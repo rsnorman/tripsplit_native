@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { AppRegistry } from 'react-native';
 import { setEmail, setPassword, createSession } from '../actions';
 import LoginScreen from '../components/LoginScreen'
 
@@ -29,5 +30,7 @@ const CreateSession = connect(
   mapStateToProps,
   mapDispathToProps
 )(LoginScreen);
+
+AppRegistry.registerComponent('CreateSession', () => CreateSession);
 
 export default CreateSession;

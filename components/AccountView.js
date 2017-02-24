@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { ActivityIndicator } from 'react-native';
-import TripsList from '../components/TripsList'
+import { ActivityIndicator, AppRegistry } from 'react-native';
+import UserTrips from '../containers/UserTrips'
 
 class AccountView extends Component {
   componentDidMount() {
@@ -11,8 +11,10 @@ class AccountView extends Component {
     if (this.props.isFetchingTrips) {
       return <ActivityIndicator size='large'/>
     }
-    return <TripsList trips={this.props.trips} />;
+    return <UserTrips />;
   }
 }
+
+AppRegistry.registerComponent('AccountView', () => AccountView);
 
 export default AccountView;

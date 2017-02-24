@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import {
   View,
   Modal,
-  StatusBar
+  StatusBar,
+  AppRegistry
 } from 'react-native';
 
 import NewSession from '../containers/NewSession';
 import ActiveAccount from '../containers/ActiveAccount';
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
   static navigationOptions = {
     title: 'TripSplit',
   };
@@ -31,3 +32,7 @@ export default class HomeScreen extends Component {
     );
   }
 }
+
+AppRegistry.registerComponent('HomeScreen', () => HomeScreen);
+
+export default HomeScreen;

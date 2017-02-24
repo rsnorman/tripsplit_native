@@ -58,39 +58,3 @@ export const createSession = (email, password) => {
       .catch(error => console.log(error))
   };
 };
-
-function startFetchingTrips() {
-  return {
-    type: 'START_FETCHING_TRIPS'
-  }
-}
-
-function tripFetchSuccess(trips) {
-  return {
-    type: 'TRIP_FETCH_SUCCESS',
-    trips: trips
-  }
-}
-
-export const fetchTrips = (session) => {
-  let url = 'http://localhost:3000/trips'
-
-  return dispatch => {
-    dispatch(startFetchingTrips())
-    return fetch(url, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        "Token-Type": "Bearer",
-        'Access-Token': session.accessToken,
-        'Client': session.client,
-        "Expiry": session.expiry,
-        "uid": session.uid
-      }
-    })
-      .then(response => response.json())
-      .then(json => dispatch(tripFetchSuccess(json)))
-      .catch(error => console.log(error))
-  }
-}

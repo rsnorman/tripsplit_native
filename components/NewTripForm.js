@@ -11,12 +11,6 @@ import {
 } from 'react-native';
 
 var styles = StyleSheet.create({
-  description: {
-    marginBottom: 20,
-    fontSize: 18,
-    textAlign: 'center',
-    color: '#656565'
-  },
   container: {
     alignItems: 'center'
   },
@@ -49,7 +43,7 @@ var styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
-  loginInput: {
+  input: {
     height: 36,
     padding: 4,
     flex: 4,
@@ -59,71 +53,69 @@ var styles = StyleSheet.create({
     borderRadius: 8,
     color: '#48bbec'
   },
-  loginHeader: {
-    backgroundColor: '#48bbec',
-    padding: 30,
-    alignSelf: 'stretch'
-  },
-  loginHeaderTitle: {
-    fontSize: 24,
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center'
+  multiLineInput: {
+    height: 108,
+    padding: 4,
+    flex: 4,
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: '#48bbec',
+    borderRadius: 8,
+    color: '#48bbec'
   }
 });
 
-class LoginScreen extends Component {
-  static navigationOptions = {
-    title: 'Login',
-  };
-
-  onEmailChanged(event) {
-    this.props.onEmailChange(event.nativeEvent.text);
+class NewTripForm extends Component {
+  onNameChanged(event) {
+    this.props.onTripAttributeSet('name', event.nativeEvent.text);
+  }
+  onLocationChanged(event) {
+    this.props.onTripAttributeSet('location', event.nativeEvent.text);
+  }
+  onDescriptionChanged(event) {
+    this.props.onTripAttributeSet('detail', event.nativeEvent.text);
   }
 
-  onPasswordChanged(event) {
-    this.props.onPasswordChange(event.nativeEvent.text);
-  }
-
-  onLoginPressed() {
-    this.props.onLogin(this.props.email, this.props.password);
+  onCreatePressed() {
+    this.props.onCreate(this.props.session, this.props.newTrip)
   }
 
   render() {
-    let spinner = this.props.isLoggingIn ?
+    let spinner = this.props.isCreatingTrip ?
       ( <ActivityIndicator size='large'/> ) :
       ( <View/> );
 
     return (
       <View style={styles.container}>
-        <View style={styles.loginHeader}>
-          <Text style={styles.loginHeaderTitle}>TripSplit</Text>
-        </View>
         <View style={styles.form}>
           <View style={styles.formRow}>
             <TextInput
-              value={this.props.email}
-              style={styles.loginInput}
-              keyboardType="email-address"
-              returnKeyType="go"
-              onChange={this.onEmailChanged.bind(this)}
-              placeholder='Email'/>
+              value={this.props.newTrip.name}
+              style={styles.input}
+              onChange={this.onNameChanged.bind(this)}
+              placeholder='Name'/>
           </View>
           <View style={styles.formRow}>
             <TextInput
-              value={this.props.password}
-              style={styles.loginInput}
-              type="password"
-              returnKeyType="go"
-              secureTextEntry={true}
-              onChange={this.onPasswordChanged.bind(this)}
-              placeholder='Password'/>
+              value={this.props.newTrip.location}
+              style={styles.input}
+              onChange={this.onLocationChanged.bind(this)}
+              placeholder='Location'/>
+          </View>
+          <View style={styles.formRow}>
+            <TextInput
+              value={this.props.newTrip.description}
+              style={styles.multiLineInput}
+              onChange={this.onDescriptionChanged.bind(this)}
+              multiline={true}
+              numberOfLines={3}
+              placeholder='Description'/>
           </View>
           <View style={styles.formRow}>
             <TouchableHighlight style={styles.button}
-              onPress={this.onLoginPressed.bind(this)}
+              onPress={this.onCreatePressed.bind(this)}
               underlayColor='#99d9f4'>
-              <Text style={styles.buttonText}>Login</Text>
+              <Text style={styles.buttonText}>Create</Text>
             </TouchableHighlight>
           </View>
           {spinner}
@@ -134,6 +126,6 @@ class LoginScreen extends Component {
   }
 }
 
-AppRegistry.registerComponent('LoginScreen', () => LoginScreen);
+AppRegistry.registerComponent('NewTripForm', () => NewTripForm);
 
-export default LoginScreen;
+export default NewTripForm;

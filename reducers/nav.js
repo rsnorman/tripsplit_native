@@ -3,10 +3,9 @@ import AppNavigator from './../components/AppNavigator';
 
 const nav = (state, action) => {
   switch (action.type) {
-    case 'SEARCH_SUCCESS':
-      return AppNavigator.router.getStateForAction(NavigationActions.navigate({ routeName: 'SearchResults' }), state);
-    case 'VIEW_PROPERTY':
-      return AppNavigator.router.getStateForAction(NavigationActions.navigate({ routeName: 'PropertyView', params: { property: action.property } }), state);
+    case 'TRIP_CREATE_SUCCESS':
+    case 'VIEW_TRIP':
+      return AppNavigator.router.getStateForAction(NavigationActions.navigate({ routeName: 'VisibleTrip', params: { trip: action.trip } }), state);
     default:
       return AppNavigator.router.getStateForAction(action, state);
   }

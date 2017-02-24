@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchTrips } from '../actions';
+import { AppRegistry } from 'react-native';
+import { fetchTrips, addTrip } from '../actions/trip';
 
 import AccountView from '../components/AccountView'
 
@@ -12,17 +13,22 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispathToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onLoad: (session) => {
       dispatch(fetchTrips(session));
+    },
+    onAddTrip: () => {
+      dispatch(addTrip());
     }
   };
 };
 
 const ActiveAccount = connect(
   mapStateToProps,
-  mapDispathToProps
+  mapDispatchToProps
 )(AccountView);
+
+AppRegistry.registerComponent('ActiveAccount', () => ActiveAccount);
 
 export default ActiveAccount;
