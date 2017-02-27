@@ -6,6 +6,8 @@ const nav = (state, action) => {
     case 'TRIP_CREATE_SUCCESS':
     case 'VIEW_TRIP':
       return AppNavigator.router.getStateForAction(NavigationActions.navigate({ routeName: 'VisibleTrip', params: { trip: action.trip } }), state);
+    case 'TRIP_DELETE_SUCCESS':
+      return AppNavigator.router.getStateForAction(NavigationActions.back(), state);
     default:
       return AppNavigator.router.getStateForAction(action, state);
   }

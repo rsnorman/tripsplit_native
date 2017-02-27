@@ -7,16 +7,16 @@ import TripView from './../components/TripView'
 const mapStateToProps = (state) => {
   return {
     session: state.session.session,
+    trip: state.trips.viewedTrip,
     isViewingNewExpenseForm: false,
+    isViewingEditTripForm: state.trips.isViewingEditTripForm,
     isFetchingExpenses: true
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddExpensePressed: () => {
-      
-    }
+    onAddExpensePressed: () => {}
   };
 };
 

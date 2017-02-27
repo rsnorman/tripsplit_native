@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   Dimensions,
   Modal,
+  Button,
   AppRegistry
 } from 'react-native';
 
@@ -16,11 +17,21 @@ let ScreenHeight = Dimensions.get("window").height;
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import NewTrip from './../containers/NewTrip'
+import EditTrip from './../containers/EditTrip'
+import EditTripButton from './../containers/EditTripButton'
 
 let styles = StyleSheet.create({
   container: {
-    height: ScreenHeight - 64
+  },
+  containerHeader: {
+    alignSelf: 'stretch',
+    borderWidth: 0,
+    borderBottomWidth: 1,
+    borderBottomColor: '#cdcdcd',
+    paddingTop: 30,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingBottom: 15
   },
   thumb: {
     width: 80,
@@ -31,74 +42,113 @@ let styles = StyleSheet.create({
   thumbIcon: {
     padding: 12
   },
-  textContainer: {
+  loader: {
+    marginTop: 30
+  },
+  tripHeader: {
+    flexDirection: 'row'
+  },
+  tripHeaderRightColumn: {
     flex: 1
   },
-  separator: {
-    height: 1,
-    backgroundColor: '#dddddd'
+  tripStats: {
+    flex: 1,
+    flexDirection: 'row'
   },
-  title: {
-    fontSize: 18
+  organizer: {
+    flex: 1,
+    alignItems: 'center'
   },
-  location: {
-    fontSize: 16,
-    color: '#5e5e5e'
+  organizerLabel: {
+    textAlign: 'center',
+    fontSize: 13,
+    color: '#8d8d8d'
   },
-  cost: {
-    fontSize: 16,
-    color: '#5e5e5e'
+  tripStat: {
+    flex: 3,
+    alignItems: 'center',
   },
-  members: {
-    fontSize: 16,
-    color: '#5e5e5e'
+  tripStatValue: {
+    textAlign: 'center',
+    fontWeight: 'bold'
   },
-  rowContainer: {
-    flexDirection: 'row',
-    padding: 10
+  tripStatLabel: {
+    textAlign: 'center',
+    fontSize: 11,
+    fontWeight: 'bold',
+    color: '#8d8d8d'
   },
-  addTripButton: {
-    width: 50,
-    height: 50,
-    backgroundColor: '#48bbec',
-    borderRadius: 25,
-    position: 'absolute',
-    bottom: 10,
-    right: 10
+  tripName: {
+    fontWeight: 'bold',
+    marginTop: 5,
+    paddingTop: 3,
+    paddingBottom: 3,
   },
-  addIcon: {
-    width: 30,
-    height: 30,
-    marginTop: 10,
-    marginLeft: 12,
-    fontSize: 30,
-    color: 'white',
+  tripLocation: {
+    paddingTop: 3,
+    paddingBottom: 3
   },
+  tripDescription: {
+    fontStyle: 'italic',
+    color: '#3d3d3d'
+  }
 });
 
 class TripView extends Component {
   static navigationOptions = {
-    title: (navigation, childRouter) => {
+    title: (navigation) => {
       return navigation.state.params.trip.name ;
-    }
+    },
+    header: ({ state, setParams }) => ({
+      right: (
+        <EditTripButton />
+      )
+    })
   };
 
   render() {
+    let trip = this.props.trip;
+    console.log(trip);
     let spinner = this.props.isFetchingExpenses ?
-      <ActivityIndicator size='large'/> :
+      <ActivityIndicator style={styles.loader} size='large'/> :
       <View />;
 
     return (
       <View style={styles.container}>
+        <View style={styles.containerHeader}>
+          <View style={styles.tripHeader}>
+            <View style={styles.thumb}>
+              <Icon name="car" style={styles.thumbIcon} size={50} color="#fff" />
+            </View>
+            <View style={styles.tripHeaderRightColumn}>
+              <View style={styles.tripStats}>
+                <View style={styles.tripStat}>
+                  <Text style={styles.tripStatValue}>{trip.total_members}</Text>
+                  <Text style={styles.tripStatLabel}>Members</Text>
+                </View>
+                <View style={styles.tripStat}>
+                  <Text style={styles.tripStatValue}>${trip.total_cost}</Text>
+                  <Text style={styles.tripStatLabel}>Cost</Text>
+                </View>
+                <View style={styles.tripStat}>
+                  <Text style={styles.tripStatValue}>${trip.average_cost_per_member}</Text>
+                  <Text style={styles.tripStatLabel}>Average Cost</Text>
+                </View>
+              </View>
+              <View style={styles.organizer}>
+                <Text style={styles.organizerLabel}>Organized by: {trip.organizer.name || trip.organizer.email}</Text>
+              </View>
+            </View>
+          </View>
+          <View style={styles.tripDetails}>
+            <Text style={styles.tripName}>{this.props.trip.name}</Text>
+            <Text style={styles.tripLocation}>{this.props.trip.location}</Text>
+            <Text style={styles.tripDescription}>{this.props.trip.description}</Text>
+          </View>
+        </View>
         {spinner}
-        <TouchableHighlight
-          style={styles.addExpenseButton}
-          onPress={this.props.onAddExpensePressed.bind(this)}
-          underlayColor="#54CBFD">
-          <Icon name="plus-circle" style={styles.addIcon} />
-        </TouchableHighlight>
-        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingNewExpenseForm}>
-          <NewTrip />
+        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditTripForm}>
+          <EditTrip />
         </Modal>
       </View>
     );
@@ -106,6 +156,7 @@ class TripView extends Component {
 }
 
 TripView.propTypes = {
+  trip: PropTypes.object.isRequired
 };
 
 AppRegistry.registerComponent('TripView', () => TripView);

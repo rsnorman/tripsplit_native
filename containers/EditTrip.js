@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { setTripAttr, createTrip, cancelCreatingTrip } from '../actions/trip';
+import { setTripAttr, updateTrip, deleteTrip, cancelEditingTrip } from '../actions/trip';
 import TripForm from '../components/TripForm'
 
 const mapStateToProps = (state) => {
   return {
-    title: 'Create Trip',
-    trip: state.trips.newTrip,
+    title: 'Edit Trip',
+    showDeleteButton: true,
+    trip: state.trips.editingTrip,
     isSavingTrip: state.trips.isSavingTrip,
+    isDeletingTrip: state.trips.isDeletingTrip,
     session: state.session.session
   };
 };
@@ -18,20 +20,23 @@ const mapDispatchToProps = (dispatch) => {
     onTripAttributeSet: (attributeName, attributeValue) => {
       dispatch(setTripAttr(attributeName, attributeValue));
     },
-    onSave: (session, newTrip) => {
-      dispatch(createTrip(session, newTrip));
+    onSave: (session, trip) => {
+      dispatch(updateTrip(session, trip));
     },
     onCancel: () => {
-      dispatch(cancelCreatingTrip());
+      dispatch(cancelEditingTrip());
+    },
+    onDelete: (session, trip) => {
+      dispatch(deleteTrip(session, trip));
     }
   };
 };
 
-const NewTrip = connect(
+const EditTrip = connect(
   mapStateToProps,
   mapDispatchToProps
 )(TripForm);
 
-AppRegistry.registerComponent('NewTrip', () => NewTrip);
+AppRegistry.registerComponent('EditTrip', () => EditTrip);
 
-export default NewTrip;
+export default EditTrip;
