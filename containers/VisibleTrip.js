@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { } from '../actions';
+import { updateTripImage } from '../actions/trip';
 import TripView from './../components/TripView'
 
 const mapStateToProps = (state) => {
@@ -16,6 +16,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    onTripImageChanged: (session, trip, image) => {
+      dispatch(updateTripImage(session, trip, image))
+    },
     onAddExpensePressed: () => {}
   };
 };

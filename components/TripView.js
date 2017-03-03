@@ -13,6 +13,8 @@ import {
   AppRegistry
 } from 'react-native';
 
+var ImagePicker = require('react-native-image-picker');
+
 let ScreenHeight = Dimensions.get("window").height;
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -91,6 +93,11 @@ let styles = StyleSheet.create({
   tripDescription: {
     fontStyle: 'italic',
     color: '#3d3d3d'
+  },
+  editIcon: {
+    position: 'absolute',
+    right: 2,
+    bottom: 2
   }
 });
 
@@ -106,9 +113,27 @@ class TripView extends Component {
     })
   };
 
+  onImageEditPressed() {
+    // More info on all the options is below in the README...just some common use cases shown here
+    let options = {
+      title: 'Select Trip Image',
+      storageOptions: {
+        skipBackup: true,
+        path: 'images'
+      }
+    };
+
+    ImagePicker.showImagePicker(options, (response) => {
+      if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else {
+        this.props.onTripImageChanged(this.props.session, this.props.trip, { uri: response.uri, fileName: response.fileName});
+      }
+    });
+  }
+
   render() {
     let trip = this.props.trip;
-    console.log(trip);
     let spinner = this.props.isFetchingExpenses ?
       <ActivityIndicator style={styles.loader} size='large'/> :
       <View />;
@@ -117,9 +142,14 @@ class TripView extends Component {
       <View style={styles.container}>
         <View style={styles.containerHeader}>
           <View style={styles.tripHeader}>
-            <View style={styles.thumb}>
-              <Icon name="car" style={styles.thumbIcon} size={50} color="#fff" />
-            </View>
+            <TouchableHighlight
+              onPress={() => this.onImageEditPressed()}
+              underlayColor='#dddddd'>
+              <View style={styles.thumb}>
+                <Icon name="car" style={styles.thumbIcon} size={50} color="#fff" />
+                <Icon name="edit" style={styles.editIcon} size={15} color="#fff" />
+              </View>
+            </TouchableHighlight>
             <View style={styles.tripHeaderRightColumn}>
               <View style={styles.tripStats}>
                 <View style={styles.tripStat}>

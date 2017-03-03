@@ -182,3 +182,46 @@ export const deleteTrip = (session, trip) => {
       .catch(error => console.log(error))
   }
 }
+
+function startUpdatingTripImage() {
+  return {
+    type: 'START_UPDATING_TRIP_IMAGE'
+  }
+}
+
+function tripImageUpdateSuccess(trip) {
+  return {
+    type: 'TRIP_IMAGE_UPDATE_SUCCESS',
+    trip: trip
+  }
+}
+
+export const updateTripImage = (session, trip, image) => {
+  let url = 'http://localhost:3000/trips/' + trip.id;
+  const body = new FormData();
+
+  body.append('trip[picture]', {
+    uri: image.uri,
+    type: 'image/jpeg',
+    name: image.fileName
+  });
+
+  return dispatch => {
+    dispatch(startUpdatingTripImage())
+    return fetch(url, {
+      method: 'PUT',
+      body: body,
+      headers: {
+        'Accept': 'application/json',
+        "Token-Type": "Bearer",
+        'Access-Token': session.accessToken,
+        'Client': session.client,
+        "Expiry": session.expiry,
+        "uid": session.uid
+      }
+    })
+      .then(response => response.json())
+      .then(json => dispatch(tripImageUpdateSuccess(json)))
+      .catch(error => console.log(error))
+  }
+}
