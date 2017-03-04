@@ -12,6 +12,8 @@ import {
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import ListImage from './../components/ListImage';
+
 let styles = StyleSheet.create({
   loader: {
     marginTop: 20
@@ -62,21 +64,13 @@ class ExpensesList extends Component {
   }
 
   renderRow(rowData, sectionID, rowID) {
-    let pictureIcon = rowData.picture.url ?
-      ( <Image source={{uri: 'http://localhost:3000' + rowData.picture.thumb.url}} style={styles.thumb} /> ) :
-      (
-        <View style={styles.thumb}>
-          <Icon name={rowData.expense_type} style={styles.thumbIcon} size={50} color="#fff" />
-        </View>
-      );
-
     return (
       <TouchableHighlight
         onPress={() => this.rowPressed(rowData.id)}
         underlayColor='#dddddd'>
         <View>
           <View style={styles.rowContainer}>
-            {pictureIcon}
+            <ListImage size={80} image={rowData.picture} />
             <View style={styles.textContainer}>
               <Text style={styles.name} numberOfLines={1}>
                 {rowData.name}
