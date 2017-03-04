@@ -21,6 +21,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import EditTrip from './../containers/EditTrip'
 import EditTripButton from './../containers/EditTripButton'
+import TripExpenses from './../containers/TripExpenses'
 
 let styles = StyleSheet.create({
   container: {
@@ -135,7 +136,7 @@ class TripView extends Component {
   render() {
     let trip = this.props.trip;
     let spinner = this.props.isFetchingExpenses ?
-      <ActivityIndicator style={styles.loader} size='large'/> :
+      <TripExpenses />:
       <View />;
 
     return (
