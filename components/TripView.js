@@ -39,8 +39,8 @@ let styles = StyleSheet.create({
     paddingBottom: 15
   },
   thumb: {
-    width: 120,
-    height: 120,
+    width: 100,
+    height: 100,
     borderRadius: 4,
     backgroundColor: '#48bbec'
   },
@@ -152,6 +152,8 @@ class TripView extends Component {
     ImagePicker.showImagePicker(options, (response) => {
       if (response.error) {
         console.log('ImagePicker Error: ', response.error);
+      } else if (response.didCancel) {
+        console.log('ImagePicker Canceled');
       } else {
         this.props.onTripImageChanged(this.props.session, this.props.trip, { uri: response.uri, fileName: response.fileName});
       }

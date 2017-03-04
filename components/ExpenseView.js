@@ -34,8 +34,8 @@ let styles = StyleSheet.create({
     paddingBottom: 15
   },
   thumb: {
-    width: 120,
-    height: 120,
+    width: 100,
+    height: 100,
     borderRadius: 4,
     backgroundColor: '#48bbec'
   },
@@ -126,6 +126,8 @@ class ExpenseView extends Component {
     ImagePicker.showImagePicker(options, (response) => {
       if (response.error) {
         console.log('ImagePicker Error: ', response.error);
+      } else if (response.didCancel) {
+        console.log('ImagePicker Canceled');
       } else {
         this.props.onExpenseImageChanged(this.props.session, this.props.expense, { uri: response.uri, fileName: response.fileName});
       }
