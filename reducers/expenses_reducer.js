@@ -9,7 +9,7 @@ let initialExpensesState = {
   viewedExpense: null,
   isViewingNewExpenseForm: false,
   isViewingEditExpenseForm: false,
-  ediitingExpense: null
+  editingExpense: null
 };
 
 const expenses = (state = initialExpensesState, action) => {

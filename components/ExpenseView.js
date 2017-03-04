@@ -18,7 +18,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import EditExpense from './../containers/EditExpense'
 import EditExpenseButton from './../containers/EditExpenseButton'
-//import ExpenseObligations from './../containers/ExpenseObligations'
+import ExpenseObligations from './../containers/ExpenseObligations'
 
 let styles = StyleSheet.create({
   container: {
@@ -137,7 +137,7 @@ class ExpenseView extends Component {
   render() {
     let expense = this.props.expense;
     let spinner = this.props.isFetchingObligations ?
-      <ExpenseObligations />:
+      <ExpenseObligations /> :
       <View />;
     let picture = expense.picture.url ?
       ( <Image source={{uri: 'http://localhost:3000' + expense.picture.thumb.url}} style={styles.thumb} /> ) :

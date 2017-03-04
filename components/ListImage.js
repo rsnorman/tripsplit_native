@@ -22,11 +22,11 @@ class ListImage extends Component {
         padding: 12
       }
     });
-    return this.props.image.url ?
+    return this.props.image && this.props.image.url ?
       ( <Image source={{uri: 'http://localhost:3000' + this.props.image.thumb.url}} style={iconStyles.thumb} /> ) :
       (
         <View style={iconStyles.thumb}>
-          <Icon name='car' size={this.props.size} color="#fff" />
+          <Icon name={this.props.icon} size={this.props.size} color="#fff" />
         </View>
       );
   }
@@ -34,7 +34,7 @@ class ListImage extends Component {
 
 ListImage.propTypes = {
   size: PropTypes.number.isRequired,
-  image: PropTypes.object.isRequired,
+  image: PropTypes.object,
   icon: PropTypes.string
 };
 
