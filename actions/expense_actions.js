@@ -99,6 +99,56 @@ export const cancelCreatingExpense = () => {
   };
 }
 
+export const editExpense = function(expense) {
+  return {
+    type: 'EDIT_EXPENSE',
+    expense
+  }
+};
+
+function startUpdatingExpense() {
+  return {
+    type: 'START_UPDATING_EXPENSE'
+  }
+}
+
+function expenseUpdateSuccess(expense) {
+  return {
+    type: 'EXPENSE_UPDATE_SUCCESS',
+    expense
+  }
+}
+
+export const updateExpense = (session, editingExpense) => {
+  let url = 'http://localhost:3000/trips/' + editingExpense.trip_id + '/expenses/' + editingExpense.id
+
+  return dispatch => {
+    dispatch(startUpdatingExpense())
+    return fetch(url, {
+      method: 'PUT',
+      body: JSON.stringify({expense: editingExpense}),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        "Token-Type": "Bearer",
+        'Access-Token': session.accessToken,
+        'Client': session.client,
+        "Expiry": session.expiry,
+        "uid": session.uid
+      }
+    })
+      .then(response => response.json())
+      .then(json => dispatch(expenseUpdateSuccess(json)))
+      .catch(error => console.log(error))
+  }
+}
+
+export const cancelEditingExpense = () => {
+  return {
+    type: 'CANCEL_EDIT_EXPENSE'
+  };
+}
+
 function startUpdatingExpenseImage() {
   return {
     type: 'START_UPDATING_EXPENSE_IMAGE'

@@ -7,7 +7,9 @@ let initialExpensesState = {
   },
   isFetchingTripExpenses: false,
   viewedExpense: null,
-  isViewingNewExpenseForm: false
+  isViewingNewExpenseForm: false,
+  isViewingEditExpenseForm: false,
+  ediitingExpense: null
 };
 
 const expenses = (state = initialExpensesState, action) => {
@@ -49,7 +51,6 @@ const expenses = (state = initialExpensesState, action) => {
         isSavingExpense: true
       });
     case 'EXPENSE_CREATE_SUCCESS':
-      console.log('Expense create success', action.expense)
       return Object.assign({}, state, {
         tripExpenses: [action.expense, ...state.tripExpenses],
         isSavingExpense: false,
@@ -63,6 +64,30 @@ const expenses = (state = initialExpensesState, action) => {
     case 'VIEW_EXPENSE':
       return Object.assign({}, state, {
         viewedExpense: action.expense
+      });
+    case 'EDIT_EXPENSE':
+      return Object.assign({}, state, {
+        editingExpense: action.expense,
+        isViewingEditExpenseForm: true
+      });
+    case 'START_UPDATING_EXPENSE':
+      return Object.assign({}, state, {
+        isSavingExpense: true
+      });
+    case 'EXPENSE_UPDATE_SUCCESS':
+      let updatedExpenseIndex = state.tripExpenses.findIndex((expense) => expense.id === action.expense.id);
+      let expensesWithUpdated = JSON.parse(JSON.stringify(state.tripExpenses));
+      expensesWithUpdated[updatedExpenseIndex] = action.expense;
+
+      return Object.assign({}, state, {
+        tripExpenses: expensesWithUpdated,
+        viewedExpense: action.expense,
+        isSavingExpense: false,
+        isViewingEditExpenseForm: false
+      });
+    case 'CANCEL_EDIT_EXPENSE':
+      return Object.assign({}, state, {
+        isViewingEditExpenseForm: false
       });
     default:
       return state;
