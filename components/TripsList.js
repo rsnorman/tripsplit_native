@@ -16,7 +16,8 @@ let ScreenHeight = Dimensions.get("window").height;
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import NewTrip from './../containers/NewTrip'
+import ListImage from './../components/ListImage';
+import NewTrip from './../containers/NewTrip';
 
 let styles = StyleSheet.create({
   container: {
@@ -87,21 +88,13 @@ class TripsList extends Component {
   }
 
   renderRow(rowData, sectionID, rowID) {
-    let pictureIcon = rowData.picture.url ?
-      ( <Image source={{uri: 'http://localhost:3000' + rowData.picture.thumb.url}} style={styles.thumb} /> ) :
-      (
-        <View style={styles.thumb}>
-          <Icon name="car" style={styles.thumbIcon} size={50} color="#fff" />
-        </View>
-      );
-
     return (
       <TouchableHighlight
         onPress={() => this.rowPressed(rowData.id)}
         underlayColor='#dddddd'>
         <View>
           <View style={styles.rowContainer}>
-            {pictureIcon}
+            <ListImage size={80} image={rowData.picture} />
             <View style={styles.textContainer}>
               <Text style={styles.title} numberOfLines={1}>
                 {rowData.name}

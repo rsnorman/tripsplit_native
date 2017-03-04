@@ -29,13 +29,14 @@ let styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#cdcdcd',
     paddingTop: 30,
-    paddingLeft: 15,
-    paddingRight: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
     paddingBottom: 15
   },
   thumb: {
-    width: 80,
-    height: 80,
+    width: 120,
+    height: 120,
+    borderRadius: 4,
     backgroundColor: '#48bbec'
   },
   thumbIcon: {
