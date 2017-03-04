@@ -1,6 +1,8 @@
 let initialExpensesState = {
   tripExpenses: [],
   isFetchingTripExpenses: false,
+  viewedExpense: null,
+  isViewingEditExpenseForm: false
 };
 
 const expenses = (state = initialExpensesState, action) => {
@@ -13,6 +15,10 @@ const expenses = (state = initialExpensesState, action) => {
       return Object.assign({}, state, {
         isFetchingTripExpenses: false,
         tripExpenses: action.tripExpenses
+      });
+    case 'VIEW_EXPENSE':
+      return Object.assign({}, state, {
+        viewedExpense: action.expense
       });
     default:
       return state;

@@ -56,7 +56,8 @@ class ExpensesList extends Component {
   }
 
   rowPressed(expenseId) {
-    console.log('Show expense', expenseId);
+    let expense = this.props.expenses.filter(expense => expense.id === expenseId)[0];
+    this.props.onExpenseSelected(expense)
   }
 
   renderRow(rowData, sectionID, rowID) {
