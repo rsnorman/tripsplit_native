@@ -192,14 +192,15 @@ function startUpdatingExpenseImage() {
 }
 
 function expenseImageUpdateSuccess(expense) {
+  console.log('Expense image updated', expense);
   return {
     type: 'EXPENSE_IMAGE_UPDATE_SUCCESS',
-    expense: expense
+    expense
   }
 }
 
-export const updateExpenseImage = (session, exepense, image) => {
-  let url = 'http://localhost:3000/expenses/' + expense.id;
+export const updateExpenseImage = (session, expense, image) => {
+  let url = 'http://localhost:3000/trips/' + expense.trip_id + '/expenses/' + expense.id;
   const body = new FormData();
 
   body.append('expense[picture]', {

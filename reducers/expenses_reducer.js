@@ -89,6 +89,20 @@ const expenses = (state = initialExpensesState, action) => {
       return Object.assign({}, state, {
         isViewingEditExpenseForm: false
       });
+    case 'START_UPDATING_EXPENSE_IMAGE':
+      return Object.assign({}, state, {
+        isUploadingExpenseImage: true
+      });
+    case 'EXPENSE_IMAGE_UPDATE_SUCCESS':
+      let updatedExpenseImageIndex = state.tripExpenses.findIndex((expense) => expense.id === action.expense.id);
+      let expensesWithUpdatedImage = JSON.parse(JSON.stringify(state.tripExpenses));
+      expensesWithUpdatedImage[updatedExpenseImageIndex] = action.expense;
+
+      return Object.assign({}, state, {
+        expense: expensesWithUpdatedImage,
+        viewedExpense: action.expense,
+        isUploadingExpenseImage: false
+      });
     case 'START_DELETING_EXPENSE':
       return Object.assign({}, state, {
         isDeletingExpense: true
