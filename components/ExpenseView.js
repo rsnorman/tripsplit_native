@@ -36,7 +36,6 @@ let styles = StyleSheet.create({
   thumb: {
     width: 80,
     height: 80,
-    marginRight: 10,
     backgroundColor: '#48bbec'
   },
   thumbIcon: {
@@ -91,8 +90,14 @@ let styles = StyleSheet.create({
   editIcon: {
     position: 'absolute',
     right: 2,
-    bottom: 2
-  }
+    bottom: 2,
+    backgroundColor: 'transparent'
+  },
+  imageUploadSpinner: {
+    position: 'absolute',
+    left: 25,
+    top: 20
+  },
 });
 
 class ExpenseView extends Component {
@@ -131,6 +136,12 @@ class ExpenseView extends Component {
     let spinner = this.props.isFetchingObligations ?
       <ExpenseObligations />:
       <View />;
+    let picture = expense.picture.url ?
+      ( <Image source={{uri: 'http://localhost:3000' + expense.picture.thumb.url}} style={styles.thumb} /> ) :
+      ( <Icon name={expense.expense_type} style={styles.thumbIcon} size={50} color="#fff" /> );
+    let pictureSpinner = this.props.isUploadingExpenseImage ?
+      ( <ActivityIndicator style={styles.imageUploadSpinner} size="large" /> ) :
+      ( <View /> );
 
     return (
       <View style={styles.container}>
@@ -140,8 +151,9 @@ class ExpenseView extends Component {
               onPress={() => this.onImageEditPressed()}
               underlayColor='#dddddd'>
               <View style={styles.thumb}>
-                <Icon name={expense.expense_type} style={styles.thumbIcon} size={50} color="#fff" />
+                {picture}
                 <Icon name="edit" style={styles.editIcon} size={15} color="#fff" />
+                {pictureSpinner}
               </View>
             </TouchableHighlight>
             <View style={styles.expenseHeaderRightColumn}>
