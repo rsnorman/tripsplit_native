@@ -22,9 +22,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import EditTrip from './../containers/EditTrip'
 import EditTripButton from './../containers/EditTripButton'
 import TripExpenses from './../containers/TripExpenses'
+import NewExpense from './../containers/NewExpense'
 
 let styles = StyleSheet.create({
   container: {
+    height: ScreenHeight - 64
   },
   containerHeader: {
     alignSelf: 'stretch',
@@ -104,7 +106,24 @@ let styles = StyleSheet.create({
     position: 'absolute',
     left: 25,
     top: 20
-  }
+  },
+  addExpenseButton: {
+    width: 50,
+    height: 50,
+    backgroundColor: '#48bbec',
+    borderRadius: 25,
+    position: 'absolute',
+    bottom: 10,
+    right: 10
+  },
+  addIcon: {
+    width: 30,
+    height: 30,
+    marginTop: 10,
+    marginLeft: 12,
+    fontSize: 30,
+    color: 'white',
+  },
 });
 
 class TripView extends Component {
@@ -138,6 +157,10 @@ class TripView extends Component {
     });
   }
 
+  onAddExpensePressed() {
+    this.props.onAddExpensePressed(this.props.trip);
+  }
+
   render() {
     let trip = this.props.trip;
     let spinner = this.props.isFetchingExpenses ?
@@ -149,7 +172,6 @@ class TripView extends Component {
     let pictureSpinner = this.props.isUploadingTripImage ?
       ( <ActivityIndicator style={styles.imageUploadSpinner} size="large" /> ) :
       ( <View /> );
-
 
     return (
       <View style={styles.container}>
@@ -191,8 +213,17 @@ class TripView extends Component {
           </View>
         </View>
         {spinner}
+        <TouchableHighlight
+          style={styles.addExpenseButton}
+          onPress={this.onAddExpensePressed.bind(this)}
+          underlayColor="#54CBFD">
+          <Icon name="money" style={styles.addIcon} />
+        </TouchableHighlight>
         <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditTripForm}>
           <EditTrip />
+        </Modal>
+        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingNewExpenseForm}>
+          <NewExpense />
         </Modal>
       </View>
     );

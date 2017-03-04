@@ -41,6 +41,64 @@ export const viewExpense = (expense) => {
   }
 }
 
+export const addExpense = (trip) => {
+  return {
+    type: 'NEW_EXPENSE',
+    trip
+  };
+}
+
+export const setExpenseAttr = (attributeName, attributeValue) => {
+  return {
+    type: 'SET_EXPENSE_ATTRIBUTE',
+    name: attributeName,
+    value: attributeValue
+  };
+}
+
+function startCreatingExpense() {
+  return {
+    type: 'START_CREATING_EXPENSE'
+  }
+}
+
+function expenseCreateSuccess(expense) {
+  return {
+    type: 'EXPENSE_CREATE_SUCCESS',
+    expense
+  }
+}
+
+export const createExpense = (session, newExpense) => {
+  let url = 'http://localhost:3000/trips/' + newExpense.trip_id + '/expenses'
+
+  return dispatch => {
+    dispatch(startCreatingExpense())
+    return fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({expense: newExpense}),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        "Token-Type": "Bearer",
+        'Access-Token': session.accessToken,
+        'Client': session.client,
+        "Expiry": session.expiry,
+        "uid": session.uid
+      }
+    })
+      .then(response => response.json())
+      .then(json => dispatch(expenseCreateSuccess(json)))
+      .catch(error => console.log(error))
+  }
+}
+
+export const cancelCreatingExpense = () => {
+  return {
+    type: 'CANCEL_NEW_EXPENSE'
+  };
+}
+
 function startUpdatingExpenseImage() {
   return {
     type: 'START_UPDATING_EXPENSE_IMAGE'

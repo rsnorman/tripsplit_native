@@ -2,13 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
 import { updateTripImage } from '../actions/trip';
+import { addExpense } from '../actions/expense_actions';
 import TripView from './../components/TripView'
 
 const mapStateToProps = (state) => {
   return {
     session: state.session.session,
     trip: state.trips.viewedTrip,
-    isViewingNewExpenseForm: false,
+    isViewingNewExpenseForm: state.expenses.isViewingNewExpenseForm,
     isViewingEditTripForm: state.trips.isViewingEditTripForm,
     isFetchingExpenses: true,
     isUploadingTripImage: state.trips.isUploadingTripImage
@@ -20,7 +21,9 @@ const mapDispatchToProps = (dispatch) => {
     onTripImageChanged: (session, trip, image) => {
       dispatch(updateTripImage(session, trip, image))
     },
-    onAddExpensePressed: () => {}
+    onAddExpensePressed: (trip) => {
+      dispatch(addExpense(trip));
+    }
   };
 };
 
