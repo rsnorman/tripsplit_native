@@ -6,7 +6,8 @@ let initialTripState = {
   isCreatingTrip: false,
   isSavingTrip: false,
   isFetchingTrips: false,
-  isViewingEditTripForm: false
+  isViewingEditTripForm: false,
+  isUploadingTripImage: false
 };
 
 const trips = (state = initialTripState, action) => {
@@ -73,6 +74,20 @@ const trips = (state = initialTripState, action) => {
         viewedTrip: action.trip,
         isSavingTrip: false,
         isViewingEditTripForm: false
+      });
+    case 'START_UPDATING_TRIP_IMAGE':
+      return Object.assign({}, state, {
+        isUploadingTripImage: true
+      });
+    case 'TRIP_IMAGE_UPDATE_SUCCESS':
+      let updatedTripImageIndex = state.trips.findIndex((trip) => trip.id === action.trip.id);
+      let tripsWithUpdatedImage = JSON.parse(JSON.stringify(state.trips));
+      tripsWithUpdatedImage[updatedTripImageIndex] = action.trip;
+
+      return Object.assign({}, state, {
+        trips: tripsWithUpdatedImage,
+        viewedTrip: action.trip,
+        isUploadingTripImage: false
       });
     case 'CANCEL_EDIT_TRIP':
       return Object.assign({}, state, {

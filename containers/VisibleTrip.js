@@ -10,7 +10,8 @@ const mapStateToProps = (state) => {
     trip: state.trips.viewedTrip,
     isViewingNewExpenseForm: false,
     isViewingEditTripForm: state.trips.isViewingEditTripForm,
-    isFetchingExpenses: true
+    isFetchingExpenses: true,
+    isUploadingTripImage: state.trips.isUploadingTripImage
   };
 };
 
