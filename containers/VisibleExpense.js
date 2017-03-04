@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
   return {
     session: state.session.session,
     expense: state.expenses.viewedExpense,
-    isViewingEditExpenseForm: state.trips.isViewingEditExpenseForm
+    isViewingEditExpenseForm: state.expenses.isViewingEditExpenseForm
   };
 };
 

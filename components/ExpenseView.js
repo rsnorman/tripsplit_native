@@ -16,8 +16,8 @@ var ImagePicker = require('react-native-image-picker');
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-//import EditExpense from './../containers/EditExpense'
-//import EditExpenseButton from './../containers/EditExpenseButton'
+import EditExpense from './../containers/EditExpense'
+import EditExpenseButton from './../containers/EditExpenseButton'
 //import ExpenseObligations from './../containers/ExpenseObligations'
 
 let styles = StyleSheet.create({
@@ -100,11 +100,11 @@ class ExpenseView extends Component {
     title: (navigation) => {
       return navigation.state.params.expense.name ;
     },
-    //header: ({ state, setParams }) => ({
-      //right: (
-        ////<EditExpenseButton />
-      //)
-    //})
+    header: ({ state, setParams }) => ({
+      right: (
+        <EditExpenseButton />
+      )
+    })
   };
 
   onImageEditPressed() {
@@ -166,6 +166,9 @@ class ExpenseView extends Component {
           </View>
         </View>
         {spinner}
+        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditExpenseForm}>
+          <EditExpense />
+        </Modal>
       </View>
     );
   }
