@@ -149,6 +149,42 @@ export const cancelEditingExpense = () => {
   };
 }
 
+function startDeletingExpense() {
+  return {
+    type: 'START_DELETING_EXPENSE'
+  }
+}
+
+function expenseDeleteSuccess(expense) {
+  console.log('expense delete success', expense);
+  return {
+    type: 'EXPENSE_DELETE_SUCCESS',
+    expense
+  }
+}
+
+export const deleteExpense = (session, expense) => {
+  let url = 'http://localhost:3000/trips/' + expense.trip_id + '/expenses/' + expense.id;
+
+  return dispatch => {
+    dispatch(startDeletingExpense())
+    return fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        "Token-Type": "Bearer",
+        'Access-Token': session.accessToken,
+        'Client': session.client,
+        "Expiry": session.expiry,
+        "uid": session.uid
+      }
+    })
+      .then(_response => dispatch(expenseDeleteSuccess(expense)))
+      .catch(error => console.log(error))
+  }
+}
+
 function startUpdatingExpenseImage() {
   return {
     type: 'START_UPDATING_EXPENSE_IMAGE'

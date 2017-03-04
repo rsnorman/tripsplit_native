@@ -89,6 +89,20 @@ const expenses = (state = initialExpensesState, action) => {
       return Object.assign({}, state, {
         isViewingEditExpenseForm: false
       });
+    case 'START_DELETING_EXPENSE':
+      return Object.assign({}, state, {
+        isDeletingExpense: true
+      });
+    case 'EXPENSE_DELETE_SUCCESS':
+      let deletedExpenseIndex = state.tripExpenses.findIndex((expense) => expense.id === action.expense.id);
+      let expensesWithoutDeleted = JSON.parse(JSON.stringify(state.tripExpenses));
+      expensesWithoutDeleted.splice(deletedExpenseIndex, 1)
+
+      return Object.assign({}, state, {
+        tripExpenses: expensesWithoutDeleted,
+        isDeletingExpense: false,
+        isViewingEditExpenseForm: false
+      });
     default:
       return state;
   }
