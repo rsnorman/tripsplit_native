@@ -70,7 +70,7 @@ class ExpensesList extends Component {
         underlayColor='#dddddd'>
         <View>
           <View style={styles.rowContainer}>
-            <ListImage size={80} image={rowData.picture} />
+            <ListImage size={80} image={rowData.picture} icon={rowData.expense_type} />
             <View style={styles.textContainer}>
               <Text style={styles.name} numberOfLines={1}>
                 {rowData.name}

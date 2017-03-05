@@ -29,7 +29,7 @@ const expenses = (state = initialExpensesState, action) => {
         name: 'Gas',
         cost: '90',
         description: 'Another fill-up',
-        expense_type: 'money'
+        expense_type: 'dollar'
       };
       return Object.assign({}, state, {
         isViewingNewExpenseForm: true,

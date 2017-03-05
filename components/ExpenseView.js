@@ -1,9 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
-  Image,
   View,
-  TouchableHighlight,
   ListView,
   Text,
   ActivityIndicator,
@@ -12,17 +10,13 @@ import {
   AppRegistry
 } from 'react-native';
 
-var ImagePicker = require('react-native-image-picker');
-
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 import EditExpense from './../containers/EditExpense'
 import EditExpenseButton from './../containers/EditExpenseButton'
 import ExpenseObligations from './../containers/ExpenseObligations'
+import HeaderImage from './../components/HeaderImage';
 
 let styles = StyleSheet.create({
-  container: {
-  },
   containerHeader: {
     alignSelf: 'stretch',
     borderWidth: 0,
@@ -32,15 +26,6 @@ let styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 15
-  },
-  thumb: {
-    width: 100,
-    height: 100,
-    borderRadius: 4,
-    backgroundColor: '#48bbec'
-  },
-  thumbIcon: {
-    padding: 12
   },
   loader: {
     marginTop: 30
@@ -87,18 +72,7 @@ let styles = StyleSheet.create({
   expenseDescription: {
     fontStyle: 'italic',
     color: '#3d3d3d'
-  },
-  editIcon: {
-    position: 'absolute',
-    right: 2,
-    bottom: 2,
-    backgroundColor: 'transparent'
-  },
-  imageUploadSpinner: {
-    position: 'absolute',
-    left: 25,
-    top: 20
-  },
+  }
 });
 
 class ExpenseView extends Component {
@@ -113,25 +87,12 @@ class ExpenseView extends Component {
     })
   };
 
-  onImageEditPressed() {
-    // More info on all the options is below in the README...just some common use cases shown here
-    let options = {
-      title: 'Select Expense Image',
-      storageOptions: {
-        skipBackup: true,
-        path: 'images'
-      }
-    };
-
-    ImagePicker.showImagePicker(options, (response) => {
-      if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.didCancel) {
-        console.log('ImagePicker Canceled');
-      } else {
-        this.props.onExpenseImageChanged(this.props.session, this.props.expense, { uri: response.uri, fileName: response.fileName});
-      }
-    });
+  updateExpenseImage(image) {
+    this.props.onExpenseImageChanged(
+      this.props.session,
+      this.props.expense,
+      image
+    );
   }
 
   render() {
@@ -139,26 +100,18 @@ class ExpenseView extends Component {
     let spinner = this.props.isFetchingObligations ?
       <ExpenseObligations /> :
       <View />;
-    let picture = expense.picture.url ?
-      ( <Image source={{uri: 'http://localhost:3000' + expense.picture.thumb.url}} style={styles.thumb} /> ) :
-      ( <Icon name={expense.expense_type} style={styles.thumbIcon} size={50} color="#fff" /> );
-    let pictureSpinner = this.props.isUploadingExpenseImage ?
-      ( <ActivityIndicator style={styles.imageUploadSpinner} size="large" /> ) :
-      ( <View /> );
 
     return (
       <View style={styles.container}>
         <View style={styles.containerHeader}>
           <View style={styles.expenseHeader}>
-            <TouchableHighlight
-              onPress={() => this.onImageEditPressed()}
-              underlayColor='#dddddd'>
-              <View style={styles.thumb}>
-                {picture}
-                <Icon name="edit" style={styles.editIcon} size={15} color="#fff" />
-                {pictureSpinner}
-              </View>
-            </TouchableHighlight>
+            <HeaderImage
+              image={this.props.expense.picture}
+              title="Expense"
+              size={100}
+              onImageSelected={this.updateExpenseImage.bind(this)}
+              icon={this.props.expense.expense_type}
+              isUploadingImage={this.props.isUploadingExpenseImage} />
             <View style={styles.expenseHeaderRightColumn}>
               <View style={styles.expenseCostDetails}>
                 <View style={styles.expenseDetail}>
