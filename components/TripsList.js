@@ -14,23 +14,13 @@ import {
 
 let ScreenHeight = Dimensions.get("window").height;
 
-import Icon from 'react-native-vector-icons/FontAwesome';
-
 import ListImage from './../components/ListImage';
 import NewTrip from './../containers/NewTrip';
+import FloatingButton from './../components/FloatingButton';
 
 let styles = StyleSheet.create({
   container: {
     height: ScreenHeight - 64
-  },
-  thumb: {
-    width: 80,
-    height: 80,
-    marginRight: 10,
-    backgroundColor: '#48bbec'
-  },
-  thumbIcon: {
-    padding: 12
   },
   textContainer: {
     flex: 1
@@ -57,24 +47,7 @@ let styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     padding: 10
-  },
-  addTripButton: {
-    width: 50,
-    height: 50,
-    backgroundColor: '#48bbec',
-    borderRadius: 25,
-    position: 'absolute',
-    bottom: 10,
-    right: 10
-  },
-  addIcon: {
-    width: 30,
-    height: 30,
-    marginTop: 10,
-    marginLeft: 12,
-    fontSize: 30,
-    color: 'white',
-  },
+  }
 });
 
 class TripsList extends Component {
@@ -94,7 +67,7 @@ class TripsList extends Component {
         underlayColor='#dddddd'>
         <View>
           <View style={styles.rowContainer}>
-            <ListImage size={80} image={rowData.picture} />
+            <ListImage size={80} image={rowData.picture} icon="car" />
             <View style={styles.textContainer}>
               <Text style={styles.title} numberOfLines={1}>
                 {rowData.name}
@@ -127,12 +100,7 @@ class TripsList extends Component {
           dataSource={this.props.dataSource}
           enableEmptySections={true}
           renderRow={this.renderRow.bind(this)}/>
-        <TouchableHighlight
-          style={styles.addTripButton}
-          onPress={this.onAddTripPressed.bind(this)}
-          underlayColor="#54CBFD">
-          <Icon name="plus-circle" style={styles.addIcon} />
-        </TouchableHighlight>
+        <FloatingButton icon="plus-circle" size={50} onButtonPressed={this.onAddTripPressed.bind(this)} />
         <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingNewTripForm}>
           <NewTrip />
         </Modal>

@@ -19,10 +19,13 @@ let ScreenHeight = Dimensions.get("window").height;
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import EditTrip from './../containers/EditTrip'
-import EditTripButton from './../containers/EditTripButton'
-import TripExpenses from './../containers/TripExpenses'
-import NewExpense from './../containers/NewExpense'
+import EditTrip from './../containers/EditTrip';
+import EditTripButton from './../containers/EditTripButton';
+import TripExpenses from './../containers/TripExpenses';
+import NewExpense from './../containers/NewExpense';
+import FloatingButton from './../components/FloatingButton';
+import HeaderImage from './../components/HeaderImage';
+
 
 let styles = StyleSheet.create({
   container: {
@@ -37,15 +40,6 @@ let styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 15
-  },
-  thumb: {
-    width: 100,
-    height: 100,
-    borderRadius: 4,
-    backgroundColor: '#48bbec'
-  },
-  thumbIcon: {
-    padding: 12
   },
   loader: {
     marginTop: 30
@@ -96,35 +90,7 @@ let styles = StyleSheet.create({
   tripDescription: {
     fontStyle: 'italic',
     color: '#3d3d3d'
-  },
-  editIcon: {
-    position: 'absolute',
-    right: 2,
-    bottom: 2,
-    backgroundColor: 'transparent'
-  },
-  imageUploadSpinner: {
-    position: 'absolute',
-    left: 25,
-    top: 20
-  },
-  addExpenseButton: {
-    width: 50,
-    height: 50,
-    backgroundColor: '#48bbec',
-    borderRadius: 25,
-    position: 'absolute',
-    bottom: 10,
-    right: 10
-  },
-  addIcon: {
-    width: 30,
-    height: 30,
-    marginTop: 10,
-    marginLeft: 12,
-    fontSize: 30,
-    color: 'white',
-  },
+  }
 });
 
 class TripView extends Component {
@@ -139,25 +105,12 @@ class TripView extends Component {
     })
   };
 
-  onImageEditPressed() {
-    // More info on all the options is below in the README...just some common use cases shown here
-    let options = {
-      title: 'Select Trip Image',
-      storageOptions: {
-        skipBackup: true,
-        path: 'images'
-      }
-    };
-
-    ImagePicker.showImagePicker(options, (response) => {
-      if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.didCancel) {
-        console.log('ImagePicker Canceled');
-      } else {
-        this.props.onTripImageChanged(this.props.session, this.props.trip, { uri: response.uri, fileName: response.fileName});
-      }
-    });
+  updateTripImage(image) {
+    this.props.onTripImageChanged(
+      this.props.session,
+      this.props.trip,
+      image
+    );
   }
 
   onAddExpensePressed() {
@@ -169,26 +122,18 @@ class TripView extends Component {
     let spinner = this.props.isFetchingExpenses ?
       <TripExpenses />:
       <View />;
-    let picture = trip.picture.url ?
-      ( <Image source={{uri: 'http://localhost:3000' + trip.picture.thumb.url}} style={styles.thumb} /> ) :
-      ( <Icon name="car" style={styles.thumbIcon} size={50} color="#fff" /> );
-    let pictureSpinner = this.props.isUploadingTripImage ?
-      ( <ActivityIndicator style={styles.imageUploadSpinner} size="large" /> ) :
-      ( <View /> );
 
     return (
       <View style={styles.container}>
         <View style={styles.containerHeader}>
           <View style={styles.tripHeader}>
-            <TouchableHighlight
-              onPress={() => this.onImageEditPressed()}
-              underlayColor='#dddddd'>
-              <View style={styles.thumb}>
-                {picture}
-                <Icon name="edit" style={styles.editIcon} size={15} color="#fff" />
-                {pictureSpinner}
-              </View>
-            </TouchableHighlight>
+            <HeaderImage
+              image={this.props.trip.picture}
+              title={'Trip'}
+              size={100}
+              onImageSelected={this.updateTripImage.bind(this)}
+              icon="car"
+              isUploadingImage={this.props.isUploadingTripImage} />
             <View style={styles.tripHeaderRightColumn}>
               <View style={styles.tripStats}>
                 <View style={styles.tripStat}>
@@ -216,12 +161,7 @@ class TripView extends Component {
           </View>
         </View>
         {spinner}
-        <TouchableHighlight
-          style={styles.addExpenseButton}
-          onPress={this.onAddExpensePressed.bind(this)}
-          underlayColor="#54CBFD">
-          <Icon name="money" style={styles.addIcon} />
-        </TouchableHighlight>
+        <FloatingButton icon="dollar" size={50} onButtonPressed={this.onAddExpensePressed.bind(this)} />
         <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditTripForm}>
           <EditTrip />
         </Modal>

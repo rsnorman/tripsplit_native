@@ -18,17 +18,6 @@ let styles = StyleSheet.create({
   loader: {
     marginTop: 20
   },
-  container: {
-  },
-  thumb: {
-    width: 80,
-    height: 80,
-    marginRight: 10,
-    backgroundColor: '#48bbec'
-  },
-  thumbIcon: {
-    padding: 12
-  },
   textContainer: {
     flex: 1
   },
@@ -36,14 +25,10 @@ let styles = StyleSheet.create({
     height: 1,
     backgroundColor: '#dddddd'
   },
-  name: {
+  obligator: {
     fontSize: 18
   },
-  purchaser: {
-    fontSize: 16,
-    color: '#5e5e5e'
-  },
-  cost: {
+  amount: {
     fontSize: 16,
     color: '#5e5e5e'
   },
@@ -53,14 +38,14 @@ let styles = StyleSheet.create({
   },
 });
 
-class ExpensesList extends Component {
+class ObligationsList extends Component {
   componentDidMount() {
-    this.props.onExpensesLoad(this.props.session, this.props.trip)
+    this.props.onObligationsLoad(this.props.session, this.props.expense)
   }
 
-  rowPressed(expenseId) {
-    let expense = this.props.expenses.filter(expense => expense.id === expenseId)[0];
-    this.props.onExpenseSelected(expense)
+  rowPressed(obligationId) {
+    let obligation = this.props.obligations.filter(obligation => obligation.id === obligationId)[0];
+    console.log('Obligation Selected:', obligation);
   }
 
   renderRow(rowData, sectionID, rowID) {
@@ -70,16 +55,13 @@ class ExpensesList extends Component {
         underlayColor='#dddddd'>
         <View>
           <View style={styles.rowContainer}>
-            <ListImage size={80} image={rowData.picture} icon={rowData.expense_type} />
+            <ListImage size={50} image={rowData.user.picture} icon="user-circle" />
             <View style={styles.textContainer}>
-              <Text style={styles.name} numberOfLines={1}>
-                {rowData.name}
+              <Text style={styles.obligator} numberOfLines={1}>
+                {rowData.user.name || rowData.user.email}
               </Text>
-              <Text style={styles.purchaser} numberOfLines={1}>
-                Purchaser: {rowData.purchaser.name || rowData.purchaser.email}
-              </Text>
-              <Text style={styles.cost} numberOfLines={1}>
-                ${rowData.cost}
+              <Text style={styles.amount} numberOfLines={1}>
+                ${rowData.amount}
               </Text>
             </View>
           </View>
@@ -90,7 +72,7 @@ class ExpensesList extends Component {
   }
 
   render() {
-    if (this.props.isFetchingTripExpenses) {
+    if (this.props.isFetchingExpenseObligations) {
       return (
         <ActivityIndicator style={styles.loader} size='large'/>
       );
@@ -107,6 +89,6 @@ class ExpensesList extends Component {
   }
 }
 
-AppRegistry.registerComponent('ExpensesList', () => ExpensesList);
+AppRegistry.registerComponent('ObligationsList', () => ObligationsList);
 
-export default ExpensesList;
+export default ObligationsList;
