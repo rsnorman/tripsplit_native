@@ -55,7 +55,7 @@ let styles = StyleSheet.create({
 
 class ExpensesList extends Component {
   componentDidMount() {
-    this.props.onExpensesLoad(this.props.session, this.props.trip)
+    this.props.onExpensesLoad(this.props.trip)
   }
 
   rowPressed(expenseId) {

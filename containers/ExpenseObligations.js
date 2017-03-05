@@ -14,15 +14,14 @@ const mapStateToProps = (state) => {
     expense: state.expenses.viewedExpense,
     obligations: state.obligations.expenseObligations,
     dataSource: dataSource.cloneWithRows(state.obligations.expenseObligations),
-    isFetchingExpenseObligations: state.obligations.isFetchingExpenseObligations,
-    session: state.session.session
+    isFetchingExpenseObligations: state.obligations.isFetchingExpenseObligations
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onObligationsLoad: (session, expense) => {
-      dispatch(fetchExpenseObligations(session, expense));
+    onObligationsLoad: (expense) => {
+      dispatch(fetchExpenseObligations(expense));
     }
   };
 };

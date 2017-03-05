@@ -1,4 +1,4 @@
-import { applyAuthenticatedHeaders } from './helpers'
+import { applyAuthenticationHeaders } from './helpers'
 
 function startFetchingExpenseObligations() {
   return {
@@ -17,8 +17,8 @@ export const fetchExpenseObligations = (expense) => {
   let url = 'http://localhost:3000/expenses/' + expense.id + '/obligations';
 
   return dispatch => {
-    dispatch(startFetchingExpenseObligations())
-    return fetch(url, applyAuthenticatedHeaders({ method: 'GET' }, {}))
+    const { session } = dispatch(startFetchingExpenseObligations())
+    return fetch(url, applyAuthenticationHeaders({ method: 'GET' }, session))
       .then(response => response.json())
       .then(json => dispatch(expenseObligationsFetchSuccess(json)))
       .catch(error => console.log(error))

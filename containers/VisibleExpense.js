@@ -6,7 +6,6 @@ import ExpenseView from './../components/ExpenseView'
 
 const mapStateToProps = (state) => {
   return {
-    session: state.session.session,
     expense: state.expenses.viewedExpense,
     isViewingEditExpenseForm: state.expenses.isViewingEditExpenseForm,
     isUploadingExpenseImage: state.trips.isUploadingExpenseImage,
@@ -16,8 +15,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onExpenseImageChanged: (session, expense, image) => {
-      dispatch(updateExpenseImage(session, expense, image))
+    onExpenseImageChanged: (expense, image) => {
+      dispatch(updateExpenseImage(expense, image))
     }
   };
 };

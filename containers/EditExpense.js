@@ -10,8 +10,7 @@ const mapStateToProps = (state) => {
     showDeleteButton: true,
     expense: state.expenses.editingExpense,
     isSavingExpense: state.expenses.isSavingExpense,
-    isDeletingExpense: state.expenses.isDeletingExpense,
-    session: state.session.session
+    isDeletingExpense: state.expenses.isDeletingExpense
   };
 };
 
@@ -20,14 +19,14 @@ const mapDispatchToProps = (dispatch) => {
     onExpenseAttributeSet: (attributeName, attributeValue) => {
       dispatch(setExpenseAttr(attributeName, attributeValue));
     },
-    onSave: (session, expense) => {
-      dispatch(updateExpense(session, expense));
+    onSave: (expense) => {
+      dispatch(updateExpense(expense));
     },
     onCancel: () => {
       dispatch(cancelEditingExpense());
     },
-    onDelete: (session, expense) => {
-      dispatch(deleteExpense(session, expense));
+    onDelete: (expense) => {
+      dispatch(deleteExpense(expense));
     }
   };
 };

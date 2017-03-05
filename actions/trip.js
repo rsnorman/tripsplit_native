@@ -1,4 +1,4 @@
-import { applyAuthenticationHeaders } from './helpers'
+import { applyAuthenticationHeaders } from './helpers';
 
 function startFetchingTrips() {
   return {

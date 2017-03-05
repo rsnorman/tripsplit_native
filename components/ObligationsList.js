@@ -40,7 +40,7 @@ let styles = StyleSheet.create({
 
 class ObligationsList extends Component {
   componentDidMount() {
-    this.props.onObligationsLoad(this.props.session, this.props.expense)
+    this.props.onObligationsLoad(this.props.expense)
   }
 
   rowPressed(obligationId) {

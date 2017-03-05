@@ -125,7 +125,7 @@ class ExpenseForm extends Component {
   }
 
   onSavePressed() {
-    this.props.onSave(this.props.session, this.props.expense);
+    this.props.onSave(this.props.expense);
   }
 
   onCancelPressed() {
@@ -142,7 +142,7 @@ class ExpenseForm extends Component {
             color: 'red'
         },
         callback: () => {
-            this.props.onDelete(this.props.session, this.props.expense);
+            this.props.onDelete(this.props.expense);
         },
       },
       cancel: {

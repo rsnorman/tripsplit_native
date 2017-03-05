@@ -1,3 +1,5 @@
+import { applyAuthenticationHeaders } from './helpers';
+
 function startFetchingTripExpenses() {
   return {
     type: 'START_FETCHING_TRIP_EXPENSES'
@@ -11,23 +13,14 @@ function tripExpensesFetchSuccess(expenses) {
   }
 }
 
-export const fetchTripExpenses = (session, trip) => {
+export const fetchTripExpenses = (trip) => {
   let url = 'http://localhost:3000/trips/' + trip.id + '/expenses';
 
   return dispatch => {
-    dispatch(startFetchingTripExpenses())
-    return fetch(url, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        "Token-Type": "Bearer",
-        'Access-Token': session.accessToken,
-        'Client': session.client,
-        "Expiry": session.expiry,
-        "uid": session.uid
-      }
-    })
+    const { session } = dispatch(startFetchingTripExpenses())
+    return fetch(url, applyAuthenticationHeaders({
+      method: 'GET'
+    }, session))
       .then(response => response.json())
       .then(json => dispatch(tripExpensesFetchSuccess(json)))
       .catch(error => console.log(error))
@@ -69,24 +62,15 @@ function expenseCreateSuccess(expense) {
   }
 }
 
-export const createExpense = (session, newExpense) => {
+export const createExpense = (newExpense) => {
   let url = 'http://localhost:3000/trips/' + newExpense.trip_id + '/expenses'
 
   return dispatch => {
-    dispatch(startCreatingExpense())
-    return fetch(url, {
+    const { session } = dispatch(startCreatingExpense())
+    return fetch(url, applyAuthenticationHeaders({
       method: 'POST',
-      body: JSON.stringify({expense: newExpense}),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        "Token-Type": "Bearer",
-        'Access-Token': session.accessToken,
-        'Client': session.client,
-        "Expiry": session.expiry,
-        "uid": session.uid
-      }
-    })
+      body: JSON.stringify({expense: newExpense})
+    }, session))
       .then(response => response.json())
       .then(json => dispatch(expenseCreateSuccess(json)))
       .catch(error => console.log(error))
@@ -119,24 +103,15 @@ function expenseUpdateSuccess(expense) {
   }
 }
 
-export const updateExpense = (session, editingExpense) => {
+export const updateExpense = (editingExpense) => {
   let url = 'http://localhost:3000/trips/' + editingExpense.trip_id + '/expenses/' + editingExpense.id
 
   return dispatch => {
-    dispatch(startUpdatingExpense())
-    return fetch(url, {
+    const { session } = dispatch(startUpdatingExpense())
+    return fetch(url, applyAuthenticationHeaders({
       method: 'PUT',
-      body: JSON.stringify({expense: editingExpense}),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        "Token-Type": "Bearer",
-        'Access-Token': session.accessToken,
-        'Client': session.client,
-        "Expiry": session.expiry,
-        "uid": session.uid
-      }
-    })
+      body: JSON.stringify({expense: editingExpense})
+    }, session))
       .then(response => response.json())
       .then(json => dispatch(expenseUpdateSuccess(json)))
       .catch(error => console.log(error))
@@ -162,23 +137,14 @@ function expenseDeleteSuccess(expense) {
   }
 }
 
-export const deleteExpense = (session, expense) => {
+export const deleteExpense = (expense) => {
   let url = 'http://localhost:3000/trips/' + expense.trip_id + '/expenses/' + expense.id;
 
   return dispatch => {
-    dispatch(startDeletingExpense())
-    return fetch(url, {
-      method: 'DELETE',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        "Token-Type": "Bearer",
-        'Access-Token': session.accessToken,
-        'Client': session.client,
-        "Expiry": session.expiry,
-        "uid": session.uid
-      }
-    })
+    const { session } = dispatch(startDeletingExpense())
+    return fetch(url, applyAuthenticationHeaders({
+      method: 'DELETE'
+    }, session))
       .then(_response => dispatch(expenseDeleteSuccess(expense)))
       .catch(error => console.log(error))
   }
@@ -197,7 +163,7 @@ function expenseImageUpdateSuccess(expense) {
   }
 }
 
-export const updateExpenseImage = (session, expense, image) => {
+export const updateExpenseImage = (expense, image) => {
   let url = 'http://localhost:3000/trips/' + expense.trip_id + '/expenses/' + expense.id;
   const body = new FormData();
 
@@ -208,19 +174,11 @@ export const updateExpenseImage = (session, expense, image) => {
   });
 
   return dispatch => {
-    dispatch(startUpdatingExpenseImage())
-    return fetch(url, {
+    const { session } = dispatch(startUpdatingExpenseImage())
+    return fetch(url, applyAuthenticationHeaders({
       method: 'PUT',
-      body: body,
-      headers: {
-        'Accept': 'application/json',
-        "Token-Type": "Bearer",
-        'Access-Token': session.accessToken,
-        'Client': session.client,
-        "Expiry": session.expiry,
-        "uid": session.uid
-      }
-    })
+      body: body
+    }, session))
       .then(response => response.json())
       .then(json => dispatch(expenseImageUpdateSuccess(json)))
       .catch(error => console.log(error))
