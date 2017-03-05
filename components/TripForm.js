@@ -125,7 +125,7 @@ class TripForm extends Component {
   }
 
   onSavePressed() {
-    this.props.onSave(this.props.session, this.props.trip);
+    this.props.onSave(this.props.trip);
   }
 
   onCancelPressed() {
@@ -142,7 +142,7 @@ class TripForm extends Component {
             color: 'red'
         },
         callback: () => {
-            this.props.onDelete(this.props.session, this.props.trip);
+            this.props.onDelete(this.props.trip);
         },
       },
       cancel: {

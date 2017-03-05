@@ -10,8 +10,7 @@ const mapStateToProps = (state) => {
     showDeleteButton: true,
     trip: state.trips.editingTrip,
     isSavingTrip: state.trips.isSavingTrip,
-    isDeletingTrip: state.trips.isDeletingTrip,
-    session: state.session.session
+    isDeletingTrip: state.trips.isDeletingTrip
   };
 };
 
@@ -20,14 +19,14 @@ const mapDispatchToProps = (dispatch) => {
     onTripAttributeSet: (attributeName, attributeValue) => {
       dispatch(setTripAttr(attributeName, attributeValue));
     },
-    onSave: (session, trip) => {
-      dispatch(updateTrip(session, trip));
+    onSave: (trip) => {
+      dispatch(updateTrip(trip));
     },
     onCancel: () => {
       dispatch(cancelEditingTrip());
     },
-    onDelete: (session, trip) => {
-      dispatch(deleteTrip(session, trip));
+    onDelete: (trip) => {
+      dispatch(deleteTrip(trip));
     }
   };
 };

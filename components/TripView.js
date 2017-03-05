@@ -106,11 +106,7 @@ class TripView extends Component {
   };
 
   updateTripImage(image) {
-    this.props.onTripImageChanged(
-      this.props.session,
-      this.props.trip,
-      image
-    );
+    this.props.onTripImageChanged(this.props.trip, image);
   }
 
   onAddExpensePressed() {

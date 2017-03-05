@@ -4,7 +4,7 @@ import UserTrips from '../containers/UserTrips'
 
 class AccountView extends Component {
   componentDidMount() {
-    this.props.onLoad(this.props.session);
+    this.props.onLoad();
   }
 
   render() {

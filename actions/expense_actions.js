@@ -156,7 +156,6 @@ function startDeletingExpense() {
 }
 
 function expenseDeleteSuccess(expense) {
-  console.log('expense delete success', expense);
   return {
     type: 'EXPENSE_DELETE_SUCCESS',
     expense
@@ -192,7 +191,6 @@ function startUpdatingExpenseImage() {
 }
 
 function expenseImageUpdateSuccess(expense) {
-  console.log('Expense image updated', expense);
   return {
     type: 'EXPENSE_IMAGE_UPDATE_SUCCESS',
     expense
