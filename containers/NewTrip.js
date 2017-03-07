@@ -8,8 +8,7 @@ const mapStateToProps = (state) => {
   return {
     title: 'Create Trip',
     trip: state.trips.newTrip,
-    isSavingTrip: state.trips.isSavingTrip,
-    session: state.session.session
+    isSavingTrip: state.trips.isSavingTrip
   };
 };
 
@@ -18,8 +17,8 @@ const mapDispatchToProps = (dispatch) => {
     onTripAttributeSet: (attributeName, attributeValue) => {
       dispatch(setTripAttr(attributeName, attributeValue));
     },
-    onSave: (session, newTrip) => {
-      dispatch(createTrip(session, newTrip));
+    onSave: (newTrip) => {
+      dispatch(createTrip(newTrip));
     },
     onCancel: () => {
       dispatch(cancelCreatingTrip());

@@ -12,6 +12,8 @@ const nav = (state, action) => {
       return AppNavigator.router.getStateForAction(NavigationActions.navigate({ routeName: 'VisibleExpense', params: { expense: action.expense } }), state);
     case 'EXPENSE_DELETE_SUCCESS':
       return AppNavigator.router.getStateForAction(NavigationActions.back(), state);
+    case 'VIEW_OBLIGATION':
+      return AppNavigator.router.getStateForAction(NavigationActions.navigate({ routeName: 'VisibleObligation', params: { expense: action.obligation.expense } }), state);
     default:
       return AppNavigator.router.getStateForAction(action, state);
   }

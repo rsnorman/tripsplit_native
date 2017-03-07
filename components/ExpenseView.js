@@ -88,11 +88,7 @@ class ExpenseView extends Component {
   };
 
   updateExpenseImage(image) {
-    this.props.onExpenseImageChanged(
-      this.props.session,
-      this.props.expense,
-      image
-    );
+    this.props.onExpenseImageChanged(this.props.expense, image);
   }
 
   render() {

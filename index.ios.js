@@ -6,14 +6,9 @@
 
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import AppWithNavigationState from './containers/AppWithNavigationState'
-
-import tripSplitApp from './reducers';
-
-let store = createStore(tripSplitApp, applyMiddleware(thunk));
+import AppWithNavigationState from './containers/AppWithNavigationState';
+import store from './tripsplit-store';
 
 export default class TripSplitApp extends Component {
   render() {

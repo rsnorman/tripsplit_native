@@ -1,3 +1,5 @@
+import { applyAuthenticationHeaders } from './helpers';
+
 function startFetchingTrips() {
   return {
     type: 'START_FETCHING_TRIPS'
@@ -11,23 +13,13 @@ function tripFetchSuccess(trips) {
   }
 }
 
-export const fetchTrips = (session) => {
+export const fetchTrips = () => {
   let url = 'http://localhost:3000/trips'
 
   return dispatch => {
-    dispatch(startFetchingTrips())
-    return fetch(url, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        "Token-Type": "Bearer",
-        'Access-Token': session.accessToken,
-        'Client': session.client,
-        "Expiry": session.expiry,
-        "uid": session.uid
-      }
-    })
+    const { session } = dispatch(startFetchingTrips());
+
+    return fetch(url, applyAuthenticationHeaders({ method: 'GET' }, session))
       .then(response => response.json())
       .then(json => dispatch(tripFetchSuccess(json)))
       .catch(error => console.log(error))
@@ -81,24 +73,15 @@ function tripUpdateSuccess(trip) {
   }
 }
 
-export const createTrip = (session, newTrip) => {
+export const createTrip = (newTrip) => {
   let url = 'http://localhost:3000/trips'
 
   return dispatch => {
-    dispatch(startCreatingTrip())
-    return fetch(url, {
+    const { session } = dispatch(startCreatingTrip())
+    return fetch(url, applyAuthenticationHeaders({
       method: 'POST',
-      body: JSON.stringify({trip: newTrip}),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        "Token-Type": "Bearer",
-        'Access-Token': session.accessToken,
-        'Client': session.client,
-        "Expiry": session.expiry,
-        "uid": session.uid
-      }
-    })
+      body: JSON.stringify({trip: newTrip})
+    }, session))
       .then(response => response.json())
       .then(json => dispatch(tripCreateSuccess(json)))
       .catch(error => console.log(error))
@@ -118,24 +101,15 @@ export const editTrip = function(trip) {
   }
 };
 
-export const updateTrip = (session, editingTrip) => {
+export const updateTrip = (editingTrip) => {
   let url = 'http://localhost:3000/trips/' + editingTrip.id
 
   return dispatch => {
-    dispatch(startUpdatingTrip())
-    return fetch(url, {
+    const { session } = dispatch(startUpdatingTrip())
+    return fetch(url, applyAuthenticationHeaders({
       method: 'PUT',
-      body: JSON.stringify({trip: editingTrip}),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        "Token-Type": "Bearer",
-        'Access-Token': session.accessToken,
-        'Client': session.client,
-        "Expiry": session.expiry,
-        "uid": session.uid
-      }
-    })
+      body: JSON.stringify({trip: editingTrip})
+    }, session))
       .then(response => response.json())
       .then(json => dispatch(tripUpdateSuccess(json)))
       .catch(error => console.log(error))
@@ -161,23 +135,14 @@ function tripDeleteSuccess(trip) {
   }
 }
 
-export const deleteTrip = (session, trip) => {
+export const deleteTrip = (trip) => {
   let url = 'http://localhost:3000/trips/' + trip.id
 
   return dispatch => {
-    dispatch(startDeletingTrip())
-    return fetch(url, {
-      method: 'DELETE',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        "Token-Type": "Bearer",
-        'Access-Token': session.accessToken,
-        'Client': session.client,
-        "Expiry": session.expiry,
-        "uid": session.uid
-      }
-    })
+    const { session } = dispatch(startDeletingTrip())
+    return fetch(url, applyAuthenticationHeaders({
+      method: 'DELETE'
+    }, session))
       .then(_response => dispatch(tripDeleteSuccess(trip)))
       .catch(error => console.log(error))
   }
@@ -196,7 +161,7 @@ function tripImageUpdateSuccess(trip) {
   }
 }
 
-export const updateTripImage = (session, trip, image) => {
+export const updateTripImage = (trip, image) => {
   let url = 'http://localhost:3000/trips/' + trip.id;
   const body = new FormData();
 
@@ -207,19 +172,11 @@ export const updateTripImage = (session, trip, image) => {
   });
 
   return dispatch => {
-    dispatch(startUpdatingTripImage())
-    return fetch(url, {
+    const { session } = dispatch(startUpdatingTripImage())
+    return fetch(url, applyAuthenticationHeaders({
       method: 'PUT',
-      body: body,
-      headers: {
-        'Accept': 'application/json',
-        "Token-Type": "Bearer",
-        'Access-Token': session.accessToken,
-        'Client': session.client,
-        "Expiry": session.expiry,
-        "uid": session.uid
-      }
-    })
+      body: body
+    }, session))
       .then(response => response.json())
       .then(json => dispatch(tripImageUpdateSuccess(json)))
       .catch(error => console.log(error))

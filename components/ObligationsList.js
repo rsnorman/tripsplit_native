@@ -36,19 +36,33 @@ let styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 10
   },
+  paidIndicator: { },
+  paidIndicatorLabel: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: '#48bbec'
+  }
 });
 
 class ObligationsList extends Component {
   componentDidMount() {
-    this.props.onObligationsLoad(this.props.session, this.props.expense)
+    this.props.onObligationsLoad(this.props.expense)
   }
 
   rowPressed(obligationId) {
     let obligation = this.props.obligations.filter(obligation => obligation.id === obligationId)[0];
-    console.log('Obligation Selected:', obligation);
+    this.props.onObligationSelected(obligation);
   }
 
   renderRow(rowData, sectionID, rowID) {
+    let paidIndicator = rowData.is_paid ?
+      (
+        <View style={styles.paidIndicator}>
+          <Text style={styles.paidIndicatorLabel}>Paid</Text>
+        </View>
+      ) :
+      ( <View /> );
+
     return (
       <TouchableHighlight
         onPress={() => this.rowPressed(rowData.id)}
@@ -64,6 +78,7 @@ class ObligationsList extends Component {
                 ${rowData.amount}
               </Text>
             </View>
+            {paidIndicator}
           </View>
           <View style={styles.separator}/>
         </View>

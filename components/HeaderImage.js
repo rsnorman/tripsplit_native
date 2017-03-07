@@ -67,6 +67,10 @@ class HeaderImage extends Component {
       ( <ActivityIndicator style={imageStyles.imageUploadSpinner} size="large" /> ) :
       ( <View /> );
 
+    if (!this.props.onImageSelected) {
+      return <View style={imageStyles.thumb}>{image}</View>;
+    }
+
     return (
       <TouchableHighlight
         onPress={() => this.onImageEditPressed()}

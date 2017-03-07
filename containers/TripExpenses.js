@@ -14,15 +14,14 @@ const mapStateToProps = (state) => {
     trip: state.trips.viewedTrip,
     expenses: state.expenses.tripExpenses,
     dataSource: dataSource.cloneWithRows(state.expenses.tripExpenses),
-    isFetchingTripExpenses: state.expenses.isFetchingTripExpenses,
-    session: state.session.session
+    isFetchingTripExpenses: state.expenses.isFetchingTripExpenses
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onExpensesLoad: (session, trip) => {
-      dispatch(fetchTripExpenses(session, trip));
+    onExpensesLoad: (trip) => {
+      dispatch(fetchTripExpenses(trip));
     },
     onExpenseSelected: (expense) => {
       dispatch(viewExpense(expense));

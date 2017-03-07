@@ -85,7 +85,8 @@ let styles = StyleSheet.create({
   },
   tripLocation: {
     paddingTop: 3,
-    paddingBottom: 3
+    paddingBottom: 3,
+    marginBottom: 3
   },
   tripDescription: {
     fontStyle: 'italic',
@@ -106,11 +107,7 @@ class TripView extends Component {
   };
 
   updateTripImage(image) {
-    this.props.onTripImageChanged(
-      this.props.session,
-      this.props.trip,
-      image
-    );
+    this.props.onTripImageChanged(this.props.trip, image);
   }
 
   onAddExpensePressed() {

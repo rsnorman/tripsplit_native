@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { fetchExpenseObligations } from '../actions/obligation_actions';
+import { fetchExpenseObligations, viewExpenseObligation } from '../actions/obligation_actions';
 import ObligationsList from '../components/ObligationsList';
 import { ListView } from 'react-native';
 
@@ -14,15 +14,17 @@ const mapStateToProps = (state) => {
     expense: state.expenses.viewedExpense,
     obligations: state.obligations.expenseObligations,
     dataSource: dataSource.cloneWithRows(state.obligations.expenseObligations),
-    isFetchingExpenseObligations: state.obligations.isFetchingExpenseObligations,
-    session: state.session.session
+    isFetchingExpenseObligations: state.obligations.isFetchingExpenseObligations
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onObligationsLoad: (session, expense) => {
-      dispatch(fetchExpenseObligations(session, expense));
+    onObligationsLoad: (expense) => {
+      dispatch(fetchExpenseObligations(expense));
+    },
+    onObligationSelected: (obligation) => {
+      dispatch(viewExpenseObligation(obligation));
     }
   };
 };

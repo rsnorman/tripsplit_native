@@ -7,7 +7,6 @@ import TripView from './../components/TripView'
 
 const mapStateToProps = (state) => {
   return {
-    session: state.session.session,
     trip: state.trips.viewedTrip,
     isViewingNewExpenseForm: state.expenses.isViewingNewExpenseForm,
     isViewingEditTripForm: state.trips.isViewingEditTripForm,
@@ -18,8 +17,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onTripImageChanged: (session, trip, image) => {
-      dispatch(updateTripImage(session, trip, image))
+    onTripImageChanged: (trip, image) => {
+      dispatch(updateTripImage(trip, image))
     },
     onAddExpensePressed: (trip) => {
       dispatch(addExpense(trip));

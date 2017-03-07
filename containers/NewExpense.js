@@ -8,8 +8,7 @@ const mapStateToProps = (state) => {
   return {
     title: 'Create Expense',
     expense: state.expenses.newExpense,
-    isSavingExpense: state.expenses.isSavingExpense,
-    session: state.session.session
+    isSavingExpense: state.expenses.isSavingExpense
   };
 };
 
@@ -18,8 +17,8 @@ const mapDispatchToProps = (dispatch) => {
     onExpenseAttributeSet: (attributeName, attributeValue) => {
       dispatch(setExpenseAttr(attributeName, attributeValue));
     },
-    onSave: (session, newExpense) => {
-      dispatch(createExpense(session, newExpense));
+    onSave: (newExpense) => {
+      dispatch(createExpense(newExpense));
     },
     onCancel: () => {
       dispatch(cancelCreatingExpense());

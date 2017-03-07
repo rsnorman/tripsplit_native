@@ -8,15 +8,14 @@ import AccountView from '../components/AccountView'
 const mapStateToProps = (state) => {
   return {
     trips: state.trips.trips,
-    isFetchingTrips: state.trips.isFetchingTrips,
-    session: state.session.session
+    isFetchingTrips: state.trips.isFetchingTrips
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLoad: (session) => {
-      dispatch(fetchTrips(session));
+    onLoad: () => {
+      dispatch(fetchTrips());
     },
     onAddTrip: () => {
       dispatch(addTrip());
