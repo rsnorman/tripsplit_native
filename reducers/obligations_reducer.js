@@ -14,6 +14,21 @@ const obligations = (state = initialObligationsState, action) => {
         isFetchingExpenseObligations: false,
         expenseObligations: action.expenseObligations
       });
+    case 'VIEW_OBLIGATION':
+      return {
+        ...state,
+        viewedObligation: action.obligation
+      };
+    case 'EXPENSE_OBLIGATION_PAYMENT_SUCCESS':
+      let paidObligationIndex = state.expenseObligations.findIndex((obligation) => obligation.id === action.obligation.id);
+      let obligationsWithPaid = JSON.parse(JSON.stringify(state.expenseObligations));
+      obligationsWithPaid[paidObligationIndex] = action.obligation;
+
+      return {
+        ...state,
+        expenseObligations: obligationsWithPaid,
+        viewedObligation: action.obligation
+      }
     default:
       return state;
   }

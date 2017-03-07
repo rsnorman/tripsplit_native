@@ -85,7 +85,8 @@ let styles = StyleSheet.create({
   },
   tripLocation: {
     paddingTop: 3,
-    paddingBottom: 3
+    paddingBottom: 3,
+    marginBottom: 3
   },
   tripDescription: {
     fontStyle: 'italic',

@@ -99,7 +99,7 @@ const expenses = (state = initialExpensesState, action) => {
       expensesWithUpdatedImage[updatedExpenseImageIndex] = action.expense;
 
       return Object.assign({}, state, {
-        expense: expensesWithUpdatedImage,
+        tripExpenses: expensesWithUpdatedImage,
         viewedExpense: action.expense,
         isUploadingExpenseImage: false
       });

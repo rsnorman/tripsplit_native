@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { fetchExpenseObligations } from '../actions/obligation_actions';
+import { fetchExpenseObligations, viewExpenseObligation } from '../actions/obligation_actions';
 import ObligationsList from '../components/ObligationsList';
 import { ListView } from 'react-native';
 
@@ -22,6 +22,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onObligationsLoad: (expense) => {
       dispatch(fetchExpenseObligations(expense));
+    },
+    onObligationSelected: (obligation) => {
+      dispatch(viewExpenseObligation(obligation));
     }
   };
 };
