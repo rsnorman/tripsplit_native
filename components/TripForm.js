@@ -121,7 +121,7 @@ class TripForm extends Component {
     this.props.onTripAttributeSet('location', event.nativeEvent.text);
   }
   onDescriptionChanged(event) {
-    this.props.onTripAttributeSet('detail', event.nativeEvent.text);
+    this.props.onTripAttributeSet('description', event.nativeEvent.text);
   }
 
   onSavePressed() {
