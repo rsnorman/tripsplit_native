@@ -1,4 +1,23 @@
 import { dispatch } from 'react';
+import { AsyncStorage } from 'react-native';
+
+function initializeAppSuccess(sessionData) {
+  return {
+    type: 'APP_INITIALIZED',
+    sessionData
+  };
+}
+
+export const initializeHomeScreen = () => {
+  return dispatch => {
+    AsyncStorage.getItem('sessionData').then((sessionData) => {
+      if (sessionData !== null) {
+        sessionData = JSON.parse(sessionData);
+      }
+      dispatch(initializeAppSuccess(sessionData))
+    });
+  }
+}
 
 export const setEmail = (email) => {
   return {
@@ -21,6 +40,7 @@ function startLogin() {
 }
 
 function loginSuccess(loginData) {
+  AsyncStorage.setItem('sessionData', JSON.stringify(loginData));
   return {
     type: 'CREATE_SESSION',
     user: loginData.user,

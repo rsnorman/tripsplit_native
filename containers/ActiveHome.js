@@ -1,17 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { fetchTrips } from '../actions';
 import HomeScreen from './../components/HomeScreen'
+import { initializeHomeScreen } from '../actions/index';
 
 const mapStateToProps = (state) => {
   return {
     session: state.session.session,
+    isInitializing: state.session.isInitializing
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    onHomeScreenLoaded: () => {
+      dispatch(initializeHomeScreen());
+    }
+  };
 };
 
 const ActiveHome = connect(
