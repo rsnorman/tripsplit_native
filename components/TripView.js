@@ -25,6 +25,7 @@ import TripExpenses from './../containers/TripExpenses';
 import NewExpense from './../containers/NewExpense';
 import FloatingButton from './../components/FloatingButton';
 import HeaderImage from './../components/HeaderImage';
+import ActiveTripTabNavigator from './../containers/ActiveTripTabNavigator';
 
 
 let styles = StyleSheet.create({
@@ -116,9 +117,6 @@ class TripView extends Component {
 
   render() {
     let trip = this.props.trip;
-    let spinner = this.props.isFetchingExpenses ?
-      <TripExpenses />:
-      <View />;
 
     return (
       <View style={styles.container}>
@@ -157,7 +155,7 @@ class TripView extends Component {
             <Text style={styles.tripDescription}>{this.props.trip.description}</Text>
           </View>
         </View>
-        {spinner}
+        <ActiveTripTabNavigator />
         <FloatingButton icon="dollar" size={50} onButtonPressed={this.onAddExpensePressed.bind(this)} />
         <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditTripForm}>
           <EditTrip />
