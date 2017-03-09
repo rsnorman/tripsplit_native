@@ -1,7 +1,7 @@
 import { dispatch } from 'react';
 import { AsyncStorage } from 'react-native';
 
-function initializeAppSuccess(sessionData, currentTrip) {
+function initializeAppSuccess() {
   return {
     type: 'APP_INITIALIZED'
   };

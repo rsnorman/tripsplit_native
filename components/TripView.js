@@ -107,6 +107,12 @@ class TripView extends Component {
     })
   };
 
+  componentDidMount() {
+    if (this.props.needsTripReload) {
+      this.props.onDirtyTripLoad(this.props.trip);
+    }
+  }
+
   updateTripImage(image) {
     this.props.onTripImageChanged(this.props.trip, image);
   }
