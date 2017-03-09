@@ -33,7 +33,9 @@ class HomeScreen extends Component {
     let spinner = isInitializing ?
       ( <ActivityIndicator style={styles.spinner} size="large" /> ) :
       ( <View /> );
-    let currentAccountView = isLoggedIn ?
+
+    //let currentAccountView = isLoggedIn && !this.props.skipAccountView && !isInitializing ?
+    let currentAccountView = isLoggedIn && !isInitializing ?
       ( <ActiveAccount /> ) :
       ( <View /> );
 

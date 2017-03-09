@@ -3,6 +3,8 @@ import AppNavigator from './../components/AppNavigator';
 
 const nav = (state, action) => {
   switch (action.type) {
+    case 'SAVED_CURRENT_TRIP_LOADED':
+      return AppNavigator.router.getStateForAction(NavigationActions.navigate({ routeName: 'VisibleTrip', params: { trip: action.currentTrip } }), state);
     case 'TRIP_CREATE_SUCCESS':
     case 'VIEW_TRIP':
       return AppNavigator.router.getStateForAction(NavigationActions.navigate({ routeName: 'VisibleTrip', params: { trip: action.trip } }), state);

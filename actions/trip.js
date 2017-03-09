@@ -1,4 +1,5 @@
 import { applyAuthenticationHeaders } from './helpers';
+import { AsyncStorage } from 'react-native';
 
 function startFetchingTrips() {
   return {
@@ -6,9 +7,9 @@ function startFetchingTrips() {
   }
 }
 
-function tripFetchSuccess(trips) {
+function tripsFetchSuccess(trips) {
   return {
-    type: 'TRIP_FETCH_SUCCESS',
+    type: 'TRIPS_FETCH_SUCCESS',
     trips: trips
   }
 }
@@ -21,7 +22,7 @@ export const fetchTrips = () => {
 
     return fetch(url, applyAuthenticationHeaders({ method: 'GET' }, session))
       .then(response => response.json())
-      .then(json => dispatch(tripFetchSuccess(json)))
+      .then(json => dispatch(tripsFetchSuccess(json)))
       .catch(error => console.log(error))
   }
 }
@@ -33,10 +34,38 @@ export const addTrip = () => {
 }
 
 export const viewTrip = (trip) => {
+  AsyncStorage.setItem('currentTrip', JSON.stringify(trip))
   return {
     type: 'VIEW_TRIP',
     trip: trip
   }
+}
+
+function startFetchingTrip() {
+  return {
+    type: 'START_FETCHING_TRIP'
+  }
+}
+
+function tripFetchSuccess(trip) {
+  AsyncStorage.setItem('currentTrip', JSON.stringify(trip))
+  return {
+    type: 'TRIP_FETCH_SUCCESS',
+    trip
+  }
+}
+
+export const reloadTrip = (trip) => {
+  let url = `http://localhost:3000/trips/${trip.id}`
+
+  return dispatch => {
+    const { session } = dispatch(startFetchingTrip());
+
+    return fetch(url, applyAuthenticationHeaders({ method: 'GET' }, session))
+      .then(response => response.json())
+      .then(json => dispatch(tripFetchSuccess(json)))
+      .catch(error => console.log(error))
+  };
 }
 
 export const setTripAttr = (attributeName, attributeValue) => {

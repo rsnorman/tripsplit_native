@@ -6,20 +6,38 @@ let initialTripState = {
   isCreatingTrip: false,
   isSavingTrip: false,
   isFetchingTrips: false,
+  isFetchingTrip: false,
   isViewingEditTripForm: false,
-  isUploadingTripImage: false
+  isUploadingTripImage: false,
+  isDirtyTrip: false
 };
 
 const trips = (state = initialTripState, action) => {
   switch (action.type) {
+    case 'SAVED_CURRENT_TRIP_LOADED':
+      return {
+        ...state,
+        isDirtyTrip: true,
+        viewedTrip: action.currentTrip
+      };
     case 'START_FETCHING_TRIPS':
       return Object.assign({}, state, {
         isFetchingTrips: true
       })
-    case 'TRIP_FETCH_SUCCESS':
+    case 'TRIPS_FETCH_SUCCESS':
       return Object.assign({}, state, {
         isFetchingTrips: false,
         trips: action.trips
+      });
+    case 'START_FETCHING_TRIP':
+      return Object.assign({}, state, {
+        isFetchingTrip: true
+      })
+    case 'TRIP_FETCH_SUCCESS':
+      return Object.assign({}, state, {
+        isFetchingTrip: false,
+        isDirtyTrip: false,
+        trip: action.trip
       });
     case 'NEW_TRIP':
       return Object.assign({}, state, {

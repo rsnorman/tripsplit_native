@@ -1,20 +1,43 @@
 import { dispatch } from 'react';
 import { AsyncStorage } from 'react-native';
 
-function initializeAppSuccess(sessionData) {
+function initializeAppSuccess() {
   return {
-    type: 'APP_INITIALIZED',
+    type: 'APP_INITIALIZED'
+  };
+}
+
+function loadSavedSessionData(sessionData) {
+  return {
+    type: 'SAVED_SESSION_DATA_LOADED',
     sessionData
+  };
+}
+
+function loadSavedCurrentTrip(currentTrip) {
+  return {
+    type: 'SAVED_CURRENT_TRIP_LOADED',
+    currentTrip
   };
 }
 
 export const initializeHomeScreen = () => {
   return dispatch => {
     AsyncStorage.getItem('sessionData').then((sessionData) => {
-      if (sessionData !== null) {
+      if (sessionData === null) {
+        dispatch(initializeAppSuccess())
+      } else {
         sessionData = JSON.parse(sessionData);
+        dispatch(loadSavedSessionData(sessionData))
+
+        AsyncStorage.getItem('currentTrip').then((currentTrip) => {
+          if (currentTrip !== null) {
+            currentTrip = JSON.parse(currentTrip);
+            dispatch(loadSavedCurrentTrip(currentTrip))
+          }
+          dispatch(initializeAppSuccess())
+        });
       }
-      dispatch(initializeAppSuccess(sessionData))
     });
   }
 }
