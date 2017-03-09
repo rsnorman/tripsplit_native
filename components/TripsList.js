@@ -18,6 +18,7 @@ import ListImage from './../components/ListImage';
 import NewTrip from './../containers/NewTrip';
 import FloatingButton from './../components/FloatingButton';
 import Money from './../components/MoneyView';
+import OpenDrawerButton from './../containers/OpenDrawerButton';
 
 let styles = StyleSheet.create({
   container: {
@@ -52,6 +53,19 @@ let styles = StyleSheet.create({
 });
 
 class TripsList extends Component {
+  static navigationOptions = {
+    title: 'Trips',
+    header: () => ({
+      left: (
+        <OpenDrawerButton />
+      )
+    })
+  };
+
+  componentDidMount() {
+    this.props.onTripsLoad();
+  }
+
   rowPressed(tripId) {
     let trip = this.props.trips.filter(trip => trip.id === tripId)[0];
     this.props.onTripSelected(trip);
