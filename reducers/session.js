@@ -7,16 +7,13 @@ const defaultUser = {
 const session = (state = defaultUser, action) => {
   switch (action.type) {
     case 'APP_INITIALIZED':
-      console.log('reduce app initialized', action.sessionData);
-      if (!action.sessionData) {
-        return {
-          ...state,
-          isInitializing: false
-        };
-      }
       return {
         ...state,
-        isInitializing: false,
+        isInitializing: false
+      };
+    case 'SAVED_SESSION_DATA_LOADED':
+      return {
+        ...state,
         user: action.sessionData.user,
         session: action.sessionData.session
       };

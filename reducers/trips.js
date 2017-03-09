@@ -7,11 +7,19 @@ let initialTripState = {
   isSavingTrip: false,
   isFetchingTrips: false,
   isViewingEditTripForm: false,
-  isUploadingTripImage: false
+  isUploadingTripImage: false,
+  isDirtyTrip: false
 };
 
 const trips = (state = initialTripState, action) => {
   switch (action.type) {
+    case 'SAVED_CURRENT_TRIP_LOADED':
+      console.log('reduce app initialized', action.currentTrip);
+      return {
+        ...state,
+        isDirtyTrip: true,
+        viewedTrip: action.currentTrip
+      };
     case 'START_FETCHING_TRIPS':
       return Object.assign({}, state, {
         isFetchingTrips: true

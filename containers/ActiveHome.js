@@ -7,7 +7,8 @@ import { initializeHomeScreen } from '../actions/index';
 const mapStateToProps = (state) => {
   return {
     session: state.session.session,
-    isInitializing: state.session.isInitializing
+    isInitializing: state.session.isInitializing,
+    skipAccountView: !!state.trips.viewedTrip
   };
 };
 

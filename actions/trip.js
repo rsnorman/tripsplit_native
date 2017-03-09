@@ -1,4 +1,5 @@
 import { applyAuthenticationHeaders } from './helpers';
+import { AsyncStorage } from 'react-native';
 
 function startFetchingTrips() {
   return {
@@ -33,6 +34,7 @@ export const addTrip = () => {
 }
 
 export const viewTrip = (trip) => {
+  AsyncStorage.setItem('currentTrip', JSON.stringify(trip))
   return {
     type: 'VIEW_TRIP',
     trip: trip
