@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import HeaderImage from './../components/HeaderImage';
+import Money from './../components/MoneyView';
 
 let styles = StyleSheet.create({
   containerHeader: {
@@ -155,11 +156,11 @@ class ObligationView extends Component {
             <View style={styles.obligationHeaderRightColumn}>
               <View style={styles.obligationCostDetails}>
                 <View style={styles.obligationDetail}>
-                  <Text style={styles.obligationDetailValue}>${expense.average_cost}</Text>
+                  <Money style={styles.obligationDetailValue} amount={expense.average_cost} />
                   <Text style={styles.obligationDetailLabel}>Payment</Text>
                 </View>
                 <View style={styles.obligationDetail}>
-                  <Text style={styles.obligationDetailValue}>${expense.cost}</Text>
+                  <Money style={styles.obligationDetailValue} amount={expense.cost} />
                   <Text style={styles.obligationDetailLabel}>Group Cost</Text>
                 </View>
               </View>

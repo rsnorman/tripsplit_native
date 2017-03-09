@@ -13,6 +13,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import ListImage from './../components/ListImage';
+import Money from './../components/MoneyView';
 
 let styles = StyleSheet.create({
   loader: {
@@ -78,9 +79,7 @@ class ExpensesList extends Component {
               <Text style={styles.purchaser} numberOfLines={1}>
                 Purchaser: {rowData.purchaser.name || rowData.purchaser.email}
               </Text>
-              <Text style={styles.cost} numberOfLines={1}>
-                ${rowData.cost}
-              </Text>
+              <Money style={styles.cost} amount={rowData.cost} />
             </View>
           </View>
           <View style={styles.separator}/>

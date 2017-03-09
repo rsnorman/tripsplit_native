@@ -25,6 +25,7 @@ import TripExpenses from './../containers/TripExpenses';
 import NewExpense from './../containers/NewExpense';
 import FloatingButton from './../components/FloatingButton';
 import HeaderImage from './../components/HeaderImage';
+import Money from './../components/MoneyView';
 import ActiveTripTabNavigator from './../containers/ActiveTripTabNavigator';
 
 
@@ -142,11 +143,11 @@ class TripView extends Component {
                   <Text style={styles.tripStatLabel}>Members</Text>
                 </View>
                 <View style={styles.tripStat}>
-                  <Text style={styles.tripStatValue}>${trip.total_cost}</Text>
+                  <Money style={styles.tripStatValue} amount={trip.total_cost} />
                   <Text style={styles.tripStatLabel}>Cost</Text>
                 </View>
                 <View style={styles.tripStat}>
-                  <Text style={styles.tripStatValue}>${trip.average_cost_per_member}</Text>
+                  <Money style={styles.tripStatValue} amount={trip.average_cost_per_member} />
                   <Text style={styles.tripStatLabel}>Average Cost</Text>
                 </View>
               </View>

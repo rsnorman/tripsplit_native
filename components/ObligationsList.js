@@ -13,6 +13,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import ListImage from './../components/ListImage';
+import Money from './../components/MoneyView';
 
 let styles = StyleSheet.create({
   loader: {
@@ -74,9 +75,7 @@ class ObligationsList extends Component {
               <Text style={styles.obligator} numberOfLines={1}>
                 {rowData.user.name || rowData.user.email}
               </Text>
-              <Text style={styles.amount} numberOfLines={1}>
-                ${rowData.amount}
-              </Text>
+              <Money style={styles.amount} amount={rowData.amount} />
             </View>
             {paidIndicator}
           </View>

@@ -15,6 +15,7 @@ import EditExpense from './../containers/EditExpense'
 import EditExpenseButton from './../containers/EditExpenseButton'
 import ExpenseObligations from './../containers/ExpenseObligations'
 import HeaderImage from './../components/HeaderImage';
+import Money from './../components/MoneyView';
 
 let styles = StyleSheet.create({
   containerHeader: {
@@ -111,11 +112,11 @@ class ExpenseView extends Component {
             <View style={styles.expenseHeaderRightColumn}>
               <View style={styles.expenseCostDetails}>
                 <View style={styles.expenseDetail}>
-                  <Text style={styles.expenseDetailValue}>${expense.cost}</Text>
+                  <Money style={styles.expenseDetailValue} amount={expense.cost} />
                   <Text style={styles.expenseDetailLabel}>Cost</Text>
                 </View>
                 <View style={styles.expenseDetail}>
-                  <Text style={styles.expenseDetailValue}>${expense.average_cost}</Text>
+                  <Money style={styles.expenseDetailValue} amount={expense.cost} />
                   <Text style={styles.expenseDetailLabel}>Average Cost</Text>
                 </View>
               </View>
