@@ -17,6 +17,7 @@ let ScreenHeight = Dimensions.get("window").height;
 import ListImage from './../components/ListImage';
 import NewTrip from './../containers/NewTrip';
 import FloatingButton from './../components/FloatingButton';
+import Money from './../components/MoneyView';
 
 let styles = StyleSheet.create({
   container: {
@@ -75,9 +76,7 @@ class TripsList extends Component {
               <Text style={styles.location} numberOfLines={1}>
                 {rowData.location}
               </Text>
-              <Text style={styles.cost} numberOfLines={1}>
-                ${rowData.total_cost}
-              </Text>
+              <Money style={styles.cost} amount={rowData.total_cost} />
               <Text style={styles.members} numberOfLines={1}>
                 {rowData.total_members} {rowData.total_members == 1 ? 'member' : 'members'}
               </Text>
