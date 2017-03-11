@@ -145,7 +145,8 @@ export const deleteExpense = (expense) => {
     return fetch(url, applyAuthenticationHeaders({
       method: 'DELETE'
     }, session))
-      .then(_response => dispatch(expenseDeleteSuccess(expense)))
+      .then(response => response.json())
+      .then(json => dispatch(expenseDeleteSuccess(json)))
       .catch(error => console.log(error))
   }
 }

@@ -37,7 +37,7 @@ const trips = (state = initialTripState, action) => {
       return Object.assign({}, state, {
         isFetchingTrip: false,
         isDirtyTrip: false,
-        trip: action.trip
+        viewedTrip: action.trip
       });
     case 'NEW_TRIP':
       return Object.assign({}, state, {
@@ -125,6 +125,17 @@ const trips = (state = initialTripState, action) => {
         isDeletingTrip: false,
         isViewingEditTripForm: false
       });
+    case 'EXPENSE_CREATE_SUCCESS':
+    case 'EXPENSE_UPDATE_SUCCESS':
+    case 'EXPENSE_DELETE_SUCCESS':
+      let updatedTripExpenseIndex = state.trips.findIndex((trip) => trip.id === action.expense.trip.id);
+      let tripsWithUpdatedExpenses = JSON.parse(JSON.stringify(state.trips));
+      tripsWithUpdatedExpenses[updatedTripExpenseIndex] = action.expense.trip;
+      return {
+        ...state,
+        trips: tripsWithUpdatedExpenses,
+        viewedTrip: action.expense.trip
+      };
     default:
       return state;
   }

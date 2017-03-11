@@ -29,6 +29,11 @@ const obligations = (state = initialObligationsState, action) => {
         expenseObligations: obligationsWithPaid,
         viewedObligation: action.obligation
       }
+    case 'EXPENSE_UPDATE_SUCCESS':
+      return {
+        ...state,
+        expenseObligations: action.expense.obligations
+      };
     default:
       return state;
   }
