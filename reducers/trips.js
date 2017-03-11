@@ -37,7 +37,7 @@ const trips = (state = initialTripState, action) => {
       return Object.assign({}, state, {
         isFetchingTrip: false,
         isDirtyTrip: false,
-        trip: action.trip
+        viewedTrip: action.trip
       });
     case 'NEW_TRIP':
       return Object.assign({}, state, {
