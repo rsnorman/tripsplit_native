@@ -22,6 +22,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import EditTrip from './../containers/EditTrip';
 import EditTripButton from './../containers/EditTripButton';
 import TripExpenses from './../containers/TripExpenses';
+import TripMembers from './../containers/TripMembers';
 import NewExpense from './../containers/NewExpense';
 import FloatingButton from './../components/FloatingButton';
 import HeaderImage from './../components/HeaderImage';
@@ -122,47 +123,79 @@ class TripView extends Component {
     this.props.onAddExpensePressed(this.props.trip);
   }
 
+  renderRow(rowData, sectionID, rowID) {
+    switch(rowData) {
+      case 'TRIP_HEADER':
+        let trip = this.props.trip;
+        return (
+          <View style={styles.containerHeader}>
+            <View style={styles.tripHeader}>
+              <HeaderImage
+                image={this.props.trip.picture}
+                title={'Trip'}
+                size={100}
+                onImageSelected={this.updateTripImage.bind(this)}
+                icon="car"
+                isUploadingImage={this.props.isUploadingTripImage} />
+              <View style={styles.tripHeaderRightColumn}>
+                <View style={styles.tripStats}>
+                  <View style={styles.tripStat}>
+                    <Text style={styles.tripStatValue}>{trip.total_members}</Text>
+                    <Text style={styles.tripStatLabel}>Members</Text>
+                  </View>
+                  <View style={styles.tripStat}>
+                    <Money style={styles.tripStatValue} amount={trip.total_cost} />
+                    <Text style={styles.tripStatLabel}>Cost</Text>
+                  </View>
+                  <View style={styles.tripStat}>
+                    <Money style={styles.tripStatValue} amount={trip.average_cost_per_member} />
+                    <Text style={styles.tripStatLabel}>Average Cost</Text>
+                  </View>
+                </View>
+                <View style={styles.organizer}>
+                  <Text style={styles.organizerLabel}>Organized by: {trip.organizer.name || trip.organizer.email}</Text>
+                </View>
+              </View>
+            </View>
+            <View style={styles.tripDetails}>
+              <Text style={styles.tripName}>{this.props.trip.name}</Text>
+              <Text style={styles.tripLocation}>{this.props.trip.location}</Text>
+              <Text style={styles.tripDescription}>{this.props.trip.description}</Text>
+            </View>
+          </View>
+        );
+      case 'TRIP_TABS':
+        return <ActiveTripTabNavigator />
+      case 'TRIP_EXPENSES':
+        return <TripExpenses />
+      case 'TRIP_MEMBERS':
+        return <TripMembers />
+      default:
+        throw('Unknown row type');
+    }
+  }
+
   render() {
-    let trip = this.props.trip;
+    if (this.props.isFetchingTripExpenses) {
+      return (
+        <ActivityIndicator style={styles.loader} size='large'/>
+      );
+    }
+
+    const dataSource = new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1 !== r2,
+    });
+
+    const tripItems = ['TRIP_EXPENSES', 'TRIP_MEMBERS'];
+    const tripRows = ['TRIP_HEADER', 'TRIP_TABS', tripItems[this.props.activeTabIndex]];
 
     return (
       <View style={styles.container}>
-        <View style={styles.containerHeader}>
-          <View style={styles.tripHeader}>
-            <HeaderImage
-              image={this.props.trip.picture}
-              title={'Trip'}
-              size={100}
-              onImageSelected={this.updateTripImage.bind(this)}
-              icon="car"
-              isUploadingImage={this.props.isUploadingTripImage} />
-            <View style={styles.tripHeaderRightColumn}>
-              <View style={styles.tripStats}>
-                <View style={styles.tripStat}>
-                  <Text style={styles.tripStatValue}>{trip.total_members}</Text>
-                  <Text style={styles.tripStatLabel}>Members</Text>
-                </View>
-                <View style={styles.tripStat}>
-                  <Money style={styles.tripStatValue} amount={trip.total_cost} />
-                  <Text style={styles.tripStatLabel}>Cost</Text>
-                </View>
-                <View style={styles.tripStat}>
-                  <Money style={styles.tripStatValue} amount={trip.average_cost_per_member} />
-                  <Text style={styles.tripStatLabel}>Average Cost</Text>
-                </View>
-              </View>
-              <View style={styles.organizer}>
-                <Text style={styles.organizerLabel}>Organized by: {trip.organizer.name || trip.organizer.email}</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.tripDetails}>
-            <Text style={styles.tripName}>{this.props.trip.name}</Text>
-            <Text style={styles.tripLocation}>{this.props.trip.location}</Text>
-            <Text style={styles.tripDescription}>{this.props.trip.description}</Text>
-          </View>
-        </View>
-        <ActiveTripTabNavigator />
+        <ListView
+          dataSource={dataSource.cloneWithRows(tripRows)}
+          enableEmptySections={true}
+          stickyHeaderIndices={[1]}
+          renderRow={this.renderRow.bind(this)}/>
         <FloatingButton icon="dollar" size={50} onButtonPressed={this.onAddExpensePressed.bind(this)} />
         <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditTripForm}>
           <EditTrip />

@@ -92,45 +92,66 @@ class ExpenseView extends Component {
     this.props.onExpenseImageChanged(this.props.expense, image);
   }
 
+  renderRow(rowData, sectionID, rowID) {
+    let { expense, isFetchingObligations } = this.props;
+
+    switch(rowData) {
+      case 'EXPENSE_HEADER':
+        return (
+          <View style={styles.containerHeader}>
+            <View style={styles.expenseHeader}>
+              <HeaderImage
+                image={expense.picture}
+                title="Expense"
+                size={100}
+                onImageSelected={this.updateExpenseImage.bind(this)}
+                icon={expense.expense_type}
+                isUploadingImage={this.props.isUploadingExpenseImage} />
+              <View style={styles.expenseHeaderRightColumn}>
+                <View style={styles.expenseCostDetails}>
+                  <View style={styles.expenseDetail}>
+                    <Money style={styles.expenseDetailValue} amount={expense.cost} />
+                    <Text style={styles.expenseDetailLabel}>Cost</Text>
+                  </View>
+                  <View style={styles.expenseDetail}>
+                    <Money style={styles.expenseDetailValue} amount={expense.cost} />
+                    <Text style={styles.expenseDetailLabel}>Average Cost</Text>
+                  </View>
+                </View>
+                <View style={styles.purchaser}>
+                  <Text style={styles.purchaserLabel}>Purchased by: {expense.purchaser.name || expense.purchaser.email}</Text>
+                </View>
+              </View>
+            </View>
+            <View style={styles.expenseDetails}>
+              <Text style={styles.expenseName}>{expense.name}</Text>
+              <Text style={styles.expenseDescription}>{expense.description}</Text>
+            </View>
+          </View>
+        );
+      case 'EXPENSE_OBLIGATIONS':
+        let obligationsView = isFetchingObligations ?
+          <ExpenseObligations /> :
+          <View />;
+        return obligationsView;
+      default:
+        throw('Unknown row type');
+    }
+  }
+
   render() {
-    let expense = this.props.expense;
-    let spinner = this.props.isFetchingObligations ?
-      <ExpenseObligations /> :
-      <View />;
+    const dataSource = new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1 !== r2,
+    });
+
+    const expenseRows = ['EXPENSE_HEADER', 'EXPENSE_OBLIGATIONS'];
 
     return (
       <View style={styles.container}>
-        <View style={styles.containerHeader}>
-          <View style={styles.expenseHeader}>
-            <HeaderImage
-              image={this.props.expense.picture}
-              title="Expense"
-              size={100}
-              onImageSelected={this.updateExpenseImage.bind(this)}
-              icon={this.props.expense.expense_type}
-              isUploadingImage={this.props.isUploadingExpenseImage} />
-            <View style={styles.expenseHeaderRightColumn}>
-              <View style={styles.expenseCostDetails}>
-                <View style={styles.expenseDetail}>
-                  <Money style={styles.expenseDetailValue} amount={expense.cost} />
-                  <Text style={styles.expenseDetailLabel}>Cost</Text>
-                </View>
-                <View style={styles.expenseDetail}>
-                  <Money style={styles.expenseDetailValue} amount={expense.cost} />
-                  <Text style={styles.expenseDetailLabel}>Average Cost</Text>
-                </View>
-              </View>
-              <View style={styles.purchaser}>
-                <Text style={styles.purchaserLabel}>Purchased by: {expense.purchaser.name || expense.purchaser.email}</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.expenseDetails}>
-            <Text style={styles.expenseName}>{this.props.expense.name}</Text>
-            <Text style={styles.expenseDescription}>{this.props.expense.description}</Text>
-          </View>
-        </View>
-        {spinner}
+        <ListView
+          dataSource={dataSource.cloneWithRows(expenseRows)}
+          enableEmptySections={true}
+          renderRow={this.renderRow.bind(this)}/>
         <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditExpenseForm}>
           <EditExpense />
         </Modal>
@@ -140,7 +161,9 @@ class ExpenseView extends Component {
 }
 
 ExpenseView.propTypes = {
-  expense: PropTypes.object.isRequired
+  expense: PropTypes.object.isRequired,
+  isFetchingObligations: PropTypes.bool.isRequired,
+  isViewingEditExpenseForm: PropTypes.bool.isRequired
 };
 
 AppRegistry.registerComponent('ExpenseView', () => ExpenseView);
