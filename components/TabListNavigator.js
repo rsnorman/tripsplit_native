@@ -12,7 +12,9 @@ let styles = StyleSheet.create({
   tabNavigator: {
     flexDirection: 'row',
     borderBottomWidth: 1,
-    borderBottomColor: '#cdcdcd'
+    borderBottomColor: '#cdcdcd',
+    backgroundColor: '#E9E9EF',
+    opacity: 0.9
   },
   tabActive: {
     paddingTop: 5,
@@ -62,10 +64,8 @@ const TabListNavigator = (tabConfiguration) => {
     let tabs = Object.values(tabConfiguration).map(renderTab);
 
     return (
-      <View>
-        <View style={styles.tabNavigator}>
-          {tabs}
-        </View>
+      <View style={styles.tabNavigator}>
+        {tabs}
       </View>
     );
   };

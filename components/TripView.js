@@ -194,6 +194,7 @@ class TripView extends Component {
         <ListView
           dataSource={dataSource.cloneWithRows(tripRows)}
           enableEmptySections={true}
+          stickyHeaderIndices={[1]}
           renderRow={this.renderRow.bind(this)}/>
         <FloatingButton icon="dollar" size={50} onButtonPressed={this.onAddExpensePressed.bind(this)} />
         <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditTripForm}>
