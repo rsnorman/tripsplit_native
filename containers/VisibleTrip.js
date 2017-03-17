@@ -12,7 +12,8 @@ const mapStateToProps = (state) => {
     isViewingEditTripForm: state.trips.isViewingEditTripForm,
     isFetchingExpenses: true,
     isUploadingTripImage: state.trips.isUploadingTripImage,
-    needsTripReload: state.trips.isDirtyTrip
+    needsTripReload: state.trips.isDirtyTrip,
+    activeTabIndex: state.tripTabs.activeTabIndex
   };
 };
 

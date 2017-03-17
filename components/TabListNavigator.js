@@ -60,15 +60,11 @@ const TabListNavigator = (tabConfiguration) => {
     }
 
     let tabs = Object.values(tabConfiguration).map(renderTab);
-    const ActiveScreen = Object.values(tabConfiguration)[props.activeTabIndex].screen;
 
     return (
       <View>
         <View style={styles.tabNavigator}>
           {tabs}
-        </View>
-        <View>
-        <ActiveScreen />
         </View>
       </View>
     );
