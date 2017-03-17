@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
 import { setEmail, setPassword, createSession } from '../actions';
-import LoginScreen from '../components/LoginScreen'
+import LoginScreen from '../components/LoginScreen';
 
 const mapStateToProps = (state) => {
   return {
@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispathToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onEmailChange: (email) => {
       dispatch(setEmail(email));
@@ -28,7 +28,7 @@ const mapDispathToProps = (dispatch) => {
 
 const CreateSession = connect(
   mapStateToProps,
-  mapDispathToProps
+  mapDispatchToProps
 )(LoginScreen);
 
 AppRegistry.registerComponent('CreateSession', () => CreateSession);

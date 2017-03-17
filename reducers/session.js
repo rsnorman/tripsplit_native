@@ -35,6 +35,10 @@ const session = (state = defaultUser, action) => {
         user: action.user,
         session: action.session
       });
+    case 'DESTROY_SESSION':
+      return Object.assign({}, state, {
+        session: null
+      });
     default:
       return state;
   }

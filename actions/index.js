@@ -71,6 +71,13 @@ function loginSuccess(loginData) {
   };
 }
 
+export const logout = () => {
+  AsyncStorage.removeItem('sessionData');
+  return {
+    type: 'DESTROY_SESSION'
+  };
+}
+
 export const createSession = (email, password) => {
   let url = 'http://localhost:3000/auth/sign_in'
 

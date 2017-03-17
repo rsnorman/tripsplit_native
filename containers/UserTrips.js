@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { addTrip, viewTrip } from '../actions/trip';
+import { fetchTrips, addTrip, viewTrip } from '../actions/trip';
 import TripsList from '../components/TripsList';
 import { ListView } from 'react-native';
 
@@ -13,12 +13,16 @@ const mapStateToProps = (state) => {
   return {
     trips: state.trips.trips,
     dataSource: dataSource.cloneWithRows(state.trips.trips),
-    isViewingNewTripForm: state.trips.isViewingNewTripForm
+    isViewingNewTripForm: state.trips.isViewingNewTripForm,
+    isFetchingTrips: state.trips.isFetchingTrips
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    onTripsLoad: () => {
+      dispatch(fetchTrips());
+    },
     onTripAdd: () => {
       dispatch(addTrip());
     },

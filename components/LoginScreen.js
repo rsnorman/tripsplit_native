@@ -7,6 +7,7 @@ import {
   View,
   TouchableHighlight,
   ActivityIndicator,
+  StatusBar,
   AppRegistry
 } from 'react-native';
 
@@ -73,9 +74,11 @@ var styles = StyleSheet.create({
 });
 
 class LoginScreen extends Component {
-  static navigationOptions = {
-    title: 'Login',
-  };
+  componentDidMount() {
+    if (this.props.onLoad) {
+      this.props.onLoad();
+    }
+  }
 
   onEmailChanged(event) {
     this.props.onEmailChange(event.nativeEvent.text);
@@ -96,6 +99,7 @@ class LoginScreen extends Component {
 
     return (
       <View style={styles.container}>
+        <StatusBar barStyle='light-content' />
         <View style={styles.loginHeader}>
           <Text style={styles.loginHeaderTitle}>TripSplit</Text>
         </View>
