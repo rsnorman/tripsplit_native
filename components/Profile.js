@@ -103,11 +103,11 @@ class Profile extends Component {
                   <Text style={styles.userStatLabel}>Trips</Text>
                 </View>
                 <View style={styles.userStat}>
-                  <Money style={styles.userStatValue} amount={user.total_purchased} />
+                  <Money style={styles.userStatValue} amount={user.total_purchased} round={true} />
                   <Text style={styles.userStatLabel}>Purchases</Text>
                 </View>
                 <View style={styles.userStat}>
-                  <Money style={styles.userStatValue} amount={user.total_paid} />
+                  <Money style={styles.userStatValue} amount={user.total_paid} round={true} />
                   <Text style={styles.userStatLabel}>Paid</Text>
                 </View>
               </View>
