@@ -39,6 +39,17 @@ const session = (state = defaultUser, action) => {
       return Object.assign({}, state, {
         session: null
       });
+    case 'START_UPDATING_USER_IMAGE':
+      return {
+        ...state,
+        isUploadingUserImage: true
+      };
+    case 'USER_IMAGE_UPDATE_SUCCESS':
+      return {
+        ...state,
+        user: action.user,
+        isUploadingUserImage: false
+      };
     default:
       return state;
   }
