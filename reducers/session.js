@@ -14,7 +14,6 @@ const session = (state = defaultUser, action) => {
     case 'SAVED_SESSION_DATA_LOADED':
       return {
         ...state,
-        user: action.sessionData.user,
         session: action.sessionData.session
       };
     case 'SET_EMAIL':
@@ -32,7 +31,6 @@ const session = (state = defaultUser, action) => {
     case 'CREATE_SESSION':
       return Object.assign({}, state, {
         isLoggingIn: false,
-        user: action.user,
         session: action.session
       });
     case 'DESTROY_SESSION':
