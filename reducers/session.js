@@ -14,7 +14,6 @@ const session = (state = defaultUser, action) => {
     case 'SAVED_SESSION_DATA_LOADED':
       return {
         ...state,
-        user: action.sessionData.user,
         session: action.sessionData.session
       };
     case 'SET_EMAIL':
@@ -32,24 +31,12 @@ const session = (state = defaultUser, action) => {
     case 'CREATE_SESSION':
       return Object.assign({}, state, {
         isLoggingIn: false,
-        user: action.user,
         session: action.session
       });
     case 'DESTROY_SESSION':
       return Object.assign({}, state, {
         session: null
       });
-    case 'START_UPDATING_USER_IMAGE':
-      return {
-        ...state,
-        isUploadingUserImage: true
-      };
-    case 'USER_IMAGE_UPDATE_SUCCESS':
-      return {
-        ...state,
-        user: action.user,
-        isUploadingUserImage: false
-      };
     default:
       return state;
   }

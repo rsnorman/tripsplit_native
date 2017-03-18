@@ -6,8 +6,9 @@ import { updateUserImage } from '../actions/user_actions';
 
 const mapStateToProps = (state) => {
   return {
-    user: state.session.user,
-    isUploadingUserImage: state.session.isUploadingUserImage
+    user: state.user.user,
+    isUploadingUserImage: state.user.isUploadingUserImage,
+    isViewingEditUserForm: state.user.isViewingEditUserForm
   };
 };
 

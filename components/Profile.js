@@ -12,6 +12,7 @@ import HeaderImage from './../components/HeaderImage';
 import Money from './../components/MoneyView';
 import OpenDrawerButton from './../containers/OpenDrawerButton';
 import EditUserButton from './../containers/EditUserButton';
+import EditUser from './../containers/EditUser';
 
 import { Header } from 'react-navigation';
 
@@ -94,7 +95,7 @@ class Profile extends Component {
               title={'User'}
               size={100}
               onImageSelected={this.updateUserImage.bind(this)}
-              icon="car"
+              icon="user"
               isUploadingImage={this.props.isUploadingUserImage} />
             <View style={styles.userHeaderRightColumn}>
               <View style={styles.userStats}>
@@ -118,6 +119,9 @@ class Profile extends Component {
             <Text style={styles.userEmail}>{this.props.user.email}</Text>
           </View>
         </View>
+        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditUserForm}>
+          <EditUser />
+        </Modal>
       </View>
     );
   }
