@@ -5,7 +5,7 @@ import { editUser } from '../actions/user_actions';
 
 const mapStateToProps = (state) => {
   return {
-    trip: state.session.user,
+    user: state.user.user,
   };
 };
 

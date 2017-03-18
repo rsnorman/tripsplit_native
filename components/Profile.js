@@ -12,6 +12,7 @@ import HeaderImage from './../components/HeaderImage';
 import Money from './../components/MoneyView';
 import OpenDrawerButton from './../containers/OpenDrawerButton';
 import EditUserButton from './../containers/EditUserButton';
+import EditUser from './../containers/EditUser';
 
 import { Header } from 'react-navigation';
 
@@ -118,6 +119,9 @@ class Profile extends Component {
             <Text style={styles.userEmail}>{this.props.user.email}</Text>
           </View>
         </View>
+        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditUserForm}>
+          <EditUser />
+        </Modal>
       </View>
     );
   }
