@@ -95,7 +95,7 @@ class Profile extends Component {
               title={'User'}
               size={100}
               onImageSelected={this.updateUserImage.bind(this)}
-              icon="car"
+              icon="user"
               isUploadingImage={this.props.isUploadingUserImage} />
             <View style={styles.userHeaderRightColumn}>
               <View style={styles.userStats}>
