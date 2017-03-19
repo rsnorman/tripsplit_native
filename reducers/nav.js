@@ -10,6 +10,8 @@ const nav = (state, action) => {
       return TripStackNavigator.router.getStateForAction(NavigationActions.navigate({ routeName: 'VisibleTrip', params: { trip: action.trip } }), state);
     case 'TRIP_DELETE_SUCCESS':
       return TripStackNavigator.router.getStateForAction(NavigationActions.back(), state);
+    case 'VIEW_MEMBER':
+      return TripStackNavigator.router.getStateForAction(NavigationActions.navigate({ routeName: 'VisibleMember', params: { member: action.member } }), state);
     case 'VIEW_EXPENSE':
       return TripStackNavigator.router.getStateForAction(NavigationActions.navigate({ routeName: 'VisibleExpense', params: { expense: action.expense } }), state);
     case 'EXPENSE_DELETE_SUCCESS':
