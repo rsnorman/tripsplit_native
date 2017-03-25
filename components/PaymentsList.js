@@ -88,9 +88,9 @@ class PaymentsList extends Component {
               {rowData.to_user.name || rowData.to_user.email}
             </Text>
             <View style={styles.paymentObligation} >
-              <Money style={styles.cost} amount={rowData.amount} />
-              <Text> / </Text>
               <Money style={styles.cost} amount={rowData.obligation_amount} />
+              <Text> / </Text>
+              <Money style={styles.cost} amount={rowData.amount} />
             </View>
           </View>
           <View style={styles.runningTotal}>
