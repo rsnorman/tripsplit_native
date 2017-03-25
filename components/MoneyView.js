@@ -5,6 +5,15 @@ import {
   AppRegistry
 } from 'react-native';
 
+let styles = StyleSheet.create({
+  positiveAmount: {
+
+  },
+  negativeAmount: {
+    color: 'red'
+  }
+});
+
 class MoneyView extends Component {
   render() {
     let amountStr;
@@ -17,12 +26,16 @@ class MoneyView extends Component {
         amountStr = `${amountStr}0`;
       }
     } else {
-      amountStr = Math.round(this.props.amount).toString()
+      amountStr = Math.round(this.props.amount).toString();
     }
+
+    let moneyStyle = this.props.amount * 1 < 0 ? styles.negativeAmount : styles.positiveAmount;
+
+    amountStr = amountStr.replace('-', '');
 
     return (
       <Text {...this.props}>
-        ${amountStr}
+        <Text style={moneyStyle}>${amountStr}</Text>
       </Text>
     );
   }

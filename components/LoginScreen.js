@@ -110,6 +110,9 @@ class LoginScreen extends Component {
               style={styles.loginInput}
               keyboardType="email-address"
               returnKeyType="go"
+              autoCapitalize="none"
+              autoCorrect={false}
+              autoFocus={true}
               onChange={this.onEmailChanged.bind(this)}
               placeholder='Email'/>
           </View>

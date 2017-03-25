@@ -19,7 +19,7 @@ let ScreenHeight = Dimensions.get("window").height;
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-// import MemberPurchases from './../containers/MemberPurchases';
+import MemberPayments from './../containers/MemberPayments';
 import HeaderImage from './../components/HeaderImage';
 import Money from './../components/MoneyView';
 import OweAmount from './../components/OweAmount';
@@ -131,38 +131,25 @@ class MemberView extends Component {
             </View>
           </View>
         );
-      case 'MEMBER_PURCHASES':
-        if (this.props.isFetchingMemberPurchases) {
-          return (
-            <ActivityIndicator style={styles.loader} size='large'/>
-          );
-        } else {
-          return <MemberPurchases />
-        }
+      case 'MEMBER_PAYMENTS':
+        return <MemberPayments />
       default:
         throw('Unknown row type');
     }
   }
 
   render() {
-    // if (this.props.isFetchingMemberPurchases) {
-    //   return (
-    //     <ActivityIndicator style={styles.loader} size='large'/>
-    //   );
-    // }
-
     const dataSource = new ListView.DataSource({
         rowHasChanged: (r1, r2) => r1 !== r2,
     });
 
-    const memberRows = ['MEMBER_HEADER', 'MEMBER_PURCHASES'];
+    const memberRows = ['MEMBER_HEADER', 'MEMBER_PAYMENTS'];
 
     return (
       <View style={styles.container}>
         <ListView
           dataSource={dataSource.cloneWithRows(memberRows)}
           enableEmptySections={true}
-          stickyHeaderIndices={[1]}
           renderRow={this.renderRow.bind(this)}/>
       </View>
     );
