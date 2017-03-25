@@ -26,9 +26,9 @@ const expenses = (state = initialExpensesState, action) => {
     case 'NEW_EXPENSE':
       let newTripExpense = {
         trip_id: action.trip.id,
-        name: 'Gas',
-        cost: '90',
-        description: 'Another fill-up',
+        name: null,
+        cost: null,
+        description: null,
         expense_type: 'dollar'
       };
       return Object.assign({}, state, {

@@ -61,11 +61,10 @@ class MembersList extends Component {
 
   rowPressed(memberId) {
     let member = this.props.members.filter(member => member.id === memberId)[0];
-    // this.props.onMemberSelected(member);
+    this.props.onMemberSelected(member);
   }
 
   renderRow(rowData, sectionID, rowID) {
-    console.log(rowData);
     return (
       <TouchableHighlight
         onPress={() => this.rowPressed(rowData.id)}
@@ -78,10 +77,13 @@ class MembersList extends Component {
                 {rowData.name}
               </Text>
               <Text style={styles.cost}>
-                Purchases: <Money amount={rowData.total_expense_amount} />
+                Purchased: <Money amount={rowData.total_purchased_amount} />
               </Text>
               <Text style={styles.cost} numberOfLines={1}>
-                Owes: <Money amount={rowData.total_owe_amount} />
+                Owes: <Money amount={rowData.total_obligated_amount} />
+              </Text>
+              <Text style={styles.cost} numberOfLines={1}>
+                Paid: <Money amount={rowData.total_contributed_amount} />
               </Text>
             </View>
           </View>

@@ -33,3 +33,30 @@ export const viewMember = (member) => {
     member
   }
 }
+
+function startFetchingMemberPayments() {
+  return {
+    type: 'START_FETCHING_MEMBER_PAYMENTS'
+  }
+}
+
+function memberPaymentsFetchSuccess(payments) {
+  return {
+    type: 'MEMBER_PAYMENTS_FETCH_SUCCESS',
+    memberPayments: payments
+  }
+}
+
+export const fetchMemberPayments = (trip, user) => {
+  let url = `http://localhost:3000/users/${user.id}/payments?trip_id=${trip.id}`;
+
+  return dispatch => {
+    const { session } = dispatch(startFetchingMemberPayments())
+    return fetch(url, applyAuthenticationHeaders({
+      method: 'GET'
+    }, session))
+      .then(response => response.json())
+      .then(json => dispatch(memberPaymentsFetchSuccess(json)))
+      .catch(error => console.log(error))
+  }
+}
