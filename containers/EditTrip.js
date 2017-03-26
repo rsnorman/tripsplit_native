@@ -7,7 +7,7 @@ import TripForm from '../components/TripForm'
 const mapStateToProps = (state) => {
   return {
     title: 'Edit Trip',
-    showDeleteButton: true,
+    showDeleteButton: !!state.trips.editingTrip.actions.delete,
     trip: state.trips.editingTrip,
     isSavingTrip: state.trips.isSavingTrip,
     isDeletingTrip: state.trips.isDeletingTrip

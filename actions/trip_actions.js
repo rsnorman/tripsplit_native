@@ -58,8 +58,9 @@ function tripFetchSuccess(trip) {
 export const reloadTrip = (trip) => {
   return dispatch => {
     const { session } = dispatch(startFetchingTrip());
+    const { url, method } = trip.actions.show;
 
-    return fetch(trip.href, applyAuthenticationHeaders({ method: 'GET' }, session))
+    return fetch(url, applyAuthenticationHeaders({ method: method }, session))
       .then(response => response.json())
       .then(json => dispatch(tripFetchSuccess(json)))
       .catch(error => console.log(error))
@@ -130,9 +131,11 @@ export const editTrip = function(trip) {
 
 export const updateTrip = (editingTrip) => {
   return dispatch => {
-    const { session } = dispatch(startUpdatingTrip())
-    return fetch(editingTrip.update, applyAuthenticationHeaders({
-      method: 'PUT',
+    const { session } = dispatch(startUpdatingTrip());
+    const { url, method } = trip.actions.update;
+
+    return fetch(url, applyAuthenticationHeaders({
+      method: method,
       body: JSON.stringify({trip: editingTrip})
     }, session))
       .then(response => response.json())
@@ -162,9 +165,11 @@ function tripDeleteSuccess(trip) {
 
 export const deleteTrip = (trip) => {
   return dispatch => {
-    const { session } = dispatch(startDeletingTrip())
-    return fetch(trip.delete, applyAuthenticationHeaders({
-      method: 'DELETE'
+    const { session } = dispatch(startDeletingTrip());
+    const { url, method } = trip.actions.delete;
+
+    return fetch(url, applyAuthenticationHeaders({
+      method: method
     }, session))
       .then(_response => dispatch(tripDeleteSuccess(trip)))
       .catch(error => console.log(error))
@@ -194,9 +199,11 @@ export const updateTripImage = (trip, image) => {
   });
 
   return dispatch => {
-    const { session } = dispatch(startUpdatingTripImage())
-    return fetch(trip.update, applyAuthenticationHeaders({
-      method: 'PUT',
+    const { session } = dispatch(startUpdatingTripImage());
+    const { url, method } = trip.actions.update;
+
+    return fetch(url, applyAuthenticationHeaders({
+      method: method,
       body: body
     }, session))
       .then(response => response.json())

@@ -15,9 +15,11 @@ function tripExpensesFetchSuccess(expenses) {
 
 export const fetchTripExpenses = (trip) => {
   return dispatch => {
-    const { session } = dispatch(startFetchingTripExpenses())
-    return fetch(trip.view_expenses, applyAuthenticationHeaders({
-      method: 'GET'
+    const { session } = dispatch(startFetchingTripExpenses());
+    const { url, method } = trip.actions.view_expenses;
+
+    return fetch(url, applyAuthenticationHeaders({
+      method: method
     }, session))
       .then(response => response.json())
       .then(json => dispatch(tripExpensesFetchSuccess(json)))
@@ -62,9 +64,11 @@ function expenseCreateSuccess(expense) {
 
 export const createExpense = (newExpense) => {
   return dispatch => {
-    const { session } = dispatch(startCreatingExpense())
-    return fetch(newExpense.trip.create_expense, applyAuthenticationHeaders({
-      method: 'POST',
+    const { session } = dispatch(startCreatingExpense());
+    const { url, method } = newExpense.trip.actions.create_expense;
+
+    return fetch(url, applyAuthenticationHeaders({
+      method: method,
       body: JSON.stringify({expense: newExpense})
     }, session))
       .then(response => response.json())

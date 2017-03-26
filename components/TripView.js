@@ -137,7 +137,7 @@ class TripView extends Component {
                 onImageSelected={this.updateTripImage.bind(this)}
                 icon="car"
                 isUploadingImage={this.props.isUploadingTripImage}
-                canEdit={!!this.props.trip.update} />
+                canEdit={!!this.props.canEditPhoto} />
               <View style={styles.tripHeaderRightColumn}>
                 <View style={styles.tripStats}>
                   <View style={styles.tripStat}>
@@ -190,7 +190,7 @@ class TripView extends Component {
     const tripItems = ['TRIP_EXPENSES', 'TRIP_MEMBERS'];
     const tripRows = ['TRIP_HEADER', 'TRIP_TABS', tripItems[this.props.activeTabIndex]];
 
-    let addExpenseButton = this.props.trip.create_expense ?
+    let addExpenseButton = this.props.showAddExpenseButton ?
       ( <FloatingButton icon="dollar" size={50} onButtonPressed={this.onAddExpensePressed.bind(this)} /> ) :
       ( <View /> );
 

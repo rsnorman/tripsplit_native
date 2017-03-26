@@ -6,6 +6,7 @@ import { editTrip } from '../actions/trip_actions';
 const mapStateToProps = (state) => {
   return {
     trip: state.trips.viewedTrip,
+    isVisible: !!state.trips.viewedTrip.actions.update
   };
 };
 
@@ -20,9 +21,9 @@ const mapDispatchToProps = (dispatch) => {
 const EditTripButton = connect(
   mapStateToProps,
   mapDispatchToProps
-)(({ trip, onBeginEditingTrip }) => {
-  if (!trip.update) {
-    return <View />
+)(({ trip, isVisible, onBeginEditingTrip }) => {
+  if (!isVisible) {
+    return <View />;
   }
 
   return (

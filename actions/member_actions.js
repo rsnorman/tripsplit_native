@@ -15,9 +15,11 @@ function tripMembersFetchSuccess(members) {
 
 export const fetchTripMembers = (trip) => {
   return dispatch => {
-    const { session } = dispatch(startFetchingTripMembers())
-    return fetch(trip.view_members, applyAuthenticationHeaders({
-      method: 'GET'
+    const { session } = dispatch(startFetchingTripMembers());
+    const { url, method } = trip.actions.view_members;
+
+    return fetch(url, applyAuthenticationHeaders({
+      method: method
     }, session))
       .then(response => response.json())
       .then(json => dispatch(tripMembersFetchSuccess(json)))

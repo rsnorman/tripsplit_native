@@ -13,7 +13,9 @@ const mapStateToProps = (state) => {
     isFetchingExpenses: true,
     isUploadingTripImage: state.trips.isUploadingTripImage,
     needsTripReload: state.trips.isDirtyTrip,
-    activeTabIndex: state.tripTabs.activeTabIndex
+    activeTabIndex: state.tripTabs.activeTabIndex,
+    showAddExpenseButton: !!state.trips.viewedTrip.actions.create_expense,
+    canEditPhoto: !!state.trips.viewedTrip.actions.update
   };
 };
 
