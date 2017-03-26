@@ -10,7 +10,8 @@ let styles = StyleSheet.create({
 
   },
   negativeAmount: {
-    color: 'red'
+    color: 'red',
+    opacity: 0.7
   }
 });
 
