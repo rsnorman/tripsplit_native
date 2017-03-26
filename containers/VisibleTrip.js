@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { reloadTrip, updateTripImage } from '../actions/trip';
+import { reloadTrip, updateTripImage } from '../actions/trip_actions';
 import { addExpense } from '../actions/expense_actions';
 import TripView from './../components/TripView'
 

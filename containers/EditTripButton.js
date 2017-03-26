@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AppRegistry, Button } from 'react-native';
-import { editTrip } from '../actions/trip';
+import { AppRegistry, Button, View } from 'react-native';
+import { editTrip } from '../actions/trip_actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -21,6 +21,10 @@ const EditTripButton = connect(
   mapStateToProps,
   mapDispatchToProps
 )(({ trip, onBeginEditingTrip }) => {
+  if (!trip.update) {
+    return <View />
+  }
+
   return (
     <Button
       title='Edit'

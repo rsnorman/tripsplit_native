@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { fetchTrips, addTrip, viewTrip } from '../actions/trip';
+import { fetchTrips, addTrip, viewTrip } from '../actions/trip_actions';
 import TripsList from '../components/TripsList';
 import { ListView } from 'react-native';
 

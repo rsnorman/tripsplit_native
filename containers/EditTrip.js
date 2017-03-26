@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { setTripAttr, updateTrip, deleteTrip, cancelEditingTrip } from '../actions/trip';
+import { setTripAttr, updateTrip, deleteTrip, cancelEditingTrip } from '../actions/trip_actions';
 import TripForm from '../components/TripForm'
 
 const mapStateToProps = (state) => {

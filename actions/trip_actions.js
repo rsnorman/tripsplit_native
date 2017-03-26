@@ -56,12 +56,10 @@ function tripFetchSuccess(trip) {
 }
 
 export const reloadTrip = (trip) => {
-  let url = `http://localhost:3000/trips/${trip.id}`
-
   return dispatch => {
     const { session } = dispatch(startFetchingTrip());
 
-    return fetch(url, applyAuthenticationHeaders({ method: 'GET' }, session))
+    return fetch(trip.href, applyAuthenticationHeaders({ method: 'GET' }, session))
       .then(response => response.json())
       .then(json => dispatch(tripFetchSuccess(json)))
       .catch(error => console.log(error))
@@ -131,11 +129,9 @@ export const editTrip = function(trip) {
 };
 
 export const updateTrip = (editingTrip) => {
-  let url = 'http://localhost:3000/trips/' + editingTrip.id
-
   return dispatch => {
     const { session } = dispatch(startUpdatingTrip())
-    return fetch(url, applyAuthenticationHeaders({
+    return fetch(editingTrip.update, applyAuthenticationHeaders({
       method: 'PUT',
       body: JSON.stringify({trip: editingTrip})
     }, session))
@@ -165,11 +161,9 @@ function tripDeleteSuccess(trip) {
 }
 
 export const deleteTrip = (trip) => {
-  let url = 'http://localhost:3000/trips/' + trip.id
-
   return dispatch => {
     const { session } = dispatch(startDeletingTrip())
-    return fetch(url, applyAuthenticationHeaders({
+    return fetch(trip.delete, applyAuthenticationHeaders({
       method: 'DELETE'
     }, session))
       .then(_response => dispatch(tripDeleteSuccess(trip)))
@@ -191,7 +185,6 @@ function tripImageUpdateSuccess(trip) {
 }
 
 export const updateTripImage = (trip, image) => {
-  let url = 'http://localhost:3000/trips/' + trip.id;
   const body = new FormData();
 
   body.append('trip[picture]', {
@@ -202,7 +195,7 @@ export const updateTripImage = (trip, image) => {
 
   return dispatch => {
     const { session } = dispatch(startUpdatingTripImage())
-    return fetch(url, applyAuthenticationHeaders({
+    return fetch(trip.update, applyAuthenticationHeaders({
       method: 'PUT',
       body: body
     }, session))
