@@ -14,11 +14,11 @@ function expenseObligationsFetchSuccess(obligations) {
 }
 
 export const fetchExpenseObligations = (expense) => {
-  let url = 'http://localhost:3000/expenses/' + expense.id + '/obligations';
-
   return dispatch => {
     const { session } = dispatch(startFetchingExpenseObligations())
-    return fetch(url, applyAuthenticationHeaders({ method: 'GET' }, session))
+    const { url, method } = expense.actions.view_obligations;
+
+    return fetch(url, applyAuthenticationHeaders({ method: method }, session))
       .then(response => response.json())
       .then(json => dispatch(expenseObligationsFetchSuccess(json)))
       .catch(error => console.log(error))

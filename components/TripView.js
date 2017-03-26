@@ -137,7 +137,7 @@ class TripView extends Component {
                 onImageSelected={this.updateTripImage.bind(this)}
                 icon="car"
                 isUploadingImage={this.props.isUploadingTripImage}
-                canEdit={!!this.props.canEditPhoto} />
+                canEdit={this.props.canEditPhoto} />
               <View style={styles.tripHeaderRightColumn}>
                 <View style={styles.tripStats}>
                   <View style={styles.tripStat}>

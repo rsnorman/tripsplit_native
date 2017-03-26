@@ -5,11 +5,13 @@ import { updateExpenseImage } from '../actions/expense_actions';
 import ExpenseView from './../components/ExpenseView'
 
 const mapStateToProps = (state) => {
+  let expense = state.expenses.viewedExpense;
   return {
-    expense: state.expenses.viewedExpense,
+    expense,
     isViewingEditExpenseForm: state.expenses.isViewingEditExpenseForm,
     isUploadingExpenseImage: state.trips.isUploadingExpenseImage,
-    isFetchingObligations: true
+    isFetchingObligations: true,
+    canEditPhoto: !!expense.actions.update
   };
 };
 

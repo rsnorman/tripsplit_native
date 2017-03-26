@@ -63,13 +63,13 @@ class HeaderImage extends Component {
       ( <Image source={{uri: 'http://localhost:3000' + this.props.image.thumb.url}} style={imageStyles.thumb} /> ) :
       ( <Icon name={this.props.icon} style={imageStyles.thumbIcon} size={this.props.size / 2.3} color="#fff" /> );
 
+    if (!this.props.canEdit) {
+      return <View style={imageStyles.thumb}>{image}</View>;
+    }
+
     let imageSpinner = this.props.isUploadingImage ?
       ( <ActivityIndicator style={imageStyles.imageUploadSpinner} size="large" /> ) :
       ( <View /> );
-
-    if (!this.props.onImageSelected || !this.props.canEdit) {
-      return <View style={imageStyles.thumb}>{image}</View>;
-    }
 
     return (
       <TouchableHighlight
