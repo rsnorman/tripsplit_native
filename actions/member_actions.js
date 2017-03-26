@@ -14,11 +14,9 @@ function tripMembersFetchSuccess(members) {
 }
 
 export const fetchTripMembers = (trip) => {
-  let url = 'http://localhost:3000/trips/' + trip.id + '/members';
-
   return dispatch => {
     const { session } = dispatch(startFetchingTripMembers())
-    return fetch(url, applyAuthenticationHeaders({
+    return fetch(trip.view_members, applyAuthenticationHeaders({
       method: 'GET'
     }, session))
       .then(response => response.json())

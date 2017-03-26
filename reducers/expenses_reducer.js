@@ -25,7 +25,7 @@ const expenses = (state = initialExpensesState, action) => {
       });
     case 'NEW_EXPENSE':
       let newTripExpense = {
-        trip_id: action.trip.id,
+        trip: action.trip,
         name: null,
         cost: null,
         description: null,

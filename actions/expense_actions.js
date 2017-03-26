@@ -14,11 +14,9 @@ function tripExpensesFetchSuccess(expenses) {
 }
 
 export const fetchTripExpenses = (trip) => {
-  let url = 'http://localhost:3000/trips/' + trip.id + '/expenses';
-
   return dispatch => {
     const { session } = dispatch(startFetchingTripExpenses())
-    return fetch(url, applyAuthenticationHeaders({
+    return fetch(trip.view_expenses, applyAuthenticationHeaders({
       method: 'GET'
     }, session))
       .then(response => response.json())
@@ -63,11 +61,9 @@ function expenseCreateSuccess(expense) {
 }
 
 export const createExpense = (newExpense) => {
-  let url = 'http://localhost:3000/trips/' + newExpense.trip_id + '/expenses'
-
   return dispatch => {
     const { session } = dispatch(startCreatingExpense())
-    return fetch(url, applyAuthenticationHeaders({
+    return fetch(newExpense.trip.create_expense, applyAuthenticationHeaders({
       method: 'POST',
       body: JSON.stringify({expense: newExpense})
     }, session))
