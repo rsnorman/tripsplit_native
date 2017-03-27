@@ -80,9 +80,6 @@ class MembersList extends Component {
                 Purchased: <Money amount={rowData.total_purchased_amount} />
               </Text>
               <Text style={styles.cost} numberOfLines={1}>
-                Owes: <Money amount={rowData.total_obligated_amount} />
-              </Text>
-              <Text style={styles.cost} numberOfLines={1}>
                 Paid: <Money amount={rowData.total_contributed_amount} />
               </Text>
             </View>

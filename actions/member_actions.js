@@ -48,12 +48,13 @@ function memberPaymentsFetchSuccess(payments) {
 }
 
 export const fetchMemberPayments = (trip, user) => {
-  let url = `http://localhost:3000/users/${user.id}/payments?trip_id=${trip.id}`;
 
   return dispatch => {
     const { session } = dispatch(startFetchingMemberPayments())
+    const { url, method } = user.actions.view_payments;
+
     return fetch(url, applyAuthenticationHeaders({
-      method: 'GET'
+      method: method
     }, session))
       .then(response => response.json())
       .then(json => dispatch(memberPaymentsFetchSuccess(json)))
