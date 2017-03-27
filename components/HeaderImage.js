@@ -8,6 +8,7 @@ import {
   Button,
   AppRegistry
 } from 'react-native';
+import { baseUrl } from './../constants';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 var ImagePicker = require('react-native-image-picker');
@@ -60,7 +61,7 @@ class HeaderImage extends Component {
     });
 
     let image = this.props.image.url ?
-      ( <Image source={{uri: 'http://localhost:3000' + this.props.image.thumb.url}} style={imageStyles.thumb} /> ) :
+      ( <Image source={{uri: `${baseUrl}${this.props.image.thumb.url}`}} style={imageStyles.thumb} /> ) :
       ( <Icon name={this.props.icon} style={imageStyles.thumbIcon} size={this.props.size / 2.3} color="#fff" /> );
 
     if (!this.props.canEdit) {

@@ -1,5 +1,6 @@
 import { applyAuthenticationHeaders } from './helpers';
 import { AsyncStorage } from 'react-native';
+import { baseUrl } from './../constants';
 
 function startFetchingTrips() {
   return {
@@ -15,7 +16,7 @@ function tripsFetchSuccess(trips) {
 }
 
 export const fetchTrips = () => {
-  let url = 'http://localhost:3000/trips'
+  let url = `${baseUrl}/trips`
 
   return dispatch => {
     const { session } = dispatch(startFetchingTrips());
@@ -102,7 +103,7 @@ function tripUpdateSuccess(trip) {
 }
 
 export const createTrip = (newTrip) => {
-  let url = 'http://localhost:3000/trips'
+  let url = `${baseUrl}/trips`
 
   return dispatch => {
     const { session } = dispatch(startCreatingTrip())
