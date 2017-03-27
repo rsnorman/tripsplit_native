@@ -14,11 +14,11 @@ function expenseObligationsFetchSuccess(obligations) {
 }
 
 export const fetchExpenseObligations = (expense) => {
-  let url = 'http://localhost:3000/expenses/' + expense.id + '/obligations';
-
   return dispatch => {
     const { session } = dispatch(startFetchingExpenseObligations())
-    return fetch(url, applyAuthenticationHeaders({ method: 'GET' }, session))
+    const { url, method } = expense.actions.view_obligations;
+
+    return fetch(url, applyAuthenticationHeaders({ method: method }, session))
       .then(response => response.json())
       .then(json => dispatch(expenseObligationsFetchSuccess(json)))
       .catch(error => console.log(error))
@@ -46,13 +46,13 @@ function expenseObligationPaymentSuccess(obligation) {
 }
 
 export const payExpenseObligation = (obligation) => {
-  let url = `http://localhost:3000/expenses/${obligation.expense_id}/contributions`;
-
   return dispatch => {
-    const { session } = dispatch(startPayingExpenseObligation())
+    const { session } = dispatch(startPayingExpenseObligation());
+    const { url, method } = obligation.actions.pay;
+
     return fetch(url, applyAuthenticationHeaders({
-      method: 'POST',
-      body: JSON.stringify({expense_contribution: {is_paid: true}})
+      method: method,
+      body: JSON.stringify({expense_obligation: {user_id: obligation.user.id}})
     }, session))
       .then(response => response.json())
       .then(json => dispatch(expenseObligationPaymentSuccess(json)))

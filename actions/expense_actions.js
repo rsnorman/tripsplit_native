@@ -14,12 +14,12 @@ function tripExpensesFetchSuccess(expenses) {
 }
 
 export const fetchTripExpenses = (trip) => {
-  let url = 'http://localhost:3000/trips/' + trip.id + '/expenses';
-
   return dispatch => {
-    const { session } = dispatch(startFetchingTripExpenses())
+    const { session } = dispatch(startFetchingTripExpenses());
+    const { url, method } = trip.actions.view_expenses;
+
     return fetch(url, applyAuthenticationHeaders({
-      method: 'GET'
+      method: method
     }, session))
       .then(response => response.json())
       .then(json => dispatch(tripExpensesFetchSuccess(json)))
@@ -63,12 +63,12 @@ function expenseCreateSuccess(expense) {
 }
 
 export const createExpense = (newExpense) => {
-  let url = 'http://localhost:3000/trips/' + newExpense.trip_id + '/expenses'
-
   return dispatch => {
-    const { session } = dispatch(startCreatingExpense())
+    const { session } = dispatch(startCreatingExpense());
+    const { url, method } = newExpense.trip.actions.create_expense;
+
     return fetch(url, applyAuthenticationHeaders({
-      method: 'POST',
+      method: method,
       body: JSON.stringify({expense: newExpense})
     }, session))
       .then(response => response.json())
@@ -104,12 +104,12 @@ function expenseUpdateSuccess(expense) {
 }
 
 export const updateExpense = (editingExpense) => {
-  let url = 'http://localhost:3000/trips/' + editingExpense.trip_id + '/expenses/' + editingExpense.id
-
   return dispatch => {
     const { session } = dispatch(startUpdatingExpense())
+    const { url, method } = editingExpense.actions.update;
+
     return fetch(url, applyAuthenticationHeaders({
-      method: 'PUT',
+      method: method,
       body: JSON.stringify({expense: editingExpense})
     }, session))
       .then(response => response.json())
@@ -138,12 +138,12 @@ function expenseDeleteSuccess(expense) {
 }
 
 export const deleteExpense = (expense) => {
-  let url = 'http://localhost:3000/trips/' + expense.trip_id + '/expenses/' + expense.id;
-
   return dispatch => {
     const { session } = dispatch(startDeletingExpense())
+    const { url, method } = expense.actions.delete;
+
     return fetch(url, applyAuthenticationHeaders({
-      method: 'DELETE'
+      method: method
     }, session))
       .then(response => response.json())
       .then(json => dispatch(expenseDeleteSuccess(json)))
@@ -165,7 +165,6 @@ function expenseImageUpdateSuccess(expense) {
 }
 
 export const updateExpenseImage = (expense, image) => {
-  let url = 'http://localhost:3000/trips/' + expense.trip_id + '/expenses/' + expense.id;
   const body = new FormData();
 
   body.append('expense[picture]', {
@@ -176,8 +175,10 @@ export const updateExpenseImage = (expense, image) => {
 
   return dispatch => {
     const { session } = dispatch(startUpdatingExpenseImage())
+    const { url, method } = expense.actions.update;
+
     return fetch(url, applyAuthenticationHeaders({
-      method: 'PUT',
+      method: method,
       body: body
     }, session))
       .then(response => response.json())

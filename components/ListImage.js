@@ -5,6 +5,7 @@ import {
   View,
   AppRegistry
 } from 'react-native';
+import { baseUrl } from './../constants';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -24,7 +25,7 @@ class ListImage extends Component {
       }
     });
     return this.props.image && this.props.image.url ?
-      ( <Image source={{uri: 'http://localhost:3000' + this.props.image.thumb.url}} style={iconStyles.thumb} /> ) :
+      ( <Image source={{uri: `${baseUrl}${this.props.image.thumb.url}`}} style={iconStyles.thumb} /> ) :
       (
         <View style={iconStyles.thumb}>
           <Icon name={this.props.icon} style={iconStyles.thumbIcon} size={this.props.size / 2.3} color="#fff" />

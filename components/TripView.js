@@ -136,7 +136,8 @@ class TripView extends Component {
                 size={100}
                 onImageSelected={this.updateTripImage.bind(this)}
                 icon="car"
-                isUploadingImage={this.props.isUploadingTripImage} />
+                isUploadingImage={this.props.isUploadingTripImage}
+                canEdit={this.props.canEditPhoto} />
               <View style={styles.tripHeaderRightColumn}>
                 <View style={styles.tripStats}>
                   <View style={styles.tripStat}>
@@ -189,6 +190,10 @@ class TripView extends Component {
     const tripItems = ['TRIP_EXPENSES', 'TRIP_MEMBERS'];
     const tripRows = ['TRIP_HEADER', 'TRIP_TABS', tripItems[this.props.activeTabIndex]];
 
+    let addExpenseButton = this.props.showAddExpenseButton ?
+      ( <FloatingButton icon="dollar" size={50} onButtonPressed={this.onAddExpensePressed.bind(this)} /> ) :
+      ( <View /> );
+
     return (
       <View style={styles.container}>
         <ListView
@@ -196,7 +201,7 @@ class TripView extends Component {
           enableEmptySections={true}
           stickyHeaderIndices={[1]}
           renderRow={this.renderRow.bind(this)}/>
-        <FloatingButton icon="dollar" size={50} onButtonPressed={this.onAddExpensePressed.bind(this)} />
+        {addExpenseButton}
         <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditTripForm}>
           <EditTrip />
         </Modal>

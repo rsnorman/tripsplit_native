@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AppRegistry, Button } from 'react-native';
+import { AppRegistry, Button, View } from 'react-native';
 import { editExpense } from '../actions/expense_actions';
 
 const mapStateToProps = (state) => {
+  let expense = state.expenses.viewedExpense;
   return {
-    expense: state.expenses.viewedExpense,
+    expense,
+    isVisible: !!expense.actions.update
   };
 };
 
@@ -20,7 +22,11 @@ const mapDispatchToProps = (dispatch) => {
 const EditExpenseButton = connect(
   mapStateToProps,
   mapDispatchToProps
-)(({ expense, onBeginEditingExpense }) => {
+)(({ expense, isVisible, onBeginEditingExpense }) => {
+  if (!isVisible) {
+    return <View />;
+  }
+
   return (
     <Button
       title='Edit'

@@ -1,5 +1,6 @@
 import { dispatch } from 'react';
 import { AsyncStorage } from 'react-native';
+import { baseUrl } from './../constants';
 
 function initializeAppSuccess() {
   return {
@@ -79,7 +80,7 @@ export const logout = () => {
 }
 
 export const createSession = (email, password) => {
-  let url = 'http://localhost:3000/auth/sign_in'
+  let url = `${baseUrl}/auth/sign_in`
 
   return dispatch => {
     dispatch(startLogin())

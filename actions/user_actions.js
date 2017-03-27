@@ -1,5 +1,6 @@
 import { applyAuthenticationHeaders } from './helpers';
 import { AsyncStorage } from 'react-native';
+import { baseUrl } from './../constants';
 
 function updateSavedUser(user) {
   AsyncStorage.getItem('sessionData').then((sessionData) => {
@@ -27,7 +28,7 @@ function userImageUpdateSuccess(user) {
 }
 
 export const updateUserImage = (user, image) => {
-  let url = `http://localhost:3000/users/${user.id}`;
+  let url = `${baseUrl}/users/${user.id}`;
   const body = new FormData();
 
   body.append('user[picture]', {
@@ -78,7 +79,7 @@ function userUpdateSuccess(user) {
 }
 
 export const updateUser = (editingUser) => {
-  let url = 'http://localhost:3000/users/' + editingUser.id
+  let url = `${baseUrl}/users/${editingUser.id}`
 
   return dispatch => {
     const { session } = dispatch(startUpdatingUser())

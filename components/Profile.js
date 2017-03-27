@@ -16,7 +16,6 @@ import EditUser from './../containers/EditUser';
 
 import { Header } from 'react-navigation';
 
-
 let styles = StyleSheet.create({
   containerHeader: {
     alignSelf: 'stretch',
@@ -96,7 +95,8 @@ class Profile extends Component {
               size={100}
               onImageSelected={this.updateUserImage.bind(this)}
               icon="user"
-              isUploadingImage={this.props.isUploadingUserImage} />
+              isUploadingImage={this.props.isUploadingUserImage}
+              canEdit={true} />
             <View style={styles.userHeaderRightColumn}>
               <View style={styles.userStats}>
                 <View style={styles.userStat}>

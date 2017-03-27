@@ -124,8 +124,19 @@ class ObligationView extends Component {
   }
 
   render() {
-    let expense = this.props.expense;
-    let obligation = this.props.obligation;
+    let { expense, obligation, showPayButton } = this.props;
+
+    let payButton = showPayButton ?
+      (
+        <View style={styles.formRow}>
+          <TouchableHighlight style={styles.button}
+            onPress={this.payObligation.bind(this)}
+            underlayColor='#99d9f4'>
+            <Text style={styles.buttonText}>Mark As Paid</Text>
+          </TouchableHighlight>
+        </View>
+      ) :
+      ( <View /> );
 
     let markAsPaidView = obligation.is_paid ?
       (
@@ -135,15 +146,7 @@ class ObligationView extends Component {
           </View>
         </View>
       ) :
-      (
-        <View style={styles.formRow}>
-          <TouchableHighlight style={styles.button}
-            onPress={this.payObligation.bind(this)}
-            underlayColor='#99d9f4'>
-            <Text style={styles.buttonText}>Mark As Paid</Text>
-          </TouchableHighlight>
-        </View>
-      );
+      payButton;
 
     return (
       <View style={styles.container}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { reloadTrip, updateTripImage } from '../actions/trip';
+import { reloadTrip, updateTripImage } from '../actions/trip_actions';
 import { addExpense } from '../actions/expense_actions';
 import TripView from './../components/TripView'
 
@@ -13,7 +13,9 @@ const mapStateToProps = (state) => {
     isFetchingExpenses: true,
     isUploadingTripImage: state.trips.isUploadingTripImage,
     needsTripReload: state.trips.isDirtyTrip,
-    activeTabIndex: state.tripTabs.activeTabIndex
+    activeTabIndex: state.tripTabs.activeTabIndex,
+    showAddExpenseButton: !!state.trips.viewedTrip.actions.create_expense,
+    canEditPhoto: !!state.trips.viewedTrip.actions.update
   };
 };
 
