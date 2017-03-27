@@ -7,7 +7,7 @@ import ExpenseForm from '../components/ExpenseForm'
 const mapStateToProps = (state) => {
   return {
     title: 'Edit Expense',
-    showDeleteButton: !state.expenses.editingExpense.actions.delete,
+    showDeleteButton: !!state.expenses.editingExpense.actions.delete,
     expense: state.expenses.editingExpense,
     isSavingExpense: state.expenses.isSavingExpense,
     isDeletingExpense: state.expenses.isDeletingExpense

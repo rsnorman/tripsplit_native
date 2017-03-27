@@ -46,13 +46,13 @@ function expenseObligationPaymentSuccess(obligation) {
 }
 
 export const payExpenseObligation = (obligation) => {
-  let url = `http://localhost:3000/expenses/${obligation.expense_id}/contributions`;
-
   return dispatch => {
-    const { session } = dispatch(startPayingExpenseObligation())
+    const { session } = dispatch(startPayingExpenseObligation());
+    const { url, method } = obligation.actions.pay;
+
     return fetch(url, applyAuthenticationHeaders({
-      method: 'POST',
-      body: JSON.stringify({expense_contribution: {is_paid: true}})
+      method: method,
+      body: JSON.stringify({expense_obligation: {user_id: obligation.user.id}})
     }, session))
       .then(response => response.json())
       .then(json => dispatch(expenseObligationPaymentSuccess(json)))
