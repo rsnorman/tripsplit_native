@@ -66,9 +66,17 @@ export const reloadTrip = (trip) => {
   };
 }
 
-export const setTripAttr = (attributeName, attributeValue) => {
+export const setNewTripAttr = (attributeName, attributeValue) => {
   return {
-    type: 'SET_TRIP_ATTRIBUTE',
+    type: 'SET_NEW_TRIP_ATTRIBUTE',
+    name: attributeName,
+    value: attributeValue
+  };
+}
+
+export const setEditTripAttr = (attributeName, attributeValue) => {
+  return {
+    type: 'SET_EDIT_TRIP_ATTRIBUTE',
     name: attributeName,
     value: attributeValue
   };
@@ -100,6 +108,13 @@ function tripUpdateSuccess(trip) {
   }
 }
 
+function tripSaveFailure(error) {
+  return {
+    type: 'SAVE_TRIP_ERROR',
+    error
+  };
+}
+
 export const createTrip = (newTrip) => {
   let url = `${baseUrl}/trips`
 
@@ -109,9 +124,15 @@ export const createTrip = (newTrip) => {
       method: 'POST',
       body: JSON.stringify({trip: newTrip})
     }, session))
-      .then(response => response.json())
+      .then(response => {
+        if (response.status !== 200) {
+          throw('There was an error saving. Please try again.');
+        }
+
+        return response.json();
+      })
       .then(json => dispatch(tripCreateSuccess(json)))
-      .catch(error => console.log(error))
+      .catch(error => dispatch(tripSaveFailure(error)))
   }
 }
 
@@ -131,15 +152,21 @@ export const editTrip = function(trip) {
 export const updateTrip = (editingTrip) => {
   return dispatch => {
     const { session } = dispatch(startUpdatingTrip());
-    const { url, method } = trip.actions.update;
+    const { url, method } = editingTrip.actions.update;
 
     return fetch(url, applyAuthenticationHeaders({
       method: method,
       body: JSON.stringify({trip: editingTrip})
     }, session))
-      .then(response => response.json())
+      .then(response => {
+        if (response.status !== 200) {
+          throw('There was an error saving. Please try again.');
+        }
+
+        return response.json();
+      })
       .then(json => dispatch(tripUpdateSuccess(json)))
-      .catch(error => console.log(error))
+      .catch(error => dispatch(tripSaveFailure(error)))
   }
 }
 

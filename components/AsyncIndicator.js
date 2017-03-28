@@ -16,10 +16,14 @@ let styles = StyleSheet.create({
 
 class AsyncIndicator extends Component {
   render() {
-    const { active, errorMessage } = this.props;
-    let spinner = active ? <ActivityIndicator size='large'/> : <View/>;
+    const { active, errorMessage, style } = this.props;
+    let spinner = active ? <ActivityIndicator style={style} size='large'/> : <View/>;
     if (!!errorMessage) {
-      return <Text style={styles.error}>{errorMessage}</Text>
+      return (
+        <View style={style}>
+          <Text style={styles.error}>{errorMessage}</Text>
+        </View>
+      );
     }
 
     return spinner;
@@ -27,7 +31,8 @@ class AsyncIndicator extends Component {
 }
 
 AsyncIndicator.propTypes = {
-  active: PropTypes.bool.isRequired,
+  style: PropTypes.any,
+  active: PropTypes.bool,
   errorMessage: PropTypes.string
 };
 
