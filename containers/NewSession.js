@@ -1,14 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { setEmail, setPassword, createSession } from '../actions';
+import { setEmail, setPassword, createSession } from '../actions/session_actions';
 import LoginScreen from '../components/LoginScreen';
 
 const mapStateToProps = (state) => {
+  const {
+    email,
+    password,
+    isLoggingIn,
+    errorMessage,
+    loginButtonDisabled
+  } = state.session;
+
   return {
-    email: state.session.email,
-    password: state.session.password,
-    isLoggingIn: state.session.isLoggingIn
+    email,
+    password,
+    isLoggingIn,
+    loginButtonDisabled,
+    loginErrorMessage: state.session.errorMessage
   };
 };
 

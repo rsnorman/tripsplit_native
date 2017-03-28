@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ActivityIndicator, AppRegistry } from 'react-native';
-import { logout } from '../actions';
+import { logout } from '../actions/session_actions';
 
 const mapStateToProps = (state) => {
   return { };
