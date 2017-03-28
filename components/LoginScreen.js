@@ -11,6 +11,9 @@ import {
   AppRegistry
 } from 'react-native';
 
+import AsyncIndicator from './AsyncIndicator';
+import FormButton from './FormButton';
+
 var styles = StyleSheet.create({
   description: {
     marginBottom: 20,
@@ -32,23 +35,6 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'stretch',
     marginTop: 15
-  },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  button: {
-    height: 36,
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: '#48bbec',
-    borderColor: '#48bbec',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
   },
   loginInput: {
     height: 36,
@@ -93,9 +79,13 @@ class LoginScreen extends Component {
   }
 
   render() {
-    let spinner = this.props.isLoggingIn ?
-      ( <ActivityIndicator size='large'/> ) :
-      ( <View/> );
+    const {
+      email,
+      password,
+      isLoggingIn,
+      loginErrorMessage,
+      loginButtonDisabled
+    } = this.props;
 
     return (
       <View style={styles.container}>
@@ -106,7 +96,7 @@ class LoginScreen extends Component {
         <View style={styles.form}>
           <View style={styles.formRow}>
             <TextInput
-              value={this.props.email}
+              value={email}
               style={styles.loginInput}
               keyboardType="email-address"
               returnKeyType="go"
@@ -118,7 +108,7 @@ class LoginScreen extends Component {
           </View>
           <View style={styles.formRow}>
             <TextInput
-              value={this.props.password}
+              value={password}
               style={styles.loginInput}
               type="password"
               returnKeyType="go"
@@ -127,14 +117,12 @@ class LoginScreen extends Component {
               placeholder='Password'/>
           </View>
           <View style={styles.formRow}>
-            <TouchableHighlight style={styles.button}
+            <FormButton
+              text="Login"
               onPress={this.onLoginPressed.bind(this)}
-              underlayColor='#99d9f4'>
-              <Text style={styles.buttonText}>Login</Text>
-            </TouchableHighlight>
+              disabled={loginButtonDisabled} />
           </View>
-          {spinner}
-          <Text style={styles.description}>{this.props.message}</Text>
+          <AsyncIndicator active={isLoggingIn} errorMessage={loginErrorMessage} />
         </View>
       </View>
     );

@@ -1,47 +1,5 @@
-import { dispatch } from 'react';
 import { AsyncStorage } from 'react-native';
 import { baseUrl } from './../constants';
-
-function initializeAppSuccess() {
-  return {
-    type: 'APP_INITIALIZED'
-  };
-}
-
-function loadSavedSessionData(sessionData) {
-  return {
-    type: 'SAVED_SESSION_DATA_LOADED',
-    sessionData
-  };
-}
-
-function loadSavedCurrentTrip(currentTrip) {
-  return {
-    type: 'SAVED_CURRENT_TRIP_LOADED',
-    currentTrip
-  };
-}
-
-export const initializeHomeScreen = () => {
-  return dispatch => {
-    AsyncStorage.getItem('sessionData').then((sessionData) => {
-      if (sessionData === null) {
-        dispatch(initializeAppSuccess())
-      } else {
-        sessionData = JSON.parse(sessionData);
-        dispatch(loadSavedSessionData(sessionData))
-
-        AsyncStorage.getItem('currentTrip').then((currentTrip) => {
-          if (currentTrip !== null) {
-            currentTrip = JSON.parse(currentTrip);
-            dispatch(loadSavedCurrentTrip(currentTrip))
-          }
-          dispatch(initializeAppSuccess())
-        });
-      }
-    });
-  }
-}
 
 export const setEmail = (email) => {
   return {
@@ -72,6 +30,13 @@ function loginSuccess(loginData) {
   };
 }
 
+function loginFailure(error) {
+  return {
+    type: 'CREATE_SESSION_ERROR',
+    error
+  };
+}
+
 export const logout = () => {
   AsyncStorage.removeItem('sessionData');
   return {
@@ -83,7 +48,7 @@ export const createSession = (email, password) => {
   let url = `${baseUrl}/auth/sign_in`
 
   return dispatch => {
-    dispatch(startLogin())
+    dispatch(startLogin());
     return fetch(url, {
       method: 'POST',
       headers: {
@@ -93,6 +58,10 @@ export const createSession = (email, password) => {
       body: JSON.stringify({email: email, password: password})}
     )
       .then(response => {
+        if (response.status === 401) {
+          throw(`Incorrect password for ${email}. Please try again.`);
+        }
+
         return new Promise((resolve, reject) => {
           let sessionData = {
             client: response.headers.get('client'),
@@ -106,6 +75,6 @@ export const createSession = (email, password) => {
         })
       })
       .then(json => dispatch(loginSuccess(json)))
-      .catch(error => console.log(error))
+      .catch(error => dispatch(loginFailure(error)))
   };
 };

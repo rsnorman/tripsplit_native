@@ -4,7 +4,7 @@ import { DrawerNavigator, addNavigationHelpers } from 'react-navigation';
 import { connect } from 'react-redux';
 import RootNavigator from './../components/RootNavigator';
 import NewSession from '../containers/NewSession';
-import { initializeHomeScreen } from '../actions/index';
+import { initializeHomeScreen } from '../actions/initialize_actions';
 
 var styles = StyleSheet.create({
   appInitializingContainer: {

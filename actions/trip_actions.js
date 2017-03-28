@@ -35,7 +35,6 @@ export const addTrip = () => {
 }
 
 export const viewTrip = (trip) => {
-  AsyncStorage.setItem('currentTrip', JSON.stringify(trip))
   return {
     type: 'VIEW_TRIP',
     trip: trip
@@ -49,7 +48,6 @@ function startFetchingTrip() {
 }
 
 function tripFetchSuccess(trip) {
-  AsyncStorage.setItem('currentTrip', JSON.stringify(trip))
   return {
     type: 'TRIP_FETCH_SUCCESS',
     trip
