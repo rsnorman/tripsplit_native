@@ -1,6 +1,10 @@
+// @flow
+
+import { isInvalidForm } from './../helpers/form-validation';
+
 let initialTripState = {
   trips: [],
-  newTrip: { name: "Brandon's Bachelor Party", location: "UP", description: 'Sending B-Rabbit off in style!' },
+  newTrip: {},
   viewedTrip: null,
   isViewingNewTripForm: false,
   isCreatingTrip: false,
@@ -14,19 +18,6 @@ let initialTripState = {
   errorMessage: null,
   saveButtonDisabled: true
 };
-
-function isInvalidForm(state, fields) {
-  let _i, _len, _field;
-
-  for (_i = 0, _len = fields.length; _i < _len; _i++) {
-    _field = fields[_i];
-    if (!state[_field] || state[_field] === '') {
-      return true;
-    }
-  }
-
-  return false;
-}
 
 const trips = (state = initialTripState, action) => {
   switch (action.type) {
@@ -62,6 +53,7 @@ const trips = (state = initialTripState, action) => {
     case 'NEW_TRIP':
       return {
         ...state,
+        newTrip: {},
         errorMessage: null,
         saveButtonDisabled: true,
         isViewingNewTripForm: true

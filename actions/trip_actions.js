@@ -1,3 +1,5 @@
+// @flow
+
 import { applyAuthenticationHeaders } from './helpers';
 import { AsyncStorage } from 'react-native';
 import { baseUrl } from './../constants';
@@ -66,7 +68,7 @@ export const reloadTrip = (trip) => {
   };
 }
 
-export const setNewTripAttr = (attributeName, attributeValue) => {
+export const setNewTripAttr = (attributeName: string, attributeValue: string) => {
   return {
     type: 'SET_NEW_TRIP_ATTRIBUTE',
     name: attributeName,
@@ -74,7 +76,7 @@ export const setNewTripAttr = (attributeName, attributeValue) => {
   };
 }
 
-export const setEditTripAttr = (attributeName, attributeValue) => {
+export const setEditTripAttr = (attributeName: string, attributeValue: string) => {
   return {
     type: 'SET_EDIT_TRIP_ATTRIBUTE',
     name: attributeName,
@@ -108,7 +110,7 @@ function tripUpdateSuccess(trip) {
   }
 }
 
-function tripSaveFailure(error) {
+function tripSaveFailure(error: string) {
   return {
     type: 'SAVE_TRIP_ERROR',
     error

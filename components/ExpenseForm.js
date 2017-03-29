@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 
 import Popup from 'react-native-popup';
+import AsyncIndicator from './AsyncIndicator';
+import FormButton from './FormButton';
 
 var styles = StyleSheet.create({
   container: {
@@ -40,22 +42,6 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'stretch',
     marginTop: 15
-  },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  button: {
-    height: 36,
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: '#48bbec',
-    borderColor: '#48bbec',
-    borderWidth: 1,
-    borderRadius: 8,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
   },
   deleteButtonText: {
     fontSize: 18,
@@ -153,11 +139,17 @@ class ExpenseForm extends Component {
   }
 
   render() {
-    let spinner = this.props.isSavingExpense || this.props.isDeletingExpense ?
-      ( <ActivityIndicator size='large' style={styles.spinner} /> ) :
-      ( <View/> );
+    const {
+      expense,
+      isSavingExpense,
+      isDeletingExpense,
+      showDeleteButton,
+      title,
+      errorMessage,
+      saveButtonDisabled
+    } = this.props;
 
-    let deleteButton = this.props.showDeleteButton ?
+    let deleteButton = showDeleteButton ?
       ( <View style={styles.formRow}>
         <TouchableHighlight style={styles.deleteButton}
           onPress={this.onDeletePressed.bind(this)}
@@ -171,27 +163,27 @@ class ExpenseForm extends Component {
       <View style={styles.container}>
         <View style={styles.formHeader}>
           <Text style={styles.formHeaderText}>
-            {this.props.title}
+            {title}
           </Text>
         </View>
         <View style={styles.form}>
           <View style={styles.formRow}>
             <TextInput
-              value={this.props.expense.name}
+              value={expense.name}
               style={styles.input}
               onChange={this.onNameChanged.bind(this)}
               placeholder='Name'/>
           </View>
           <View style={styles.formRow}>
             <TextInput
-              value={this.props.expense.cost}
+              value={expense.cost}
               style={styles.input}
               onChange={this.onCostChanged.bind(this)}
               placeholder='Cost'/>
           </View>
           <View style={styles.formRow}>
             <TextInput
-              value={this.props.expense.description}
+              value={expense.description}
               style={styles.multiLineInput}
               onChange={this.onDescriptionChanged.bind(this)}
               multiline={true}
@@ -199,11 +191,10 @@ class ExpenseForm extends Component {
               placeholder='Description'/>
           </View>
           <View style={styles.formRow}>
-            <TouchableHighlight style={styles.button}
+            <FormButton
               onPress={this.onSavePressed.bind(this)}
-              underlayColor='#99d9f4'>
-              <Text style={styles.buttonText}>Save</Text>
-            </TouchableHighlight>
+              text="Save"
+              disabled={saveButtonDisabled} />
           </View>
           {deleteButton}
           <View style={styles.formRow}>
@@ -213,8 +204,10 @@ class ExpenseForm extends Component {
               <Text style={styles.cancelButtonText}>Cancel</Text>
             </TouchableHighlight>
           </View>
-          {spinner}
-          <Text style={styles.description}>{this.props.message}</Text>
+          <AsyncIndicator
+            style={styles.spinner}
+            active={isSavingExpense || isDeletingExpense}
+            errorMessage={errorMessage} />
         </View>
         <Popup ref={popup => this.popup = popup }/>
       </View>

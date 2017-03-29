@@ -1,3 +1,5 @@
+// @flow
+
 import { applyAuthenticationHeaders } from './helpers';
 
 function startFetchingTripExpenses() {
@@ -40,10 +42,17 @@ export const addExpense = (trip) => {
     trip
   };
 }
-
-export const setExpenseAttr = (attributeName, attributeValue) => {
+export const setNewExpenseAttr = (attributeName: string, attributeValue: string) => {
   return {
-    type: 'SET_EXPENSE_ATTRIBUTE',
+    type: 'SET_NEW_EXPENSE_ATTRIBUTE',
+    name: attributeName,
+    value: attributeValue
+  };
+}
+
+export const setEditExpenseAttr = (attributeName: string, attributeValue: string) => {
+  return {
+    type: 'SET_EDIT_EXPENSE_ATTRIBUTE',
     name: attributeName,
     value: attributeValue
   };
@@ -62,6 +71,13 @@ function expenseCreateSuccess(expense) {
   }
 }
 
+function expenseSaveFailure(error: string) {
+  return {
+    type: 'SAVE_EXPENSE_ERROR',
+    error
+  };
+}
+
 export const createExpense = (newExpense) => {
   return dispatch => {
     const { session } = dispatch(startCreatingExpense());
@@ -71,9 +87,15 @@ export const createExpense = (newExpense) => {
       method: method,
       body: JSON.stringify({expense: newExpense})
     }, session))
-      .then(response => response.json())
+      .then(response => {
+        if (response.status !== 200) {
+          throw('There was an error saving. Please try again.');
+        }
+
+        return response.json();
+      })
       .then(json => dispatch(expenseCreateSuccess(json)))
-      .catch(error => console.log(error))
+      .catch(error => dispatch(expenseSaveFailure(error)))
   }
 }
 
@@ -112,9 +134,15 @@ export const updateExpense = (editingExpense) => {
       method: method,
       body: JSON.stringify({expense: editingExpense})
     }, session))
-      .then(response => response.json())
+      .then(response => {
+        if (response.status !== 200) {
+          throw('There was an error saving. Please try again.');
+        }
+
+        return response.json();
+      })
       .then(json => dispatch(expenseUpdateSuccess(json)))
-      .catch(error => console.log(error))
+      .catch(error => dispatch(expenseSaveFailure(error)))
   }
 }
 
