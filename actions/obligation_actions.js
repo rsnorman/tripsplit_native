@@ -1,3 +1,5 @@
+// @flow
+
 import { applyAuthenticationHeaders } from './helpers'
 
 function startFetchingExpenseObligations() {
@@ -45,6 +47,13 @@ function expenseObligationPaymentSuccess(obligation) {
   }
 }
 
+function expenseObligationPaymentFailure(error: string) {
+  return {
+    type: 'PAY_EXPENSE_OBLIGATION_ERROR',
+    error
+  };
+}
+
 export const payExpenseObligation = (obligation) => {
   return dispatch => {
     const { session } = dispatch(startPayingExpenseObligation());
@@ -54,8 +63,14 @@ export const payExpenseObligation = (obligation) => {
       method: method,
       body: JSON.stringify({expense_obligation: {user_id: obligation.user.id}})
     }, session))
-      .then(response => response.json())
+      .then(response => {
+        if (response.status !== 200) {
+          throw('There was an error marking expense paid. Please try again.');
+        }
+
+        return response.json();
+      })
       .then(json => dispatch(expenseObligationPaymentSuccess(json)))
-      .catch(error => console.log(error))
+      .catch(error => dispatch(expenseObligationPaymentFailure(error)))
   }
 }

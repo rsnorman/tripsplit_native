@@ -1,21 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { setTripAttr, createTrip, cancelCreatingTrip } from '../actions/trip_actions';
+import { setNewTripAttr, createTrip, cancelCreatingTrip } from '../actions/trip_actions';
 import TripForm from '../components/TripForm'
 
 const mapStateToProps = (state) => {
+  const {
+    isSavingTrip,
+    errorMessage,
+    newTrip,
+    saveButtonDisabled
+  } = state.trips;
+
   return {
     title: 'Create Trip',
-    trip: state.trips.newTrip,
-    isSavingTrip: state.trips.isSavingTrip
+    trip: newTrip,
+    isSavingTrip,
+    errorMessage,
+    saveButtonDisabled
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onTripAttributeSet: (attributeName, attributeValue) => {
-      dispatch(setTripAttr(attributeName, attributeValue));
+      dispatch(setNewTripAttr(attributeName, attributeValue));
     },
     onSave: (newTrip) => {
       dispatch(createTrip(newTrip));

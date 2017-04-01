@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 
 import Popup from 'react-native-popup';
+import AsyncIndicator from './AsyncIndicator';
+import FormButton from './FormButton';
 
 var styles = StyleSheet.create({
   container: {
@@ -40,22 +42,6 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'stretch',
     marginTop: 15
-  },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  button: {
-    height: 36,
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: '#48bbec',
-    borderColor: '#48bbec',
-    borderWidth: 1,
-    borderRadius: 8,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
   },
   deleteButtonText: {
     fontSize: 18,
@@ -153,9 +139,15 @@ class TripForm extends Component {
   }
 
   render() {
-    let spinner = this.props.isSavingTrip || this.props.isDeletingTrip ?
-      ( <ActivityIndicator size='large' style={styles.spinner} /> ) :
-      ( <View/> );
+    const {
+      trip,
+      isSavingTrip,
+      isDeletingTrip,
+      showDeleteButton,
+      title,
+      errorMessage,
+      saveButtonDisabled
+    } = this.props;
 
     let deleteButton = this.props.showDeleteButton ?
       ( <View style={styles.formRow}>
@@ -199,11 +191,10 @@ class TripForm extends Component {
               placeholder='Description'/>
           </View>
           <View style={styles.formRow}>
-            <TouchableHighlight style={styles.button}
+            <FormButton
               onPress={this.onSavePressed.bind(this)}
-              underlayColor='#99d9f4'>
-              <Text style={styles.buttonText}>Save</Text>
-            </TouchableHighlight>
+              text="Save"
+              disabled={saveButtonDisabled} />
           </View>
           {deleteButton}
           <View style={styles.formRow}>
@@ -213,8 +204,10 @@ class TripForm extends Component {
               <Text style={styles.cancelButtonText}>Cancel</Text>
             </TouchableHighlight>
           </View>
-          {spinner}
-          <Text style={styles.description}>{this.props.message}</Text>
+          <AsyncIndicator
+            style={styles.spinner}
+            active={isSavingTrip || isDeletingTrip}
+            errorMessage={errorMessage} />
         </View>
         <Popup ref={popup => this.popup = popup }/>
       </View>

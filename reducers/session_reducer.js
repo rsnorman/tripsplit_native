@@ -64,10 +64,10 @@ const session = (state = defaultUser, action) => {
         loginButtonDisabled: false
       };
     case 'CREATE_SESSION_ERROR':
-      console.log('create error', action.error);
       return {
         ...state,
         isLoggingIn: false,
+        loginButtonDisabled: false,
         errorMessage: action.error
       };
     default:

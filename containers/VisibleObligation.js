@@ -5,11 +5,20 @@ import { payExpenseObligation } from '../actions/obligation_actions';
 import ObligationView from './../components/ObligationView'
 
 const mapStateToProps = (state) => {
-  let obligation = state.obligations.viewedObligation;
+  const {
+    viewedObligation,
+    isPayingExpense,
+    errorMessage,
+    payButtonDisabled
+  } = state.obligations;
+
   return {
-    obligation,
+    obligation: viewedObligation,
     expense: state.expenses.viewedExpense,
-    showPayButton: !!obligation.actions.pay
+    showPayButton: !!viewedObligation.actions.pay,
+    isPayingExpense,
+    errorMessage,
+    payButtonDisabled
   };
 };
 

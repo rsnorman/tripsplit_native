@@ -10,6 +10,8 @@ import {
 
 import HeaderImage from './../components/HeaderImage';
 import Money from './../components/MoneyView';
+import AsyncIndicator from './AsyncIndicator';
+import FormButton from './FormButton';
 
 let styles = StyleSheet.create({
   containerHeader: {
@@ -78,22 +80,6 @@ let styles = StyleSheet.create({
     paddingLeft: 30,
     paddingRight: 30,
   },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  button: {
-    height: 36,
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: '#48bbec',
-    borderColor: '#48bbec',
-    borderWidth: 1,
-    borderRadius: 8,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
-  },
   paidText: {
     fontSize: 18,
     color: '#48bbec',
@@ -109,6 +95,9 @@ let styles = StyleSheet.create({
     borderRadius: 8,
     alignSelf: 'stretch',
     justifyContent: 'center'
+  },
+  spinner: {
+    marginTop: 15
   }
 });
 
@@ -124,16 +113,21 @@ class ObligationView extends Component {
   }
 
   render() {
-    let { expense, obligation, showPayButton } = this.props;
+    let {
+      expense,
+      obligation,
+      showPayButton,
+      payButtonDisabled,
+      isPayingExpense,
+      errorMessage
+    } = this.props;
 
     let payButton = showPayButton ?
       (
         <View style={styles.formRow}>
-          <TouchableHighlight style={styles.button}
+          <FormButton
             onPress={this.payObligation.bind(this)}
-            underlayColor='#99d9f4'>
-            <Text style={styles.buttonText}>Mark As Paid</Text>
-          </TouchableHighlight>
+            text="Mark As Paid" />
         </View>
       ) :
       ( <View /> );
@@ -179,6 +173,10 @@ class ObligationView extends Component {
           </View>
         </View>
         {markAsPaidView}
+        <AsyncIndicator
+          style={styles.spinner}
+          active={isPayingExpense}
+          errorMessage={errorMessage} />
       </View>
     );
   }
