@@ -1,6 +1,7 @@
 // @flow
 
 import { applyAuthenticationHeaders } from './helpers';
+import { expenseSaveFailure } from './error_actions';
 
 function startFetchingTripExpenses() {
   return {
@@ -69,13 +70,6 @@ function expenseCreateSuccess(expense) {
     type: 'EXPENSE_CREATE_SUCCESS',
     expense
   }
-}
-
-function expenseSaveFailure(error: string) {
-  return {
-    type: 'SAVE_EXPENSE_ERROR',
-    error
-  };
 }
 
 export const createExpense = (newExpense) => {

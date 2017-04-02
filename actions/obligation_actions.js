@@ -1,6 +1,7 @@
 // @flow
 
-import { applyAuthenticationHeaders } from './helpers'
+import { applyAuthenticationHeaders } from './helpers';
+import { expenseObligationPaymentFailure } from './error_actions';
 
 function startFetchingExpenseObligations() {
   return {
@@ -38,20 +39,6 @@ function startPayingExpenseObligation() {
   return {
     type: 'START_PAYING_EXPENSE_OBLIGATION'
   }
-}
-
-function expenseObligationPaymentSuccess(obligation) {
-  return {
-    type: 'EXPENSE_OBLIGATION_PAYMENT_SUCCESS',
-    obligation
-  }
-}
-
-function expenseObligationPaymentFailure(error: string) {
-  return {
-    type: 'PAY_EXPENSE_OBLIGATION_ERROR',
-    error
-  };
 }
 
 export const payExpenseObligation = (obligation) => {

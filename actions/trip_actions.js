@@ -3,6 +3,7 @@
 import { applyAuthenticationHeaders } from './helpers';
 import { AsyncStorage } from 'react-native';
 import { baseUrl } from './../constants';
+import { tripsFetchFailure, tripSaveFailure } from './error_actions';
 
 function startFetchingTrips() {
   return {
@@ -24,9 +25,15 @@ export const fetchTrips = () => {
     const { session } = dispatch(startFetchingTrips());
 
     return fetch(url, applyAuthenticationHeaders({ method: 'GET' }, session))
-      .then(response => response.json())
+      .then(response => {
+        if (response.status !== 200) {
+          throw('There was an error retrieving trips. Please try again.');
+        }
+
+        return response.json();
+      })
       .then(json => dispatch(tripsFetchSuccess(json)))
-      .catch(error => console.log(error))
+      .catch(error => dispatch(tripsFetchFailure(error)))
   }
 }
 
@@ -108,13 +115,6 @@ function tripUpdateSuccess(trip) {
     type: 'TRIP_UPDATE_SUCCESS',
     trip: trip
   }
-}
-
-function tripSaveFailure(error: string) {
-  return {
-    type: 'SAVE_TRIP_ERROR',
-    error
-  };
 }
 
 export const createTrip = (newTrip) => {
