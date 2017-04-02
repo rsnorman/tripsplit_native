@@ -10,11 +10,18 @@ const dataSource = new ListView.DataSource({
 });
 
 const mapStateToProps = (state) => {
+  const {
+    expenseObligations,
+    isFetchingExpenseObligations,
+    fetchObligationsErrorMessage
+  } = state.obligations;
+
   return {
     expense: state.expenses.viewedExpense,
-    obligations: state.obligations.expenseObligations,
-    dataSource: dataSource.cloneWithRows(state.obligations.expenseObligations),
-    isFetchingExpenseObligations: state.obligations.isFetchingExpenseObligations
+    obligations: expenseObligations,
+    dataSource: dataSource.cloneWithRows(expenseObligations),
+    isFetchingExpenseObligations,
+    fetchObligationsErrorMessage
   };
 };
 

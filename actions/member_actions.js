@@ -1,4 +1,5 @@
-import { applyAuthenticationHeaders } from './helpers';
+import { applyAuthenticationHeaders, parseResponse } from './helpers';
+import { membersFetchFailure, paymentsFetchFailure } from './error_actions';
 
 function startFetchingTripMembers() {
   return {
@@ -21,9 +22,9 @@ export const fetchTripMembers = (trip) => {
     return fetch(url, applyAuthenticationHeaders({
       method: method
     }, session))
-      .then(response => response.json())
+      .then(parseResponse(200, 'There was an error retrieving members. Please try again.'))
       .then(json => dispatch(tripMembersFetchSuccess(json)))
-      .catch(error => console.log(error))
+      .catch(error => dispatch(membersFetchFailure(error)))
   }
 }
 
@@ -48,7 +49,6 @@ function memberPaymentsFetchSuccess(payments) {
 }
 
 export const fetchMemberPayments = (trip, user) => {
-
   return dispatch => {
     const { session } = dispatch(startFetchingMemberPayments())
     const { url, method } = user.actions.view_payments;
@@ -56,8 +56,8 @@ export const fetchMemberPayments = (trip, user) => {
     return fetch(url, applyAuthenticationHeaders({
       method: method
     }, session))
-      .then(response => response.json())
+      .then(parseResponse(200, 'There was an error retrieving member payments. Please try again.'))
       .then(json => dispatch(memberPaymentsFetchSuccess(json)))
-      .catch(error => console.log(error))
+      .catch(error => dispatch(paymentsFetchFailure(error)))
   }
 }

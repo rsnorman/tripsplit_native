@@ -6,7 +6,6 @@ import {
   TouchableHighlight,
   ListView,
   Text,
-  ActivityIndicator,
   Dimensions,
   Modal,
   AppRegistry
@@ -18,6 +17,7 @@ import ListImage from './../components/ListImage';
 import NewTrip from './../containers/NewTrip';
 import FloatingButton from './../components/FloatingButton';
 import Money from './../components/MoneyView';
+import AsyncIndicator from './../components/AsyncIndicator';
 import OpenDrawerButton from './../containers/OpenDrawerButton';
 
 let styles = StyleSheet.create({
@@ -49,6 +49,9 @@ let styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     padding: 10
+  },
+  spinner: {
+    marginTop: 10
   }
 });
 
@@ -63,7 +66,7 @@ class TripsList extends Component {
   };
 
   componentDidMount() {
-    this.props.onTripsLoad();
+    this._loadTrips();
   }
 
   rowPressed(tripId) {
@@ -73,6 +76,10 @@ class TripsList extends Component {
 
   onAddTripPressed() {
     this.props.onTripAdd();
+  }
+
+  _loadTrips() {
+    this.props.onTripsLoad();
   }
 
   renderRow(rowData, sectionID, rowID) {
@@ -103,18 +110,26 @@ class TripsList extends Component {
   }
 
   render() {
-    if (this.props.isFetchingTrips) {
-      return <ActivityIndicator size='large'/>
-    }
+    const {
+      isFetchingTrips,
+      fetchTripsErrorMessage,
+      dataSource,
+      isViewingNewTripForm
+    } = this.props;
 
     return (
       <View style={styles.container}>
+        <AsyncIndicator
+          style={styles.spinner}
+          active={isFetchingTrips}
+          errorMessage={fetchTripsErrorMessage}
+          onRetryPress={this._loadTrips.bind(this)}/>
         <ListView
-          dataSource={this.props.dataSource}
+          dataSource={dataSource}
           enableEmptySections={true}
           renderRow={this.renderRow.bind(this)}/>
         <FloatingButton icon="plus-circle" size={50} onButtonPressed={this.onAddTripPressed.bind(this)} />
-        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingNewTripForm}>
+        <Modal animationType={'slide'} transparent={false} visible={isViewingNewTripForm}>
           <NewTrip />
         </Modal>
       </View>

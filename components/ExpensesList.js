@@ -5,7 +5,6 @@ import {
   TouchableHighlight,
   Text,
   Image,
-  ActivityIndicator,
   ListView,
   AppRegistry
 } from 'react-native';
@@ -14,9 +13,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import ListImage from './../components/ListImage';
 import Money from './../components/MoneyView';
+import AsyncIndicator from './../components/AsyncIndicator';
 
 let styles = StyleSheet.create({
-  loader: {
+  spinner: {
     marginTop: 20
   },
   container: {
@@ -55,8 +55,12 @@ let styles = StyleSheet.create({
 });
 
 class ExpensesList extends Component {
+  _loadExpenses() {
+    this.props.onExpensesLoad(this.props.trip);
+  }
+
   componentDidMount() {
-    this.props.onExpensesLoad(this.props.trip)
+    this._loadExpenses();
   }
 
   rowPressed(expenseId) {
@@ -89,16 +93,17 @@ class ExpensesList extends Component {
   }
 
   render() {
-    if (this.props.isFetchingTripExpenses) {
-      return (
-        <ActivityIndicator style={styles.loader} size='large'/>
-      );
-    }
+    const { isFetchingTripExpenses, fetchExpensesErrorMessage, dataSource } = this.props;
 
     return (
       <View style={styles.container}>
+        <AsyncIndicator
+          style={styles.spinner}
+          active={isFetchingTripExpenses}
+          errorMessage={fetchExpensesErrorMessage}
+          onRetryPress={this._loadExpenses.bind(this)}/>
         <ListView
-          dataSource={this.props.dataSource}
+          dataSource={dataSource}
           enableEmptySections={true}
           renderRow={this.renderRow.bind(this)}/>
       </View>

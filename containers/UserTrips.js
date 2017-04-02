@@ -10,11 +10,19 @@ const dataSource = new ListView.DataSource({
 });
 
 const mapStateToProps = (state) => {
+  const {
+    trips,
+    isViewingNewTripForm,
+    isFetchingTrips,
+    fetchTripsErrorMessage
+  } = state.trips;
+
   return {
-    trips: state.trips.trips,
-    dataSource: dataSource.cloneWithRows(state.trips.trips),
-    isViewingNewTripForm: state.trips.isViewingNewTripForm,
-    isFetchingTrips: state.trips.isFetchingTrips
+    trips,
+    isViewingNewTripForm,
+    isFetchingTrips,
+    fetchTripsErrorMessage,
+    dataSource: dataSource.cloneWithRows(state.trips.trips)
   };
 };
 

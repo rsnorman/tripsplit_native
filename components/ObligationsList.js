@@ -5,7 +5,6 @@ import {
   TouchableHighlight,
   Text,
   Image,
-  ActivityIndicator,
   ListView,
   AppRegistry
 } from 'react-native';
@@ -14,9 +13,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import ListImage from './../components/ListImage';
 import Money from './../components/MoneyView';
+import AsyncIndicator from './../components/AsyncIndicator';
 
 let styles = StyleSheet.create({
-  loader: {
+  spinner: {
     marginTop: 20
   },
   textContainer: {
@@ -46,8 +46,12 @@ let styles = StyleSheet.create({
 });
 
 class ObligationsList extends Component {
+  _loadObligations() {
+    this.props.onObligationsLoad(this.props.expense);
+  }
+
   componentDidMount() {
-    this.props.onObligationsLoad(this.props.expense)
+    this._loadObligations();
   }
 
   rowPressed(obligationId) {
@@ -86,16 +90,21 @@ class ObligationsList extends Component {
   }
 
   render() {
-    if (this.props.isFetchingExpenseObligations) {
-      return (
-        <ActivityIndicator style={styles.loader} size='large'/>
-      );
-    }
+    const {
+      isFetchingExpenseObligations,
+      fetchObligationsErrorMessage,
+      dataSource
+    } = this.props;
 
     return (
       <View style={styles.container}>
+        <AsyncIndicator
+          style={styles.spinner}
+          active={isFetchingExpenseObligations}
+          errorMessage={fetchObligationsErrorMessage}
+          onRetryPress={this._loadObligations.bind(this)}/>
         <ListView
-          dataSource={this.props.dataSource}
+          dataSource={dataSource}
           enableEmptySections={true}
           renderRow={this.renderRow.bind(this)}/>
       </View>

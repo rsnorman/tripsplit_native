@@ -1,3 +1,5 @@
+// @flow
+
 export const applyAuthenticationHeaders = (fetchOptions, session) => {
   return {
     ...fetchOptions,
@@ -10,5 +12,14 @@ export const applyAuthenticationHeaders = (fetchOptions, session) => {
       "Expiry": session.expiry,
       "uid": session.uid
     }
+  }
+}
+
+export const parseResponse = (successStatus: number, errorMessage: string) => {
+  return (response) => {
+    if (response.status !== successStatus) {
+      throw(errorMessage);
+    }
+    return response.json();
   }
 }

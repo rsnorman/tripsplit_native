@@ -15,6 +15,7 @@ let initialTripState = {
   isViewingEditTripForm: false,
   isUploadingTripImage: false,
   isDirtyTrip: false,
+  fetchTripsErrorMessage: null,
   errorMessage: null,
   saveButtonDisabled: true
 };
@@ -30,13 +31,21 @@ const trips = (state = initialTripState, action) => {
     case 'START_FETCHING_TRIPS':
       return {
         ...state,
-        isFetchingTrips: true
+        isFetchingTrips: true,
+        trips: [],
+        fetchTripsErrorMessage: null
       };
     case 'TRIPS_FETCH_SUCCESS':
       return {
         ...state,
         isFetchingTrips: false,
         trips: action.trips
+      };
+    case 'FETCH_TRIPS_ERROR':
+      return {
+        ...state,
+        isFetchingTrips: false,
+        fetchTripsErrorMessage: action.error
       };
     case 'START_FETCHING_TRIP':
       return {
