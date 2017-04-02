@@ -1,7 +1,7 @@
 // @flow
 
-import { applyAuthenticationHeaders } from './helpers';
-import { expenseSaveFailure } from './error_actions';
+import { applyAuthenticationHeaders, parseResponse } from './helpers';
+import { expenseSaveFailure, expensesFetchFailure } from './error_actions';
 
 function startFetchingTripExpenses() {
   return {
@@ -24,9 +24,9 @@ export const fetchTripExpenses = (trip) => {
     return fetch(url, applyAuthenticationHeaders({
       method: method
     }, session))
-      .then(response => response.json())
+      .then(parseResponse(200, 'There was an error retrieving expenses. Please try again.'))
       .then(json => dispatch(tripExpensesFetchSuccess(json)))
-      .catch(error => console.log(error))
+      .catch(error => dispatch(expensesFetchFailure(error)))
   }
 }
 
@@ -81,13 +81,7 @@ export const createExpense = (newExpense) => {
       method: method,
       body: JSON.stringify({expense: newExpense})
     }, session))
-      .then(response => {
-        if (response.status !== 200) {
-          throw('There was an error saving. Please try again.');
-        }
-
-        return response.json();
-      })
+      .then(parseResponse(200, 'There was an error saving. Please try again.'))
       .then(json => dispatch(expenseCreateSuccess(json)))
       .catch(error => dispatch(expenseSaveFailure(error)))
   }
@@ -128,13 +122,7 @@ export const updateExpense = (editingExpense) => {
       method: method,
       body: JSON.stringify({expense: editingExpense})
     }, session))
-      .then(response => {
-        if (response.status !== 200) {
-          throw('There was an error saving. Please try again.');
-        }
-
-        return response.json();
-      })
+      .then(parseResponse(200, 'There was an error saving. Please try again.'))
       .then(json => dispatch(expenseUpdateSuccess(json)))
       .catch(error => dispatch(expenseSaveFailure(error)))
   }

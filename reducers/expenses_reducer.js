@@ -16,6 +16,7 @@ let initialExpensesState = {
   isViewingNewExpenseForm: false,
   isViewingEditExpenseForm: false,
   editingExpense: null,
+  fetchExpensesErrorMessage: null,
   errorMessage: null,
   saveButtonDisabled: true
 };
@@ -25,13 +26,21 @@ const expenses = (state = initialExpensesState, action) => {
     case 'START_FETCHING_TRIP_EXPENSES':
       return {
         ...state,
-        isFetchingTripExpenses: true
+        tripExpenses: [],
+        isFetchingTripExpenses: true,
+        fetchExpensesErrorMessage: null
       };
     case 'TRIP_EXPENSES_FETCH_SUCCESS':
       return {
         ...state,
         isFetchingTripExpenses: false,
         tripExpenses: action.tripExpenses
+      };
+    case 'FETCH_EXPENSES_ERROR':
+      return {
+        ...state,
+        isFetchingTripExpenses: false,
+        fetchExpensesErrorMessage: action.error
       };
     case 'NEW_EXPENSE':
       let newTripExpense = {

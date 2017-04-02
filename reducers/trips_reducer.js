@@ -32,6 +32,7 @@ const trips = (state = initialTripState, action) => {
       return {
         ...state,
         isFetchingTrips: true,
+        trips: [],
         fetchTripsErrorMessage: null
       };
     case 'TRIPS_FETCH_SUCCESS':

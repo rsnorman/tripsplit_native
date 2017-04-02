@@ -14,9 +14,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import ListImage from './../components/ListImage';
 import Money from './../components/MoneyView';
+import AsyncIndicator from './../components/AsyncIndicator';
 
 let styles = StyleSheet.create({
-  loader: {
+  spinner: {
     marginTop: 20
   },
   container: {
@@ -71,8 +72,12 @@ let styles = StyleSheet.create({
 });
 
 class PaymentsList extends Component {
-  componentDidMount() {
+  _loadPayments() {
     this.props.onPaymentsLoad(this.props.trip, this.props.member);
+  }
+
+  componentDidMount() {
+    this._loadPayments();
   }
 
   renderRow(rowData, sectionID, rowID) {
@@ -104,16 +109,17 @@ class PaymentsList extends Component {
   }
 
   render() {
-    if (this.props.isFetchingMemberPayments) {
-      return (
-        <ActivityIndicator style={styles.loader} size='large'/>
-      );
-    }
+    const { isFetchingMemberPayments, fetchPaymentsErrorMessage, dataSource } = this.props;
 
     return (
       <View style={styles.container}>
+        <AsyncIndicator
+          style={styles.spinner}
+          active={isFetchingMemberPayments}
+          errorMessage={fetchPaymentsErrorMessage}
+          onRetryPress={this._loadPayments.bind(this)}/>
         <ListView
-          dataSource={this.props.dataSource}
+          dataSource={dataSource}
           enableEmptySections={true}
           renderRow={this.renderRow.bind(this)}/>
       </View>

@@ -1,7 +1,7 @@
 // @flow
 
-import { applyAuthenticationHeaders } from './helpers';
-import { expenseObligationPaymentFailure } from './error_actions';
+import { applyAuthenticationHeaders, parseResponse } from './helpers';
+import { expenseObligationPaymentFailure, obligationsFetchFailure } from './error_actions';
 
 function startFetchingExpenseObligations() {
   return {
@@ -22,9 +22,9 @@ export const fetchExpenseObligations = (expense) => {
     const { url, method } = expense.actions.view_obligations;
 
     return fetch(url, applyAuthenticationHeaders({ method: method }, session))
-      .then(response => response.json())
+      .then(parseResponse(200, 'There was an error retrieving expense obligations. Please try again.'))
       .then(json => dispatch(expenseObligationsFetchSuccess(json)))
-      .catch(error => console.log(error))
+      .catch(error => dispatch(obligationsFetchFailure(error)))
   }
 }
 
@@ -41,6 +41,13 @@ function startPayingExpenseObligation() {
   }
 }
 
+function expenseObligationPaymentSuccess(obligation) {
+  return {
+    type: 'EXPENSE_OBLIGATION_PAYMENT_SUCCESS',
+    obligation
+  }
+}
+
 export const payExpenseObligation = (obligation) => {
   return dispatch => {
     const { session } = dispatch(startPayingExpenseObligation());
@@ -50,13 +57,7 @@ export const payExpenseObligation = (obligation) => {
       method: method,
       body: JSON.stringify({expense_obligation: {user_id: obligation.user.id}})
     }, session))
-      .then(response => {
-        if (response.status !== 200) {
-          throw('There was an error marking expense paid. Please try again.');
-        }
-
-        return response.json();
-      })
+      .then(parseResponse(200, 'There was an error marking expense paid. Please try again.'))
       .then(json => dispatch(expenseObligationPaymentSuccess(json)))
       .catch(error => dispatch(expenseObligationPaymentFailure(error)))
   }

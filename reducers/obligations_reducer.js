@@ -2,22 +2,31 @@ let initialObligationsState = {
   expenseObligations: [],
   isFetchingExpenseObligations: false,
   isPayingExpense: false,
+  fetchObligationsErrorMessage: null,
   errorMessage: null,
   payButtonDisabled: true
 };
 
 const obligations = (state = initialObligationsState, action) => {
   switch (action.type) {
-    case 'START_FETCHING_EXPENSE_OBLIGATION':
+    case 'START_FETCHING_EXPENSE_OBLIGATIONS':
       return {
         ...state,
-        isFetchingExpenseObligations: true
+        expenseObligations: [],
+        isFetchingExpenseObligations: true,
+        fetchObligationsErrorMessage: null
       };
     case 'EXPENSE_OBLIGATIONS_FETCH_SUCCESS':
       return {
         ...state,
         isFetchingExpenseObligations: false,
         expenseObligations: action.expenseObligations
+      };
+    case 'FETCH_OBLIGATIONS_ERROR':
+      return {
+        ...state,
+        isFetchingExpenseObligations: false,
+        fetchObligationsErrorMessage: action.error
       };
     case 'VIEW_OBLIGATION':
       return {

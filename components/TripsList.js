@@ -6,7 +6,6 @@ import {
   TouchableHighlight,
   ListView,
   Text,
-  ActivityIndicator,
   Dimensions,
   Modal,
   AppRegistry
