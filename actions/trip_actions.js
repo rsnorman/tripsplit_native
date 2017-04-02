@@ -1,9 +1,9 @@
 // @flow
 
-import { applyAuthenticationHeaders } from './helpers';
+import { applyAuthenticationHeaders, parseResponse } from './helpers';
 import { AsyncStorage } from 'react-native';
 import { baseUrl } from './../constants';
-import { tripsFetchFailure, tripSaveFailure } from './error_actions';
+import { tripsFetchFailure, tripSaveFailure, tripDeleteFailure } from './error_actions';
 
 function startFetchingTrips() {
   return {
@@ -25,13 +25,7 @@ export const fetchTrips = () => {
     const { session } = dispatch(startFetchingTrips());
 
     return fetch(url, applyAuthenticationHeaders({ method: 'GET' }, session))
-      .then(response => {
-        if (response.status !== 200) {
-          throw('There was an error retrieving trips. Please try again.');
-        }
-
-        return response.json();
-      })
+      .then(parseResponse(200, 'There was an error retrieving trips. Please try again.'))
       .then(json => dispatch(tripsFetchSuccess(json)))
       .catch(error => dispatch(tripsFetchFailure(error)))
   }
@@ -69,7 +63,7 @@ export const reloadTrip = (trip) => {
     const { url, method } = trip.actions.show;
 
     return fetch(url, applyAuthenticationHeaders({ method: method }, session))
-      .then(response => response.json())
+      .then(parseResponse(200, 'There was an error refreshing trip. Please try again.'))
       .then(json => dispatch(tripFetchSuccess(json)))
       .catch(error => console.log(error))
   };
@@ -126,13 +120,7 @@ export const createTrip = (newTrip) => {
       method: 'POST',
       body: JSON.stringify({trip: newTrip})
     }, session))
-      .then(response => {
-        if (response.status !== 200) {
-          throw('There was an error saving. Please try again.');
-        }
-
-        return response.json();
-      })
+      .then(parseResponse(200, 'There was an error saving. Please try again.'))
       .then(json => dispatch(tripCreateSuccess(json)))
       .catch(error => dispatch(tripSaveFailure(error)))
   }
@@ -160,13 +148,7 @@ export const updateTrip = (editingTrip) => {
       method: method,
       body: JSON.stringify({trip: editingTrip})
     }, session))
-      .then(response => {
-        if (response.status !== 200) {
-          throw('There was an error saving. Please try again.');
-        }
-
-        return response.json();
-      })
+      .then(parseResponse(200, 'There was an error saving. Please try again.'))
       .then(json => dispatch(tripUpdateSuccess(json)))
       .catch(error => dispatch(tripSaveFailure(error)))
   }
@@ -199,8 +181,9 @@ export const deleteTrip = (trip) => {
     return fetch(url, applyAuthenticationHeaders({
       method: method
     }, session))
-      .then(_response => dispatch(tripDeleteSuccess(trip)))
-      .catch(error => console.log(error))
+      .then(parseResponse(200, 'There was an error deleting. Please try again.'))
+      .then(_json => dispatch(tripDeleteSuccess(trip)))
+      .catch(error => dispatch(tripDeleteFailure(error)))
   }
 }
 

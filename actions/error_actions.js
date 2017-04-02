@@ -55,3 +55,17 @@ export const expenseObligationPaymentFailure = (error: string) => {
     error
   };
 }
+
+export const tripDeleteFailure = (error: string) => {
+  return {
+    type: 'DELETE_TRIP_ERROR',
+    error
+  };
+}
+
+export const expenseDeleteFailure = (error: string) => {
+  return {
+    type: 'DELETE_EXPENSE_ERROR',
+    error
+  };
+}

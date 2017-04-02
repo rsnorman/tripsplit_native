@@ -21,7 +21,6 @@ let styles = StyleSheet.create({
     borderColor: '#48bbec',
     borderWidth: 1,
     borderRadius: 8,
-    marginBottom: 10,
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
@@ -33,7 +32,6 @@ let styles = StyleSheet.create({
     borderColor: '#99d9f4',
     borderWidth: 1,
     borderRadius: 8,
-    marginBottom: 10,
     alignSelf: 'stretch',
     justifyContent: 'center'
   }

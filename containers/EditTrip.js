@@ -10,7 +10,8 @@ const mapStateToProps = (state) => {
     isDeletingTrip,
     errorMessage,
     editingTrip,
-    saveButtonDisabled
+    saveButtonDisabled,
+    deleteButtonDisabled
   } = state.trips;
 
   return {
@@ -20,7 +21,8 @@ const mapStateToProps = (state) => {
     isSavingTrip,
     isDeletingTrip,
     errorMessage,
-    saveButtonDisabled
+    saveButtonDisabled,
+    deleteButtonDisabled
   };
 };
 
