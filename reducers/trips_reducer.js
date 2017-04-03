@@ -17,7 +17,7 @@ let initialTripState = {
   isDirtyTrip: false,
   fetchTripsErrorMessage: null,
   errorMessage: null,
-  saveButtonDisabled: true
+  isValidTrip: false
 };
 
 const trips = (state = initialTripState, action) => {
@@ -64,7 +64,7 @@ const trips = (state = initialTripState, action) => {
         ...state,
         newTrip: {},
         errorMessage: null,
-        saveButtonDisabled: true,
+        isValidTrip: false,
         isViewingNewTripForm: true
       };
     case 'SET_NEW_TRIP_ATTRIBUTE':
@@ -74,7 +74,7 @@ const trips = (state = initialTripState, action) => {
       return {
         ...state,
         newTrip,
-        saveButtonDisabled: isInvalidForm(newTrip, ['name', 'location'])
+        isValidTrip: !isInvalidForm(newTrip, ['name', 'location'])
       };
     case 'SET_EDIT_TRIP_ATTRIBUTE':
       let editingTrip = {...state.editingTrip};
@@ -83,14 +83,13 @@ const trips = (state = initialTripState, action) => {
       return {
         ...state,
         editingTrip,
-        saveButtonDisabled: isInvalidForm(editingTrip, ['name', 'location'])
+        isValidTrip: !isInvalidForm(editingTrip, ['name', 'location'])
       };
     case 'START_CREATING_TRIP':
       return {
         ...state,
         isSavingTrip: true,
-        errorMessage: null,
-        saveButtonDisabled: true
+        errorMessage: null
       };
     case 'TRIP_CREATE_SUCCESS':
       return {
@@ -104,7 +103,6 @@ const trips = (state = initialTripState, action) => {
       return {
         ...state,
         isSavingTrip: false,
-        saveButtonDisabled: false,
         errorMessage: action.error
       };
     case 'CANCEL_NEW_TRIP':
@@ -122,7 +120,7 @@ const trips = (state = initialTripState, action) => {
         ...state,
         editingTrip: action.trip,
         errorMessage: null,
-        saveButtonDisabled: true,
+        isValidTrip: false,
         isViewingEditTripForm: true
       };
     case 'START_UPDATING_TRIP':
@@ -130,8 +128,6 @@ const trips = (state = initialTripState, action) => {
         ...state,
         isSavingTrip: true,
         errorMessage: null,
-        saveButtonDisabled: true,
-        deleteButtonDisabled: true
       };
     case 'TRIP_UPDATE_SUCCESS':
       let updatedTripIndex = state.trips.findIndex((trip) => trip.id === action.trip.id);
@@ -170,9 +166,7 @@ const trips = (state = initialTripState, action) => {
       return {
         ...state,
         errorMessage: null,
-        isDeletingTrip: true,
-        saveButtonDisabled: true,
-        deleteButtonDisabled: true
+        isDeletingTrip: true
       };
     case 'TRIP_DELETE_SUCCESS':
       let deletedTripIndex = state.trips.findIndex((trip) => trip.id === action.trip.id);
@@ -183,15 +177,12 @@ const trips = (state = initialTripState, action) => {
         ...state,
         trips: tripsWithoutDeleted,
         isDeletingTrip: false,
-        isViewingEditTripForm: false,
-        deleteButtonDisabled: false
+        isViewingEditTripForm: false
       };
     case 'DELETE_TRIP_ERROR':
       return {
         ...state,
         isDeletingTrip: false,
-        saveButtonDisabled: false,
-        deleteButtonDisabled: false,
         errorMessage: action.error
       };
     case 'EXPENSE_CREATE_SUCCESS':

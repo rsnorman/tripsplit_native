@@ -132,14 +132,11 @@ class TripForm extends Component {
               numberOfLines={3}
               placeholder='Description'/>
           </View>
-          <View style={styles.formRow}>
-            <FormButton
-              onPress={this.onSavePressed.bind(this)}
-              text="Save"
-              disabled={saveButtonDisabled} />
-          </View>
+          <FormButton
+            onPress={this.onSavePressed.bind(this)}
+            text="Save"
+            disabled={saveButtonDisabled} />
           <DeleteButton
-            title="Trip"
             hidden={!showDeleteButton}
             disabled={deleteButtonDisabled}
             onPress={this.onDeletePressed.bind(this)} />
