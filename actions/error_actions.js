@@ -76,3 +76,24 @@ export const userUpdateFailure = (error: string) => {
     error
   }
 }
+
+export const userPhotoUpdateFailure = (error: string) => {
+  return {
+    type: 'UPDATE_USER_PHOTO_ERROR',
+    error
+  }
+}
+
+export const tripPhotoUpdateFailure = (error: string) => {
+  return {
+    type: 'UPDATE_TRIP_PHOTO_ERROR',
+    error
+  }
+}
+
+export const expensePhotoUpdateFailure = (error: string) => {
+  return {
+    type: 'UPDATE_EXPENSE_PHOTO_ERROR',
+    error
+  }
+}

@@ -6,6 +6,7 @@ const initialUserState = {
   isViewingEditUserForm: false,
   isUploadingUserImage: false,
   errorMessage: null,
+  uploadPhotoErrorMessage: null,
   isValidUser: false
 };
 
@@ -29,13 +30,20 @@ const user = (state = initialUserState, action) => {
     case 'START_UPDATING_USER_IMAGE':
       return {
         ...state,
-        isUploadingUserImage: true
+        isUploadingUserImage: true,
+        uploadPhotoErrorMessage: null
       };
     case 'USER_IMAGE_UPDATE_SUCCESS':
       return {
         ...state,
         user: action.user,
         isUploadingUserImage: false
+      };
+    case 'UPDATE_USER_PHOTO_ERROR':
+      return {
+        ...state,
+        isUploadingUserImage: false,
+        uploadPhotoErrorMessage: action.error
       };
     case 'EDIT_USER':
       return {

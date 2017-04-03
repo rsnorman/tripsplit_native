@@ -1,7 +1,7 @@
 // @flow
 
 import { applyAuthenticationHeaders, parseResponse } from './helpers';
-import { expenseSaveFailure, expensesFetchFailure, expenseDeleteFailure } from './error_actions';
+import { expenseSaveFailure, expensesFetchFailure, expenseDeleteFailure, expensePhotoUpdateFailure } from './error_actions';
 
 function startFetchingTripExpenses() {
   return {
@@ -192,8 +192,8 @@ export const updateExpenseImage = (expense, image) => {
       method: method,
       body: body
     }, session))
-      .then(response => response.json())
+      .then(parseResponse(200, 'There was an error uploading expense image. Please try again.'))
       .then(json => dispatch(expenseImageUpdateSuccess(json)))
-      .catch(error => console.log(error))
+      .catch(error => dispatch(expensePhotoUpdateFailure(error)))
   }
 }

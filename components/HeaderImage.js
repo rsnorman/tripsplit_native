@@ -6,6 +6,8 @@ import {
   TouchableHighlight,
   ActivityIndicator,
   Button,
+  Animated,
+  Easing,
   AppRegistry
 } from 'react-native';
 import { baseUrl } from './../constants';
@@ -14,6 +16,37 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 var ImagePicker = require('react-native-image-picker');
 
 class HeaderImage extends Component {
+  constructor(props) {
+    super(props);
+    this.bounceAnimation = new Animated.Value(1),
+    this.shakeAnimation = new Animated.Value(0)
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.image.url !== this.props.image.url) {
+      this.bounceAnimation.setValue(1.2);
+      Animated.spring(
+        this.bounceAnimation,
+        {
+          toValue: 1,
+          friction: 3
+        }
+      ).start();
+    }
+
+    if (!!newProps.errorMessage && !this.props.errorMessage) {
+      this.shakeAnimation.setValue(0);
+      Animated.timing(
+        this.shakeAnimation,
+        {
+          duration: 400,
+          toValue: 3,
+          ease: Easing.bounce
+        }
+      ).start();
+    }
+  }
+
   onImageEditPressed() {
     // More info on all the options is below in the README...just some common use cases shown here
     let options = {
@@ -72,15 +105,31 @@ class HeaderImage extends Component {
       ( <ActivityIndicator style={imageStyles.imageUploadSpinner} size="large" /> ) :
       ( <View /> );
 
+    const interpolatedShake = this.shakeAnimation.interpolate({
+      inputRange: [0, 0.5, 1, 1.5, 2, 2.5, 3],
+      outputRange: [0, -10, 0, 10, 0, -10, 0]
+    });
+
     return (
       <TouchableHighlight
         onPress={() => this.onImageEditPressed()}
         underlayColor='#dddddd'>
-        <View style={imageStyles.thumb}>
-          {image}
-          <Icon name="edit" style={imageStyles.editIcon} size={15} color="#fff" />
-          {imageSpinner}
-        </View>
+        <Animated.View style={{
+            transform: [
+              {
+                scale: this.bounceAnimation
+              },
+              {
+                translateX: interpolatedShake
+              }
+            ]
+          }}>
+          <View style={imageStyles.thumb}>
+            {image}
+            <Icon name="edit" style={imageStyles.editIcon} size={15} color="#fff" />
+            {imageSpinner}
+          </View>
+        </Animated.View>
       </TouchableHighlight>
     );
   }
@@ -90,7 +139,8 @@ HeaderImage.propTypes = {
   size: PropTypes.number.isRequired,
   image: PropTypes.object,
   icon: PropTypes.string,
-  isUploadingImage: PropTypes.bool
+  isUploadingImage: PropTypes.bool,
+  uploadPhotoErrorMessage: PropTypes.string
 };
 
 AppRegistry.registerComponent('HeaderImage', () => HeaderImage);

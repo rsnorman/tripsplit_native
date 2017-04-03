@@ -1,7 +1,7 @@
 import { applyAuthenticationHeaders, parseResponse } from './helpers';
 import { AsyncStorage } from 'react-native';
 import { baseUrl } from './../constants';
-import { userUpdateFailure } from './error_actions';
+import { userUpdateFailure, userPhotoUpdateFailure } from './error_actions';
 
 function updateSavedUser(user) {
   AsyncStorage.getItem('sessionData').then((sessionData) => {
@@ -44,9 +44,9 @@ export const updateUserImage = (user, image) => {
       method: 'PUT',
       body: body
     }, session))
-      .then(response => response.json())
+      .then(parseResponse(200, 'There was an error updating profile photo. Please try again.'))
       .then(json => dispatch(userImageUpdateSuccess(json)))
-      .catch(error => console.log(error))
+      .catch(error => dispatch(userPhotoUpdateFailure(error)))
   }
 }
 

@@ -107,7 +107,8 @@ class ExpenseView extends Component {
                 onImageSelected={this.updateExpenseImage.bind(this)}
                 icon={expense.expense_type}
                 isUploadingImage={this.props.isUploadingExpenseImage}
-                canEdit={this.props.canEditPhoto} />
+                canEdit={this.props.canEditPhoto}
+                errorMessage={this.props.uploadPhotoErrorMessage}  />
               <View style={styles.expenseHeaderRightColumn}>
                 <View style={styles.expenseCostDetails}>
                   <View style={styles.expenseDetail}>
