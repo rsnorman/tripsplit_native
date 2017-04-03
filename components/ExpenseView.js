@@ -116,7 +116,7 @@ class ExpenseView extends Component {
                     <Text style={styles.expenseDetailLabel}>Cost</Text>
                   </View>
                   <View style={styles.expenseDetail}>
-                    <Money style={styles.expenseDetailValue} amount={expense.cost} />
+                    <Money style={styles.expenseDetailValue} amount={expense.average_cost} />
                     <Text style={styles.expenseDetailLabel}>Average Cost</Text>
                   </View>
                 </View>
