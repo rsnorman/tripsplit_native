@@ -35,16 +35,20 @@ class HeaderImage extends Component {
     }
 
     if (!!newProps.errorMessage && !this.props.errorMessage) {
-      this.shakeAnimation.setValue(0);
-      Animated.timing(
-        this.shakeAnimation,
-        {
-          duration: 400,
-          toValue: 3,
-          ease: Easing.bounce
-        }
-      ).start();
+      this._showImageUploadError();
     }
+  }
+
+  _showImageUploadError() {
+    this.shakeAnimation.setValue(0);
+    Animated.timing(
+      this.shakeAnimation,
+      {
+        duration: 400,
+        toValue: 3,
+        ease: Easing.bounce
+      }
+    ).start();
   }
 
   onImageEditPressed() {
@@ -60,6 +64,7 @@ class HeaderImage extends Component {
     ImagePicker.showImagePicker(options, (response) => {
       if (response.error) {
         console.log('ImagePicker Error: ', response.error);
+        this._showImageUploadError();
       } else if (response.didCancel) {
         console.log('ImagePicker Canceled');
       } else {
