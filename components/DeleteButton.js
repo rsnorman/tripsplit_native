@@ -6,7 +6,6 @@ import {
   View,
   AppRegistry
 } from 'react-native';
-import Popup from 'react-native-popup';
 
 import formStyles from '../styles/form';
 
