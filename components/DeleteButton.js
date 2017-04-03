@@ -43,28 +43,9 @@ let styles = StyleSheet.create({
 });
 
 class DeleteButton extends Component {
-  onPress() {
-    let title = !!this.props.title ? `Delete ${this.props.title}` : 'Delete';
-    this.popup.confirm({
-      title,
-      content: ['Are you sure you want to delete?'],
-      ok: {
-        text: 'Yes',
-        style: {
-            color: 'red'
-        },
-        callback: () => {
-            this.props.onPress();
-        },
-      },
-      cancel: {
-        text: 'Cancel'
-      },
-    });
-  }
-
   render() {
     const { onPress, disabled, hidden } = this.props;
+
     if (hidden) {
       return <View />;
     }
@@ -93,7 +74,6 @@ class DeleteButton extends Component {
 }
 
 DeleteButton.propTypes = {
-  title: PropTypes.string,
   hidden: PropTypes.bool,
   onPress: PropTypes.func.isRequired,
   disabled: PropTypes.bool
