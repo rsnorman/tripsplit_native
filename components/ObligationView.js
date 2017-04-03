@@ -13,7 +13,10 @@ import Money from './../components/MoneyView';
 import AsyncIndicator from './AsyncIndicator';
 import FormButton from './FormButton';
 
+import formStyles from '../styles/form';
+
 let styles = StyleSheet.create({
+  ...formStyles,
   containerHeader: {
     alignSelf: 'stretch',
     borderWidth: 0,
@@ -72,14 +75,6 @@ let styles = StyleSheet.create({
     fontStyle: 'italic',
     color: '#3d3d3d'
   },
-  formRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    marginTop: 40,
-    paddingLeft: 30,
-    paddingRight: 30,
-  },
   paidText: {
     fontSize: 18,
     color: '#48bbec',
@@ -124,11 +119,9 @@ class ObligationView extends Component {
 
     let payButton = showPayButton ?
       (
-        <View style={styles.formRow}>
-          <FormButton
-            onPress={this.payObligation.bind(this)}
-            text="Mark As Paid" />
-        </View>
+        <FormButton
+          onPress={this.payObligation.bind(this)}
+          text="Mark As Paid" />
       ) :
       ( <View /> );
 
@@ -172,7 +165,9 @@ class ObligationView extends Component {
             <Text style={styles.expenseDescription}>{expense.description}</Text>
           </View>
         </View>
-        {markAsPaidView}
+        <View style={styles.form}>
+          {markAsPaidView}
+        </View>
         <AsyncIndicator
           style={styles.spinner}
           active={isPayingExpense}
