@@ -11,6 +11,9 @@ import {
 import { primaryColor } from './../constants'
 
 let styles = StyleSheet.create({
+  container: {
+    marginTop: 15
+  },
   error: {
     color: 'red',
     textAlign: 'center'
@@ -19,12 +22,12 @@ let styles = StyleSheet.create({
 
 class AsyncIndicator extends Component {
   render() {
-    const { active, errorMessage, style, onRetryPress } = this.props;
-    let spinner = active ? <ActivityIndicator style={style} size='large'/> : <View/>;
+    const { active, errorMessage, onRetryPress } = this.props;
+    let spinner = active ? <ActivityIndicator style={styles.container} size='large'/> : <View/>;
     let retryButton = !!onRetryPress ? <Button color={primaryColor} onPress={onRetryPress} title="Retry" accessibilityLabel="Retry fetching your trips" /> : <View/>;
     if (!!errorMessage) {
       return (
-        <View style={style}>
+        <View style={styles.container}>
           <Text style={styles.error}>{errorMessage}</Text>
           {retryButton}
         </View>
@@ -36,7 +39,6 @@ class AsyncIndicator extends Component {
 }
 
 AsyncIndicator.propTypes = {
-  style: PropTypes.any,
   active: PropTypes.bool,
   errorMessage: PropTypes.string,
   onRetryPress: PropTypes.func

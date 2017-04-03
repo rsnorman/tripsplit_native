@@ -35,9 +35,6 @@ var styles = StyleSheet.create({
     borderRadius: 8,
     alignSelf: 'stretch',
     justifyContent: 'center'
-  },
-  spinner: {
-    marginTop: 15
   }
 });
 
@@ -148,7 +145,6 @@ class TripForm extends Component {
             </TouchableHighlight>
           </View>
           <AsyncIndicator
-            style={styles.spinner}
             active={isSavingTrip || isDeletingTrip}
             errorMessage={errorMessage} />
         </View>

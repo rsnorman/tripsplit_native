@@ -90,9 +90,6 @@ let styles = StyleSheet.create({
     borderRadius: 8,
     alignSelf: 'stretch',
     justifyContent: 'center'
-  },
-  spinner: {
-    marginTop: 15
   }
 });
 
@@ -169,7 +166,6 @@ class ObligationView extends Component {
           {markAsPaidView}
         </View>
         <AsyncIndicator
-          style={styles.spinner}
           active={isPayingExpense}
           errorMessage={errorMessage} />
       </View>

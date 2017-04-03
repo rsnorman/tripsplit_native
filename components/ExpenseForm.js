@@ -36,9 +36,6 @@ var styles = StyleSheet.create({
     borderRadius: 8,
     alignSelf: 'stretch',
     justifyContent: 'center'
-  },
-  spinner: {
-    marginTop: 15
   }
 });
 
@@ -140,7 +137,6 @@ class ExpenseForm extends Component {
             </TouchableHighlight>
           </View>
           <AsyncIndicator
-            style={styles.spinner}
             active={isSavingExpense || isDeletingExpense}
             errorMessage={errorMessage} />
         </View>

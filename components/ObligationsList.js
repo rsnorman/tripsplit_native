@@ -16,9 +16,6 @@ import Money from './../components/MoneyView';
 import AsyncIndicator from './../components/AsyncIndicator';
 
 let styles = StyleSheet.create({
-  spinner: {
-    marginTop: 20
-  },
   textContainer: {
     flex: 1
   },
@@ -97,9 +94,8 @@ class ObligationsList extends Component {
     } = this.props;
 
     return (
-      <View style={styles.container}>
+      <View>
         <AsyncIndicator
-          style={styles.spinner}
           active={isFetchingExpenseObligations}
           errorMessage={fetchObligationsErrorMessage}
           onRetryPress={this._loadObligations.bind(this)}/>

@@ -17,11 +17,6 @@ import Money from './../components/MoneyView';
 import AsyncIndicator from './../components/AsyncIndicator';
 
 let styles = StyleSheet.create({
-  spinner: {
-    marginTop: 20
-  },
-  container: {
-  },
   thumb: {
     width: 80,
     height: 80,
@@ -112,9 +107,8 @@ class PaymentsList extends Component {
     const { isFetchingMemberPayments, fetchPaymentsErrorMessage, dataSource } = this.props;
 
     return (
-      <View style={styles.container}>
+      <View>
         <AsyncIndicator
-          style={styles.spinner}
           active={isFetchingMemberPayments}
           errorMessage={fetchPaymentsErrorMessage}
           onRetryPress={this._loadPayments.bind(this)}/>
