@@ -18,7 +18,7 @@ let initialExpensesState = {
   editingExpense: null,
   fetchExpensesErrorMessage: null,
   errorMessage: null,
-  saveButtonDisabled: true
+  isValidExpense: false
 };
 
 const expenses = (state = initialExpensesState, action) => {
@@ -53,7 +53,7 @@ const expenses = (state = initialExpensesState, action) => {
       return {
         ...state,
         errorMessage: null,
-        saveButtonDisabled: true,
+        isValidExpense: false,
         isViewingNewExpenseForm: true,
         newExpense: newTripExpense
       };
@@ -64,7 +64,7 @@ const expenses = (state = initialExpensesState, action) => {
       return {
         ...state,
         newExpense,
-        saveButtonDisabled: isInvalidForm(newExpense, ['name', {cost: 'currency'}])
+        isValidExpense: !isInvalidForm(newExpense, ['name', {cost: 'currency'}])
       };
     case 'SET_EDIT_EXPENSE_ATTRIBUTE':
       let editingExpense = {...state.editingExpense};
@@ -73,14 +73,13 @@ const expenses = (state = initialExpensesState, action) => {
       return {
         ...state,
         editingExpense,
-        saveButtonDisabled: isInvalidForm(editingExpense, ['name', {cost: 'currency'}])
+        isValidExpense: !isInvalidForm(editingExpense, ['name', {cost: 'currency'}])
       };
     case 'START_CREATING_EXPENSE':
       return {
         ...state,
         isSavingExpense: true,
-        errorMessage: null,
-        saveButtonDisabled: true
+        errorMessage: null
       };
     case 'EXPENSE_CREATE_SUCCESS':
       return {
@@ -89,6 +88,12 @@ const expenses = (state = initialExpensesState, action) => {
         isSavingExpense: false,
         isViewingNewExpenseForm: false,
         viewedExpense: action.expense
+      };
+    case 'SAVE_EXPENSE_ERROR':
+      return {
+        ...state,
+        isSavingExpense: false,
+        errorMessage: action.error
       };
     case 'CANCEL_NEW_EXPENSE':
       return {
@@ -106,14 +111,13 @@ const expenses = (state = initialExpensesState, action) => {
         editingExpense: action.expense,
         isViewingEditExpenseForm: true,
         errorMessage: null,
-        saveButtonDisabled: true
+        isValidExpense: false
       };
     case 'START_UPDATING_EXPENSE':
       return {
         ...state,
         isSavingExpense: true,
-        errorMessage: null,
-        saveButtonDisabled: true
+        errorMessage: null
       };
     case 'EXPENSE_UPDATE_SUCCESS':
       let updatedExpenseIndex = state.tripExpenses.findIndex((expense) => expense.id === action.expense.id);
@@ -152,7 +156,7 @@ const expenses = (state = initialExpensesState, action) => {
       return {
         ...state,
         errorMessage: null,
-        isDeletingExpense: true
+        isDeletingExpense: true,
       };
     case 'EXPENSE_DELETE_SUCCESS':
       let deletedExpenseIndex = state.tripExpenses.findIndex((expense) => expense.id === action.expense.id);
@@ -165,11 +169,10 @@ const expenses = (state = initialExpensesState, action) => {
         isDeletingExpense: false,
         isViewingEditExpenseForm: false
       };
-    case 'SAVE_EXPENSE_ERROR':
+    case 'DELETE_EXPENSE_ERROR':
       return {
         ...state,
-        isSavingExpense: false,
-        saveButtonDisabled: false,
+        isDeletingExpense: false,
         errorMessage: action.error
       };
     default:

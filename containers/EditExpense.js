@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
     isDeletingExpense,
     errorMessage,
     editingExpense,
-    saveButtonDisabled
+    isValidExpense
   } = state.expenses;
 
   return {
@@ -22,7 +22,8 @@ const mapStateToProps = (state) => {
     isSavingExpense,
     isDeletingExpense,
     errorMessage,
-    saveButtonDisabled
+    saveButtonDisabled: isSavingExpense || isDeletingExpense || !isValidExpense,
+    deleteButtonDisabled: isSavingExpense || isDeletingExpense
   };
 };
 
