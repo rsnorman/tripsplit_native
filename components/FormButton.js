@@ -7,55 +7,33 @@ import {
   AppRegistry
 } from 'react-native';
 
-let styles = StyleSheet.create({
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  button: {
-    height: 36,
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: '#48bbec',
-    borderColor: '#48bbec',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
-  },
-  disabledButton: {
-    height: 36,
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: '#99d9f4',
-    borderColor: '#99d9f4',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
-  }
-});
+import formStyles from '../styles/form';
+import formButtonStyles from '../styles/form-button';
+
+let styles = StyleSheet.create({...formStyles, ...formButtonStyles});
 
 class FormButton extends Component {
   render() {
     const { text, onPress, disabled } = this.props;
+
     if (disabled) {
       return (
-        <TouchableHighlight style={styles.disabledButton}
-          underlayColor='#99d9f4'>
-          <Text style={styles.buttonText}>{text}</Text>
-        </TouchableHighlight>
+        <View style={styles.formRow}>
+          <TouchableHighlight style={styles.disabledButton}
+            underlayColor='#99d9f4'>
+            <Text style={styles.buttonText}>{text}</Text>
+          </TouchableHighlight>
+        </View>
       );
     }
     return (
-      <TouchableHighlight style={styles.button}
-        onPress={onPress}
-        underlayColor='#99d9f4'>
-        <Text style={styles.buttonText}>{text}</Text>
-      </TouchableHighlight>
+      <View style={styles.formRow}>
+        <TouchableHighlight style={styles.button}
+          onPress={onPress}
+          underlayColor='#99d9f4'>
+          <Text style={styles.buttonText}>{text}</Text>
+        </TouchableHighlight>
+      </View>
     );
   }
 }

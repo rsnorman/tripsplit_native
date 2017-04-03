@@ -13,51 +13,13 @@ import {
 import Popup from 'react-native-popup';
 import AsyncIndicator from './AsyncIndicator';
 import FormButton from './FormButton';
+import DeleteButton from './DeleteButton';
+import formStyles from '../styles/form';
 
 var styles = StyleSheet.create({
+  ...formStyles,
   container: {
     alignItems: 'center'
-  },
-  formHeader: {
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    paddingRight: 30,
-    paddingLeft: 30,
-    marginTop: 40
-  },
-  formHeaderText: {
-    textAlign: 'center',
-    color: '#48bbec',
-    fontWeight: 'bold',
-    fontSize: 22
-  },
-  form: {
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    padding: 30,
-    marginTop: 60
-  },
-  formRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    marginTop: 15
-  },
-  deleteButtonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  deleteButton: {
-    height: 36,
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: 'red',
-    borderColor: 'red',
-    borderWidth: 1,
-    borderRadius: 8,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
   },
   cancelButtonText: {
     fontSize: 18,
@@ -73,29 +35,6 @@ var styles = StyleSheet.create({
     borderRadius: 8,
     alignSelf: 'stretch',
     justifyContent: 'center'
-  },
-  input: {
-    height: 36,
-    padding: 4,
-    flex: 4,
-    fontSize: 18,
-    borderWidth: 1,
-    borderColor: '#48bbec',
-    borderRadius: 8,
-    color: '#48bbec'
-  },
-  multiLineInput: {
-    height: 108,
-    padding: 4,
-    flex: 4,
-    fontSize: 18,
-    borderWidth: 1,
-    borderColor: '#48bbec',
-    borderRadius: 8,
-    color: '#48bbec'
-  },
-  spinner: {
-    marginTop: 15
   }
 });
 
@@ -135,7 +74,6 @@ class TripForm extends Component {
         text: 'Cancel'
       },
     });
-
   }
 
   render() {
@@ -146,7 +84,8 @@ class TripForm extends Component {
       showDeleteButton,
       title,
       errorMessage,
-      saveButtonDisabled
+      saveButtonDisabled,
+      deleteButtonDisabled
     } = this.props;
 
     let deleteButton = this.props.showDeleteButton ?
@@ -190,13 +129,14 @@ class TripForm extends Component {
               numberOfLines={3}
               placeholder='Description'/>
           </View>
-          <View style={styles.formRow}>
-            <FormButton
-              onPress={this.onSavePressed.bind(this)}
-              text="Save"
-              disabled={saveButtonDisabled} />
-          </View>
-          {deleteButton}
+          <FormButton
+            onPress={this.onSavePressed.bind(this)}
+            text="Save"
+            disabled={saveButtonDisabled} />
+          <DeleteButton
+            hidden={!showDeleteButton}
+            disabled={deleteButtonDisabled}
+            onPress={this.onDeletePressed.bind(this)} />
           <View style={styles.formRow}>
             <TouchableHighlight style={styles.cancelButton}
               onPress={this.onCancelPressed.bind(this)}
@@ -205,7 +145,6 @@ class TripForm extends Component {
             </TouchableHighlight>
           </View>
           <AsyncIndicator
-            style={styles.spinner}
             active={isSavingTrip || isDeletingTrip}
             errorMessage={errorMessage} />
         </View>
