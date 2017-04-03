@@ -1,6 +1,6 @@
 const defaultUser = {
-  email: 'rsnorman15@gmail.com',
-  password: 'test1234',
+  email: null,
+  password: null,
   isInitializing: true,
   isLoggingIn: false,
   errorMessage: null,
@@ -30,7 +30,8 @@ const session = (state = defaultUser, action) => {
     case 'SAVED_SESSION_DATA_LOADED':
       return {
         ...state,
-        session: action.sessionData.session
+        session: action.sessionData.session,
+        email: action.sessionData.user.email
       };
     case 'SET_EMAIL':
       return {
@@ -49,7 +50,7 @@ const session = (state = defaultUser, action) => {
         ...state,
         isLoggingIn: true,
         errorMessage: null,
-        loginButtonDisabled: true
+        loginButtonDisabled: isInvalidForm(state, ['email', 'password'])
       }
     case 'CREATE_SESSION':
       return {
@@ -61,6 +62,7 @@ const session = (state = defaultUser, action) => {
       return {
         ...state,
         session: null,
+        password: null,
         loginButtonDisabled: false
       };
     case 'CREATE_SESSION_ERROR':
