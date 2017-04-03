@@ -66,7 +66,6 @@ class DeleteButton extends Component {
           underlayColor='#99d9f4'>
           <Text style={styles.buttonText}>Delete</Text>
         </TouchableHighlight>
-        <Popup ref={popup => this.popup = popup }/>
       </View>
     );
   }
