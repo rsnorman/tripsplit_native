@@ -1,6 +1,7 @@
-import { applyAuthenticationHeaders } from './helpers';
+import { applyAuthenticationHeaders, parseResponse } from './helpers';
 import { AsyncStorage } from 'react-native';
 import { baseUrl } from './../constants';
+import { userUpdateFailure } from './error_actions';
 
 function updateSavedUser(user) {
   AsyncStorage.getItem('sessionData').then((sessionData) => {
@@ -87,9 +88,9 @@ export const updateUser = (editingUser) => {
       method: 'PUT',
       body: JSON.stringify({user: editingUser})
     }, session))
-      .then(response => response.json())
+      .then(parseResponse(200, 'There was an error updating profile. Please try again.'))
       .then(json => dispatch(userUpdateSuccess(json)))
-      .catch(error => console.log(error))
+      .catch(error => dispatch(userUpdateFailure(error)))
   }
 }
 

@@ -2,7 +2,8 @@ const initialUserState = {
   user: {},
   editingUser: null,
   isViewingEditUserForm: false,
-  isUploadingUserImage: false
+  isUploadingUserImage: false,
+  errorMessage: null
 };
 
 const user = (state = initialUserState, action) => {
@@ -37,7 +38,8 @@ const user = (state = initialUserState, action) => {
       return {
         ...state,
         editingUser: action.user,
-        isViewingEditUserForm: true
+        isViewingEditUserForm: true,
+        errorMessage: null
       };
     case 'SET_USER_ATTRIBUTE':
       let editingUser = {
@@ -52,7 +54,8 @@ const user = (state = initialUserState, action) => {
     case 'START_UPDATING_USER':
       return {
         ...state,
-        isSavingUser: true
+        isSavingUser: true,
+        errorMessage: action.error
       };
     case 'USER_UPDATE_SUCCESS':
       return {
@@ -61,6 +64,12 @@ const user = (state = initialUserState, action) => {
         viewedUser: action.user,
         isSavingUser: false,
         isViewingEditUserForm: false
+      };
+    case 'UPDATE_USER_ERROR':
+      return {
+        ...state,
+        isSavingUser: false,
+        errorMessage: action.error
       };
     case 'CANCEL_EDIT_USER':
       return {
