@@ -137,7 +137,8 @@ class TripView extends Component {
                 onImageSelected={this.updateTripImage.bind(this)}
                 icon="car"
                 isUploadingImage={this.props.isUploadingTripImage}
-                canEdit={this.props.canEditPhoto} />
+                canEdit={this.props.canEditPhoto}
+                errorMessage={this.props.uploadPhotoErrorMessage} />
               <View style={styles.tripHeaderRightColumn}>
                 <View style={styles.tripStats}>
                   <View style={styles.tripStat}>
@@ -177,12 +178,6 @@ class TripView extends Component {
   }
 
   render() {
-    if (this.props.isFetchingTripExpenses) {
-      return (
-        <ActivityIndicator style={styles.loader} size='large'/>
-      );
-    }
-
     const dataSource = new ListView.DataSource({
         rowHasChanged: (r1, r2) => r1 !== r2,
     });

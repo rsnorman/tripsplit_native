@@ -11,7 +11,8 @@ const mapStateToProps = (state) => {
     isViewingEditExpenseForm: state.expenses.isViewingEditExpenseForm,
     isUploadingExpenseImage: state.trips.isUploadingExpenseImage,
     isFetchingObligations: true,
-    canEditPhoto: !!expense.actions.update
+    canEditPhoto: !!expense.actions.update,
+    uploadPhotoErrorMessage: state.expenses.uploadPhotoErrorMessage
   };
 };
 

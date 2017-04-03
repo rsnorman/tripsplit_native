@@ -7,6 +7,13 @@ export const tripsFetchFailure = (error: string) => {
   }
 }
 
+export const tripRefreshFailure = (error: string) => {
+  return {
+    type: 'REFRESH_TRIP_ERROR',
+    error
+  }
+}
+
 export const expensesFetchFailure = (error: string) => {
   return {
     type: 'FETCH_EXPENSES_ERROR',
@@ -73,6 +80,27 @@ export const expenseDeleteFailure = (error: string) => {
 export const userUpdateFailure = (error: string) => {
   return {
     type: 'UPDATE_USER_ERROR',
+    error
+  }
+}
+
+export const userPhotoUpdateFailure = (error: string) => {
+  return {
+    type: 'UPDATE_USER_PHOTO_ERROR',
+    error
+  }
+}
+
+export const tripPhotoUpdateFailure = (error: string) => {
+  return {
+    type: 'UPDATE_TRIP_PHOTO_ERROR',
+    error
+  }
+}
+
+export const expensePhotoUpdateFailure = (error: string) => {
+  return {
+    type: 'UPDATE_EXPENSE_PHOTO_ERROR',
     error
   }
 }

@@ -17,7 +17,9 @@ let initialTripState = {
   isDirtyTrip: false,
   fetchTripsErrorMessage: null,
   errorMessage: null,
-  isValidTrip: false
+  isValidTrip: false,
+  uploadPhotoErrorMessage: null,
+  refreshTripErrorMessage: null
 };
 
 const trips = (state = initialTripState, action) => {
@@ -50,7 +52,8 @@ const trips = (state = initialTripState, action) => {
     case 'START_FETCHING_TRIP':
       return {
         ...state,
-        isFetchingTrip: true
+        isFetchingTrip: true,
+        refreshTripErrorMessage: null
       };
     case 'TRIP_FETCH_SUCCESS':
       return {
@@ -58,6 +61,12 @@ const trips = (state = initialTripState, action) => {
         isFetchingTrip: false,
         isDirtyTrip: false,
         viewedTrip: action.trip
+      };
+    case 'REFRESH_TRIP_ERROR':
+      return {
+        ...state,
+        isFetchingTrip: false,
+        tripRefreshErrorMessage: action.error
       };
     case 'NEW_TRIP':
       return {
@@ -144,7 +153,8 @@ const trips = (state = initialTripState, action) => {
     case 'START_UPDATING_TRIP_IMAGE':
       return {
         ...state,
-        isUploadingTripImage: true
+        isUploadingTripImage: true,
+        uploadPhotoErrorMessage: null
       };
     case 'TRIP_IMAGE_UPDATE_SUCCESS':
       let updatedTripImageIndex = state.trips.findIndex((trip) => trip.id === action.trip.id);
@@ -156,6 +166,12 @@ const trips = (state = initialTripState, action) => {
         trips: tripsWithUpdatedImage,
         viewedTrip: action.trip,
         isUploadingTripImage: false
+      };
+    case 'UPDATE_TRIP_PHOTO_ERROR':
+      return {
+        ...state,
+        isUploadingTripImage: false,
+        uploadPhotoErrorMessage: action.error
       };
     case 'CANCEL_EDIT_TRIP':
       return {

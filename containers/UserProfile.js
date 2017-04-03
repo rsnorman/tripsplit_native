@@ -8,7 +8,8 @@ const mapStateToProps = (state) => {
   return {
     user: state.user.user,
     isUploadingUserImage: state.user.isUploadingUserImage,
-    isViewingEditUserForm: state.user.isViewingEditUserForm
+    isViewingEditUserForm: state.user.isViewingEditUserForm,
+    uploadPhotoErrorMessage: state.user.uploadPhotoErrorMessage
   };
 };
 

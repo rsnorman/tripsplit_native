@@ -18,7 +18,8 @@ let initialExpensesState = {
   editingExpense: null,
   fetchExpensesErrorMessage: null,
   errorMessage: null,
-  isValidExpense: false
+  isValidExpense: false,
+  uploadPhotoErrorMessage: null
 };
 
 const expenses = (state = initialExpensesState, action) => {
@@ -139,7 +140,8 @@ const expenses = (state = initialExpensesState, action) => {
     case 'START_UPDATING_EXPENSE_IMAGE':
       return {
         ...state,
-        isUploadingExpenseImage: true
+        isUploadingExpenseImage: true,
+        uploadPhotoErrorMessage: null
       };
     case 'EXPENSE_IMAGE_UPDATE_SUCCESS':
       let updatedExpenseImageIndex = state.tripExpenses.findIndex((expense) => expense.id === action.expense.id);
@@ -151,6 +153,12 @@ const expenses = (state = initialExpensesState, action) => {
         tripExpenses: expensesWithUpdatedImage,
         viewedExpense: action.expense,
         isUploadingExpenseImage: false
+      };
+    case 'UPDATE_EXPENSE_PHOTO_ERROR':
+      return {
+        ...state,
+        isUploadingExpenseImage: false,
+        uploadPhotoErrorMessage: action.error
       };
     case 'START_DELETING_EXPENSE':
       return {

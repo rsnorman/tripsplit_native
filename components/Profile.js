@@ -83,7 +83,7 @@ class Profile extends Component {
   }
 
   render() {
-    let { user } = this.props;
+    let { user, uploadPhotoErrorMessage } = this.props;
 
     return (
       <View>
@@ -96,6 +96,7 @@ class Profile extends Component {
               onImageSelected={this.updateUserImage.bind(this)}
               icon="user"
               isUploadingImage={this.props.isUploadingUserImage}
+              errorMessage={uploadPhotoErrorMessage}
               canEdit={true} />
             <View style={styles.userHeaderRightColumn}>
               <View style={styles.userStats}>
