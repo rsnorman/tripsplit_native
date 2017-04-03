@@ -9,37 +9,15 @@ import {
   ActivityIndicator,
   AppRegistry
 } from 'react-native';
+import AsyncIndicator from './AsyncIndicator';
+import FormButton from './FormButton';
 
-import Popup from 'react-native-popup';
+import formStyles from '../styles/form';
 
 var styles = StyleSheet.create({
+  ...formStyles,
   container: {
     alignItems: 'center'
-  },
-  formHeader: {
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    paddingRight: 30,
-    paddingLeft: 30,
-    marginTop: 40
-  },
-  formHeaderText: {
-    textAlign: 'center',
-    color: '#48bbec',
-    fontWeight: 'bold',
-    fontSize: 22
-  },
-  form: {
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    padding: 30,
-    marginTop: 60
-  },
-  formRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    marginTop: 15
   },
   buttonText: {
     fontSize: 18,
@@ -71,29 +49,6 @@ var styles = StyleSheet.create({
     borderRadius: 8,
     alignSelf: 'stretch',
     justifyContent: 'center'
-  },
-  input: {
-    height: 36,
-    padding: 4,
-    flex: 4,
-    fontSize: 18,
-    borderWidth: 1,
-    borderColor: '#48bbec',
-    borderRadius: 8,
-    color: '#48bbec'
-  },
-  multiLineInput: {
-    height: 108,
-    padding: 4,
-    flex: 4,
-    fontSize: 18,
-    borderWidth: 1,
-    borderColor: '#48bbec',
-    borderRadius: 8,
-    color: '#48bbec'
-  },
-  spinner: {
-    marginTop: 15
   }
 });
 
@@ -102,7 +57,7 @@ class UserForm extends Component {
     this.props.onUserAttributeSet('name', event.nativeEvent.text);
   }
   onEmailChanged(event) {
-    this.props.onUserAttributeSet('location', event.nativeEvent.text);
+    this.props.onUserAttributeSet('email', event.nativeEvent.text);
   }
 
   onSavePressed() {
@@ -114,9 +69,7 @@ class UserForm extends Component {
   }
 
   render() {
-    let spinner = this.props.isSavingUser ?
-      ( <ActivityIndicator size='large' style={styles.spinner} /> ) :
-      ( <View/> );
+    const { user, isSavingUser, saveButtonDisabled, errorMessage } = this.props;
 
     return (
       <View style={styles.container}>
@@ -128,25 +81,22 @@ class UserForm extends Component {
         <View style={styles.form}>
           <View style={styles.formRow}>
             <TextInput
-              value={this.props.user.name}
+              value={user.name}
               style={styles.input}
               onChange={this.onNameChanged.bind(this)}
               placeholder='Name'/>
           </View>
           <View style={styles.formRow}>
             <TextInput
-              value={this.props.user.email}
+              value={user.email}
               style={styles.input}
               onChange={this.onEmailChanged.bind(this)}
-              placeholder='Location'/>
+              placeholder='Email'/>
           </View>
-          <View style={styles.formRow}>
-            <TouchableHighlight style={styles.button}
-              onPress={this.onSavePressed.bind(this)}
-              underlayColor='#99d9f4'>
-              <Text style={styles.buttonText}>Save</Text>
-            </TouchableHighlight>
-          </View>
+          <FormButton
+            onPress={this.onSavePressed.bind(this)}
+            disabled={saveButtonDisabled}
+            text="Save" />
           <View style={styles.formRow}>
             <TouchableHighlight style={styles.cancelButton}
               onPress={this.onCancelPressed.bind(this)}
@@ -154,10 +104,10 @@ class UserForm extends Component {
               <Text style={styles.cancelButtonText}>Cancel</Text>
             </TouchableHighlight>
           </View>
-          {spinner}
-          <Text style={styles.description}>{this.props.message}</Text>
+          <AsyncIndicator
+            active={isSavingUser}
+            errorMessage={errorMessage} />
         </View>
-        <Popup ref={popup => this.popup = popup }/>
       </View>
     );
   }

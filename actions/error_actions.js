@@ -69,3 +69,10 @@ export const expenseDeleteFailure = (error: string) => {
     error
   };
 }
+
+export const userUpdateFailure = (error: string) => {
+  return {
+    type: 'UPDATE_USER_ERROR',
+    error
+  }
+}

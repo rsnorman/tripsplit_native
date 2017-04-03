@@ -9,7 +9,8 @@ const mapStateToProps = (state) => {
     title: 'Edit User',
     user: state.user.editingUser,
     isSavingUser: state.user.isSavingUser,
-    isDeletingUser: state.user.isDeletingUser
+    saveButtonDisabled: state.user.isSavingUser || !state.user.isValidUser,
+    errorMessage: state.user.errorMessage
   };
 };
 
