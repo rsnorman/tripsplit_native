@@ -57,7 +57,7 @@ class UserForm extends Component {
     this.props.onUserAttributeSet('name', event.nativeEvent.text);
   }
   onEmailChanged(event) {
-    this.props.onUserAttributeSet('location', event.nativeEvent.text);
+    this.props.onUserAttributeSet('email', event.nativeEvent.text);
   }
 
   onSavePressed() {

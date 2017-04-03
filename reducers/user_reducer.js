@@ -1,9 +1,12 @@
+import { isInvalidForm } from './../helpers/form-validation';
+
 const initialUserState = {
   user: {},
   editingUser: null,
   isViewingEditUserForm: false,
   isUploadingUserImage: false,
-  errorMessage: null
+  errorMessage: null,
+  isValidUser: false
 };
 
 const user = (state = initialUserState, action) => {
@@ -39,7 +42,8 @@ const user = (state = initialUserState, action) => {
         ...state,
         editingUser: action.user,
         isViewingEditUserForm: true,
-        errorMessage: null
+        errorMessage: null,
+        isValidUser: false
       };
     case 'SET_USER_ATTRIBUTE':
       let editingUser = {
@@ -49,7 +53,8 @@ const user = (state = initialUserState, action) => {
 
       return {
         ...state,
-        editingUser
+        editingUser,
+        isValidUser: !isInvalidForm(editingUser, ['name', 'email'])
       };
     case 'START_UPDATING_USER':
       return {
