@@ -7,6 +7,13 @@ export const tripsFetchFailure = (error: string) => {
   }
 }
 
+export const tripRefreshFailure = (error: string) => {
+  return {
+    type: 'REFRESH_TRIP_ERROR',
+    error
+  }
+}
+
 export const expensesFetchFailure = (error: string) => {
   return {
     type: 'FETCH_EXPENSES_ERROR',

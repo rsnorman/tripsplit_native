@@ -18,7 +18,8 @@ let initialTripState = {
   fetchTripsErrorMessage: null,
   errorMessage: null,
   isValidTrip: false,
-  uploadPhotoErrorMessage: null
+  uploadPhotoErrorMessage: null,
+  refreshTripErrorMessage: null
 };
 
 const trips = (state = initialTripState, action) => {
@@ -51,7 +52,8 @@ const trips = (state = initialTripState, action) => {
     case 'START_FETCHING_TRIP':
       return {
         ...state,
-        isFetchingTrip: true
+        isFetchingTrip: true,
+        refreshTripErrorMessage: null
       };
     case 'TRIP_FETCH_SUCCESS':
       return {
@@ -59,6 +61,12 @@ const trips = (state = initialTripState, action) => {
         isFetchingTrip: false,
         isDirtyTrip: false,
         viewedTrip: action.trip
+      };
+    case 'REFRESH_TRIP_ERROR':
+      return {
+        ...state,
+        isFetchingTrip: false,
+        tripRefreshErrorMessage: action.error
       };
     case 'NEW_TRIP':
       return {

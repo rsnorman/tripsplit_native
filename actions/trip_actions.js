@@ -3,7 +3,7 @@
 import { applyAuthenticationHeaders, parseResponse } from './helpers';
 import { AsyncStorage } from 'react-native';
 import { baseUrl } from './../constants';
-import { tripsFetchFailure, tripSaveFailure, tripDeleteFailure, tripPhotoUpdateFailure } from './error_actions';
+import { tripsFetchFailure, tripSaveFailure, tripDeleteFailure, tripPhotoUpdateFailure, tripRefreshFailure } from './error_actions';
 
 function startFetchingTrips() {
   return {
@@ -65,7 +65,7 @@ export const reloadTrip = (trip) => {
     return fetch(url, applyAuthenticationHeaders({ method: method }, session))
       .then(parseResponse(200, 'There was an error refreshing trip. Please try again.'))
       .then(json => dispatch(tripFetchSuccess(json)))
-      .catch(error => console.log(error))
+      .catch(error => dispatch(tripRefreshFailure(error)))
   };
 }
 
