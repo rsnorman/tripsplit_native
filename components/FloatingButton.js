@@ -7,7 +7,7 @@ import {
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { primaryColor } from './../constants';
+import { primaryColor, secondaryColor } from './../constants';
 
 class FloatingButton extends Component {
   onButtonPressed() {
@@ -47,7 +47,7 @@ class FloatingButton extends Component {
       <TouchableHighlight
         style={buttonStyles.floatingButton}
         onPress={this.onButtonPressed.bind(this)}
-        underlayColor="#54CBFD">
+        underlayColor={secondaryColor}>
         <Icon name={this.props.icon} style={buttonStyles.icon} />
       </TouchableHighlight>
     );

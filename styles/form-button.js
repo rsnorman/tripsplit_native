@@ -21,11 +21,12 @@ export default formButtonStyles = {
     height: 36,
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#99d9f4',
-    borderColor: '#99d9f4',
+    backgroundColor: primaryColor,
+    borderColor: primaryColor,
     borderWidth: 1,
     borderRadius: 8,
     alignSelf: 'stretch',
+    opacity: 0.4,
     justifyContent: 'center'
   }
 };

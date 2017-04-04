@@ -134,7 +134,7 @@ class ExpenseForm extends Component {
           <View style={styles.formRow}>
             <TouchableHighlight style={styles.cancelButton}
               onPress={this.onCancelPressed.bind(this)}
-              underlayColor='#99d9f4'>
+              underlayColor='white'>
               <Text style={styles.cancelButtonText}>Cancel</Text>
             </TouchableHighlight>
           </View>

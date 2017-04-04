@@ -63,7 +63,7 @@ class DeleteButton extends Component {
       <View style={styles.formRow}>
         <TouchableHighlight style={styles.button}
           onPress={onPress}
-          underlayColor='#99d9f4'>
+          underlayColor='red'>
           <Text style={styles.buttonText}>Delete</Text>
         </TouchableHighlight>
       </View>

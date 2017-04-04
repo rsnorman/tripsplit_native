@@ -9,6 +9,7 @@ import {
 
 import formStyles from '../styles/form';
 import formButtonStyles from '../styles/form-button';
+import { secondaryColor } from '../constants';
 
 let styles = StyleSheet.create({...formStyles, ...formButtonStyles});
 
@@ -20,7 +21,7 @@ class FormButton extends Component {
       return (
         <View style={styles.formRow}>
           <TouchableHighlight style={styles.disabledButton}
-            underlayColor='#99d9f4'>
+            underlayColor={secondaryColor}>
             <Text style={styles.buttonText}>{text}</Text>
           </TouchableHighlight>
         </View>
@@ -30,7 +31,7 @@ class FormButton extends Component {
       <View style={styles.formRow}>
         <TouchableHighlight style={styles.button}
           onPress={onPress}
-          underlayColor='#99d9f4'>
+          underlayColor={secondaryColor}>
           <Text style={styles.buttonText}>{text}</Text>
         </TouchableHighlight>
       </View>
