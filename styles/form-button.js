@@ -1,3 +1,5 @@
+import { primaryColor } from './../constants';
+
 export default formButtonStyles = {
   buttonText: {
     fontSize: 18,
@@ -8,8 +10,8 @@ export default formButtonStyles = {
     height: 36,
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#48bbec',
-    borderColor: '#48bbec',
+    backgroundColor: primaryColor,
+    borderColor: primaryColor,
     borderWidth: 1,
     borderRadius: 8,
     alignSelf: 'stretch',

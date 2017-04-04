@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry, Button } from 'react-native';
 import { editUser } from '../actions/user_actions';
+import { primaryColor } from './../constants';
 
 const mapStateToProps = (state) => {
   return {
@@ -24,6 +25,7 @@ const EditUserButton = connect(
   return (
     <Button
       title='Edit'
+      color={primaryColor}
       onPress={() => onBeginEditingProfile(user)}
     />
   );

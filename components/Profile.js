@@ -13,6 +13,7 @@ import Money from './../components/MoneyView';
 import OpenDrawerButton from './../containers/OpenDrawerButton';
 import EditUserButton from './../containers/EditUserButton';
 import EditUser from './../containers/EditUser';
+import { primaryColor } from './../constants';
 
 import { Header } from 'react-navigation';
 
@@ -74,7 +75,9 @@ class Profile extends Component {
       ),
       right: (
         <EditUserButton />
-      )
+      ),
+      tintColor: primaryColor,
+      titleStyle: { color: 'black' }
     })
   };
 

@@ -28,7 +28,7 @@ import FloatingButton from './../components/FloatingButton';
 import HeaderImage from './../components/HeaderImage';
 import Money from './../components/MoneyView';
 import ActiveTripTabNavigator from './../containers/ActiveTripTabNavigator';
-
+import { primaryColor } from './../constants';
 
 let styles = StyleSheet.create({
   container: {
@@ -105,7 +105,9 @@ class TripView extends Component {
     header: ({ state, setParams }) => ({
       right: (
         <EditTripButton />
-      )
+      ),
+      tintColor: primaryColor,
+      titleStyle: { color: 'black' }
     })
   };
 

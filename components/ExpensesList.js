@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { primaryColor } from './../constants';
 
 import ListImage from './../components/ListImage';
 import Money from './../components/MoneyView';
@@ -20,7 +21,7 @@ let styles = StyleSheet.create({
     width: 80,
     height: 80,
     marginRight: 10,
-    backgroundColor: '#48bbec'
+    backgroundColor: primaryColor
   },
   thumbIcon: {
     padding: 12

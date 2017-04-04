@@ -14,6 +14,7 @@ import { baseUrl } from './../constants';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 var ImagePicker = require('react-native-image-picker');
+import { primaryColor } from './../constants';
 
 class HeaderImage extends Component {
   constructor(props) {
@@ -79,7 +80,7 @@ class HeaderImage extends Component {
         width: this.props.size,
         height: this.props.size,
         borderRadius: 4,
-        backgroundColor: '#48bbec'
+        backgroundColor: primaryColor
       },
       thumbIcon: {
         margin: this.props.size / 4,

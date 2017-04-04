@@ -14,6 +14,7 @@ import AsyncIndicator from './AsyncIndicator';
 import FormButton from './FormButton';
 
 import formStyles from '../styles/form';
+import { primaryColor } from './../constants';
 
 let styles = StyleSheet.create({
   ...formStyles,
@@ -77,7 +78,7 @@ let styles = StyleSheet.create({
   },
   paidText: {
     fontSize: 18,
-    color: '#48bbec',
+    color: primaryColor,
     alignSelf: 'center'
   },
   disableButton: {
@@ -85,7 +86,7 @@ let styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     backgroundColor: 'transparent',
-    borderColor: '#48bbec',
+    borderColor: primaryColor,
     borderWidth: 1,
     borderRadius: 8,
     alignSelf: 'stretch',
@@ -97,6 +98,10 @@ class ObligationView extends Component {
   static navigationOptions = {
     title: (navigation) => {
       return `${navigation.state.params.expense.name} Payment`;
+    },
+    header: {
+      tintColor: primaryColor,
+      titleStyle: { color: 'black' }
     }
   };
 

@@ -10,6 +10,8 @@ import {
   AppRegistry
 } from 'react-native';
 
+import { primaryColor } from './../constants';
+
 import Popup from 'react-native-popup';
 import AsyncIndicator from './AsyncIndicator';
 import FormButton from './FormButton';
@@ -24,14 +26,14 @@ var styles = StyleSheet.create({
   },
   cancelButtonText: {
     fontSize: 18,
-    color: '#48bbec',
+    color: primaryColor,
     alignSelf: 'center'
   },
   cancelButton: {
     height: 36,
     flex: 1,
     flexDirection: 'row',
-    borderColor: '#48bbec',
+    borderColor: primaryColor,
     borderWidth: 1,
     borderRadius: 8,
     alignSelf: 'stretch',
