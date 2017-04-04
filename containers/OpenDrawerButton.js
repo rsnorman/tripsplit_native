@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import { AppRegistry, TouchableHighlight, StyleSheet } from 'react-native';
 import { openDrawer } from '../actions/navigation_actions';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { primaryColor } from './../constants';
 
 let styles = StyleSheet.create({
   drawer: {
     padding: 10,
   },
   drawerIcon: {
-    color: '#48bbec'
+    color: primaryColor
   }
 });
 

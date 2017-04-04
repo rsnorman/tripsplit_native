@@ -13,6 +13,7 @@ import AsyncIndicator from './AsyncIndicator';
 import FormButton from './FormButton';
 
 import formStyles from '../styles/form';
+import { primaryColor } from './../constants';
 
 var styles = StyleSheet.create({
   ...formStyles,
@@ -28,8 +29,8 @@ var styles = StyleSheet.create({
     height: 36,
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#48bbec',
-    borderColor: '#48bbec',
+    backgroundColor: primaryColor,
+    borderColor: primaryColor,
     borderWidth: 1,
     borderRadius: 8,
     alignSelf: 'stretch',
@@ -37,14 +38,14 @@ var styles = StyleSheet.create({
   },
   cancelButtonText: {
     fontSize: 18,
-    color: '#48bbec',
+    color: primaryColor,
     alignSelf: 'center'
   },
   cancelButton: {
     height: 36,
     flex: 1,
     flexDirection: 'row',
-    borderColor: '#48bbec',
+    borderColor: primaryColor,
     borderWidth: 1,
     borderRadius: 8,
     alignSelf: 'stretch',

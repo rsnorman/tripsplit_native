@@ -23,6 +23,7 @@ import MemberPayments from './../containers/MemberPayments';
 import HeaderImage from './../components/HeaderImage';
 import Money from './../components/MoneyView';
 import OweAmount from './../components/OweAmount';
+import { primaryColor } from './../constants';
 
 let styles = StyleSheet.create({
   containerHeader: {

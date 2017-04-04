@@ -19,6 +19,7 @@ import FloatingButton from './../components/FloatingButton';
 import Money from './../components/MoneyView';
 import AsyncIndicator from './../components/AsyncIndicator';
 import OpenDrawerButton from './../containers/OpenDrawerButton';
+import { primaryColor } from './../constants';
 
 let styles = StyleSheet.create({
   container: {

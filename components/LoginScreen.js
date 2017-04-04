@@ -15,6 +15,7 @@ import AsyncIndicator from './AsyncIndicator';
 import FormButton from './FormButton';
 
 import formStyles from '../styles/form';
+import { primaryColor } from './../constants';
 
 var styles = StyleSheet.create({
   ...formStyles,
@@ -27,12 +28,12 @@ var styles = StyleSheet.create({
     flex: 4,
     fontSize: 18,
     borderWidth: 1,
-    borderColor: '#48bbec',
+    borderColor: primaryColor,
     borderRadius: 8,
-    color: '#48bbec'
+    color: primaryColor
   },
   loginHeader: {
-    backgroundColor: '#48bbec',
+    backgroundColor: primaryColor,
     padding: 30,
     alignSelf: 'stretch'
   },

@@ -16,6 +16,7 @@ import EditExpenseButton from './../containers/EditExpenseButton'
 import ExpenseObligations from './../containers/ExpenseObligations'
 import HeaderImage from './../components/HeaderImage';
 import Money from './../components/MoneyView';
+import { primaryColor } from './../constants';
 
 let styles = StyleSheet.create({
   containerHeader: {

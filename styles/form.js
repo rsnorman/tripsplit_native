@@ -1,3 +1,5 @@
+import { primaryColor } from './../constants';
+
 export default formStyles = {
   formHeader: {
     alignSelf: 'stretch',
@@ -8,7 +10,7 @@ export default formStyles = {
   },
   formHeaderText: {
     textAlign: 'center',
-    color: '#48bbec',
+    color: primaryColor,
     fontWeight: 'bold',
     fontSize: 22
   },
@@ -30,9 +32,9 @@ export default formStyles = {
     flex: 4,
     fontSize: 18,
     borderWidth: 1,
-    borderColor: '#48bbec',
+    borderColor: primaryColor,
     borderRadius: 8,
-    color: '#48bbec'
+    color: primaryColor
   },
   multiLineInput: {
     height: 108,
@@ -40,8 +42,8 @@ export default formStyles = {
     flex: 4,
     fontSize: 18,
     borderWidth: 1,
-    borderColor: '#48bbec',
+    borderColor: primaryColor,
     borderRadius: 8,
-    color: '#48bbec'
+    color: primaryColor
   }
 };

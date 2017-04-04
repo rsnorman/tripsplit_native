@@ -14,6 +14,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ListImage from './../components/ListImage';
 import Money from './../components/MoneyView';
 import AsyncIndicator from './../components/AsyncIndicator';
+import { primaryColor } from './../constants';
 
 let styles = StyleSheet.create({
   textContainer: {
@@ -38,7 +39,7 @@ let styles = StyleSheet.create({
   paidIndicatorLabel: {
     fontWeight: 'bold',
     fontSize: 16,
-    color: '#48bbec'
+    color: primaryColor
   }
 });
 

@@ -8,6 +8,7 @@ import {
 import { baseUrl } from './../constants';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { primaryColor } from './../constants';
 
 class ListImage extends Component {
   render() {
@@ -17,7 +18,7 @@ class ListImage extends Component {
         height: this.props.size,
         marginRight: 10,
         borderRadius: this.props.size / 2,
-        backgroundColor: '#48bbec'
+        backgroundColor: primaryColor
       },
       thumbIcon: {
         margin: this.props.size / 4,

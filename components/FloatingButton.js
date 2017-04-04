@@ -7,6 +7,8 @@ import {
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import { primaryColor } from './../constants';
+
 class FloatingButton extends Component {
   onButtonPressed() {
     this.props.onButtonPressed && this.props.onButtonPressed();
@@ -17,7 +19,7 @@ class FloatingButton extends Component {
       floatingButton: {
         width: this.props.size,
         height: this.props.size,
-        backgroundColor: '#48bbec',
+        backgroundColor: primaryColor,
         borderRadius: this.props.size / 2,
         position: 'absolute',
         bottom: 10,

@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import { primaryColor } from './../constants';
 import ActiveTripStackNavigator from './../containers/ActiveTripStackNavigator';
 
 let styles = StyleSheet.create({

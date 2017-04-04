@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { primaryColor } from './../constants';
 
 let styles = StyleSheet.create({
   tabNavigator: {
@@ -21,7 +22,7 @@ let styles = StyleSheet.create({
     paddingBottom: 5,
     flex: 1,
     borderBottomWidth: 2,
-    borderBottomColor: '#48bbec'
+    borderBottomColor: primaryColor
   },
   tab: {
     paddingTop: 5,
@@ -31,7 +32,7 @@ let styles = StyleSheet.create({
   tabIconActive: {
     textAlign: 'center',
     fontSize: 30,
-    color: '#48bbec',
+    color: primaryColor,
   },
   tabIcon: {
     textAlign: 'center',
