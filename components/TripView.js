@@ -105,7 +105,9 @@ class TripView extends Component {
     header: ({ state, setParams }) => ({
       right: (
         <EditTripButton />
-      )
+      ),
+      tintColor: primaryColor,
+      titleStyle: { color: 'black' }
     })
   };
 

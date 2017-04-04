@@ -63,7 +63,9 @@ class TripsList extends Component {
       left: (
         <OpenDrawerButton />
       )
-    })
+    }),
+    tintColor: primaryColor,
+    titleStyle: { color: 'black' }
   };
 
   componentDidMount() {

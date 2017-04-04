@@ -85,7 +85,9 @@ class ExpenseView extends Component {
     header: ({ state, setParams }) => ({
       right: (
         <EditExpenseButton />
-      )
+      ),
+      tintColor: primaryColor,
+      titleStyle: { color: 'black' }
     })
   };
 

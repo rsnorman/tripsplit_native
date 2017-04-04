@@ -98,6 +98,10 @@ class ObligationView extends Component {
   static navigationOptions = {
     title: (navigation) => {
       return `${navigation.state.params.expense.name} Payment`;
+    },
+    header: {
+      tintColor: primaryColor,
+      titleStyle: { color: 'black' }
     }
   };
 

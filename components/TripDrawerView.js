@@ -15,7 +15,11 @@ let styles = StyleSheet.create({
 
 class TripView extends Component {
   static navigationOptions = {
-    title: 'Current Trip'
+    title: 'Current Trip',
+    header: {
+      tintColor: primaryColor,
+      titleStyle: { color: 'black' }
+    }
   };
 
   render() {

@@ -75,7 +75,9 @@ class Profile extends Component {
       ),
       right: (
         <EditUserButton />
-      )
+      ),
+      tintColor: primaryColor,
+      titleStyle: { color: 'black' }
     })
   };
 

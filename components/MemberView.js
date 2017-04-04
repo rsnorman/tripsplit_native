@@ -90,6 +90,10 @@ class MemberView extends Component {
   static navigationOptions = {
     title: (navigation) => {
       return navigation.state.params.member.name;
+    },
+    header: {
+      tintColor: primaryColor,
+      titleStyle: { color: 'black' }
     }
   };
 
