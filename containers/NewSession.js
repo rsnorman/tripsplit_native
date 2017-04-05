@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
 import { setEmail, setPassword, createSession } from '../actions/session_actions';
+import { viewRegistration } from '../actions/navigation_actions';
 import LoginScreen from '../components/LoginScreen';
 
 const mapStateToProps = (state) => {
@@ -10,14 +11,14 @@ const mapStateToProps = (state) => {
     password,
     isLoggingIn,
     errorMessage,
-    loginButtonDisabled
+    validSignIn
   } = state.session;
 
   return {
     email,
     password,
     isLoggingIn,
-    loginButtonDisabled,
+    loginButtonDisabled: !validSignIn || isLoggingIn,
     loginErrorMessage: state.session.errorMessage
   };
 };
@@ -32,6 +33,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onLogin: (email, password) => {
       dispatch(createSession(email, password));
+    },
+    onRegisterViewPress: () => {
+      dispatch(viewRegistration());
     }
   };
 };

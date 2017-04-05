@@ -4,21 +4,10 @@ const defaultUser = {
   isInitializing: true,
   isLoggingIn: false,
   errorMessage: null,
-  loginButtonDisabled: true
+  validSignIn: false
 };
 
-function isInvalidForm(state, fields) {
-  let _i, _len, _field;
-
-  for (_i = 0, _len = fields.length; _i < _len; _i++) {
-    _field = fields[_i];
-    if (!state[_field] || state[_field] === '') {
-      return true;
-    }
-  }
-
-  return false;
-}
+import { isInvalidForm } from './../helpers/form-validation';
 
 const session = (state = defaultUser, action) => {
   switch (action.type) {
@@ -37,20 +26,24 @@ const session = (state = defaultUser, action) => {
       return {
         ...state,
         email: action.email,
-        loginButtonDisabled: isInvalidForm({...state, email: action.email}, ['email', 'password'])
+        validSignIn: !isInvalidForm({...state, email: action.email}, ['email', 'password'])
       };
     case 'SET_PASSWORD':
       return {
         ...state,
         password: action.password,
-        loginButtonDisabled: isInvalidForm({...state, password: action.password}, ['email', 'password'])
+        validSignIn: !isInvalidForm({...state, password: action.password}, ['email', 'password'])
       };
     case 'START_LOGIN':
       return {
         ...state,
         isLoggingIn: true,
         errorMessage: null,
-        loginButtonDisabled: isInvalidForm(state, ['email', 'password'])
+      }
+    case 'CREATE_ACCOUNT':
+      return {
+        ...state,
+        session: action.session
       }
     case 'CREATE_SESSION':
       return {
@@ -63,13 +56,11 @@ const session = (state = defaultUser, action) => {
         ...state,
         session: null,
         password: null,
-        loginButtonDisabled: false
       };
     case 'CREATE_SESSION_ERROR':
       return {
         ...state,
         isLoggingIn: false,
-        loginButtonDisabled: false,
         errorMessage: action.error
       };
     default:
