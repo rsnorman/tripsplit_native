@@ -17,6 +17,7 @@ const user = (state = initialUserState, action) => {
         ...state,
         user: action.sessionData.user
       };
+    case 'CREATE_ACCOUNT':
     case 'CREATE_SESSION':
       return {
         ...state,

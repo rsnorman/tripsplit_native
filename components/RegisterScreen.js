@@ -26,7 +26,7 @@ var styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center'
   },
-  loginInput: {
+  registerInput: {
     height: 36,
     padding: 4,
     flex: 4,
@@ -36,18 +36,18 @@ var styles = StyleSheet.create({
     borderRadius: 8,
     color: primaryColor
   },
-  loginHeader: {
+  registerHeader: {
     backgroundColor: primaryColor,
     padding: 30,
     alignSelf: 'stretch'
   },
-  loginHeaderTitle: {
+  registerHeaderTitle: {
     fontSize: 24,
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center'
   },
-  registerSection: {
+  loginSection: {
     width: ScreenWidth,
     alignItems: 'center',
     position: 'absolute',
@@ -60,25 +60,25 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent:'center'
   },
-  registerMessage: {
+  loginMessage: {
     color: 'gray',
     fontSize: 12
   },
-  registerButton: {
+  loginButton: {
     padding: 10
   },
-  registerButtonText: {
+  loginButtonText: {
     color: primaryColor,
     fontSize: 12
   }
 });
 
-class LoginScreen extends Component {
+class RegisterScreen extends Component {
   static navigationOptions = {
     title: 'TripSplit',
     header: {
       style: {
-        backgroundColor: primaryColor,
+        backgroundColor: secondaryColor,
         height: 100
       },
       titleStyle: {
@@ -89,10 +89,8 @@ class LoginScreen extends Component {
     }
   };
 
-  componentDidMount() {
-    if (this.props.onLoad) {
-      this.props.onLoad();
-    }
+  onNameChanged(event) {
+    this.props.onNameChange(event.nativeEvent.text);
   }
 
   onEmailChanged(event) {
@@ -103,21 +101,22 @@ class LoginScreen extends Component {
     this.props.onPasswordChange(event.nativeEvent.text);
   }
 
-  onLoginPressed() {
-    this.props.onLogin(this.props.email, this.props.password);
+  onRegisterPress() {
+    this.props.onRegister(this.props.name, this.props.email, this.props.password);
   }
 
-  onRegisterPress() {
-    this.props.onRegisterViewPress();
+  onLoginPress() {
+    this.props.onLoginViewPress();
   }
 
   render() {
     const {
+      name,
       email,
       password,
-      isLoggingIn,
-      loginErrorMessage,
-      loginButtonDisabled
+      isRegistering,
+      registerErrorMessage,
+      registerButtonDisabled
     } = this.props;
 
     return (
@@ -126,20 +125,29 @@ class LoginScreen extends Component {
         <View style={styles.form}>
           <View style={styles.formRow}>
             <TextInput
+              value={name}
+              style={styles.registerInput}
+              returnKeyType="go"
+              autoCorrect={false}
+              autoFocus={true}
+              onChange={this.onNameChanged.bind(this)}
+              placeholder='Name'/>
+          </View>
+          <View style={styles.formRow}>
+            <TextInput
               value={email}
-              style={styles.loginInput}
+              style={styles.registerInput}
               keyboardType="email-address"
               returnKeyType="go"
               autoCapitalize="none"
               autoCorrect={false}
-              autoFocus={true}
               onChange={this.onEmailChanged.bind(this)}
               placeholder='Email'/>
           </View>
           <View style={styles.formRow}>
             <TextInput
               value={password}
-              style={styles.loginInput}
+              style={styles.registerInput}
               type="password"
               returnKeyType="go"
               secureTextEntry={true}
@@ -147,18 +155,18 @@ class LoginScreen extends Component {
               placeholder='Password'/>
           </View>
           <FormButton
-            text="Login"
-            onPress={this.onLoginPressed.bind(this)}
-            disabled={loginButtonDisabled} />
-          <AsyncIndicator active={isLoggingIn} errorMessage={loginErrorMessage} />
+            text="Register"
+            onPress={this.onRegisterPress.bind(this)}
+            disabled={registerButtonDisabled} />
+          <AsyncIndicator active={isRegistering} errorMessage={registerErrorMessage} />
         </View>
-        <View style={styles.registerSection}>
-          <Text style={styles.registerMessage}>Don't have an account?</Text>
+        <View style={styles.loginSection}>
+          <Text style={styles.loginMessage}>Already have an account?</Text>
           <TouchableHighlight
-            style={styles.registerButton}
+            style={styles.loginButton}
             underlayColor='transparent'
-            onPress={this.onRegisterPress.bind(this)}>
-            <Text style={styles.registerButtonText}>Sign up.</Text>
+            onPress={this.onLoginPress.bind(this)}>
+            <Text style={styles.loginButtonText}>Login.</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -166,6 +174,6 @@ class LoginScreen extends Component {
   }
 }
 
-AppRegistry.registerComponent('LoginScreen', () => LoginScreen);
+AppRegistry.registerComponent('RegisterScreen', () => RegisterScreen);
 
-export default LoginScreen;
+export default RegisterScreen;
