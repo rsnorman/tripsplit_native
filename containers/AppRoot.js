@@ -3,7 +3,7 @@ import { BackAndroid, View, ActivityIndicator, StyleSheet } from 'react-native';
 import { DrawerNavigator, addNavigationHelpers } from 'react-navigation';
 import { connect } from 'react-redux';
 import RootNavigator from './../components/RootNavigator';
-import NewSession from '../containers/NewSession';
+import CurrentSessionStackNavigator from '../containers/CurrentSessionStackNavigator';
 import { initializeHomeScreen } from '../actions/initialize_actions';
 
 var styles = StyleSheet.create({
@@ -58,7 +58,7 @@ class AppRoot extends React.Component {
         } else {
             // Render the login screen.
             return (
-                <NewSession/>
+                <CurrentSessionStackNavigator/>
             );
         }
     }
