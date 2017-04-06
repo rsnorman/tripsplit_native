@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
   return {
     expense,
     isViewingEditExpenseForm: state.expenses.isViewingEditExpenseForm,
-    isUploadingExpenseImage: state.trips.isUploadingExpenseImage,
+    isUploadingExpenseImage: state.expenses.isUploadingExpenseImage,
     isFetchingObligations: true,
     canEditPhoto: !!expense.actions.update,
     uploadPhotoErrorMessage: state.expenses.uploadPhotoErrorMessage
