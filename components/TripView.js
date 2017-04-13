@@ -10,6 +10,7 @@ import {
   Dimensions,
   Modal,
   Button,
+  Share,
   AppRegistry
 } from 'react-native';
 
@@ -94,6 +95,14 @@ let styles = StyleSheet.create({
   tripDescription: {
     fontStyle: 'italic',
     color: '#3d3d3d'
+  },
+  shareButton: {
+    marginTop: 2,
+  },
+  shareText: {
+    textAlign: 'center',
+    fontSize: 14,
+    color: primaryColor
   }
 });
 
@@ -115,6 +124,18 @@ class TripView extends Component {
     if (this.props.needsTripReload) {
       this.props.onDirtyTripLoad(this.props.trip);
     }
+  }
+
+  openShare() {
+    Share.share({
+      message: `Join ${this.props.trip.name} to help manage trip expenses!`,
+      url: this.props.trip.join_trip_url,
+      title: this.props.trip.name
+    },
+    {
+      dialogTitle: `Join ${this.props.trip.name}`,
+      tintColor: primaryColor
+    });
   }
 
   updateTripImage(image) {
@@ -157,8 +178,14 @@ class TripView extends Component {
                   </View>
                 </View>
                 <View style={styles.organizer}>
-                  <Text style={styles.organizerLabel}>Organized by: {trip.organizer.name || trip.organizer.email}</Text>
+                  <Text style={styles.organizerLabel}>Organized by: {trip.organizer.name}</Text>
                 </View>
+                <TouchableHighlight style={styles.shareButton} onPress={this.openShare.bind(this)} underlayColor="transparent">
+                  <View>
+                    <Icon style={styles.shareText} name="share" />
+                    <Text style={styles.shareText}>Share</Text>
+                  </View>
+                </TouchableHighlight>
               </View>
             </View>
             <View style={styles.tripDetails}>
