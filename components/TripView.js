@@ -14,8 +14,6 @@ import {
   AppRegistry
 } from 'react-native';
 
-var ImagePicker = require('react-native-image-picker');
-
 let ScreenHeight = Dimensions.get("window").height;
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -25,6 +23,7 @@ import EditTripButton from './../containers/EditTripButton';
 import TripExpenses from './../containers/TripExpenses';
 import TripMembers from './../containers/TripMembers';
 import NewExpense from './../containers/NewExpense';
+import NewMember from './../containers/NewMember';
 import FloatingButton from './../components/FloatingButton';
 import HeaderImage from './../components/HeaderImage';
 import Money from './../components/MoneyView';
@@ -128,7 +127,7 @@ class TripView extends Component {
 
   openShare() {
     Share.share({
-      message: `Join ${this.props.trip.name} to help manage trip expenses!`,
+      message: `Join ${this.props.trip.name} to help manage trip expenses! ${this.props.trip.join_trip_url}`,
       url: this.props.trip.join_trip_url,
       title: this.props.trip.name
     },
@@ -144,6 +143,10 @@ class TripView extends Component {
 
   onAddExpensePressed() {
     this.props.onAddExpensePressed(this.props.trip);
+  }
+
+  onAddMemberPressed() {
+    this.props.onAddMemberPressed(this.props.trip);
   }
 
   renderRow(rowData, sectionID, rowID) {
@@ -183,7 +186,7 @@ class TripView extends Component {
                 <TouchableHighlight style={styles.shareButton} onPress={this.openShare.bind(this)} underlayColor="transparent">
                   <View>
                     <Icon style={styles.shareText} name="share" />
-                    <Text style={styles.shareText}>Share</Text>
+                    <Text style={styles.shareText}>Invite</Text>
                   </View>
                 </TouchableHighlight>
               </View>
@@ -218,6 +221,10 @@ class TripView extends Component {
       ( <FloatingButton icon="dollar" size={50} onButtonPressed={this.onAddExpensePressed.bind(this)} /> ) :
       ( <View /> );
 
+    let addMemberButton = this.props.showAddMembersButton ?
+      ( <FloatingButton icon="user-plus" size={50} onButtonPressed={this.onAddMemberPressed.bind(this)} /> ) :
+      ( <View /> );
+
     return (
       <View style={styles.container}>
         <ListView
@@ -226,11 +233,15 @@ class TripView extends Component {
           stickyHeaderIndices={[1]}
           renderRow={this.renderRow.bind(this)}/>
         {addExpenseButton}
+        {addMemberButton}
         <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditTripForm}>
           <EditTrip />
         </Modal>
         <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingNewExpenseForm}>
           <NewExpense />
+        </Modal>
+        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingNewMemberForm}>
+          <NewMember />
         </Modal>
       </View>
     );

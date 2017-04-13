@@ -22,7 +22,12 @@ let styles = StyleSheet.create({
 
 class AsyncIndicator extends Component {
   render() {
-    const { active, errorMessage, onRetryPress } = this.props;
+    const { active, onRetryPress } = this.props;
+    let { errorMessage } = this.props;
+    if (errorMessage) {
+      errorMessage = typeof errorMessage === 'string' ? errorMessage : 'There was an error. Please try again';
+    }
+
     let spinner = active ? <ActivityIndicator style={styles.container} size='large'/> : <View/>;
     let retryButton = !!onRetryPress ? <Button color={primaryColor} onPress={onRetryPress} title="Retry" accessibilityLabel="Retry fetching your trips" /> : <View/>;
     if (!!errorMessage) {
@@ -40,7 +45,7 @@ class AsyncIndicator extends Component {
 
 AsyncIndicator.propTypes = {
   active: PropTypes.bool,
-  errorMessage: PropTypes.string,
+  errorMessage: PropTypes.any,
   onRetryPress: PropTypes.func
 };
 

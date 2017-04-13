@@ -3,18 +3,32 @@ import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
 import { reloadTrip, updateTripImage } from '../actions/trip_actions';
 import { addExpense } from '../actions/expense_actions';
+import { addMember } from '../actions/member_actions';
 import TripView from './../components/TripView'
+
+const EXPENSES_TAB_INDEX = 0;
+const MEMBERS_TAB_INDEX = 1;
+
+function showAddExpenseButton(state) {
+  return state.tripTabs.activeTabIndex == EXPENSES_TAB_INDEX && !!state.trips.viewedTrip.actions.create_expense
+}
+
+function showAddMembersButton(state) {
+  return state.tripTabs.activeTabIndex == MEMBERS_TAB_INDEX && !!state.trips.viewedTrip.join_trip_url
+}
 
 const mapStateToProps = (state) => {
   return {
     trip: state.trips.viewedTrip,
     isViewingNewExpenseForm: state.expenses.isViewingNewExpenseForm,
+    isViewingNewMemberForm: state.members.isViewingNewMemberForm,
     isViewingEditTripForm: state.trips.isViewingEditTripForm,
     isFetchingExpenses: true,
     isUploadingTripImage: state.trips.isUploadingTripImage,
     needsTripReload: state.trips.isDirtyTrip,
     activeTabIndex: state.tripTabs.activeTabIndex,
-    showAddExpenseButton: !!state.trips.viewedTrip.actions.create_expense,
+    showAddExpenseButton: showAddExpenseButton(state),
+    showAddMembersButton: showAddMembersButton(state),
     canEditPhoto: !!state.trips.viewedTrip.actions.update,
     uploadPhotoErrorMessage: state.trips.uploadPhotoErrorMessage
   };
@@ -30,6 +44,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onAddExpensePressed: (trip) => {
       dispatch(addExpense(trip));
+    },
+    onAddMemberPressed: (trip) => {
+      dispatch(addMember(trip));
     }
   };
 };

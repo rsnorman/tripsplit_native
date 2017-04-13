@@ -104,3 +104,10 @@ export const expensePhotoUpdateFailure = (error: string) => {
     error
   }
 }
+
+export const tripMemberSaveFailure = (error: string) => {
+  return {
+    type: 'SAVE_MEMBER_ERROR',
+    error
+  };
+}

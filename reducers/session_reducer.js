@@ -4,7 +4,7 @@ const defaultUser = {
   isInitializing: true,
   isLoggingIn: false,
   errorMessage: null,
-  validSignIn: false
+  validSignIn: true
 };
 
 import { isInvalidForm } from './../helpers/form-validation';
