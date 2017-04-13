@@ -17,13 +17,14 @@ function loadSavedSessionData(sessionData) {
 export const initializeHomeScreen = () => {
   return dispatch => {
     AsyncStorage.getItem('sessionData').then((sessionData) => {
-      if (sessionData === null) {
-        dispatch(initializeAppSuccess());
-      } else {
+      if (sessionData !== null) {
         sessionData = JSON.parse(sessionData);
-        dispatch(loadSavedSessionData(sessionData));
-        dispatch(initializeAppSuccess());
+        if (sessionData.user && sessionData.session) {
+          dispatch(loadSavedSessionData(sessionData));
+        }
       }
+
+      dispatch(initializeAppSuccess());
     });
   }
 }
