@@ -43,6 +43,7 @@ export const addExpense = (trip) => {
     trip
   };
 }
+
 export const setNewExpenseAttr = (attributeName: string, attributeValue: string) => {
   return {
     type: 'SET_NEW_EXPENSE_ATTRIBUTE',

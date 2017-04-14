@@ -15,6 +15,9 @@ class FloatingButton extends Component {
   }
 
   render() {
+    const { size, icon } = this.props;
+    const iconSize = this.props.size / 2;
+
     let buttonStyles = StyleSheet.create({
       floatingButton: {
         width: this.props.size,
@@ -33,11 +36,11 @@ class FloatingButton extends Component {
         shadowOpacity: 0.5
       },
       icon: {
-        width: this.props.size / 2,
-        height: this.props.size / 2,
-        marginTop: this.props.size / 4,
-        marginLeft: this.props.size / 4,
-        fontSize: this.props.size / 2,
+        width: iconSize,
+        height: iconSize,
+        marginTop: (size - iconSize) / 2,
+        marginLeft: (size - iconSize) / 2,
+        fontSize: iconSize * 0.9,
         color: 'white',
         textAlign: 'center'
       }
@@ -48,7 +51,7 @@ class FloatingButton extends Component {
         style={buttonStyles.floatingButton}
         onPress={this.onButtonPressed.bind(this)}
         underlayColor={secondaryColor}>
-        <Icon name={this.props.icon} style={buttonStyles.icon} />
+        <Icon name={icon} style={buttonStyles.icon} />
       </TouchableHighlight>
     );
   }

@@ -1,4 +1,5 @@
-export const baseUrl = 'https://tripsplit.herokuapp.com';
+// export const baseUrl = 'https://tripsplit.herokuapp.com/api/v1';
+export const baseUrl = 'http://0.0.0.0:3000/api/v1';
 export const primaryColor = '#3F98BD';
 export const secondaryColor = blendColors(primaryColor, '#FFFFFF', 0.2)
 
