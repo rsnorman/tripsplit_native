@@ -3,11 +3,11 @@ import { AppRegistry } from 'react-native';
 import NewExpense from './../containers/NewExpense';
 import ExpensePurchasers from './../containers/ExpensePurchasers';
 
-const ExpenseFormStackNavigator = StackNavigator({
+const NewExpenseFormStackNavigator = StackNavigator({
   NewExpense: { screen: NewExpense },
   ExpensePurchasers: { screen: ExpensePurchasers }
 });
 
-AppRegistry.registerComponent('ExpenseFormStackNavigator', () => ExpenseFormStackNavigator);
+AppRegistry.registerComponent('NewExpenseFormStackNavigator', () => NewExpenseFormStackNavigator);
 
-export default ExpenseFormStackNavigator;
+export default NewExpenseFormStackNavigator;

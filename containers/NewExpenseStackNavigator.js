@@ -2,13 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
 import { addNavigationHelpers } from  'react-navigation';
-import ExpenseFormStackNavigator from '../components/ExpenseFormStackNavigator';
+import NewExpenseFormStackNavigator from '../components/NewExpenseFormStackNavigator';
+import NewExpense from '../containers/NewExpense';
 
 const NewExpenseStackNavigator = connect(state => ({
-  nav: state.expenseFormNav
+  nav: state.newExpenseFormNav
 }))(({ dispatch, nav }) => {
   return (
-    <ExpenseFormStackNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
+    <NewExpenseFormStackNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
   );
 });
 

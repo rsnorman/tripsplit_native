@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { selectPurchaser } from '../actions/expense_actions';
+import { selectPurchaser } from '../actions/purchasers_picker_actions';
 import PurchasersList from '../components/PurchasersList';
 import { ListView } from 'react-native';
 
@@ -11,12 +11,13 @@ const dataSource = new ListView.DataSource({
 
 const mapStateToProps = (state) => {
   let { purchasers } = state.trips.viewedTrip;
-  let { newExpense } = state.expenses;
+  let { selectedPurchaserId, onPurchaserSelected } = state.purchasersPicker;
 
   purchasers = [{name: 'You', picture: state.user.user.picture}, ...purchasers];
 
   return {
-    selectedPurchaser: purchasers.filter((p) => p.id == newExpense.purchaser_id)[0],
+    onSelect: onPurchaserSelected,
+    selectedPurchaser: purchasers.filter((p) => p.id == selectedPurchaserId)[0],
     purchasers: purchasers,
     dataSource: dataSource.cloneWithRows(purchasers)
   };
@@ -24,8 +25,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onPurchaserSelected: (purchaser) => {
-      dispatch(selectPurchaser(purchaser));
+    onPurchaserSelected: (purchaser, onSelect) => {
+      dispatch(selectPurchaser(purchaser, onSelect));
     }
   };
 };

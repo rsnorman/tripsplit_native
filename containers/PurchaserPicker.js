@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry, TouchableHighlight, Text, View, StyleSheet } from 'react-native';
-import { viewPurchasers } from '../actions/navigation_actions';
+import { viewPurchasers } from '../actions/purchasers_picker_actions';
 import { primaryColor } from './../constants';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -42,8 +42,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onBeginPickingPurchasers: (expense) => {
-      dispatch(viewPurchasers(expense));
+    onBeginPickingPurchasers: (expense, onSelect) => {
+      dispatch(viewPurchasers(expense, onSelect));
     }
   };
 };
@@ -51,7 +51,7 @@ const mapDispatchToProps = (dispatch) => {
 const PurchaserPicker = connect(
   mapStateToProps,
   mapDispatchToProps
-)(({ purchasers, expense, onBeginPickingPurchasers }) => {
+)(({ purchasers, selectedPurchaserId, onBeginPickingPurchasers, onPurchaserSelected }) => {
   if (!purchasers || purchasers.length == 0) {
     return <View />;
   }
@@ -62,7 +62,11 @@ const PurchaserPicker = connect(
     }).map((purchaser) => purchaser.name)[0];
   }
 
-  const purchaser = getPurchaserName(purchasers, expense.purchaser_id);
+  function onSelect(purchaser) {
+    onPurchaserSelected(purchaser);
+  }
+
+  const purchaser = getPurchaserName(purchasers, selectedPurchaserId);
   const purchaserText = !!purchaser ?
     (
       <Text style={styles.pickerText}>{purchaser}</Text>
@@ -77,7 +81,7 @@ const PurchaserPicker = connect(
         style={styles.picker}
         color={primaryColor}
         underlayColor="transparent"
-        onPress={() => onBeginPickingPurchasers(expense)}>
+        onPress={() => onBeginPickingPurchasers(selectedPurchaserId, onSelect)}>
         <View styles={styles.purchaserTextContainer}>
           {purchaserText}
           <Icon style={styles.arrowIcon} name="arrow-right" />
@@ -86,6 +90,11 @@ const PurchaserPicker = connect(
     </View>
   );
 });
+
+PurchaserPicker.propTypes = {
+  selectedPurchaserId: PropTypes.number,
+  onPurchaserSelected: PropTypes.func.isRequired
+};
 
 AppRegistry.registerComponent('PurchaserPicker', () => PurchaserPicker);
 

@@ -183,14 +183,6 @@ const expenses = (state = initialExpensesState, action) => {
         isDeletingExpense: false,
         errorMessage: action.error
       };
-    case 'SELECT_PURCHASER':
-      return {
-        ...state,
-        newExpense: {
-          ...state.newExpense,
-          purchaser_id: action.purchaser.id
-        }
-      }
     default:
       return state;
   }

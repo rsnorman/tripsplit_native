@@ -52,7 +52,7 @@ class PurchasersList extends Component {
 
   rowPressed(purchaserId) {
     let purchaser = this.props.purchasers.filter(purchaser => purchaser.id === purchaserId)[0];
-    this.props.onPurchaserSelected(purchaser);
+    this.props.onPurchaserSelected(purchaser, this.props.onSelect);
   }
 
   renderRow(rowData, _sectionID, _rowID) {
@@ -91,6 +91,11 @@ class PurchasersList extends Component {
     );
   }
 }
+
+PurchasersList.propTypes = {
+  onPurchaserSelected: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired
+};
 
 AppRegistry.registerComponent('PurchasersList', () => PurchasersList);
 

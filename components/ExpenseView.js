@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 
-import EditExpense from './../containers/EditExpense'
+import EditExpenseStackNavigator from './../containers/EditExpenseStackNavigator'
 import EditExpenseButton from './../containers/EditExpenseButton'
 import ExpenseObligations from './../containers/ExpenseObligations'
 import HeaderImage from './../components/HeaderImage';
@@ -158,7 +158,7 @@ class ExpenseView extends Component {
           enableEmptySections={true}
           renderRow={this.renderRow.bind(this)}/>
         <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditExpenseForm}>
-          <EditExpense />
+          <EditExpenseStackNavigator />
         </Modal>
       </View>
     );

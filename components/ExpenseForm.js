@@ -130,7 +130,7 @@ class ExpenseForm extends Component {
               onChange={this.onCostChanged.bind(this)}
               placeholder='Cost'/>
           </View>
-          <PurchaserPicker expense={expense} />
+          <PurchaserPicker selectedPurchaserId={expense.purchaser_id} onPurchaserSelected={this.onPurchaserChanged.bind(this)} />
           <View style={styles.formRow}>
             <TextInput
               value={expense.description}
