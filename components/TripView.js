@@ -22,7 +22,7 @@ import EditTrip from './../containers/EditTrip';
 import EditTripButton from './../containers/EditTripButton';
 import TripExpenses from './../containers/TripExpenses';
 import TripMembers from './../containers/TripMembers';
-import NewExpense from './../containers/NewExpense';
+import NewExpenseStackNavigator from './../containers/NewExpenseStackNavigator';
 import NewMember from './../containers/NewMember';
 import FloatingButton from './../components/FloatingButton';
 import HeaderImage from './../components/HeaderImage';
@@ -238,7 +238,7 @@ class TripView extends Component {
           <EditTrip />
         </Modal>
         <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingNewExpenseForm}>
-          <NewExpense />
+          <NewExpenseStackNavigator />
         </Modal>
         <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingNewMemberForm}>
           <NewMember />
