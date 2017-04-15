@@ -44,7 +44,6 @@ var styles = StyleSheet.create({
 
 class ExpenseForm extends Component {
   static navigationOptions = {
-    title: 'New Expense',
     header: {
       style: {
         backgroundColor: '#E9E9EF',

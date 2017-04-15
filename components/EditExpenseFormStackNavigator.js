@@ -4,7 +4,12 @@ import EditExpense from './../containers/EditExpense';
 import ExpensePurchasers from './../containers/ExpensePurchasers';
 
 const EditExpenseFormStackNavigator = StackNavigator({
-  EditExpense: { screen: EditExpense },
+  EditExpense: {
+    screen: EditExpense,
+    navigationOptions: {
+      title: 'Edit Expense'
+    }
+  },
   ExpensePurchasers: { screen: ExpensePurchasers }
 });
 

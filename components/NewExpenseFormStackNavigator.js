@@ -4,7 +4,12 @@ import NewExpense from './../containers/NewExpense';
 import ExpensePurchasers from './../containers/ExpensePurchasers';
 
 const NewExpenseFormStackNavigator = StackNavigator({
-  NewExpense: { screen: NewExpense },
+  NewExpense: {
+    screen: NewExpense,
+    navigationOptions: {
+      title: 'New Expense'
+    }
+  },
   ExpensePurchasers: { screen: ExpensePurchasers }
 });
 
