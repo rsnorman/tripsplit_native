@@ -16,6 +16,7 @@ import Popup from 'react-native-popup';
 import AsyncIndicator from './AsyncIndicator';
 import FormButton from './FormButton';
 import DeleteButton from './DeleteButton';
+import PurchaserPicker from './../containers/PurchaserPicker';
 
 import formStyles from '../styles/form';
 
@@ -42,6 +43,23 @@ var styles = StyleSheet.create({
 });
 
 class ExpenseForm extends Component {
+  static navigationOptions = {
+    title: 'New Expense',
+    header: {
+      style: {
+        backgroundColor: '#E9E9EF',
+        height: 100,
+        borderBottomWidth: 0
+      },
+      titleStyle: {
+        marginTop: 20,
+        fontWeight: 'bold',
+        fontSize: 22,
+      },
+      tintColor: primaryColor
+    }
+  };
+
   onNameChanged(event) {
     this.props.onExpenseAttributeSet('name', event.nativeEvent.text);
   }
@@ -50,6 +68,9 @@ class ExpenseForm extends Component {
   }
   onDescriptionChanged(event) {
     this.props.onExpenseAttributeSet('description', event.nativeEvent.text);
+  }
+  onPurchaserChanged(purchaserId) {
+    this.props.onExpenseAttributeSet('purchaser_id', purchaserId);
   }
 
   onSavePressed() {
@@ -94,11 +115,6 @@ class ExpenseForm extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.formHeader}>
-          <Text style={styles.formHeaderText}>
-            {title}
-          </Text>
-        </View>
         <View style={styles.form}>
           <View style={styles.formRow}>
             <TextInput
@@ -114,6 +130,7 @@ class ExpenseForm extends Component {
               onChange={this.onCostChanged.bind(this)}
               placeholder='Cost'/>
           </View>
+          <PurchaserPicker expense={expense} />
           <View style={styles.formRow}>
             <TextInput
               value={expense.description}

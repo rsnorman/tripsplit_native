@@ -11,12 +11,14 @@ import obligations from './obligations_reducer';
 import tripTabs from './trip_tabs_reducer';
 import profileNav from './profile_nav_reducer';
 import sessionNav from './session_nav_reducer';
+import expenseFormNav from './expense_form_nav_reducer';
 
 const tripSplitApp = combineReducers({
   rootNavigation,
   nav,
   profileNav,
   sessionNav,
+  expenseFormNav,
   session,
   registration,
   user,

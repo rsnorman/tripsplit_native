@@ -198,3 +198,10 @@ export const updateExpenseImage = (expense, image) => {
       .catch(error => dispatch(expensePhotoUpdateFailure(error)))
   }
 }
+
+export const selectPurchaser = (purchaser) => {
+  return {
+    type: 'SELECT_PURCHASER',
+    purchaser
+  }
+}
