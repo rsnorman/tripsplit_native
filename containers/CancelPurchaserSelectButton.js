@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry, Button } from 'react-native';
-import { cancelPurchasersSelect } from '../actions/navigation_actions';
+import { cancelPurchasersSelect } from '../actions/purchasers_picker_actions';
 import { primaryColor } from './../constants';
 
 const mapStateToProps = (state) => {
