@@ -1,7 +1,10 @@
-import { DrawerNavigator } from 'react-navigation';
+import React from 'react';
+import { DrawerNavigator, DrawerView } from 'react-navigation';
 import ActiveTripStackNavigator from './../containers/ActiveTripStackNavigator';
 import UserProfileStackNavigator from './../containers/UserProfileStackNavigator';
 import Logout from './../containers/Logout';
+
+import { primaryColor, secondaryColor } from './../constants';
 
 const RootNavigator = DrawerNavigator({
   Home: {
@@ -14,7 +17,11 @@ const RootNavigator = DrawerNavigator({
     screen: Logout
   }
 }, {
-    initialRouteName: 'Home'
+    initialRouteName: 'Home',
+    contentOptions: {
+      activeTintColor: primaryColor,
+      inactiveTintColor: secondaryColor
+    }
 });
 
 export default RootNavigator;
