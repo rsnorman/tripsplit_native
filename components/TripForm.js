@@ -112,7 +112,7 @@ class TripForm extends Component {
               value={this.props.trip.name}
               style={styles.input}
               onChange={this.onNameChanged.bind(this)}
-              placeholder='Name'/>
+              placeholder="Name (e.g., Joan's Bachelorette Party)"/>
           </View>
           <View style={styles.formRow}>
             <TextInput
@@ -128,7 +128,7 @@ class TripForm extends Component {
               onChange={this.onDescriptionChanged.bind(this)}
               multiline={true}
               numberOfLines={3}
-              placeholder='Description'/>
+              placeholder='Description (optional)'/>
           </View>
           <FormButton
             onPress={this.onSavePressed.bind(this)}

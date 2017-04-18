@@ -16,6 +16,7 @@ import Popup from 'react-native-popup';
 import AsyncIndicator from './AsyncIndicator';
 import FormButton from './FormButton';
 import DeleteButton from './DeleteButton';
+import CurrencyTextInput from './CurrencyTextInput';
 import PurchaserPicker from './../containers/PurchaserPicker';
 
 import formStyles from '../styles/form';
@@ -120,14 +121,14 @@ class ExpenseForm extends Component {
               value={expense.name}
               style={styles.input}
               onChange={this.onNameChanged.bind(this)}
-              placeholder='Name'/>
+              placeholder='Name (e.g., Gas, Horse Masks)'/>
           </View>
           <View style={styles.formRow}>
-            <TextInput
-              value={expense.cost}
+            <CurrencyTextInput
+              amount={expense.cost}
               style={styles.input}
               onChange={this.onCostChanged.bind(this)}
-              placeholder='Cost'/>
+              placeholder="Cost" />
           </View>
           <PurchaserPicker selectedPurchaserId={expense.purchaser_id} onPurchaserSelected={this.onPurchaserChanged.bind(this)} />
           <View style={styles.formRow}>
@@ -137,7 +138,7 @@ class ExpenseForm extends Component {
               onChange={this.onDescriptionChanged.bind(this)}
               multiline={true}
               numberOfLines={3}
-              placeholder='Description'/>
+              placeholder='Description (optional)'/>
           </View>
           <FormButton
             onPress={this.onSavePressed.bind(this)}

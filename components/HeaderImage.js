@@ -24,7 +24,7 @@ class HeaderImage extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.image.url !== this.props.image.url) {
+    if (newProps.image.url && newProps.image.url.split('?')[0] !== this.props.image.url.split('?')[0]) {
       this.bounceAnimation.setValue(1.2);
       Animated.spring(
         this.bounceAnimation,
@@ -94,8 +94,18 @@ class HeaderImage extends Component {
       },
       imageUploadSpinner: {
         position: 'absolute',
-        left: this.props.size / 4 + 10,
-        top: this.props.size / 4 + 10,
+        left: this.props.size / 4,
+        top: this.props.size / 4,
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',
+        borderRadius: (this.props.size + 20) / 4,
+        padding: 10,
+        shadowColor: '#000000',
+        shadowOffset: {
+          width: 0,
+          height: 0
+        },
+        shadowRadius: 5,
+        shadowOpacity: 0.5
       }
     });
 
@@ -108,7 +118,7 @@ class HeaderImage extends Component {
     }
 
     let imageSpinner = this.props.isUploadingImage ?
-      ( <ActivityIndicator style={imageStyles.imageUploadSpinner} size="large" /> ) :
+      ( <ActivityIndicator style={imageStyles.imageUploadSpinner} size="large" color="#ffffff" /> ) :
       ( <View /> );
 
     const interpolatedShake = this.shakeAnimation.interpolate({
