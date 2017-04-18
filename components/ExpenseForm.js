@@ -120,7 +120,7 @@ class ExpenseForm extends Component {
               value={expense.name}
               style={styles.input}
               onChange={this.onNameChanged.bind(this)}
-              placeholder='Name'/>
+              placeholder='Name (e.g., Gas, Horse Masks)'/>
           </View>
           <View style={styles.formRow}>
             <TextInput
@@ -137,7 +137,7 @@ class ExpenseForm extends Component {
               onChange={this.onDescriptionChanged.bind(this)}
               multiline={true}
               numberOfLines={3}
-              placeholder='Description'/>
+              placeholder='Description (optional)'/>
           </View>
           <FormButton
             onPress={this.onSavePressed.bind(this)}
