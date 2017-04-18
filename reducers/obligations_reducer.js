@@ -60,6 +60,11 @@ const obligations = (state = initialObligationsState, action) => {
         payButtonDisabled: false,
         errorMessage: action.error
       };
+    case 'EXPENSE_UPDATE_SUCCESS':
+      return {
+        ...state,
+        expenseObligations: action.expense.obligations
+      };
     default:
       return state;
   }
