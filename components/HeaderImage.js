@@ -24,7 +24,7 @@ class HeaderImage extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.image.url && newProps.image.url.split('?')[0] !== this.props.image.url.split('?')[0]) {
+    if (newProps.image.url && newProps.image.url !== this.props.image.url) {
       this.bounceAnimation.setValue(1.2);
       Animated.spring(
         this.bounceAnimation,
@@ -94,11 +94,11 @@ class HeaderImage extends Component {
       },
       imageUploadSpinner: {
         position: 'absolute',
-        left: this.props.size / 4,
-        top: this.props.size / 4,
+        left: 0,
+        top: 0,
         backgroundColor: 'rgba(0, 0, 0, 0.2)',
-        borderRadius: (this.props.size + 20) / 4,
-        padding: 10,
+        borderRadius: 4,
+        padding: this.props.size / 2 - 18,
         shadowColor: '#000000',
         shadowOffset: {
           width: 0,
