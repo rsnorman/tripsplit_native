@@ -24,7 +24,7 @@ class HeaderImage extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.image.url.split('?')[0] !== this.props.image.url.split('?')[0]) {
+    if (newProps.image.url && newProps.image.url.split('?')[0] !== this.props.image.url.split('?')[0]) {
       this.bounceAnimation.setValue(1.2);
       Animated.spring(
         this.bounceAnimation,
