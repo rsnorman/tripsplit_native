@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
     isSavingExpense,
     errorMessage,
     newExpense,
-    saveButtonDisabled
+    isValidExpense
   } = state.expenses;
 
   return {
@@ -17,7 +17,8 @@ const mapStateToProps = (state) => {
     expense: newExpense,
     isSavingExpense,
     errorMessage,
-    saveButtonDisabled
+    saveButtonDisabled: isSavingExpense || !isValidExpense,
+    deleteButtonDisabled: isSavingExpense
   };
 };
 
