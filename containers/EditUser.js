@@ -19,8 +19,8 @@ const mapDispatchToProps = (dispatch) => {
     onUserAttributeSet: (attributeName, attributeValue) => {
       dispatch(setUserAttr(attributeName, attributeValue));
     },
-    onSave: (trip) => {
-      dispatch(updateUser(trip));
+    onSave: (user) => {
+      dispatch(updateUser(user));
     },
     onCancel: () => {
       dispatch(cancelEditingUser());

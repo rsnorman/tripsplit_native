@@ -1,7 +1,7 @@
 import { applyAuthenticationHeaders, parseResponse } from './helpers';
 import { AsyncStorage } from 'react-native';
 import { baseUrl } from './../constants';
-import { userUpdateFailure, userPhotoUpdateFailure } from './error_actions';
+import { userUpdateFailure, userPasswordChangeFailure, userPhotoUpdateFailure } from './error_actions';
 
 function updateSavedUser(user) {
   AsyncStorage.getItem('sessionData').then((sessionData) => {
@@ -97,5 +97,57 @@ export const updateUser = (editingUser) => {
 export const cancelEditingUser = () => {
   return {
     type: 'CANCEL_EDIT_USER'
+  };
+}
+
+export const editUserPassword = function(user) {
+  return {
+    type: 'EDIT_USER_PASSWORD',
+    user
+  }
+};
+
+export const setUserPasswordAttr = (attributeName, attributeValue) => {
+  return {
+    type: 'SET_USER_PASSWORD_ATTRIBUTE',
+    name: attributeName,
+    value: attributeValue
+  };
+}
+
+function startChangingUserPassword() {
+  return {
+    type: 'START_CHANGING_USER_PASSWORD'
+  }
+}
+
+function userPasswordChangeSuccess(user) {
+  return {
+    type: 'USER_PASSWORD_CHANGE_SUCCESS',
+    user: user
+  }
+}
+
+export const changeUserPassword = (editingUser, changedPasswordData) => {
+  let url = `${baseUrl}/auth`;
+  return dispatch => {
+    const { session } = dispatch(startChangingUserPassword())
+    return fetch(url, applyAuthenticationHeaders({
+      method: 'PUT',
+      body: JSON.stringify({
+        current_password: changedPasswordData.currentPassword,
+        password: changedPasswordData.password,
+        password_confirmation: changedPasswordData.passwordConfirmation
+      })
+    }, session))
+      .then(parseResponse(200, 'There was an error changing password. Please try again.'))
+      .then(json => dispatch(userPasswordChangeSuccess(json)))
+      .catch(error => dispatch(userPasswordChangeFailure(error)))
+  }
+}
+
+export const cancelEditingUserPassword = () => {
+  return {
+    type: 'CANCEL_EDITING_USER_PASSWORD'
   };
 }
