@@ -5,6 +5,7 @@ import {
   View,
   Text,
   Modal,
+  TouchableHighlight,
   AppRegistry
 } from 'react-native';
 
@@ -13,6 +14,7 @@ import Money from './../components/MoneyView';
 import OpenDrawerButton from './../containers/OpenDrawerButton';
 import EditUserButton from './../containers/EditUserButton';
 import EditUser from './../containers/EditUser';
+import ChangeUserPassword from './../containers/ChangeUserPassword';
 import { primaryColor } from './../constants';
 
 import { Header } from 'react-navigation';
@@ -63,6 +65,11 @@ let styles = StyleSheet.create({
     paddingBottom: 3,
     marginBottom: 3,
     color: '#3d3d3d'
+  },
+  changePasswordButtonText: {
+    color: primaryColor,
+    fontWeight: 'normal',
+    fontSize: 14
   }
 });
 
@@ -83,6 +90,10 @@ class Profile extends Component {
 
   updateUserImage(image) {
     this.props.onUserImageChanged(this.props.user, image);
+  }
+
+  changePassword() {
+    this.props.onUserEditPassword(this.props.user);
   }
 
   render() {
@@ -121,10 +132,19 @@ class Profile extends Component {
           <View style={styles.userDetails}>
             <Text style={styles.userName}>{this.props.user.name}</Text>
             <Text style={styles.userEmail}>{this.props.user.email}</Text>
+            <TouchableHighlight
+              style={styles.changePasswordButton}
+              underlayColor='transparent'
+              onPress={this.changePassword.bind(this)}>
+              <Text style={styles.changePasswordButtonText}>Change Password</Text>
+            </TouchableHighlight>
           </View>
         </View>
         <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditUserForm}>
           <EditUser />
+        </Modal>
+        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingChangeUserPasswordForm}>
+          <ChangeUserPassword />
         </Modal>
       </View>
     );

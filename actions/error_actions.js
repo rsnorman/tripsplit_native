@@ -84,6 +84,13 @@ export const userUpdateFailure = (error: string) => {
   }
 }
 
+export const userPasswordChangeFailure = (error: string) => {
+  return {
+    type: 'CHANGE_USER_PASSWORD_ERROR',
+    error
+  }
+}
+
 export const userPhotoUpdateFailure = (error: string) => {
   return {
     type: 'UPDATE_USER_PHOTO_ERROR',

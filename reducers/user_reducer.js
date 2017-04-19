@@ -7,7 +7,11 @@ const initialUserState = {
   isUploadingUserImage: false,
   errorMessage: null,
   uploadPhotoErrorMessage: null,
-  isValidUser: false
+  isValidUser: false,
+  changedPasswordData: {},
+  isViewingChangeUserPasswordForm: false,
+  changePasswordErrorMessage: null,
+  isValidUserPasswordChange: false
 };
 
 const user = (state = initialUserState, action) => {
@@ -89,6 +93,50 @@ const user = (state = initialUserState, action) => {
       return {
         ...state,
         isViewingEditUserForm: false
+      }
+    case 'EDIT_USER_PASSWORD':
+      return {
+        ...state,
+        editingUser: state.user,
+        changedPasswordData: {},
+        isViewingChangeUserPasswordForm: true,
+        changePasswordErrorMessage: null,
+        isValidUserPasswordChange: false
+      };
+    case 'SET_USER_PASSWORD_ATTRIBUTE':
+      let changedPasswordData = {
+        ...state.changedPasswordData
+      };
+      changedPasswordData[action.name] = action.value;
+
+      return {
+        ...state,
+        changedPasswordData,
+        isValidUserPasswordChange: !isInvalidForm(changedPasswordData, ['currentPassword', 'password', 'passwordConfirmation'])
+      };
+    case 'START_CHANGING_USER_PASSWORD':
+      return {
+        ...state,
+        isChangingUserPassword: true,
+        isValidUserPasswordChange: null
+      };
+    case 'USER_PASSWORD_CHANGE_SUCCESS':
+      return {
+        ...state,
+        changedPasswordData: {},
+        isChangingUserPassword: false,
+        isViewingChangeUserPasswordForm: false
+      };
+    case 'CHANGE_USER_PASSWORD_ERROR':
+      return {
+        ...state,
+        isChangingUserPassword: false,
+        changePasswordErrorMessage: action.error
+      };
+    case 'CANCEL_EDITING_USER_PASSWORD':
+      return {
+        ...state,
+        isViewingChangeUserPasswordForm: false
       }
     default:
       return state;

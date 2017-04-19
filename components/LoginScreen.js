@@ -129,7 +129,6 @@ class LoginScreen extends Component {
               value={email}
               style={styles.loginInput}
               keyboardType="email-address"
-              returnKeyType="go"
               autoCapitalize="none"
               autoCorrect={false}
               autoFocus={true}
@@ -141,7 +140,6 @@ class LoginScreen extends Component {
               value={password}
               style={styles.loginInput}
               type="password"
-              returnKeyType="go"
               secureTextEntry={true}
               onChange={this.onPasswordChanged.bind(this)}
               placeholder='Password'/>
