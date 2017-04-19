@@ -89,16 +89,6 @@ class TripForm extends Component {
       deleteButtonDisabled
     } = this.props;
 
-    let deleteButton = this.props.showDeleteButton ?
-      ( <View style={styles.formRow}>
-        <TouchableHighlight style={styles.deleteButton}
-          onPress={this.onDeletePressed.bind(this)}
-          underlayColor='#bb0000'>
-          <Text style={styles.deleteButtonText}>Delete</Text>
-        </TouchableHighlight>
-      </View> ) :
-      ( <View /> );
-
     return (
       <View style={styles.container}>
         <View style={styles.formHeader}>

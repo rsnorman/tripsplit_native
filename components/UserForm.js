@@ -9,8 +9,11 @@ import {
   ActivityIndicator,
   AppRegistry
 } from 'react-native';
+
+import Popup from 'react-native-popup';
 import AsyncIndicator from './AsyncIndicator';
 import FormButton from './FormButton';
+import DeleteButton from './DeleteButton';
 
 import formStyles from '../styles/form';
 import { primaryColor } from './../constants';
@@ -65,12 +68,37 @@ class UserForm extends Component {
     this.props.onSave(this.props.user);
   }
 
+  onDeletePressed() {
+    this.popup.confirm({
+      title: 'Delete Your Account',
+      content: ['Are you sure you want to delete your account?'],
+      ok: {
+        text: 'Yes',
+        style: {
+            color: 'red'
+        },
+        callback: () => {
+            this.props.onDelete(this.props.user);
+        },
+      },
+      cancel: {
+        text: 'Cancel'
+      },
+    });
+  }
+
   onCancelPressed() {
     this.props.onCancel();
   }
 
   render() {
-    const { user, isSavingUser, saveButtonDisabled, errorMessage } = this.props;
+    const {
+      user,
+      isSavingUser,
+      saveButtonDisabled,
+      deleteButtonDisabled,
+      errorMessage
+    } = this.props;
 
     return (
       <View style={styles.container}>
@@ -98,6 +126,9 @@ class UserForm extends Component {
             onPress={this.onSavePressed.bind(this)}
             disabled={saveButtonDisabled}
             text="Save" />
+          <DeleteButton
+            disabled={deleteButtonDisabled}
+            onPress={this.onDeletePressed.bind(this)} />
           <View style={styles.formRow}>
             <TouchableHighlight style={styles.cancelButton}
               onPress={this.onCancelPressed.bind(this)}
@@ -109,6 +140,7 @@ class UserForm extends Component {
             active={isSavingUser}
             errorMessage={errorMessage} />
         </View>
+        <Popup ref={popup => this.popup = popup }/>
       </View>
     );
   }
