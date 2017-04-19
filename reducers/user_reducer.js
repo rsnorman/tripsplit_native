@@ -11,7 +11,8 @@ const initialUserState = {
   changedPasswordData: {},
   isViewingChangeUserPasswordForm: false,
   changePasswordErrorMessage: null,
-  isValidUserPasswordChange: false
+  isValidUserPasswordChange: false,
+  isDeletingUser: false
 };
 
 const user = (state = initialUserState, action) => {
@@ -138,6 +139,25 @@ const user = (state = initialUserState, action) => {
         ...state,
         isViewingChangeUserPasswordForm: false
       }
+    case 'START_DELETING_USER':
+      return {
+        ...state,
+        errorMessage: null,
+        isDeletingUser: true
+      };
+    case 'USER_DELETE_SUCCESS':
+      return {
+        ...state,
+        user: {},
+        isDeletingUser: false,
+        isViewingEditUserForm: false
+      };
+    case 'DELETE_USER_ERROR':
+      return {
+        ...state,
+        isDeletingUser: false,
+        errorMessage: action.error
+      };
     default:
       return state;
   }

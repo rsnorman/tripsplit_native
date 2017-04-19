@@ -6,7 +6,8 @@ import RootNavigator from './../components/RootNavigator';
  */
 const rootNavigation = (state, action) => {
   switch (action.type) {
-    case 'DESTROY_SESSION':
+    case 'CREATE_ACCOUNT':
+    case 'CREATE_SESSION':
       return RootNavigator.router.getStateForAction(NavigationActions.navigate({ routeName: 'Home' }), state);
     case 'OPEN_DRAWER':
       return RootNavigator.router.getStateForAction(NavigationActions.navigate({ routeName: 'DrawerOpen' }), state);

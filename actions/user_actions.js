@@ -1,7 +1,9 @@
+// @flow
+
 import { applyAuthenticationHeaders, parseResponse } from './helpers';
 import { AsyncStorage } from 'react-native';
 import { baseUrl } from './../constants';
-import { userUpdateFailure, userPasswordChangeFailure, userPhotoUpdateFailure } from './error_actions';
+import { userUpdateFailure, userPasswordChangeFailure, userDeleteFailure, userPhotoUpdateFailure } from './error_actions';
 
 function updateSavedUser(user) {
   AsyncStorage.getItem('sessionData').then((sessionData) => {
@@ -57,7 +59,7 @@ export const editUser = function(user) {
   }
 };
 
-export const setUserAttr = (attributeName, attributeValue) => {
+export const setUserAttr = (attributeName: string, attributeValue: string) => {
   return {
     type: 'SET_USER_ATTRIBUTE',
     name: attributeName,
@@ -107,7 +109,7 @@ export const editUserPassword = function(user) {
   }
 };
 
-export const setUserPasswordAttr = (attributeName, attributeValue) => {
+export const setUserPasswordAttr = (attributeName: string, attributeValue: string) => {
   return {
     type: 'SET_USER_PASSWORD_ATTRIBUTE',
     name: attributeName,
@@ -150,4 +152,34 @@ export const cancelEditingUserPassword = () => {
   return {
     type: 'CANCEL_EDITING_USER_PASSWORD'
   };
+}
+
+function startDeletingUser() {
+  return {
+    type: 'START_DELETING_USER'
+  }
+}
+
+function userDeleteSuccess(user) {
+  AsyncStorage.removeItem('sessionData');
+  return {
+    type: 'USER_DELETE_SUCCESS',
+    user: user
+  }
+}
+
+
+export const deleteUser = (user) => {
+  let url = `${baseUrl}/auth`;
+
+  return dispatch => {
+    const { session } = dispatch(startDeletingUser());
+
+    return fetch(url, applyAuthenticationHeaders({
+      method: 'DELETE'
+    }, session))
+      .then(parseResponse(200, 'There was an error deleting. Please try again.'))
+      .then(_json => dispatch(userDeleteSuccess(user)))
+      .catch(error => dispatch(userDeleteFailure(error)))
+  }
 }

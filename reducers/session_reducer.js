@@ -63,6 +63,12 @@ const session = (state = defaultUser, action) => {
         isLoggingIn: false,
         errorMessage: action.error
       };
+    case 'USER_DELETE_SUCCESS':
+      return {
+        ...state,
+        session: null,
+        password: null,
+      };
     default:
       return state;
   }

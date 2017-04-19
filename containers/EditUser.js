@@ -5,12 +5,22 @@ import { setUserAttr, updateUser, deleteUser, cancelEditingUser } from '../actio
 import UserForm from '../components/UserForm'
 
 const mapStateToProps = (state) => {
+  const {
+    isSavingUser,
+    isDeletingUser,
+    errorMessage,
+    editingUser,
+    isValidUser
+  } = state.user;
+
   return {
     title: 'Edit User',
-    user: state.user.editingUser,
-    isSavingUser: state.user.isSavingUser,
-    saveButtonDisabled: state.user.isSavingUser || !state.user.isValidUser,
-    errorMessage: state.user.errorMessage
+    user: editingUser,
+    isSavingUser,
+    isDeletingUser,
+    errorMessage,
+    saveButtonDisabled: isSavingUser || isDeletingUser || !isValidUser,
+    deleteButtonDisabled: isSavingUser || isDeletingUser
   };
 };
 
@@ -24,6 +34,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onCancel: () => {
       dispatch(cancelEditingUser());
+    },
+    onDelete: (user) => {
+      dispatch(deleteUser(user));
     }
   };
 };

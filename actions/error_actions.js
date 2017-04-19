@@ -118,3 +118,10 @@ export const tripMemberSaveFailure = (error: string) => {
     error
   };
 }
+
+export const userDeleteFailure = (error: string) => {
+  return {
+    type: 'DELETE_USER_ERROR',
+    error
+  };
+}
