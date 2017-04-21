@@ -15,6 +15,7 @@ import { primaryColor } from './../constants';
 import ListImage from './../components/ListImage';
 import Money from './../components/MoneyView';
 import AsyncIndicator from './../components/AsyncIndicator';
+import EmptyMessage from './../components/EmptyMessageView';
 
 let styles = StyleSheet.create({
   thumb: {
@@ -97,6 +98,7 @@ class ExpensesList extends Component {
           active={isFetchingTripExpenses}
           errorMessage={fetchExpensesErrorMessage}
           onRetryPress={this._loadExpenses.bind(this)}/>
+        <EmptyMessage text="You haven't spent any money yet. This is a cheap trip!" hidden={!!this.props.expenses.length} />
         <ListView
           dataSource={dataSource}
           enableEmptySections={true}
