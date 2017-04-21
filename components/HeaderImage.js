@@ -24,7 +24,7 @@ class HeaderImage extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.image.url && newProps.image.url.split('?')[0] !== this.props.image.url.split('?')[0]) {
+    if (newProps.image.url && (!this.props.image.url || newProps.image.url.split('?')[0] !== this.props.image.url.split('?')[0])) {
       this.bounceAnimation.setValue(1.2);
       Animated.spring(
         this.bounceAnimation,
@@ -142,7 +142,7 @@ class HeaderImage extends Component {
           }}>
           <View style={imageStyles.thumb}>
             {image}
-            <Icon name="edit" style={imageStyles.editIcon} size={15} color="#fff" />
+            <Icon name="camera" style={imageStyles.editIcon} size={15} color="#fff" />
             {imageSpinner}
           </View>
         </Animated.View>
