@@ -158,6 +158,11 @@ const user = (state = initialUserState, action) => {
         isDeletingUser: false,
         errorMessage: action.error
       };
+    case 'USER_REFRESH_SUCCESS':
+      return {
+        ...state,
+        user: action.user
+      };
     default:
       return state;
   }

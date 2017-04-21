@@ -168,7 +168,6 @@ function userDeleteSuccess(user) {
   }
 }
 
-
 export const deleteUser = (user) => {
   let url = `${baseUrl}/auth`;
 
@@ -181,5 +180,33 @@ export const deleteUser = (user) => {
       .then(parseResponse(200, 'There was an error deleting. Please try again.'))
       .then(_json => dispatch(userDeleteSuccess(user)))
       .catch(error => dispatch(userDeleteFailure(error)))
+  }
+}
+
+function startRefreshingUser() {
+  return {
+    type: 'START_REFRESHING_USER'
+  };
+}
+
+function userRefreshSuccess(user) {
+  updateSavedUser(user);
+  return {
+    type: 'USER_REFRESH_SUCCESS',
+    user: user
+  };
+}
+
+export const refreshUser = (oldUser) => {
+  let url = `${baseUrl}/users/${oldUser.id}`
+
+  return dispatch => {
+    const { session } = dispatch(startRefreshingUser());
+    return fetch(url, applyAuthenticationHeaders({
+      method: 'GET'
+    }, session))
+      .then(parseResponse(200, 'There was an error refreshing user. Please try again.'))
+      .then(json => dispatch(userRefreshSuccess(json)))
+      .catch(error => dispatch(userRefreshFailure(error)))
   }
 }

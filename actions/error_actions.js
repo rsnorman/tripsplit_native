@@ -125,3 +125,10 @@ export const userDeleteFailure = (error: string) => {
     error
   };
 }
+
+export const userRefreshFailure = (error: string) => {
+  return {
+    type: 'REFRESH_USER_ERROR',
+    error
+  };
+}
