@@ -18,6 +18,7 @@ import NewTrip from './../containers/NewTrip';
 import FloatingButton from './../components/FloatingButton';
 import Money from './../components/MoneyView';
 import AsyncIndicator from './../components/AsyncIndicator';
+import EmptyMessage from './../components/EmptyMessageView';
 import OpenDrawerButton from './../containers/OpenDrawerButton';
 import { primaryColor } from './../constants';
 
@@ -127,6 +128,7 @@ class TripsList extends Component {
           active={isFetchingTrips}
           errorMessage={fetchTripsErrorMessage}
           onRetryPress={this._loadTrips.bind(this)}/>
+        <EmptyMessage text="You haven't taken any trips yet. What are you waiting for?" hidden={!!this.props.trips.length} />
         <ListView
           dataSource={dataSource}
           enableEmptySections={true}
