@@ -1,5 +1,5 @@
 import { NavigationActions } from 'react-navigation';
-import TripStackNavigator from './../components/TripStackNavigator';
+import TripStackNavigator from './../../components/TripStackNavigator';
 
 const nav = (state, action) => {
   switch (action.type) {

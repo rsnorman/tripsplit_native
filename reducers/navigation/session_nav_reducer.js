@@ -1,5 +1,5 @@
 import { NavigationActions } from 'react-navigation';
-import SessionStackNavigator from './../components/SessionStackNavigator';
+import SessionStackNavigator from './../../components/SessionStackNavigator';
 
 const sessionNav = (state, action) => {
   switch (action.type) {

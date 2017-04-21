@@ -1,19 +1,22 @@
 import { combineReducers } from 'redux';
-import rootNavigation from './root_navigation_reducer';
-import nav from './nav_reducer';
-import session from './session_reducer';
-import registration from './registration_reducer';
-import user from './user_reducer';
-import trips from './trips_reducer';
-import expenses from './expenses_reducer';
-import members from './members_reducer';
-import obligations from './obligations_reducer';
-import tripTabs from './trip_tabs_reducer';
-import profileNav from './profile_nav_reducer';
-import sessionNav from './session_nav_reducer';
-import newExpenseFormNav from './new_expense_form_nav_reducer';
-import editExpenseFormNav from './edit_expense_form_nav_reducer';
-import purchasersPicker from './purchasers_picker_reducer';
+
+import rootNavigation from './navigation/root_navigation_reducer';
+import nav from './navigation/nav_reducer';
+import profileNav from './navigation/profile_nav_reducer';
+import sessionNav from './navigation/session_nav_reducer';
+import newExpenseFormNav from './navigation/new_expense_form_nav_reducer';
+import editExpenseFormNav from './navigation/edit_expense_form_nav_reducer';
+
+import session from './models/session_reducer';
+import registration from './models/registration_reducer';
+import user from './models/user_reducer';
+import trips from './models/trips_reducer';
+import expenses from './models/expenses_reducer';
+import members from './models/members_reducer';
+import obligations from './models/obligations_reducer';
+
+import tripTabs from './components/trip_tabs_reducer';
+import purchasersPicker from './components/purchasers_picker_reducer';
 
 const tripSplitApp = combineReducers({
   rootNavigation,

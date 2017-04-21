@@ -1,5 +1,5 @@
 import { NavigationActions } from 'react-navigation';
-import EditExpenseFormStackNavigator from './../components/EditExpenseFormStackNavigator';
+import EditExpenseFormStackNavigator from './../../components/EditExpenseFormStackNavigator';
 
 const editExpenseFormNav = (state, action) => {
   switch (action.type) {

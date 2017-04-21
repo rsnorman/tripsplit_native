@@ -1,6 +1,6 @@
 // @flow
 
-import { isInvalidForm } from './../helpers/form-validation';
+import { isInvalidForm } from './../../helpers/form-validation';
 
 let initialExpensesState = {
   tripExpenses: [],

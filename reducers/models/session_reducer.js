@@ -7,7 +7,7 @@ const defaultUser = {
   validSignIn: true
 };
 
-import { isInvalidForm } from './../helpers/form-validation';
+import { isInvalidForm } from './../../helpers/form-validation';
 
 const session = (state = defaultUser, action) => {
   switch (action.type) {

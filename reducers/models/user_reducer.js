@@ -1,4 +1,4 @@
-import { isInvalidForm } from './../helpers/form-validation';
+import { isInvalidForm } from './../../helpers/form-validation';
 
 const initialUserState = {
   user: {},

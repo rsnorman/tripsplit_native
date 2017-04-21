@@ -1,13 +1,13 @@
 const newUser = {
-  name: 'John Wick',
-  email: 'rsnorman15+jwick@gmail.com',
-  password: 'test1234',
+  name: '',
+  email: '',
+  password: '',
   isRegistering: false,
   errorMessage: null,
   validUser: false
 };
 
-import { isInvalidForm } from './../helpers/form-validation';
+import { isInvalidForm } from './../../helpers/form-validation';
 
 const registration = (state = newUser, action) => {
   switch (action.type) {

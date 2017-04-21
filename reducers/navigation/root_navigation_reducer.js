@@ -1,5 +1,5 @@
 import { NavigationActions } from 'react-navigation';
-import RootNavigator from './../components/RootNavigator';
+import RootNavigator from './../../components/RootNavigator';
 
 function onHomeScreen(state) {
   return !state.routes || !state.routes[0] || state.routes[0].index === 0;
