@@ -15,6 +15,7 @@ import {
 
 import AsyncIndicator from './AsyncIndicator';
 import FormButton from './FormButton';
+import KeyboardDismisser from './KeyboardDismisser';
 
 let ScreenWidth = Dimensions.get("window").width;
 import formStyles from '../styles/form';
@@ -121,45 +122,47 @@ class LoginScreen extends Component {
     } = this.props;
 
     return (
-      <View style={styles.container}>
-        <StatusBar barStyle='light-content' />
-        <View style={styles.form}>
-          <View style={styles.formRow}>
-            <TextInput
-              value={email}
-              style={styles.loginInput}
-              keyboardType="email-address"
-              autoCapitalize="none"
-              autoCorrect={false}
-              autoFocus={true}
-              onChange={this.onEmailChanged.bind(this)}
-              placeholder='Email'/>
+      <KeyboardDismisser>
+        <View style={styles.container}>
+          <StatusBar barStyle='light-content' />
+            <View style={styles.form}>
+              <View style={styles.formRow}>
+                <TextInput
+                  value={email}
+                  style={styles.loginInput}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  autoFocus={true}
+                  onChange={this.onEmailChanged.bind(this)}
+                  placeholder='Email'/>
+              </View>
+              <View style={styles.formRow}>
+                <TextInput
+                  value={password}
+                  style={styles.loginInput}
+                  type="password"
+                  secureTextEntry={true}
+                  onChange={this.onPasswordChanged.bind(this)}
+                  placeholder='Password'/>
+              </View>
+              <FormButton
+                text="Login"
+                onPress={this.onLoginPressed.bind(this)}
+                disabled={loginButtonDisabled} />
+              <AsyncIndicator active={isLoggingIn} errorMessage={loginErrorMessage} />
+            </View>
+          <View style={styles.registerSection}>
+            <Text style={styles.registerMessage}>Don't have an account?</Text>
+            <TouchableHighlight
+              style={styles.registerButton}
+              underlayColor='transparent'
+              onPress={this.onRegisterPress.bind(this)}>
+              <Text style={styles.registerButtonText}>Sign up.</Text>
+            </TouchableHighlight>
           </View>
-          <View style={styles.formRow}>
-            <TextInput
-              value={password}
-              style={styles.loginInput}
-              type="password"
-              secureTextEntry={true}
-              onChange={this.onPasswordChanged.bind(this)}
-              placeholder='Password'/>
-          </View>
-          <FormButton
-            text="Login"
-            onPress={this.onLoginPressed.bind(this)}
-            disabled={loginButtonDisabled} />
-          <AsyncIndicator active={isLoggingIn} errorMessage={loginErrorMessage} />
         </View>
-        <View style={styles.registerSection}>
-          <Text style={styles.registerMessage}>Don't have an account?</Text>
-          <TouchableHighlight
-            style={styles.registerButton}
-            underlayColor='transparent'
-            onPress={this.onRegisterPress.bind(this)}>
-            <Text style={styles.registerButtonText}>Sign up.</Text>
-          </TouchableHighlight>
-        </View>
-      </View>
+      </KeyboardDismisser>
     );
   }
 }
