@@ -118,7 +118,8 @@ class TripsList extends Component {
       isFetchingTrips,
       fetchTripsErrorMessage,
       dataSource,
-      isViewingNewTripForm
+      isViewingNewTripForm,
+      emptyMessageVisible
     } = this.props;
 
     return (
@@ -128,7 +129,7 @@ class TripsList extends Component {
           active={isFetchingTrips}
           errorMessage={fetchTripsErrorMessage}
           onRetryPress={this._loadTrips.bind(this)}/>
-        <EmptyMessage text="You haven't taken any trips yet. What are you waiting for?" hidden={!!this.props.trips.length} />
+        <EmptyMessage text="You haven't taken any trips yet. What are you waiting for?" hidden={!emptyMessageVisible} />
         <ListView
           dataSource={dataSource}
           enableEmptySections={true}

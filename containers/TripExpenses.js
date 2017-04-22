@@ -5,6 +5,10 @@ import { fetchTripExpenses, viewExpense } from '../actions/expense_actions';
 import ExpensesList from '../components/ExpensesList';
 import { ListView } from 'react-native';
 
+function showEmptyMessage(expensesState) {
+  return expensesState.tripExpenses.length === 0 && !expensesState.isFetchingTripExpenses && !expensesState.fetchExpensesErrorMessage;
+}
+
 const dataSource = new ListView.DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2,
 });
@@ -20,6 +24,7 @@ const mapStateToProps = (state) => {
     trip: state.trips.viewedTrip,
     expenses: tripExpenses,
     dataSource: dataSource.cloneWithRows(tripExpenses),
+    emptyMessageVisible: showEmptyMessage(state.expenses),
     isFetchingTripExpenses,
     fetchExpensesErrorMessage
   };
