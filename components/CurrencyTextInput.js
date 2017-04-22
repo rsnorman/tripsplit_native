@@ -19,6 +19,7 @@ class CurrencyTextInput extends Component {
         {...this.props}
         value={amount}
         selectTextOnFocus={true}
+        keyboardType="numeric"
         onChange={onChange} />
     );
   }
