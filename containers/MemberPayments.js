@@ -5,20 +5,28 @@ import { fetchMemberPayments } from '../actions/member_actions';
 import PaymentsList from '../components/PaymentsList';
 import { ListView } from 'react-native';
 
+function showEmptyMessage(membersState) {
+  return membersState.memberPayments.length === 0 && !membersState.isFetchingMemberPayments && !membersState.fetchPaymentsErrorMessage;
+}
+
 const dataSource = new ListView.DataSource({
     rowHasChanged: (r1, r2) => r1.id !== r2.id,
 });
 
 const mapStateToProps = (state) => {
   const { viewedMember, memberPayments, isFetchingMemberPayments, fetchPaymentsErrorMessage } = state.members;
-
+  const emptyMessage = state.user.user.id === viewedMember.id ?
+    'What do ya got… alligator arms or something?' :
+    'Someone might not be carrying their weight around here…';
   return {
     trip: state.trips.viewedTrip,
     member: viewedMember,
     payments: memberPayments,
     dataSource: dataSource.cloneWithRows(memberPayments),
     isFetchingMemberPayments,
-    fetchPaymentsErrorMessage
+    fetchPaymentsErrorMessage,
+    emptyMessageVisible: showEmptyMessage(state.members),
+    emptyMessage
   };
 };
 

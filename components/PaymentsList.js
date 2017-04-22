@@ -15,6 +15,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ListImage from './../components/ListImage';
 import Money from './../components/MoneyView';
 import AsyncIndicator from './../components/AsyncIndicator';
+import EmptyMessage from './../components/EmptyMessageView';
 import { primaryColor } from './../constants';
 
 let styles = StyleSheet.create({
@@ -105,7 +106,13 @@ class PaymentsList extends Component {
   }
 
   render() {
-    const { isFetchingMemberPayments, fetchPaymentsErrorMessage, dataSource } = this.props;
+    const {
+      isFetchingMemberPayments,
+      fetchPaymentsErrorMessage,
+      dataSource,
+      emptyMessageVisible,
+      emptyMessage
+    } = this.props;
 
     return (
       <View>
@@ -113,6 +120,7 @@ class PaymentsList extends Component {
           active={isFetchingMemberPayments}
           errorMessage={fetchPaymentsErrorMessage}
           onRetryPress={this._loadPayments.bind(this)}/>
+        <EmptyMessage text={emptyMessage} hidden={!emptyMessageVisible} />
         <ListView
           dataSource={dataSource}
           enableEmptySections={true}

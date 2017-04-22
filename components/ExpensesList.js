@@ -103,7 +103,7 @@ class ExpensesList extends Component {
           active={isFetchingTripExpenses}
           errorMessage={fetchExpensesErrorMessage}
           onRetryPress={this._loadExpenses.bind(this)}/>
-        <EmptyMessage text="You haven't spent any money yet. This is a cheap trip!" hidden={!emptyMessageVisible} />
+        <EmptyMessage text="You haven't spent any money yet. Are you even having fun?!" hidden={!emptyMessageVisible} />
         <ListView
           dataSource={dataSource}
           enableEmptySections={true}
