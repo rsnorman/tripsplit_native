@@ -90,7 +90,12 @@ class ExpensesList extends Component {
   }
 
   render() {
-    const { isFetchingTripExpenses, fetchExpensesErrorMessage, dataSource } = this.props;
+    const {
+      isFetchingTripExpenses,
+      fetchExpensesErrorMessage,
+      dataSource,
+      emptyMessageVisible
+    } = this.props;
 
     return (
       <View>
@@ -98,7 +103,7 @@ class ExpensesList extends Component {
           active={isFetchingTripExpenses}
           errorMessage={fetchExpensesErrorMessage}
           onRetryPress={this._loadExpenses.bind(this)}/>
-        <EmptyMessage text="You haven't spent any money yet. This is a cheap trip!" hidden={!!this.props.expenses.length} />
+        <EmptyMessage text="You haven't spent any money yet. This is a cheap trip!" hidden={!emptyMessageVisible} />
         <ListView
           dataSource={dataSource}
           enableEmptySections={true}

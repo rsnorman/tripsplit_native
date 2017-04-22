@@ -17,6 +17,7 @@ import AsyncIndicator from './AsyncIndicator';
 import FormButton from './FormButton';
 import DeleteButton from './DeleteButton';
 import CurrencyTextInput from './CurrencyTextInput';
+import KeyboardDismisser from './KeyboardDismisser';
 import PurchaserPicker from './../containers/PurchaserPicker';
 
 import formStyles from '../styles/form';
@@ -114,53 +115,57 @@ class ExpenseForm extends Component {
     } = this.props;
 
     return (
-      <View style={styles.container}>
-        <View style={styles.form}>
-          <View style={styles.formRow}>
-            <TextInput
-              value={expense.name}
-              style={styles.input}
-              onChange={this.onNameChanged.bind(this)}
-              placeholder='Name (e.g., Gas, Horse Masks)'/>
+      <KeyboardDismisser>
+        <View style={styles.container}>
+          <View style={styles.form}>
+            <View style={styles.formRow}>
+              <TextInput
+                value={expense.name}
+                style={styles.input}
+                autoCapitalize="words"
+                onChange={this.onNameChanged.bind(this)}
+                placeholder='Name (e.g., Gas, Horse Masks)'/>
+            </View>
+            <View style={styles.formRow}>
+              <CurrencyTextInput
+                amount={expense.cost}
+                style={styles.input}
+                onChange={this.onCostChanged.bind(this)}
+                placeholder="Cost" />
+            </View>
+            <PurchaserPicker selectedPurchaserId={expense.purchaser_id} onPurchaserSelected={this.onPurchaserChanged.bind(this)} />
+            <View style={styles.formRow}>
+              <TextInput
+                value={expense.description}
+                style={styles.multiLineInput}
+                onChange={this.onDescriptionChanged.bind(this)}
+                multiline={true}
+                numberOfLines={3}
+                autoCapitalize="sentences"
+                placeholder='Description (optional)'/>
+            </View>
+            <FormButton
+              onPress={this.onSavePressed.bind(this)}
+              text="Save"
+              disabled={saveButtonDisabled} />
+            <DeleteButton
+              hidden={!showDeleteButton}
+              disabled={deleteButtonDisabled}
+              onPress={this.onDeletePressed.bind(this)} />
+            <View style={styles.formRow}>
+              <TouchableHighlight style={styles.cancelButton}
+                onPress={this.onCancelPressed.bind(this)}
+                underlayColor='white'>
+                <Text style={styles.cancelButtonText}>Cancel</Text>
+              </TouchableHighlight>
+            </View>
+            <AsyncIndicator
+              active={isSavingExpense || isDeletingExpense}
+              errorMessage={errorMessage} />
           </View>
-          <View style={styles.formRow}>
-            <CurrencyTextInput
-              amount={expense.cost}
-              style={styles.input}
-              onChange={this.onCostChanged.bind(this)}
-              placeholder="Cost" />
-          </View>
-          <PurchaserPicker selectedPurchaserId={expense.purchaser_id} onPurchaserSelected={this.onPurchaserChanged.bind(this)} />
-          <View style={styles.formRow}>
-            <TextInput
-              value={expense.description}
-              style={styles.multiLineInput}
-              onChange={this.onDescriptionChanged.bind(this)}
-              multiline={true}
-              numberOfLines={3}
-              placeholder='Description (optional)'/>
-          </View>
-          <FormButton
-            onPress={this.onSavePressed.bind(this)}
-            text="Save"
-            disabled={saveButtonDisabled} />
-          <DeleteButton
-            hidden={!showDeleteButton}
-            disabled={deleteButtonDisabled}
-            onPress={this.onDeletePressed.bind(this)} />
-          <View style={styles.formRow}>
-            <TouchableHighlight style={styles.cancelButton}
-              onPress={this.onCancelPressed.bind(this)}
-              underlayColor='white'>
-              <Text style={styles.cancelButtonText}>Cancel</Text>
-            </TouchableHighlight>
-          </View>
-          <AsyncIndicator
-            active={isSavingExpense || isDeletingExpense}
-            errorMessage={errorMessage} />
+          <Popup ref={popup => this.popup = popup }/>
         </View>
-        <Popup ref={popup => this.popup = popup }/>
-      </View>
+      </KeyboardDismisser>
     );
   }
 }

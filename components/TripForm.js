@@ -14,6 +14,7 @@ import Popup from 'react-native-popup';
 import AsyncIndicator from './AsyncIndicator';
 import FormButton from './FormButton';
 import DeleteButton from './DeleteButton';
+import KeyboardDismisser from './KeyboardDismisser';
 import formStyles from '../styles/form';
 import { primaryColor } from './../constants';
 
@@ -90,57 +91,62 @@ class TripForm extends Component {
     } = this.props;
 
     return (
-      <View style={styles.container}>
-        <View style={styles.formHeader}>
-          <Text style={styles.formHeaderText}>
-            {this.props.title}
-          </Text>
+      <KeyboardDismisser>
+        <View style={styles.container}>
+          <View style={styles.formHeader}>
+            <Text style={styles.formHeaderText}>
+              {this.props.title}
+            </Text>
+          </View>
+          <View style={styles.form}>
+            <View style={styles.formRow}>
+              <TextInput
+                value={this.props.trip.name}
+                style={styles.input}
+                autoCapitalize="words"
+                onChange={this.onNameChanged.bind(this)}
+                placeholder="Name (e.g., Joan's Bachelorette Party)"/>
+            </View>
+            <View style={styles.formRow}>
+              <TextInput
+                value={this.props.trip.location}
+                style={styles.input}
+                autoCapitalize="words"
+                onChange={this.onLocationChanged.bind(this)}
+                placeholder='Location'/>
+            </View>
+            <View style={styles.formRow}>
+              <TextInput
+                value={this.props.trip.description}
+                style={styles.multiLineInput}
+                onChange={this.onDescriptionChanged.bind(this)}
+                multiline={true}
+                numberOfLines={3}
+                autoCapitalize="sentences"
+                placeholder='Description (optional)'/>
+            </View>
+            <FormButton
+              onPress={this.onSavePressed.bind(this)}
+              text="Save"
+              disabled={saveButtonDisabled} />
+            <DeleteButton
+              hidden={!showDeleteButton}
+              disabled={deleteButtonDisabled}
+              onPress={this.onDeletePressed.bind(this)} />
+            <View style={styles.formRow}>
+              <TouchableHighlight style={styles.cancelButton}
+                onPress={this.onCancelPressed.bind(this)}
+                underlayColor='white'>
+                <Text style={styles.cancelButtonText}>Cancel</Text>
+              </TouchableHighlight>
+            </View>
+            <AsyncIndicator
+              active={isSavingTrip || isDeletingTrip}
+              errorMessage={errorMessage} />
+          </View>
+          <Popup ref={popup => this.popup = popup }/>
         </View>
-        <View style={styles.form}>
-          <View style={styles.formRow}>
-            <TextInput
-              value={this.props.trip.name}
-              style={styles.input}
-              onChange={this.onNameChanged.bind(this)}
-              placeholder="Name (e.g., Joan's Bachelorette Party)"/>
-          </View>
-          <View style={styles.formRow}>
-            <TextInput
-              value={this.props.trip.location}
-              style={styles.input}
-              onChange={this.onLocationChanged.bind(this)}
-              placeholder='Location'/>
-          </View>
-          <View style={styles.formRow}>
-            <TextInput
-              value={this.props.trip.description}
-              style={styles.multiLineInput}
-              onChange={this.onDescriptionChanged.bind(this)}
-              multiline={true}
-              numberOfLines={3}
-              placeholder='Description (optional)'/>
-          </View>
-          <FormButton
-            onPress={this.onSavePressed.bind(this)}
-            text="Save"
-            disabled={saveButtonDisabled} />
-          <DeleteButton
-            hidden={!showDeleteButton}
-            disabled={deleteButtonDisabled}
-            onPress={this.onDeletePressed.bind(this)} />
-          <View style={styles.formRow}>
-            <TouchableHighlight style={styles.cancelButton}
-              onPress={this.onCancelPressed.bind(this)}
-              underlayColor='white'>
-              <Text style={styles.cancelButtonText}>Cancel</Text>
-            </TouchableHighlight>
-          </View>
-          <AsyncIndicator
-            active={isSavingTrip || isDeletingTrip}
-            errorMessage={errorMessage} />
-        </View>
-        <Popup ref={popup => this.popup = popup }/>
-      </View>
+      </KeyboardDismisser>
     );
   }
 }

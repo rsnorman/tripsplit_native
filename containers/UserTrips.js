@@ -5,6 +5,10 @@ import { fetchTrips, addTrip, viewTrip } from '../actions/trip_actions';
 import TripsList from '../components/TripsList';
 import { ListView } from 'react-native';
 
+function showEmptyMessage(tripsState) {
+  return tripsState.trips.length === 0 && !tripsState.isFetchingTrips && !tripsState.fetchTripsErrorMessage;
+}
+
 const dataSource = new ListView.DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2,
 });
@@ -22,6 +26,7 @@ const mapStateToProps = (state) => {
     isViewingNewTripForm,
     isFetchingTrips,
     fetchTripsErrorMessage,
+    emptyMessageVisible: showEmptyMessage(state.trips),
     dataSource: dataSource.cloneWithRows(state.trips.trips)
   };
 };

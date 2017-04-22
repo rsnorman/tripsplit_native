@@ -15,6 +15,7 @@ import {
 
 import AsyncIndicator from './AsyncIndicator';
 import FormButton from './FormButton';
+import KeyboardDismisser from './KeyboardDismisser';
 
 let ScreenWidth = Dimensions.get("window").width;
 import formStyles from '../styles/form';
@@ -120,56 +121,56 @@ class RegisterScreen extends Component {
     } = this.props;
 
     return (
-      <View style={styles.container}>
-        <StatusBar barStyle='light-content' />
-        <View style={styles.form}>
-          <View style={styles.formRow}>
-            <TextInput
-              value={name}
-              style={styles.registerInput}
-              returnKeyType="go"
-              autoCorrect={false}
-              autoFocus={true}
-              onChange={this.onNameChanged.bind(this)}
-              placeholder='Name'/>
+      <KeyboardDismisser>
+        <View style={styles.container}>
+          <StatusBar barStyle='light-content' />
+          <View style={styles.form}>
+            <View style={styles.formRow}>
+              <TextInput
+                value={name}
+                style={styles.registerInput}
+                autoCapitalize="words"
+                autoCorrect={false}
+                autoFocus={true}
+                onChange={this.onNameChanged.bind(this)}
+                placeholder='Name'/>
+            </View>
+            <View style={styles.formRow}>
+              <TextInput
+                value={email}
+                style={styles.registerInput}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoCorrect={false}
+                onChange={this.onEmailChanged.bind(this)}
+                placeholder='Email'/>
+            </View>
+            <View style={styles.formRow}>
+              <TextInput
+                value={password}
+                style={styles.registerInput}
+                type="password"
+                secureTextEntry={true}
+                onChange={this.onPasswordChanged.bind(this)}
+                placeholder='Password'/>
+            </View>
+            <FormButton
+              text="Register"
+              onPress={this.onRegisterPress.bind(this)}
+              disabled={registerButtonDisabled} />
+            <AsyncIndicator active={isRegistering} errorMessage={registerErrorMessage} />
           </View>
-          <View style={styles.formRow}>
-            <TextInput
-              value={email}
-              style={styles.registerInput}
-              keyboardType="email-address"
-              returnKeyType="go"
-              autoCapitalize="none"
-              autoCorrect={false}
-              onChange={this.onEmailChanged.bind(this)}
-              placeholder='Email'/>
+          <View style={styles.loginSection}>
+            <Text style={styles.loginMessage}>Already have an account?</Text>
+            <TouchableHighlight
+              style={styles.loginButton}
+              underlayColor='transparent'
+              onPress={this.onLoginPress.bind(this)}>
+              <Text style={styles.loginButtonText}>Login.</Text>
+            </TouchableHighlight>
           </View>
-          <View style={styles.formRow}>
-            <TextInput
-              value={password}
-              style={styles.registerInput}
-              type="password"
-              returnKeyType="go"
-              secureTextEntry={true}
-              onChange={this.onPasswordChanged.bind(this)}
-              placeholder='Password'/>
-          </View>
-          <FormButton
-            text="Register"
-            onPress={this.onRegisterPress.bind(this)}
-            disabled={registerButtonDisabled} />
-          <AsyncIndicator active={isRegistering} errorMessage={registerErrorMessage} />
         </View>
-        <View style={styles.loginSection}>
-          <Text style={styles.loginMessage}>Already have an account?</Text>
-          <TouchableHighlight
-            style={styles.loginButton}
-            underlayColor='transparent'
-            onPress={this.onLoginPress.bind(this)}>
-            <Text style={styles.loginButtonText}>Login.</Text>
-          </TouchableHighlight>
-        </View>
-      </View>
+      </KeyboardDismisser>
     );
   }
 }

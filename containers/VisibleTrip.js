@@ -14,7 +14,7 @@ function showAddExpenseButton(state) {
 }
 
 function showAddMembersButton(state) {
-  return state.tripTabs.activeTabIndex == MEMBERS_TAB_INDEX && !!state.trips.viewedTrip.join_trip_url
+  return state.tripTabs.activeTabIndex == MEMBERS_TAB_INDEX && !!state.trips.viewedTrip.actions.create_member
 }
 
 const mapStateToProps = (state) => {
