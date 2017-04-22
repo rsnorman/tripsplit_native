@@ -13,8 +13,7 @@ const mapStateToProps = (state) => {
   let { purchasers } = state.trips.viewedTrip;
   let { selectedPurchaserId, onPurchaserSelected } = state.purchasersPicker;
 
-  purchasers = [{name: 'You', picture: state.user.user.picture}, ...purchasers];
-
+  purchasers = [{id: state.user.user.id, name: 'You', picture: state.user.user.picture}, ...purchasers];
   return {
     onSelect: onPurchaserSelected,
     selectedPurchaser: purchasers.filter((p) => p.id == selectedPurchaserId)[0],
