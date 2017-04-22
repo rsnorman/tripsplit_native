@@ -12,12 +12,15 @@ const dataSource = new ListView.DataSource({
 const mapStateToProps = (state) => {
   let { purchasers } = state.trips.viewedTrip;
   let { selectedPurchaserId, onPurchaserSelected } = state.purchasersPicker;
+  const currentUserPurchaser = {id: state.user.user.id, name: 'You', picture: state.user.user.picture};
 
-  purchasers = [{id: state.user.user.id, name: 'You', picture: state.user.user.picture}, ...purchasers];
+  purchasers = [currentUserPurchaser, ...purchasers];
+  let selectedPurchaser = purchasers.filter((p) => p.id == selectedPurchaserId)[0] || currentUserPurchaser;
+
   return {
     onSelect: onPurchaserSelected,
-    selectedPurchaser: purchasers.filter((p) => p.id == selectedPurchaserId)[0],
-    purchasers: purchasers,
+    selectedPurchaser,
+    purchasers,
     dataSource: dataSource.cloneWithRows(purchasers)
   };
 };
