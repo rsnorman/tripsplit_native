@@ -7,10 +7,12 @@ const EditExpenseFormStackNavigator = StackNavigator({
   EditExpense: {
     screen: EditExpense,
     navigationOptions: {
-      title: 'Edit Expense'
+      header: { visible: false }
     }
   },
   ExpensePurchasers: { screen: ExpensePurchasers }
+}, {
+  headerMode: 'screen'
 });
 
 AppRegistry.registerComponent('EditExpenseFormStackNavigator', () => EditExpenseFormStackNavigator);
