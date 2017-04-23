@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
     isSavingMember,
     errorMessage,
     newMember,
-    saveButtonDisabled
+    isValidMember
   } = state.members;
 
   return {
@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
     member: newMember,
     isSavingMember,
     errorMessage,
-    saveButtonDisabled
+    saveButtonDisabled: isSavingMember || !isValidMember,
   };
 };
 

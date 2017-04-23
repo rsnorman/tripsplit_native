@@ -1,18 +1,31 @@
-import { primaryColor } from './../constants';
+import { primaryColor, secondaryColor } from './../constants';
 
 export default formStyles = {
   formHeader: {
     alignSelf: 'stretch',
     alignItems: 'center',
-    paddingRight: 30,
-    paddingLeft: 30,
-    marginTop: 40
+    paddingRight: 5,
+    paddingLeft: 5,
+    marginTop: 25,
+    flexDirection: 'row'
   },
   formHeaderText: {
+    flex: 1,
     textAlign: 'center',
-    color: primaryColor,
     fontWeight: 'bold',
-    fontSize: 22
+    fontSize: 18
+  },
+  modalButton: {
+    color: primaryColor,
+    padding: 10,
+    fontSize: 16
+  },
+  submitModalButton: {
+    fontWeight: 'bold'
+  },
+  disabledModalButton: {
+    color: secondaryColor,
+    opacity: 0.7
   },
   form: {
     alignSelf: 'stretch',

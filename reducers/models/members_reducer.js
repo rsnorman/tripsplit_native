@@ -16,7 +16,8 @@ let initialMembersState = {
     name: null,
     email: null
   },
-  isSavingMember: false
+  isSavingMember: false,
+  isValidMember: false
 };
 
 const members = (state = initialMembersState, action) => {

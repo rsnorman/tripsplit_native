@@ -12,7 +12,7 @@ import {
 
 import Popup from 'react-native-popup';
 import AsyncIndicator from './AsyncIndicator';
-import FormButton from './FormButton';
+import ModalFormHeader from './ModalFormHeader';
 import DeleteButton from './DeleteButton';
 
 import formStyles from '../styles/form';
@@ -22,37 +22,6 @@ var styles = StyleSheet.create({
   ...formStyles,
   container: {
     alignItems: 'center'
-  },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  button: {
-    height: 36,
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: primaryColor,
-    borderColor: primaryColor,
-    borderWidth: 1,
-    borderRadius: 8,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
-  },
-  cancelButtonText: {
-    fontSize: 18,
-    color: primaryColor,
-    alignSelf: 'center'
-  },
-  cancelButton: {
-    height: 36,
-    flex: 1,
-    flexDirection: 'row',
-    borderColor: primaryColor,
-    borderWidth: 1,
-    borderRadius: 8,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
   }
 });
 
@@ -94,6 +63,7 @@ class UserForm extends Component {
   render() {
     const {
       user,
+      title,
       isSavingUser,
       saveButtonDisabled,
       deleteButtonDisabled,
@@ -102,11 +72,12 @@ class UserForm extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.formHeader}>
-          <Text style={styles.formHeaderText}>
-            {this.props.title}
-          </Text>
-        </View>
+        <ModalFormHeader
+          title={title}
+          submitText="Save"
+          onSubmitPress={this.onSavePressed.bind(this)}
+          submitButtonDisabled={saveButtonDisabled}
+          onCancelPress={this.onCancelPressed.bind(this)} />
         <View style={styles.form}>
           <View style={styles.formRow}>
             <TextInput
@@ -122,20 +93,9 @@ class UserForm extends Component {
               onChange={this.onEmailChanged.bind(this)}
               placeholder='Email'/>
           </View>
-          <FormButton
-            onPress={this.onSavePressed.bind(this)}
-            disabled={saveButtonDisabled}
-            text="Save" />
           <DeleteButton
             disabled={deleteButtonDisabled}
             onPress={this.onDeletePressed.bind(this)} />
-          <View style={styles.formRow}>
-            <TouchableHighlight style={styles.cancelButton}
-              onPress={this.onCancelPressed.bind(this)}
-              underlayColor='white'>
-              <Text style={styles.cancelButtonText}>Cancel</Text>
-            </TouchableHighlight>
-          </View>
           <AsyncIndicator
             active={isSavingUser}
             errorMessage={errorMessage} />
