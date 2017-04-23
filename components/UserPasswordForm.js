@@ -10,7 +10,7 @@ import {
   AppRegistry
 } from 'react-native';
 import AsyncIndicator from './AsyncIndicator';
-import FormButton from './FormButton';
+import ModalFormHeader from './ModalFormHeader';
 
 import formStyles from '../styles/form';
 import { primaryColor } from './../constants';
@@ -19,37 +19,6 @@ var styles = StyleSheet.create({
   ...formStyles,
   container: {
     alignItems: 'center'
-  },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  button: {
-    height: 36,
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: primaryColor,
-    borderColor: primaryColor,
-    borderWidth: 1,
-    borderRadius: 8,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
-  },
-  cancelButtonText: {
-    fontSize: 18,
-    color: primaryColor,
-    alignSelf: 'center'
-  },
-  cancelButton: {
-    height: 36,
-    flex: 1,
-    flexDirection: 'row',
-    borderColor: primaryColor,
-    borderWidth: 1,
-    borderRadius: 8,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
   }
 });
 
@@ -77,11 +46,12 @@ class UserPasswordForm extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.formHeader}>
-          <Text style={styles.formHeaderText}>
-            Change Password
-          </Text>
-        </View>
+        <ModalFormHeader
+          title="Change Password"
+          submitText="Save"
+          onSubmitPress={this.onSavePressed.bind(this)}
+          submitButtonDisabled={saveButtonDisabled}
+          onCancelPress={this.onCancelPressed.bind(this)} />
         <View style={styles.form}>
           <View style={styles.formRow}>
             <TextInput
@@ -106,17 +76,6 @@ class UserPasswordForm extends Component {
               secureTextEntry={true}
               onChange={this.onPasswordConfirmationChanged.bind(this)}
               placeholder='New Password Confirmation'/>
-          </View>
-          <FormButton
-            onPress={this.onSavePressed.bind(this)}
-            disabled={saveButtonDisabled}
-            text="Save" />
-          <View style={styles.formRow}>
-            <TouchableHighlight style={styles.cancelButton}
-              onPress={this.onCancelPressed.bind(this)}
-              underlayColor='white'>
-              <Text style={styles.cancelButtonText}>Cancel</Text>
-            </TouchableHighlight>
           </View>
           <AsyncIndicator
             active={isChangingUserPassword}

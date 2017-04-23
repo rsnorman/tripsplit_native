@@ -38,7 +38,9 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Adds trip and expense photos</string>
+	<string>Adds trip, user, and expense photos</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Takes trip, user, and expense photos</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>

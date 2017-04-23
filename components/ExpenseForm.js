@@ -19,6 +19,7 @@ import DeleteButton from './DeleteButton';
 import CurrencyTextInput from './CurrencyTextInput';
 import KeyboardDismisser from './KeyboardDismisser';
 import PurchaserPicker from './../containers/PurchaserPicker';
+import ModalFormHeader from './ModalFormHeader';
 
 import formStyles from '../styles/form';
 
@@ -26,41 +27,10 @@ var styles = StyleSheet.create({
   ...formStyles,
   container: {
     alignItems: 'center'
-  },
-  cancelButtonText: {
-    fontSize: 18,
-    color: primaryColor,
-    alignSelf: 'center'
-  },
-  cancelButton: {
-    height: 36,
-    flex: 1,
-    flexDirection: 'row',
-    borderColor: primaryColor,
-    borderWidth: 1,
-    borderRadius: 8,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
   }
 });
 
 class ExpenseForm extends Component {
-  static navigationOptions = {
-    header: {
-      style: {
-        backgroundColor: '#E9E9EF',
-        height: 100,
-        borderBottomWidth: 0
-      },
-      titleStyle: {
-        marginTop: 20,
-        fontWeight: 'bold',
-        fontSize: 22,
-      },
-      tintColor: primaryColor
-    }
-  };
-
   onNameChanged(event) {
     this.props.onExpenseAttributeSet('name', event.nativeEvent.text);
   }
@@ -117,6 +87,12 @@ class ExpenseForm extends Component {
     return (
       <KeyboardDismisser>
         <View style={styles.container}>
+          <ModalFormHeader
+            title={title}
+            submitText="Save"
+            onSubmitPress={this.onSavePressed.bind(this)}
+            submitButtonDisabled={saveButtonDisabled}
+            onCancelPress={this.onCancelPressed.bind(this)} />
           <View style={styles.form}>
             <View style={styles.formRow}>
               <TextInput
@@ -144,21 +120,10 @@ class ExpenseForm extends Component {
                 autoCapitalize="sentences"
                 placeholder='Description (optional)'/>
             </View>
-            <FormButton
-              onPress={this.onSavePressed.bind(this)}
-              text="Save"
-              disabled={saveButtonDisabled} />
             <DeleteButton
               hidden={!showDeleteButton}
               disabled={deleteButtonDisabled}
               onPress={this.onDeletePressed.bind(this)} />
-            <View style={styles.formRow}>
-              <TouchableHighlight style={styles.cancelButton}
-                onPress={this.onCancelPressed.bind(this)}
-                underlayColor='white'>
-                <Text style={styles.cancelButtonText}>Cancel</Text>
-              </TouchableHighlight>
-            </View>
             <AsyncIndicator
               active={isSavingExpense || isDeletingExpense}
               errorMessage={errorMessage} />

@@ -7,10 +7,12 @@ const NewExpenseFormStackNavigator = StackNavigator({
   NewExpense: {
     screen: NewExpense,
     navigationOptions: {
-      title: 'New Expense'
+      header: { visible: false }
     }
   },
   ExpensePurchasers: { screen: ExpensePurchasers }
+}, {
+  headerMode: 'screen'
 });
 
 AppRegistry.registerComponent('NewExpenseFormStackNavigator', () => NewExpenseFormStackNavigator);
