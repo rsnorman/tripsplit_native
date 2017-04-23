@@ -11,6 +11,7 @@ import {
   Modal,
   Button,
   Share,
+  Platform,
   AppRegistry
 } from 'react-native';
 
@@ -126,12 +127,18 @@ class TripView extends Component {
   }
 
   openShare() {
-    Share.share({
-      message: `Join ${this.props.trip.name} to help manage trip expenses! ${this.props.trip.join_trip_url}`,
-      url: this.props.trip.join_trip_url,
+    let shareAttrs = {
+      message: `Join ${this.props.trip.name} to help manage trip expenses!`,
       title: this.props.trip.name
-    },
-    {
+    };
+
+    if (Platform.OS === 'ios') {
+      shareAttrs['url'] = this.props.trip.join_trip_url;
+    } else {
+      shareAttrs['message'] = `${shareAttrs['message']} ${this.props.trip.join_trip_url}`;
+    }
+
+    Share.share(shareAttrs, {
       dialogTitle: `Join ${this.props.trip.name}`,
       tintColor: primaryColor
     });
