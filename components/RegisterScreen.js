@@ -131,7 +131,6 @@ class RegisterScreen extends Component {
                 style={styles.registerInput}
                 autoCapitalize="words"
                 autoCorrect={false}
-                autoFocus={true}
                 onChange={this.onNameChanged.bind(this)}
                 placeholder='Name'/>
             </View>

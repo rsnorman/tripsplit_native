@@ -133,7 +133,6 @@ class LoginScreen extends Component {
                   keyboardType="email-address"
                   autoCapitalize="none"
                   autoCorrect={false}
-                  autoFocus={true}
                   onChange={this.onEmailChanged.bind(this)}
                   placeholder='Email'/>
               </View>

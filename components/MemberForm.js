@@ -61,6 +61,7 @@ class MemberForm extends Component {
           <View style={styles.formRow}>
             <TextInput
               value={member.name}
+              autoCapitalize="words"
               style={styles.input}
               onChange={this.onNameChanged.bind(this)}
               placeholder='Name'/>
