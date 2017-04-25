@@ -91,6 +91,9 @@ class PaymentsList extends Component {
   }
 
   renderSectionHeader(sectionData, sectionID) {
+    if (sectionID === 's1') {
+      return <View />
+    }
     return (
       <View style={styles.sectionHeader}>
         <Text styles={styles.sectionLabel}>{sectionID}</Text>
