@@ -56,6 +56,10 @@ class HeaderImage extends Component {
     // More info on all the options is below in the README...just some common use cases shown here
     let options = {
       title: `Select ${this.props.title} Image`,
+      mediaType: 'photo',
+      quality: 0.8,
+      maxWidth: 500,
+      maxHeight: 500,
       storageOptions: {
         skipBackup: true,
         path: 'images'
