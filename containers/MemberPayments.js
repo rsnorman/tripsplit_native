@@ -11,6 +11,7 @@ function showEmptyMessage(membersState) {
 
 const dataSource = new ListView.DataSource({
     rowHasChanged: (r1, r2) => r1.id !== r2.id,
+    sectionHeaderHasChanged: (h1, h2) => h1 !== h2
 });
 
 const mapStateToProps = (state) => {
@@ -18,11 +19,23 @@ const mapStateToProps = (state) => {
   const emptyMessage = state.user.user.id === viewedMember.id ?
     'What do ya got… alligator arms or something?' :
     'Someone might not be carrying their weight around here…';
+
+  let memberDataSource;
+
+  if (memberPayments.length > 0) {
+    const paymentLabel = state.user.user.id === viewedMember.id ? 'Purchases' : 'Payments';
+    let dataBlob = {};
+    dataBlob[paymentLabel] = memberPayments;
+    memberDataSource = dataSource.cloneWithRowsAndSections(dataBlob, [paymentLabel]);
+  } else {
+    memberDataSource = dataSource.cloneWithRows(memberPayments);
+  }
+
   return {
     trip: state.trips.viewedTrip,
     member: viewedMember,
     payments: memberPayments,
-    dataSource: dataSource.cloneWithRows(memberPayments),
+    dataSource: memberDataSource,
     isFetchingMemberPayments,
     fetchPaymentsErrorMessage,
     emptyMessageVisible: showEmptyMessage(state.members),

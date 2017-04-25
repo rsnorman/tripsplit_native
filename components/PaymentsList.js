@@ -65,6 +65,19 @@ let styles = StyleSheet.create({
   runningTotalLabel: {
     textAlign: 'center',
     color: '#5e5e5e'
+  },
+  sectionHeader: {
+    backgroundColor: '#EFEFF2',
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#cdcdcd'
+  },
+  sectionText: {
+    fontWeight: 'bold',
+    color: 'darkgray'
   }
 });
 
@@ -75,6 +88,14 @@ class PaymentsList extends Component {
 
   componentDidMount() {
     this._loadPayments();
+  }
+
+  renderSectionHeader(sectionData, sectionID) {
+    return (
+      <View style={styles.sectionHeader}>
+        <Text styles={styles.sectionLabel}>{sectionID}</Text>
+      </View>
+    );
   }
 
   renderRow(rowData, sectionID, rowID) {
@@ -124,7 +145,8 @@ class PaymentsList extends Component {
         <ListView
           dataSource={dataSource}
           enableEmptySections={true}
-          renderRow={this.renderRow.bind(this)}/>
+          renderRow={this.renderRow}
+          renderSectionHeader={this.renderSectionHeader}/>
       </View>
     );
   }
