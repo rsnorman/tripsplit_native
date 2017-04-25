@@ -88,6 +88,10 @@ class Profile extends Component {
     })
   };
 
+  componentDidMount() {
+    this.props.onUserProfileLoad(this.props.user);
+  }
+
   updateUserImage(image) {
     this.props.onUserImageChanged(this.props.user, image);
   }

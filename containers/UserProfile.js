@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
 import Profile from '../components/Profile';
-import { updateUserImage, editUserPassword } from '../actions/user_actions';
+import { refreshUser, updateUserImage, editUserPassword } from '../actions/user_actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -16,6 +16,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    onUserProfileLoad: (user) => {
+      dispatch(refreshUser(user));
+    },
     onUserImageChanged: (user, image) => {
       dispatch(updateUserImage(user, image));
     },
