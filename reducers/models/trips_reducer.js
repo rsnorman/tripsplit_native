@@ -212,6 +212,16 @@ const trips = (state = initialTripState, action) => {
         trips: tripsWithUpdatedExpenses,
         viewedTrip: action.expense.trip
       };
+    case 'MEMBER_CREATE_SUCCESS':
+    case 'MEMBER_DELETE_SUCCESS':
+      let updatedTripMemberIndex = state.trips.findIndex((trip) => trip.id === action.member.trip.id);
+      let tripsWithUpdatedMembers = JSON.parse(JSON.stringify(state.trips));
+      tripsWithUpdatedMembers[updatedTripMemberIndex] = action.member.trip;
+      return {
+        ...state,
+        trips: tripsWithUpdatedMembers,
+        viewedTrip: action.member.trip
+      };
     default:
       return state;
   }
