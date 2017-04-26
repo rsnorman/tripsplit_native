@@ -7,15 +7,12 @@ import {
   ListView,
   Text,
   ActivityIndicator,
-  Dimensions,
   Modal,
   Button,
   AppRegistry
 } from 'react-native';
 
 var ImagePicker = require('react-native-image-picker');
-
-let ScreenHeight = Dimensions.get("window").height;
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 

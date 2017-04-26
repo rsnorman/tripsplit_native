@@ -6,12 +6,9 @@ import {
   TouchableHighlight,
   ListView,
   Text,
-  Dimensions,
   Modal,
   AppRegistry
 } from 'react-native';
-
-let ScreenHeight = Dimensions.get("window").height;
 
 import ListImage from './../components/ListImage';
 import NewTrip from './../containers/NewTrip';
@@ -24,7 +21,7 @@ import { primaryColor } from './../constants';
 
 let styles = StyleSheet.create({
   container: {
-    height: ScreenHeight - 64
+    flex: 1
   },
   textContainer: {
     flex: 1

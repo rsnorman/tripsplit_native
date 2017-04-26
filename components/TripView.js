@@ -7,15 +7,12 @@ import {
   ListView,
   Text,
   ActivityIndicator,
-  Dimensions,
   Modal,
   Button,
   Share,
   Platform,
   AppRegistry
 } from 'react-native';
-
-let ScreenHeight = Dimensions.get("window").height;
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -33,7 +30,7 @@ import { primaryColor } from './../constants';
 
 let styles = StyleSheet.create({
   container: {
-    height: ScreenHeight - 64
+    flex: 1
   },
   containerHeader: {
     alignSelf: 'stretch',
