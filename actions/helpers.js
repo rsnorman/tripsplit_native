@@ -18,7 +18,11 @@ export const applyAuthenticationHeaders = (fetchOptions, session) => {
 export const parseResponse = (successStatus: number, errorMessage: string) => {
   return (response) => {
     if (response.status !== successStatus) {
-      throw(errorMessage);
+      if (response.status === 401) {
+        throw('Unauthorized');
+      } else {
+        throw(errorMessage);
+      }
     }
     return response.json();
   }
