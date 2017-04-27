@@ -1,5 +1,6 @@
 import { NavigationActions } from 'react-navigation';
 import SessionStackNavigator from './../../components/SessionStackNavigator';
+import stateForRoute from './../../helpers/state-navigator';
 
 const sessionNav = (state, action) => {
   switch (action.type) {
@@ -11,7 +12,7 @@ const sessionNav = (state, action) => {
         return SessionStackNavigator.router.getStateForAction(NavigationActions.back(), state);
       }
     case 'VIEW_REGISTRATION':
-      return SessionStackNavigator.router.getStateForAction(NavigationActions.navigate({ routeName: 'NewAccount' }), state);
+      return stateForRoute(SessionStackNavigator.router, state, 'NewAccount');
     case 'VIEW_LOGIN':
       return SessionStackNavigator.router.getStateForAction(NavigationActions.back(), state);
     default:
