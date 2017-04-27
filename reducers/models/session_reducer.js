@@ -69,6 +69,12 @@ const session = (state = defaultUser, action) => {
         session: null,
         password: null,
       };
+    case 'UNAUTHORIZED':
+      return {
+        ...state,
+        session: null,
+        password: null
+      };
     default:
       return state;
   }
