@@ -185,7 +185,7 @@ class TripView extends Component {
                   </View>
                 </View>
                 <View style={styles.organizer}>
-                  <Text style={styles.organizerLabel}>Organized by: {trip.organizer.name}</Text>
+                  <Text style={styles.organizerLabel}>Organized by {trip.organizer.name}</Text>
                 </View>
                 <TouchableHighlight style={styles.shareButton} onPress={this.openShare.bind(this)} underlayColor="transparent">
                   <View>

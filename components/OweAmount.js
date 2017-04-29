@@ -29,7 +29,7 @@ class OweAmount extends Component {
 
     return (
       <View style={styles.oweContainer}>
-        <Text style={styles.oweContainerLabel}>{text}: <Money amount={amount} /></Text>
+        <Text style={styles.oweContainerLabel}>{text} <Money amount={amount} /></Text>
       </View>
     );
   }

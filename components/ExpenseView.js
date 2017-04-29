@@ -124,7 +124,7 @@ class ExpenseView extends Component {
                   </View>
                 </View>
                 <View style={styles.purchaser}>
-                  <Text style={styles.purchaserLabel}>Purchased by: {expense.purchaser.name || expense.purchaser.email}</Text>
+                  <Text style={styles.purchaserLabel}>Purchased by {expense.purchaser.name || expense.purchaser.email}</Text>
                 </View>
               </View>
             </View>

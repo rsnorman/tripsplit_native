@@ -146,6 +146,8 @@ class ObligationView extends Component {
 
     let markAsPaidView = obligation.is_paid ? removePaymentButton : payButton;
 
+    const paymentLabel = obligation.is_paid ? `Already paid by ${obligation.user.name}` : `Payment required from ${obligation.user.name}`;
+
     return (
       <View style={styles.container}>
         <View style={styles.containerHeader}>
@@ -166,7 +168,7 @@ class ObligationView extends Component {
                 </View>
               </View>
               <View style={styles.obligator}>
-                <Text style={styles.obligatorLabel}>Payment required: {obligation.user.name}</Text>
+                <Text style={styles.obligatorLabel}>{paymentLabel}</Text>
               </View>
             </View>
           </View>
