@@ -1,5 +1,5 @@
 import { applyAuthenticationHeaders, parseResponse } from './helpers';
-import { membersFetchFailure, paymentsFetchFailure } from './error_actions';
+import { membersFetchFailure, paymentsFetchFailure, memberPhotoUpdateFailure, memberDeleteFailure } from './error_actions';
 
 import { tripMemberSaveFailure } from './error_actions';
 
@@ -110,5 +110,85 @@ export const createTripMember = (newMember) => {
       .then(parseResponse(200, 'There was an error saving. Please try again.'))
       .then(json => dispatch(tripMemberCreateSuccess(json)))
       .catch(error => dispatch(tripMemberSaveFailure(error)))
+  }
+}
+
+function startUpdatingMemberImage() {
+  return {
+    type: 'START_UPDATING_MEMBER_IMAGE'
+  }
+}
+
+function memberImageUpdateSuccess(member) {
+  return {
+    type: 'MEMBER_IMAGE_UPDATE_SUCCESS',
+    member
+  }
+}
+
+export const updateMemberImage = (member, image) => {
+  const body = new FormData();
+
+  body.append('member[picture]', {
+    uri: image.uri,
+    type: 'image/jpeg',
+    name: image.fileName
+  });
+
+  return dispatch => {
+    const { session } = dispatch(startUpdatingMemberImage())
+    const { url, method } = member.actions.update;
+
+    return fetch(url, applyAuthenticationHeaders({
+      method: method,
+      body: body
+    }, session))
+      .then(parseResponse(200, 'There was an error uploading member image. Please try again.'))
+      .then(json => dispatch(memberImageUpdateSuccess(json)))
+      .catch(error => dispatch(memberPhotoUpdateFailure(error)))
+  }
+}
+
+export const hideConfirmDeleteMember = () => {
+  return {
+    type: 'HIDE_CONFIRM_POPUP'
+  };
+}
+
+export const confirmDeleteMember = (member, confirmCallback, cancelCallback) => {
+  return {
+    type: 'CONFIRM_ACTION',
+    title: 'Remove Member',
+    message: `Are you sure you want to remove ${member.name} from the trip?`,
+    confirmCallback,
+    cancelCallback
+  };
+}
+
+function startDeletingMember() {
+  return {
+    type: 'START_DELETING_MEMBER'
+  }
+}
+
+function memberDeleteSuccess(member) {
+  return {
+    type: 'MEMBER_DELETE_SUCCESS',
+    member
+  }
+}
+
+export const deleteMember = (member) => {
+  return dispatch => {
+    const { session } = dispatch(startDeletingMember())
+    const { url, method } = member.actions.delete;
+
+    return fetch(url, applyAuthenticationHeaders({
+      method: method
+    }, session))
+      .then(parseResponse(200, 'There was an error deleting. Please try again.'))
+      .then(json => dispatch(memberDeleteSuccess(json)))
+      .catch(error => dispatch(memberDeleteFailure(error)))
+
   }
 }

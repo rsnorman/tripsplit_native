@@ -16,7 +16,7 @@ import ModalFormHeader from './ModalFormHeader';
 import DeleteButton from './DeleteButton';
 import KeyboardDismisser from './KeyboardDismisser';
 import formStyles from '../styles/form';
-import { primaryColor } from './../constants';
+import { primaryColor, dangerColor } from './../constants';
 
 var styles = StyleSheet.create({
   ...formStyles,
@@ -51,7 +51,7 @@ class TripForm extends Component {
       ok: {
         text: 'Yes',
         style: {
-            color: 'red'
+            color: dangerColor
         },
         callback: () => {
             this.props.onDelete(this.props.trip);

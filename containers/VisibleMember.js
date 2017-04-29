@@ -1,19 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { } from '../actions/member_actions';
+import { updateMemberImage } from '../actions/member_actions';
 import MemberView from './../components/MemberView'
 
 const mapStateToProps = (state) => {
+  const { viewedMember, isUploadingMemberImage, uploadPhotoErrorMessage } = state.members;
+  console.log(viewedMember);
   return {
-    member: state.members.viewedMember,
-    isLoggedInUser: state.members.viewedMember.id == state.user.user.id,
-    isFetchingMemberPurchases: true
+    member: viewedMember,
+    isLoggedInUser: viewedMember.id == state.user.user.id,
+    isFetchingMemberPurchases: true,
+    canEditPhoto: !!viewedMember.actions.update,
+    isUploadingMemberImage,
+    uploadPhotoErrorMessage
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return { };
+    return {
+      onMemberImageChanged: (member, image) => {
+        dispatch(updateMemberImage(member, image))
+      }
+    };
 };
 
 const VisibleMember = connect(

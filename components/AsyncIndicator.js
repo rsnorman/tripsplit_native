@@ -8,14 +8,14 @@ import {
   AppRegistry
 } from 'react-native';
 
-import { primaryColor } from './../constants'
+import { primaryColor, dangerColor } from './../constants'
 
 let styles = StyleSheet.create({
   container: {
     marginTop: 15
   },
   error: {
-    color: 'red',
+    color: dangerColor,
     textAlign: 'center'
   }
 });

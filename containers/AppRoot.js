@@ -44,10 +44,10 @@ class AppRoot extends React.Component {
 
         if (!!session) {
             return (
-                <RootNavigator navigation={addNavigationHelpers({
-                    dispatch: dispatch,
-                    state: navigation
-                })}/>
+              <RootNavigator navigation={addNavigationHelpers({
+                  dispatch: dispatch,
+                  state: navigation
+              })}/>
             );
         } else if (isInitializing) {
           return (

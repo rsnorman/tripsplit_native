@@ -1,7 +1,8 @@
 export const baseUrl = 'https://tripsplit.herokuapp.com/api/v1';
 // export const baseUrl = 'http://0.0.0.0:3000/api/v1';
 export const primaryColor = '#3F98BD';
-export const secondaryColor = blendColors(primaryColor, '#FFFFFF', 0.2)
+export const secondaryColor = blendColors(primaryColor, '#FFFFFF', 0.2);
+export const dangerColor = '#D0182F';
 
 function blendColors(c0, c1, p) {
     var f=parseInt(c0.slice(1),16),t=parseInt(c1.slice(1),16),R1=f>>16,G1=f>>8&0x00FF,B1=f&0x0000FF,R2=t>>16,G2=t>>8&0x00FF,B2=t&0x0000FF;

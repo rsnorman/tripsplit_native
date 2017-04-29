@@ -9,6 +9,8 @@ import {
 
 import formStyles from '../styles/form';
 
+import { dangerColor } from './../constants';
+
 let styles = StyleSheet.create({
   ...formStyles,
   buttonText: {
@@ -20,8 +22,8 @@ let styles = StyleSheet.create({
     height: 36,
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'red',
-    borderColor: 'red',
+    backgroundColor: dangerColor,
+    borderColor: dangerColor,
     borderWidth: 1,
     borderRadius: 8,
     alignSelf: 'stretch',
@@ -31,8 +33,8 @@ let styles = StyleSheet.create({
     height: 36,
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'red',
-    borderColor: 'red',
+    backgroundColor: dangerColor,
+    borderColor: dangerColor,
     opacity: 0.4,
     borderWidth: 1,
     borderRadius: 8,
@@ -53,7 +55,7 @@ class DeleteButton extends Component {
       return (
         <View style={styles.formRow}>
           <TouchableHighlight style={styles.disabledButton}
-            underlayColor='red'>
+            underlayColor={dangerColor}>
             <Text style={styles.buttonText}>Delete</Text>
           </TouchableHighlight>
         </View>
@@ -63,7 +65,7 @@ class DeleteButton extends Component {
       <View style={styles.formRow}>
         <TouchableHighlight style={styles.button}
           onPress={onPress}
-          underlayColor='red'>
+          underlayColor={dangerColor}>
           <Text style={styles.buttonText}>Delete</Text>
         </TouchableHighlight>
       </View>

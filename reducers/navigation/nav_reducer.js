@@ -16,6 +16,7 @@ const nav = (state, action) => {
     case 'VIEW_EXPENSE':
       return stateForRoute(TripStackNavigator.router, state, 'VisibleExpense', { expense: action.expense } );
     case 'EXPENSE_DELETE_SUCCESS':
+    case 'MEMBER_DELETE_SUCCESS':
       return TripStackNavigator.router.getStateForAction(NavigationActions.back(), state);
     case 'VIEW_OBLIGATION':
       return stateForRoute(TripStackNavigator.router, state, 'VisibleObligation', { expense: action.obligation.expense } );
