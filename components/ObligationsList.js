@@ -38,11 +38,11 @@ let styles = StyleSheet.create({
   paidIndicator: { },
   paidIndicatorLabel: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 13,
     color: primaryColor
   },
   unpaidIndicatorLabel: {
-    fontSize: 16,
+    fontSize: 13,
     color: grayColor
   }
 });
