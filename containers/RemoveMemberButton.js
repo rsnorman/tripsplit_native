@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AppRegistry, Button, View } from 'react-native';
+import { AppRegistry, Button, View, StyleSheet } from 'react-native';
 import AsyncIndicator from './../components/AsyncIndicator';
 import { confirmDeleteMember, hideConfirmDeleteMember, deleteMember } from '../actions/member_actions';
 import { dangerColor } from './../constants';
@@ -31,6 +31,12 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+const styles = StyleSheet.create({
+  spinner: {
+    marginRight: 5
+  }
+})
+
 const RemoveMemberButton = connect(
   mapStateToProps,
   mapDispatchToProps
@@ -40,7 +46,7 @@ const RemoveMemberButton = connect(
   }
 
   if (isDeletingMember) {
-    return <AsyncIndicator active={true} />
+    return <View style={styles.spinner}><AsyncIndicator active={true} size="small" /></View>
   }
 
   return (
