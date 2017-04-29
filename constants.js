@@ -1,6 +1,6 @@
 import blendColors from './helpers/color-blender';
 
-const isRelease = false
+const isRelease = true
 export const baseUrl = isRelease ? 'https://tripsplit.herokuapp.com/api/v1' : 'http://0.0.0.0:3000/api/v1';
 export const primaryColor = '#3F98BD';
 export const secondaryColor = blendColors(primaryColor, '#FFFFFF', 0.3);
