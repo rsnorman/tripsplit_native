@@ -88,7 +88,8 @@ let styles = StyleSheet.create({
 class MemberView extends Component {
   static navigationOptions = {
     title: (navigation) => {
-      return navigation.state.params.member.name;
+      const { name } = navigation.state.params.member;
+      return name[name.length - 1] === 's' ? `${name}' Activity` : `${name}'s Activity`;
     },
     header: {
       right: (

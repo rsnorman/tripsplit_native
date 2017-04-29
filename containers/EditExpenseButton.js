@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AppRegistry, Button, View } from 'react-native';
+import { AppRegistry, View } from 'react-native';
+import HeaderButton from './../components/HeaderButton';
 import { editExpense } from '../actions/expense_actions';
-import { primaryColor } from './../constants';
 
 const mapStateToProps = (state) => {
   let expense = state.expenses.viewedExpense;
@@ -29,9 +29,8 @@ const EditExpenseButton = connect(
   }
 
   return (
-    <Button
+    <HeaderButton
       color={primaryColor}
-      title='Edit'
       onPress={() => onBeginEditingExpense(expense)}
     />
   );

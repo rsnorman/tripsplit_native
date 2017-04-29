@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AppRegistry, Button } from 'react-native';
+import { AppRegistry } from 'react-native';
+import HeaderButton from './../components/HeaderButton';
 import { editUser } from '../actions/user_actions';
-import { primaryColor } from './../constants';
 
 const mapStateToProps = (state) => {
   return {
@@ -23,9 +23,8 @@ const EditUserButton = connect(
   mapDispatchToProps
 )(({ user, onBeginEditingProfile }) => {
   return (
-    <Button
-      title='Edit'
-      color={primaryColor}
+    <HeaderButton
+      text='Edit'
       onPress={() => onBeginEditingProfile(user)}
     />
   );

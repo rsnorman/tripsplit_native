@@ -20,22 +20,11 @@ const mapStateToProps = (state) => {
     'What do ya got… alligator arms or something?' :
     'Someone might not be carrying their weight around here…';
 
-  let memberDataSource;
-
-  if (memberPayments.length > 0) {
-    const paymentLabel = state.user.user.id === viewedMember.id ? 'Your Purchases & Payments' : 'Purchases & Payments Between You';
-    let dataBlob = {};
-    dataBlob[paymentLabel] = memberPayments;
-    memberDataSource = dataSource.cloneWithRowsAndSections(dataBlob, [paymentLabel]);
-  } else {
-    memberDataSource = dataSource.cloneWithRows(memberPayments);
-  }
-
   return {
     trip: state.trips.viewedTrip,
     member: viewedMember,
     payments: memberPayments,
-    dataSource: memberDataSource,
+    dataSource: dataSource.cloneWithRows(memberPayments),
     isFetchingMemberPayments,
     fetchPaymentsErrorMessage,
     emptyMessageVisible: showEmptyMessage(state.members),

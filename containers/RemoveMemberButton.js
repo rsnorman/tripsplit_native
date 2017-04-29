@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AppRegistry, Button, View, StyleSheet } from 'react-native';
+import { AppRegistry, View, StyleSheet } from 'react-native';
 import AsyncIndicator from './../components/AsyncIndicator';
+import HeaderButton from './../components/HeaderButton';
 import { confirmDeleteMember, hideConfirmDeleteMember, deleteMember } from '../actions/member_actions';
 import { dangerColor } from './../constants';
 
@@ -50,9 +51,9 @@ const RemoveMemberButton = connect(
   }
 
   return (
-    <Button
+    <HeaderButton
       color={dangerColor}
-      title='Remove'
+      text='Remove'
       onPress={() => onBeginRemovingMember(member)}
     />
   );

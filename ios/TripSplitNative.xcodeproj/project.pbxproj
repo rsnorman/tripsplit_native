@@ -35,19 +35,10 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* TripSplitNativeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* TripSplitNativeTests.m */; };
-		3B6522C645234EDF9E0DC82B /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67B9719B7AD24A9C88E90AB9 /* MaterialCommunityIcons.ttf */; };
-		3BD012277EA64134BE36A601 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C833346C702B4E289C5457AD /* MaterialIcons.ttf */; };
-		5A14D94FC2964ED4A25B8A3E /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C2B434B8628A4877B4374F94 /* SimpleLineIcons.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		836C8ADA1EAAB8CF006803D0 /* trip-split-loading-screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 836C8AD91EAAB8CF006803D0 /* trip-split-loading-screen.png */; };
-		93237D47BA2E48AEBDD6E2B4 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 81D148C541F34CB68DF674A8 /* Zocial.ttf */; };
-		A6CDE2E29A7C406EB4125821 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE48B45821CF47169AB9A589 /* Octicons.ttf */; };
-		B18F3241014A433FAFBC37C5 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28D22DEECAC6453796F14A6A /* Entypo.ttf */; };
-		B92E62F76E26403EA269BD50 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19F2630E8D6243E0A045E6FE /* EvilIcons.ttf */; };
-		B9D9E0E598EB4E109B461A47 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 71529ADACF3B46DBB59CC6A5 /* Foundation.ttf */; };
 		BAA47EB09A8F46BAA0AC29FD /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F568DF76ED64652BC43258D /* FontAwesome.ttf */; };
-		CF4FD27CB02A4058B14ACF16 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C779D45FDE1F4B35A37EE1EC /* Ionicons.ttf */; };
 		FECB93F622B34B13BC41773E /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF1AD5C336C4EB18B1E5052 /* libRNImagePicker.a */; };
 /* End PBXBuildFile section */
 
@@ -277,26 +268,17 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TripSplitNative/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = TripSplitNative/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
-		19F2630E8D6243E0A045E6FE /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
-		28D22DEECAC6453796F14A6A /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* TripSplitNative-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TripSplitNative-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* TripSplitNative-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TripSplitNative-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CD4B53E622C41F585174860 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
-		67B9719B7AD24A9C88E90AB9 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		6EF1AD5C336C4EB18B1E5052 /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
 		6F568DF76ED64652BC43258D /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
-		71529ADACF3B46DBB59CC6A5 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
-		81D148C541F34CB68DF674A8 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		836C8AD91EAAB8CF006803D0 /* trip-split-loading-screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "trip-split-loading-screen.png"; path = "../../../../Desktop/Ka-tet Development/trip-split-loading-screen.png"; sourceTree = "<group>"; };
 		95BF3A435E564B8FB2B0B23A /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		A2376B3E96A940039F2FF9FD /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
-		AE48B45821CF47169AB9A589 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
-		C2B434B8628A4877B4374F94 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
-		C779D45FDE1F4B35A37EE1EC /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		C833346C702B4E289C5457AD /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		D31B6B097B1640FBA8BC11DE /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -558,16 +540,7 @@
 			isa = PBXGroup;
 			children = (
 				836C8AD91EAAB8CF006803D0 /* trip-split-loading-screen.png */,
-				28D22DEECAC6453796F14A6A /* Entypo.ttf */,
-				19F2630E8D6243E0A045E6FE /* EvilIcons.ttf */,
 				6F568DF76ED64652BC43258D /* FontAwesome.ttf */,
-				71529ADACF3B46DBB59CC6A5 /* Foundation.ttf */,
-				C779D45FDE1F4B35A37EE1EC /* Ionicons.ttf */,
-				67B9719B7AD24A9C88E90AB9 /* MaterialCommunityIcons.ttf */,
-				C833346C702B4E289C5457AD /* MaterialIcons.ttf */,
-				AE48B45821CF47169AB9A589 /* Octicons.ttf */,
-				C2B434B8628A4877B4374F94 /* SimpleLineIcons.ttf */,
-				81D148C541F34CB68DF674A8 /* Zocial.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -654,16 +627,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 610;
-				ORGANIZATIONNAME = Facebook;
+				ORGANIZATIONNAME = "Ka-tet Development";
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 4ZN57V3JPU;
+						DevelopmentTeam = ZH7Q4VCUAY;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 4ZN57V3JPU;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = ZH7Q4VCUAY;
+						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -961,17 +934,8 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				B18F3241014A433FAFBC37C5 /* Entypo.ttf in Resources */,
-				B92E62F76E26403EA269BD50 /* EvilIcons.ttf in Resources */,
 				BAA47EB09A8F46BAA0AC29FD /* FontAwesome.ttf in Resources */,
-				B9D9E0E598EB4E109B461A47 /* Foundation.ttf in Resources */,
-				CF4FD27CB02A4058B14ACF16 /* Ionicons.ttf in Resources */,
-				3B6522C645234EDF9E0DC82B /* MaterialCommunityIcons.ttf in Resources */,
-				3BD012277EA64134BE36A601 /* MaterialIcons.ttf in Resources */,
-				A6CDE2E29A7C406EB4125821 /* Octicons.ttf in Resources */,
-				5A14D94FC2964ED4A25B8A3E /* SimpleLineIcons.ttf in Resources */,
 				836C8ADA1EAAB8CF006803D0 /* trip-split-loading-screen.png in Resources */,
-				93237D47BA2E48AEBDD6E2B4 /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1090,7 +1054,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 4ZN57V3JPU;
+				DEVELOPMENT_TEAM = ZH7Q4VCUAY;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1113,7 +1077,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = 4ZN57V3JPU;
+				DEVELOPMENT_TEAM = ZH7Q4VCUAY;
 				INFOPLIST_FILE = TripSplitNativeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1134,7 +1098,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 4ZN57V3JPU;
+				DEVELOPMENT_TEAM = ZH7Q4VCUAY;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TripSplitNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1143,9 +1107,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.katetdev.TripSplitNative;
+				PRODUCT_BUNDLE_IDENTIFIER = io.katetdev.tripsplit;
 				PRODUCT_NAME = TripSplitNative;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "b1b44fa4-130d-476d-b54b-ea3ebf27d3a7";
+				PROVISIONING_PROFILE_SPECIFIER = TripSplit;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1156,7 +1121,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4ZN57V3JPU;
+				DEVELOPMENT_TEAM = ZH7Q4VCUAY;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TripSplitNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1165,9 +1130,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.katetdev.TripSplitNative;
+				PRODUCT_BUNDLE_IDENTIFIER = io.katetdev.tripsplit;
 				PRODUCT_NAME = TripSplitNative;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "b1b44fa4-130d-476d-b54b-ea3ebf27d3a7";
+				PROVISIONING_PROFILE_SPECIFIER = TripSplit;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

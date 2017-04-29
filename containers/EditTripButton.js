@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry, Button, View } from 'react-native';
+import HeaderButton from './../components/HeaderButton';
 import { editTrip } from '../actions/trip_actions';
-import { primaryColor } from './../constants';
 
 const mapStateToProps = (state) => {
   return {
@@ -28,9 +28,8 @@ const EditTripButton = connect(
   }
 
   return (
-    <Button
-      title='Edit'
-      color={primaryColor}
+    <HeaderButton
+      text='Edit'
       onPress={() => onBeginEditingTrip(trip)}
     />
   );
