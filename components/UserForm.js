@@ -16,7 +16,7 @@ import ModalFormHeader from './ModalFormHeader';
 import DeleteButton from './DeleteButton';
 
 import formStyles from '../styles/form';
-import { primaryColor } from './../constants';
+import { primaryColor, dangerColor } from './../constants';
 
 var styles = StyleSheet.create({
   ...formStyles,
@@ -44,7 +44,7 @@ class UserForm extends Component {
       ok: {
         text: 'Yes',
         style: {
-            color: 'red'
+            color: dangerColor
         },
         callback: () => {
             this.props.onDelete(this.props.user);

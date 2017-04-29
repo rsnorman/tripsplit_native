@@ -17,6 +17,7 @@ import obligations from './models/obligations_reducer';
 
 import tripTabs from './components/trip_tabs_reducer';
 import purchasersPicker from './components/purchasers_picker_reducer';
+import confirmPopup from './components/confirm_popup_reducer';
 
 const tripSplitApp = combineReducers({
   rootNavigation,
@@ -33,7 +34,8 @@ const tripSplitApp = combineReducers({
   members,
   obligations,
   tripTabs,
-  purchasersPicker
+  purchasersPicker,
+  confirmPopup
 });
 
 export default tripSplitApp;

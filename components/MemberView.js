@@ -17,9 +17,11 @@ var ImagePicker = require('react-native-image-picker');
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import MemberPayments from './../containers/MemberPayments';
+import RemoveMemberButton from './../containers/RemoveMemberButton';
 import HeaderImage from './../components/HeaderImage';
 import Money from './../components/MoneyView';
 import OweAmount from './../components/OweAmount';
+import ConfirmPopup from '../containers/ConfirmPopup';
 import { primaryColor } from './../constants';
 
 let styles = StyleSheet.create({
@@ -89,10 +91,17 @@ class MemberView extends Component {
       return navigation.state.params.member.name;
     },
     header: {
+      right: (
+        <RemoveMemberButton />
+      ),
       tintColor: primaryColor,
       titleStyle: { color: 'black' }
     }
   };
+
+  updateMemberImage(image) {
+    this.props.onMemberImageChanged(this.props.member, image);
+  }
 
   renderRow(rowData, sectionID, rowID) {
     switch(rowData) {
@@ -106,9 +115,14 @@ class MemberView extends Component {
           <View style={styles.containerHeader}>
             <View style={styles.memberHeader}>
               <HeaderImage
-                image={this.props.member.picture}
+                image={member.picture}
+                title="Member"
                 size={100}
-                icon="user" />
+                onImageSelected={this.updateMemberImage.bind(this)}
+                icon="user"
+                isUploadingImage={this.props.isUploadingMemberImage}
+                canEdit={this.props.canEditPhoto}
+                errorMessage={this.props.uploadPhotoErrorMessage}  />
               <View style={styles.memberHeaderRightColumn}>
                 <View style={styles.memberStats}>
                   <View style={styles.memberStat}>
@@ -149,6 +163,7 @@ class MemberView extends Component {
           dataSource={dataSource.cloneWithRows(memberRows)}
           enableEmptySections={true}
           renderRow={this.renderRow.bind(this)}/>
+          <ConfirmPopup />
       </View>
     );
   }

@@ -17,7 +17,10 @@ let initialMembersState = {
     email: null
   },
   isSavingMember: false,
-  isValidMember: false
+  isValidMember: false,
+  uploadPhotoErrorMessage: null,
+  isUploadingMemberImage: false,
+  isDeletingMember: false
 };
 
 const members = (state = initialMembersState, action) => {
@@ -110,6 +113,51 @@ const members = (state = initialMembersState, action) => {
       return {
         ...state,
         isViewingNewMemberForm: false
+      };
+    case 'START_UPDATING_MEMBER_IMAGE':
+      return {
+        ...state,
+        isUploadingMemberImage: true,
+        uploadPhotoErrorMessage: null
+      };
+    case 'MEMBER_IMAGE_UPDATE_SUCCESS':
+      let updatedMemberImageIndex = state.tripMembers.findIndex((member) => member.id === action.member.id);
+      let membersWithUpdatedImage = JSON.parse(JSON.stringify(state.tripMembers));
+      membersWithUpdatedImage[updatedMemberImageIndex] = action.member;
+
+      return {
+        ...state,
+        tripMembers: membersWithUpdatedImage,
+        viewedMember: action.member,
+        isUploadingMemberImage: false
+      };
+    case 'UPDATE_MEMBER_PHOTO_ERROR':
+      return {
+        ...state,
+        isUploadingMemberImage: false,
+        uploadPhotoErrorMessage: action.error
+      };
+    case 'START_DELETING_MEMBER':
+      return {
+        ...state,
+        errorMessage: null,
+        isDeletingMember: true
+      };
+    case 'MEMBER_DELETE_SUCCESS':
+      let deletedMemberIndex = state.tripMembers.findIndex((member) => member.id === action.member.id);
+      let membersWithoutDeleted = JSON.parse(JSON.stringify(state.tripMembers));
+      membersWithoutDeleted.splice(deletedMemberIndex, 1);
+
+      return {
+        ...state,
+        tripMembers: membersWithoutDeleted,
+        isDeletingMember: false
+      };
+    case 'DELETE_MEMBER_ERROR':
+      return {
+        ...state,
+        isDeletingMember: false,
+        errorMessage: action.error
       };
     default:
       return state;

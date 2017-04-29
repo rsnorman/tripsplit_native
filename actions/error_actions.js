@@ -77,12 +77,20 @@ export const expensePhotoUpdateFailure = (error: string) => {
   return createError(error, 'UPDATE_EXPENSE_PHOTO_ERROR');
 }
 
+export const memberPhotoUpdateFailure = (error: string) => {
+  return createError(error, 'UPDATE_MEMBER_PHOTO_ERROR');
+}
+
 export const tripMemberSaveFailure = (error: string) => {
   return createError(error, 'SAVE_MEMBER_ERROR');
 }
 
 export const userDeleteFailure = (error: string) => {
   return createError(error, 'DELETE_USER_ERROR');
+}
+
+export const memberDeleteFailure = (error: string) => {
+  return createError(error, 'DELETE_MEMBER_ERROR');
 }
 
 export const userRefreshFailure = (error: string) => {

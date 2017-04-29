@@ -73,7 +73,7 @@ class HeaderImage extends Component {
       } else if (response.didCancel) {
         console.log('ImagePicker Canceled');
       } else {
-        this.props.onImageSelected({ uri: uri, fileName: response.fileName || 'camera-image.jpg'});
+        this.props.onImageSelected({ uri: response.uri, fileName: response.fileName || 'camera-image.jpg'});
       }
     });
   }

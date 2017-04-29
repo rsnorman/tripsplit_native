@@ -6,11 +6,10 @@ import {
   TextInput,
   View,
   TouchableHighlight,
-  ActivityIndicator,
   AppRegistry
 } from 'react-native';
 
-import { primaryColor } from './../constants';
+import { primaryColor, dangerColor } from './../constants';
 
 import Popup from 'react-native-popup';
 import AsyncIndicator from './AsyncIndicator';
@@ -59,7 +58,7 @@ class ExpenseForm extends Component {
       ok: {
         text: 'Yes',
         style: {
-            color: 'red'
+            color: dangerColor
         },
         callback: () => {
             this.props.onDelete(this.props.expense);
