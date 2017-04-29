@@ -5,12 +5,14 @@ import {
   AppRegistry
 } from 'react-native';
 
+import { negativeColor } from './../constants';
+
 let styles = StyleSheet.create({
   positiveAmount: {
 
   },
   negativeAmount: {
-    color: 'red',
+    color: negativeColor,
     opacity: 0.7
   }
 });
