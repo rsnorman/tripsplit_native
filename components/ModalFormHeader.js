@@ -5,6 +5,7 @@ import {
   Text,
   View,
   TouchableHighlight,
+  Keyboard,
   AppRegistry
 } from 'react-native';
 
@@ -18,11 +19,19 @@ var styles = StyleSheet.create({
 });
 
 class ModalFormHeader extends Component {
+  onSubmitPress() {
+    Keyboard.dismiss();
+    this.props.onSubmitPress();
+  }
+
+  onCancelPress() {
+    Keyboard.dismiss();
+    this.props.onCancelPress();
+  }
+
   render() {
     const {
       title,
-      onSubmitPress,
-      onCancelPress,
       submitText,
       submitButtonDisabled,
     } = this.props;
@@ -30,13 +39,12 @@ class ModalFormHeader extends Component {
     const submitButton = submitButtonDisabled ?
       (
         <Text style={[styles.modalButton, styles.submitModalButton, styles.disabledModalButton]}>{submitText}</Text>
-
       ) :
       (
         <TouchableHighlight
           underlayColor="transparent"
           disabled={submitButtonDisabled}
-          onPress={onSubmitPress}>
+          onPress={this.onSubmitPress.bind(this)}>
           <Text style={[styles.modalButton, styles.submitModalButton]}>{submitText}</Text>
         </TouchableHighlight>
       );
@@ -45,7 +53,7 @@ class ModalFormHeader extends Component {
       <View style={styles.formHeader}>
         <TouchableHighlight
           underlayColor="transparent"
-          onPress={onCancelPress}>
+          onPress={this.onCancelPress.bind(this)}>
           <Text style={styles.modalButton}>Cancel</Text>
         </TouchableHighlight>
         <Text style={styles.formHeaderText}>{title}</Text>
