@@ -114,7 +114,7 @@ class HeaderImage extends Component {
     });
 
     let image = this.props.image.url ?
-      ( <Image source={{uri: this.props.image.thumb.url}} style={imageStyles.thumb} /> ) :
+      ( <Image source={{uri: this.props.image.thumb.url, cache: 'force-cache'}} style={imageStyles.thumb} /> ) :
       ( <Icon name={this.props.icon} style={imageStyles.thumbIcon} size={this.props.size / 2.3} color="#fff" /> );
 
     if (!this.props.canEdit) {
