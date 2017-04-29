@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ListImage from './../components/ListImage';
 import Money from './../components/MoneyView';
 import AsyncIndicator from './../components/AsyncIndicator';
-import { primaryColor } from './../constants';
+import { primaryColor, grayColor } from './../constants';
 
 let styles = StyleSheet.create({
   textContainer: {
@@ -40,6 +40,10 @@ let styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     color: primaryColor
+  },
+  unpaidIndicatorLabel: {
+    fontSize: 16,
+    color: grayColor
   }
 });
 
@@ -61,10 +65,14 @@ class ObligationsList extends Component {
     let paidIndicator = rowData.is_paid ?
       (
         <View style={styles.paidIndicator}>
-          <Text style={styles.paidIndicatorLabel}>Paid</Text>
+          <Text style={styles.paidIndicatorLabel}>{rowData.label}</Text>
         </View>
       ) :
-      ( <View /> );
+      (
+        <View style={styles.paidIndicator}>
+          <Text style={styles.unpaidIndicatorLabel}>{rowData.label}</Text>
+        </View>
+      );
 
     return (
       <TouchableHighlight

@@ -12,6 +12,7 @@ import HeaderImage from './../components/HeaderImage';
 import Money from './../components/MoneyView';
 import AsyncIndicator from './AsyncIndicator';
 import FormButton from './FormButton';
+import DeleteButton from './DeleteButton';
 
 import formStyles from '../styles/form';
 import { primaryColor } from './../constants';
@@ -109,13 +110,19 @@ class ObligationView extends Component {
     this.props.onObligationPaid(this.props.obligation);
   }
 
+  removeObligationPayment() {
+    this.props.onRemoveObligationPayment(this.props.obligation);
+  }
+
   render() {
-    let {
+    const {
       expense,
       obligation,
       showPayButton,
+      showUnpayButton,
       payButtonDisabled,
       isPayingExpense,
+      isRemovingObligationPayment,
       errorMessage
     } = this.props;
 
@@ -123,19 +130,21 @@ class ObligationView extends Component {
       (
         <FormButton
           onPress={this.payObligation.bind(this)}
+          disabled={payButtonDisabled}
           text="Mark As Paid" />
       ) :
       ( <View /> );
 
-    let markAsPaidView = obligation.is_paid ?
+    let removePaymentButton = showUnpayButton ?
       (
-        <View style={styles.formRow}>
-          <View style={styles.disableButton}>
-            <Text style={styles.paidText}>Paid</Text>
-          </View>
-        </View>
+        <DeleteButton
+          onPress={this.removeObligationPayment.bind(this)}
+          disabled={payButtonDisabled}
+          text="Mark As Unpaid" />
       ) :
-      payButton;
+      ( <View /> );
+
+    let markAsPaidView = obligation.is_paid ? removePaymentButton : payButton;
 
     return (
       <View style={styles.container}>
@@ -171,7 +180,7 @@ class ObligationView extends Component {
           {markAsPaidView}
         </View>
         <AsyncIndicator
-          active={isPayingExpense}
+          active={isPayingExpense || isRemovingObligationPayment}
           errorMessage={errorMessage} />
       </View>
     );

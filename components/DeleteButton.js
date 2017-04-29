@@ -45,7 +45,7 @@ let styles = StyleSheet.create({
 
 class DeleteButton extends Component {
   render() {
-    const { onPress, disabled, hidden } = this.props;
+    const { text, onPress, disabled, hidden } = this.props;
 
     if (hidden) {
       return <View />;
@@ -56,7 +56,7 @@ class DeleteButton extends Component {
         <View style={styles.formRow}>
           <TouchableHighlight style={styles.disabledButton}
             underlayColor={dangerColor}>
-            <Text style={styles.buttonText}>Delete</Text>
+            <Text style={styles.buttonText}>{text || 'Delete'}</Text>
           </TouchableHighlight>
         </View>
       );
@@ -66,7 +66,7 @@ class DeleteButton extends Component {
         <TouchableHighlight style={styles.button}
           onPress={onPress}
           underlayColor={dangerColor}>
-          <Text style={styles.buttonText}>Delete</Text>
+          <Text style={styles.buttonText}>{text || 'Delete'}</Text>
         </TouchableHighlight>
       </View>
     );

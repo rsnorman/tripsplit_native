@@ -1,7 +1,7 @@
 // @flow
 
 import { applyAuthenticationHeaders, parseResponse } from './helpers';
-import { expenseObligationPaymentFailure, obligationsFetchFailure } from './error_actions';
+import { expenseObligationPaymentFailure, obligationsFetchFailure, expenseObligationPaymentRemoveFailure } from './error_actions';
 
 function startFetchingExpenseObligations() {
   return {
@@ -60,5 +60,32 @@ export const payExpenseObligation = (obligation) => {
       .then(parseResponse(200, 'There was an error marking expense paid. Please try again.'))
       .then(json => dispatch(expenseObligationPaymentSuccess(json)))
       .catch(error => dispatch(expenseObligationPaymentFailure(error)))
+  }
+}
+function startRemovingExpenseObligationPayment() {
+  return {
+    type: 'START_REMOVING_EXPENSE_OBLIGATION_PAYMENT'
+  }
+}
+
+function expenseObligationPaymentRemoveSuccess(obligation) {
+  return {
+    type: 'EXPENSE_OBLIGATION_PAYMENT_REMOVAL_SUCCESS',
+    obligation
+  }
+}
+
+export const removeObligationPayment = (obligation) => {
+  return dispatch => {
+    const { session } = dispatch(startRemovingExpenseObligationPayment());
+    const { url, method } = obligation.actions.unpay;
+
+    return fetch(url, applyAuthenticationHeaders({
+      method: method,
+      body: JSON.stringify({expense_obligation: {user_id: obligation.user.id}})
+    }, session))
+      .then(parseResponse(200, 'There was an error marking expense unpaid. Please try again.'))
+      .then(json => dispatch(expenseObligationPaymentRemoveSuccess(json)))
+      .catch(error => dispatch(expenseObligationPaymentRemoveFailure(error)))
   }
 }

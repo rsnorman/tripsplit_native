@@ -23,7 +23,7 @@ const mapStateToProps = (state) => {
   let memberDataSource;
 
   if (memberPayments.length > 0) {
-    const paymentLabel = state.user.user.id === viewedMember.id ? 'Purchases' : 'Payments';
+    const paymentLabel = 'Purchases/Payments';
     let dataBlob = {};
     dataBlob[paymentLabel] = memberPayments;
     memberDataSource = dataSource.cloneWithRowsAndSections(dataBlob, [paymentLabel]);

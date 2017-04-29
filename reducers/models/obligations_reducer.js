@@ -4,7 +4,7 @@ let initialObligationsState = {
   isPayingExpense: false,
   fetchObligationsErrorMessage: null,
   errorMessage: null,
-  payButtonDisabled: true
+  isRemovingObligationPayment: false
 };
 
 const obligations = (state = initialObligationsState, action) => {
@@ -58,6 +58,29 @@ const obligations = (state = initialObligationsState, action) => {
         ...state,
         isPayingExpense: false,
         payButtonDisabled: false,
+        errorMessage: action.error
+      };
+    case 'START_REMOVING_EXPENSE_OBLIGATION_PAYMENT':
+      return {
+        ...state,
+        isRemovingObligationPayment: true,
+        errorMessage: null
+      };
+    case 'EXPENSE_OBLIGATION_PAYMENT_REMOVAL_SUCCESS':
+      let unpaidObligationIndex = state.expenseObligations.findIndex((obligation) => obligation.id === action.obligation.id);
+      let obligationsWithUnpaid = JSON.parse(JSON.stringify(state.expenseObligations));
+      obligationsWithUnpaid[unpaidObligationIndex] = action.obligation;
+
+      return {
+        ...state,
+        expenseObligations: obligationsWithUnpaid,
+        viewedObligation: action.obligation,
+        isRemovingObligationPayment: false,
+      }
+    case 'EXPENSE_OBLIGATION_PAYMENT_REMOVAL_ERROR':
+      return {
+        ...state,
+        isRemovingObligationPayment: false,
         errorMessage: action.error
       };
     case 'EXPENSE_UPDATE_SUCCESS':
