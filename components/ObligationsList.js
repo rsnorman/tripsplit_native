@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ListImage from './../components/ListImage';
 import Money from './../components/MoneyView';
 import AsyncIndicator from './../components/AsyncIndicator';
-import { primaryColor, grayColor } from './../constants';
+import { primaryColor, grayColor, backgroundColor } from './../constants';
 
 let styles = StyleSheet.create({
   textContainer: {
@@ -44,6 +44,9 @@ let styles = StyleSheet.create({
   unpaidIndicatorLabel: {
     fontSize: 13,
     color: grayColor
+  },
+  rowText: {
+    backgroundColor: backgroundColor
   }
 });
 
@@ -65,12 +68,12 @@ class ObligationsList extends Component {
     let paidIndicator = rowData.is_paid ?
       (
         <View style={styles.paidIndicator}>
-          <Text style={styles.paidIndicatorLabel}>{rowData.label}</Text>
+          <Text style={[styles.paidIndicatorLabel, styles.rowText]}>{rowData.label}</Text>
         </View>
       ) :
       (
         <View style={styles.paidIndicator}>
-          <Text style={styles.unpaidIndicatorLabel}>{rowData.label}</Text>
+          <Text style={[styles.unpaidIndicatorLabel, styles.rowText]}>{rowData.label}</Text>
         </View>
       );
 
@@ -82,10 +85,10 @@ class ObligationsList extends Component {
           <View style={styles.rowContainer}>
             <ListImage size={50} image={rowData.user.picture} icon="user-circle" />
             <View style={styles.textContainer}>
-              <Text style={styles.obligator} numberOfLines={1}>
+              <Text style={[styles.obligator, styles.rowText]} numberOfLines={1}>
                 {rowData.user.name || rowData.user.email}
               </Text>
-              <Money style={styles.amount} amount={rowData.amount} />
+              <Money style={[styles.amount, styles.rowText]} amount={rowData.amount} />
             </View>
             {paidIndicator}
           </View>

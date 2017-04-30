@@ -15,7 +15,7 @@ import FormButton from './FormButton';
 import DeleteButton from './DeleteButton';
 
 import formStyles from '../styles/form';
-import { primaryColor } from './../constants';
+import { primaryColor, backgroundColor } from './../constants';
 
 let styles = StyleSheet.create({
   ...formStyles,
@@ -27,7 +27,8 @@ let styles = StyleSheet.create({
     paddingTop: 30,
     paddingLeft: 10,
     paddingRight: 10,
-    paddingBottom: 15
+    paddingBottom: 15,
+    backgroundColor
   },
   obligationHeader: {
     flexDirection: 'row'

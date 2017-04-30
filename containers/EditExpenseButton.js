@@ -30,7 +30,7 @@ const EditExpenseButton = connect(
 
   return (
     <HeaderButton
-      color={primaryColor}
+      text="Edit"
       onPress={() => onBeginEditingExpense(expense)}
     />
   );

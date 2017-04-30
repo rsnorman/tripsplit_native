@@ -22,7 +22,7 @@ import HeaderImage from './../components/HeaderImage';
 import Money from './../components/MoneyView';
 import OweAmount from './../components/OweAmount';
 import ConfirmPopup from '../containers/ConfirmPopup';
-import { primaryColor } from './../constants';
+import { primaryColor, backgroundColor } from './../constants';
 
 let styles = StyleSheet.create({
   containerHeader: {
@@ -33,7 +33,8 @@ let styles = StyleSheet.create({
     paddingTop: 30,
     paddingLeft: 10,
     paddingRight: 10,
-    paddingBottom: 15
+    paddingBottom: 15,
+    backgroundColor
   },
   loader: {
     marginTop: 30

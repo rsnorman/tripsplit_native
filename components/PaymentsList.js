@@ -16,7 +16,7 @@ import ListImage from './../components/ListImage';
 import Money from './../components/MoneyView';
 import AsyncIndicator from './../components/AsyncIndicator';
 import EmptyMessage from './../components/EmptyMessageView';
-import { primaryColor } from './../constants';
+import { primaryColor, backgroundColor } from './../constants';
 
 let styles = StyleSheet.create({
   thumb: {
@@ -78,6 +78,9 @@ let styles = StyleSheet.create({
   sectionText: {
     fontWeight: 'bold',
     color: 'darkgray'
+  },
+  rowText: {
+    backgroundColor: backgroundColor
   }
 });
 
@@ -107,21 +110,21 @@ class PaymentsList extends Component {
         <View style={styles.rowContainer}>
           <ListImage size={80} image={rowData.picture} icon={rowData.expense_type} />
           <View style={styles.textContainer}>
-            <Text style={styles.name} numberOfLines={1}>
+            <Text style={[styles.name, styles.rowText]} numberOfLines={1}>
               {rowData.name}
             </Text>
-            <Text style={styles.paymentUser} numberOfLines={1}>
+            <Text style={[styles.paymentUser, styles.rowText]} numberOfLines={1}>
               {rowData.recipient.name}
             </Text>
             <View style={styles.paymentObligation} >
-              <Money style={styles.cost} amount={rowData.amount} />
-              <Text> / </Text>
-              <Money style={styles.cost} amount={rowData.total} />
+              <Money style={[styles.cost, styles.rowText]} amount={rowData.amount} />
+              <Text style={styles.rowText}> / </Text>
+              <Money style={[styles.cost, styles.rowText]} amount={rowData.total} />
             </View>
           </View>
-          <View style={styles.runningTotal}>
-            <Money style={styles.runningTotalAmount} amount={rowData.running_total} />
-            <Text style={styles.runningTotalLabel}>Total</Text>
+          <View style={[styles.runningTotal, styles.rowText]}>
+            <Money style={[styles.runningTotalAmount, styles.rowText]} amount={rowData.running_total} />
+            <Text style={[styles.runningTotalLabel, styles.rowText]}>Total</Text>
           </View>
         </View>
         <View style={styles.separator}/>

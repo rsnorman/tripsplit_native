@@ -15,7 +15,7 @@ import OpenDrawerButton from './../containers/OpenDrawerButton';
 import EditUserButton from './../containers/EditUserButton';
 import EditUser from './../containers/EditUser';
 import ChangeUserPassword from './../containers/ChangeUserPassword';
-import { primaryColor } from './../constants';
+import { primaryColor, backgroundColor } from './../constants';
 
 import { Header } from 'react-navigation';
 
@@ -28,7 +28,8 @@ let styles = StyleSheet.create({
     paddingTop: 30,
     paddingLeft: 10,
     paddingRight: 10,
-    paddingBottom: 15
+    paddingBottom: 15,
+    backgroundColor
   },
   userHeader: {
     flexDirection: 'row'
@@ -69,7 +70,8 @@ let styles = StyleSheet.create({
   changePasswordButtonText: {
     color: primaryColor,
     fontWeight: 'normal',
-    fontSize: 14
+    fontSize: 14,
+    backgroundColor
   }
 });
 

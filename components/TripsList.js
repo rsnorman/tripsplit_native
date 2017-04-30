@@ -17,7 +17,7 @@ import Money from './../components/MoneyView';
 import AsyncIndicator from './../components/AsyncIndicator';
 import EmptyMessage from './../components/EmptyMessageView';
 import OpenDrawerButton from './../containers/OpenDrawerButton';
-import { primaryColor } from './../constants';
+import { primaryColor, backgroundColor } from './../constants';
 
 let styles = StyleSheet.create({
   container: {
@@ -51,6 +51,9 @@ let styles = StyleSheet.create({
   },
   spinner: {
     marginTop: 10
+  },
+  rowText: {
+    backgroundColor: backgroundColor
   }
 });
 
@@ -92,14 +95,14 @@ class TripsList extends Component {
           <View style={styles.rowContainer}>
             <ListImage size={80} image={rowData.picture} icon="car" />
             <View style={styles.textContainer}>
-              <Text style={styles.title} numberOfLines={1}>
+              <Text style={[styles.title, styles.rowText]} numberOfLines={1}>
                 {rowData.name}
               </Text>
-              <Text style={styles.location} numberOfLines={1}>
+              <Text style={[styles.location, styles.rowText]} numberOfLines={1}>
                 {rowData.location}
               </Text>
-              <Money style={styles.cost} amount={rowData.total_cost} />
-              <Text style={styles.members} numberOfLines={1}>
+              <Money style={[styles.cost, styles.rowText]} amount={rowData.total_cost} />
+              <Text style={[styles.members, styles.rowText]} numberOfLines={1}>
                 {rowData.total_members} {rowData.total_members == 1 ? 'member' : 'members'}
               </Text>
             </View>
