@@ -141,7 +141,7 @@ class MemberView extends Component {
             </View>
             <View style={styles.memberDetails}>
               <Text style={styles.memberName}>{this.props.member.name}</Text>
-              <Text style={styles.memberEmail}>{this.props.member.email}</Text>
+              <Text style={styles.memberEmail} selectable={true}>{this.props.member.email}</Text>
             </View>
           </View>
         );
