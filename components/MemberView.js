@@ -25,6 +25,9 @@ import ConfirmPopup from '../containers/ConfirmPopup';
 import { primaryColor, backgroundColor } from './../constants';
 
 let styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   containerHeader: {
     alignSelf: 'stretch',
     borderWidth: 0,
