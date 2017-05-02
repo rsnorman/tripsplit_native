@@ -84,7 +84,8 @@ class LoginScreen extends Component {
       },
       titleStyle: {
         marginTop: 20,
-        fontSize: 28
+        fontSize: 28,
+        fontFamily: 'Black Ops One'
       },
       tintColor: 'white'
     }

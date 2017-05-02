@@ -36,8 +36,9 @@
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* TripSplitNativeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* TripSplitNativeTests.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		83205BB11EB80DB9001EDA70 /* trip-split-loading-screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 83205BB01EB80DB9001EDA70 /* trip-split-loading-screen.png */; };
+		83205BB31EB81114001EDA70 /* BlackOpsOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83205BB21EB81114001EDA70 /* BlackOpsOne-Regular.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		836C8ADA1EAAB8CF006803D0 /* trip-split-loading-screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 836C8AD91EAAB8CF006803D0 /* trip-split-loading-screen.png */; };
 		BAA47EB09A8F46BAA0AC29FD /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F568DF76ED64652BC43258D /* FontAwesome.ttf */; };
 		FECB93F622B34B13BC41773E /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF1AD5C336C4EB18B1E5052 /* libRNImagePicker.a */; };
 /* End PBXBuildFile section */
@@ -275,8 +276,9 @@
 		6EF1AD5C336C4EB18B1E5052 /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
 		6F568DF76ED64652BC43258D /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		83205BB01EB80DB9001EDA70 /* trip-split-loading-screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trip-split-loading-screen.png"; sourceTree = "<group>"; };
+		83205BB21EB81114001EDA70 /* BlackOpsOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BlackOpsOne-Regular.ttf"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		836C8AD91EAAB8CF006803D0 /* trip-split-loading-screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "trip-split-loading-screen.png"; path = "../../../../Desktop/Ka-tet Development/trip-split-loading-screen.png"; sourceTree = "<group>"; };
 		95BF3A435E564B8FB2B0B23A /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		A2376B3E96A940039F2FF9FD /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		D31B6B097B1640FBA8BC11DE /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
@@ -539,7 +541,8 @@
 		A2367FCDD0B74A2CB29963A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				836C8AD91EAAB8CF006803D0 /* trip-split-loading-screen.png */,
+				83205BB21EB81114001EDA70 /* BlackOpsOne-Regular.ttf */,
+				83205BB01EB80DB9001EDA70 /* trip-split-loading-screen.png */,
 				6F568DF76ED64652BC43258D /* FontAwesome.ttf */,
 			);
 			name = Resources;
@@ -626,7 +629,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 610;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Ka-tet Development";
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -932,10 +935,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83205BB31EB81114001EDA70 /* BlackOpsOne-Regular.ttf in Resources */,
+				83205BB11EB80DB9001EDA70 /* trip-split-loading-screen.png in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				BAA47EB09A8F46BAA0AC29FD /* FontAwesome.ttf in Resources */,
-				836C8ADA1EAAB8CF006803D0 /* trip-split-loading-screen.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1067,6 +1071,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TripSplitNative.app/TripSplitNative";
 			};
@@ -1086,6 +1091,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TripSplitNative.app/TripSplitNative";
 			};
@@ -1249,15 +1255,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1290,8 +1300,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1299,6 +1311,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
