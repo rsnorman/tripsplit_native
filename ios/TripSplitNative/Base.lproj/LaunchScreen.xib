@@ -15,15 +15,15 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="trip-split-loading-screen.png" translatesAutoresizingMaskIntoConstraints="NO" id="lcq-Gi-CSq">
-                    <rect key="frame" x="140" y="197.5" width="200" height="200"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="200" id="G2l-0V-9eW"/>
-                        <constraint firstAttribute="height" constant="200" id="Gbi-GC-O0L"/>
-                    </constraints>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trip-split-loading-screen.png" translatesAutoresizingMaskIntoConstraints="NO" id="eCP-rH-EXV">
+                    <rect key="frame" x="115" y="115" width="250" height="250"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.26628598570823669" green="0.59432351589202881" blue="0.72802084684371948" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="eCP-rH-EXV" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="X97-15-XYJ"/>
+                <constraint firstItem="eCP-rH-EXV" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ccH-3I-yPF"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="548" y="455"/>
