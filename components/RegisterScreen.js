@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
   StatusBar,
   Dimensions,
+  Keyboard,
   AppRegistry
 } from 'react-native';
 
@@ -108,7 +109,12 @@ class RegisterScreen extends Component {
   }
 
   onLoginPress() {
+    Keyboard.dismiss();
     this.props.onLoginViewPress();
+  }
+
+  onSubmitPress() {
+    this.props.onRegister(this.props.name, this.props.email, this.props.password);
   }
 
   render() {
@@ -152,6 +158,8 @@ class RegisterScreen extends Component {
                 type="password"
                 secureTextEntry={true}
                 onChange={this.onPasswordChanged.bind(this)}
+                returnKeyType="go"
+                onSubmitEditing={this.onSubmitPress.bind(this)}
                 placeholder='Password'/>
             </View>
             <FormButton
