@@ -115,6 +115,10 @@ class LoginScreen extends Component {
     this.props.onRegisterViewPress();
   }
 
+  onNextPress() {
+    this.refs.passwordInput.focus();
+  }
+
   onSubmitPress() {
     this.props.onLogin(this.props.email, this.props.password);
   }
@@ -140,11 +144,14 @@ class LoginScreen extends Component {
                   keyboardType="email-address"
                   autoCapitalize="none"
                   autoCorrect={false}
+                  returnKeyType="next"
+                  onSubmitEditing={this.onNextPress.bind(this)}
                   onChange={this.onEmailChanged.bind(this)}
                   placeholder='Email'/>
               </View>
               <View style={styles.formRow}>
                 <TextInput
+                  ref="passwordInput"
                   value={password}
                   style={styles.loginInput}
                   type="password"

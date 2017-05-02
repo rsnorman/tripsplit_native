@@ -113,6 +113,14 @@ class RegisterScreen extends Component {
     this.props.onLoginViewPress();
   }
 
+  onNameNextPress() {
+    this.refs.emailInput.focus();
+  }
+
+  onEmailNextPress() {
+    this.refs.passwordInput.focus();
+  }
+
   onSubmitPress() {
     this.props.onRegister(this.props.name, this.props.email, this.props.password);
   }
@@ -138,21 +146,27 @@ class RegisterScreen extends Component {
                 style={styles.registerInput}
                 autoCapitalize="words"
                 autoCorrect={false}
+                returnKeyType="next"
+                onSubmitEditing={this.onNameNextPress.bind(this)}
                 onChange={this.onNameChanged.bind(this)}
                 placeholder='Name'/>
             </View>
             <View style={styles.formRow}>
               <TextInput
+                ref="emailInput"
                 value={email}
                 style={styles.registerInput}
                 keyboardType="email-address"
                 autoCapitalize="none"
                 autoCorrect={false}
+                returnKeyType="next"
+                onSubmitEditing={this.onEmailNextPress.bind(this)}
                 onChange={this.onEmailChanged.bind(this)}
                 placeholder='Email'/>
             </View>
             <View style={styles.formRow}>
               <TextInput
+                ref="passwordInput"
                 value={password}
                 style={styles.registerInput}
                 type="password"
