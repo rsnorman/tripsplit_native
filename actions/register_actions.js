@@ -55,7 +55,7 @@ export const createAccount = (name, email, password) => {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({name: name, email: email, password: password})}
+      body: JSON.stringify({name: name.trim(), email: email.trim(), password: password.trim()})}
     )
       .then(response => {
         if (response.status === 422) {

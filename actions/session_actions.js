@@ -55,7 +55,7 @@ export const createSession = (email, password) => {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({email: email, password: password})}
+      body: JSON.stringify({email: email.trim(), password: password.trim()})}
     )
       .then(response => {
         if (response.status === 401) {
