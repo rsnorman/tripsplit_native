@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ListImage from './../components/ListImage';
 import Money from './../components/MoneyView';
 import AsyncIndicator from './../components/AsyncIndicator';
-import { primaryColor, grayColor, backgroundColor } from './../constants';
+import { primaryColor, grayColor, backgroundColor, lightGrayColor } from './../constants';
 
 let styles = StyleSheet.create({
   textContainer: {
@@ -47,6 +47,12 @@ let styles = StyleSheet.create({
   },
   rowText: {
     backgroundColor: backgroundColor
+  },
+  nextScreenIndicator: {
+    color: lightGrayColor,
+    position: 'absolute',
+    right: 10,
+    top: 40
   }
 });
 
@@ -92,6 +98,7 @@ class ObligationsList extends Component {
             </View>
             {paidIndicator}
           </View>
+          <Icon name="arrow-right" style={styles.nextScreenIndicator} />
           <View style={styles.separator}/>
         </View>
       </TouchableHighlight>

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { primaryColor, backgroundColor } from './../constants';
+import { primaryColor, backgroundColor, lightGrayColor } from './../constants';
 
 import ListImage from './../components/ListImage';
 import Money from './../components/MoneyView';
@@ -51,6 +51,12 @@ let styles = StyleSheet.create({
   },
   rowText: {
     backgroundColor: backgroundColor
+  },
+  nextScreenIndicator: {
+    color: lightGrayColor,
+    position: 'absolute',
+    right: 10,
+    top: 40
   }
 });
 
@@ -86,6 +92,7 @@ class ExpensesList extends Component {
               <Money style={[styles.cost, styles.rowText]} amount={rowData.cost} />
             </View>
           </View>
+          <Icon name="arrow-right" style={styles.nextScreenIndicator} />
           <View style={styles.separator}/>
         </View>
       </TouchableHighlight>

@@ -17,7 +17,8 @@ import Money from './../components/MoneyView';
 import AsyncIndicator from './../components/AsyncIndicator';
 import EmptyMessage from './../components/EmptyMessageView';
 import OpenDrawerButton from './../containers/OpenDrawerButton';
-import { primaryColor, backgroundColor } from './../constants';
+import { primaryColor, backgroundColor, lightGrayColor } from './../constants';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 let styles = StyleSheet.create({
   container: {
@@ -54,6 +55,12 @@ let styles = StyleSheet.create({
   },
   rowText: {
     backgroundColor: backgroundColor
+  },
+  nextScreenIndicator: {
+    color: lightGrayColor,
+    position: 'absolute',
+    right: 10,
+    top: 40
   }
 });
 
@@ -107,6 +114,7 @@ class TripsList extends Component {
               </Text>
             </View>
           </View>
+          <Icon name="arrow-right" style={styles.nextScreenIndicator} />
           <View style={styles.separator}/>
         </View>
       </TouchableHighlight>

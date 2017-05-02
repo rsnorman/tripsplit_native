@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ListImage from './../components/ListImage';
 import Money from './../components/MoneyView';
 import AsyncIndicator from './../components/AsyncIndicator';
-import { primaryColor, backgroundColor } from './../constants';
+import { primaryColor, backgroundColor, lightGrayColor } from './../constants';
 
 let styles = StyleSheet.create({
   thumb: {
@@ -50,6 +50,12 @@ let styles = StyleSheet.create({
   },
   rowText: {
     backgroundColor: backgroundColor
+  },
+  nextScreenIndicator: {
+    color: lightGrayColor,
+    position: 'absolute',
+    right: 10,
+    top: 40
   }
 });
 
@@ -87,6 +93,7 @@ class MembersList extends Component {
               </Text>
             </View>
           </View>
+          <Icon name="arrow-right" style={styles.nextScreenIndicator} />
           <View style={styles.separator}/>
         </View>
       </TouchableHighlight>
