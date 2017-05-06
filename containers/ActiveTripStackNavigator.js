@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, AppRegistry } from 'react-native';
+import { AppRegistry } from 'react-native';
 import { addNavigationHelpers } from  'react-navigation';
 import TripStackNavigator from '../components/TripStackNavigator'
 

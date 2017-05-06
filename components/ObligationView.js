@@ -100,15 +100,11 @@ let styles = StyleSheet.create({
 });
 
 class ObligationView extends Component {
-  static navigationOptions = {
-    title: (navigation) => {
-      return `${navigation.state.params.expense.name} Payment`;
-    },
-    header: {
-      tintColor: primaryColor,
-      titleStyle: { color: 'black' }
-    }
-  };
+  static navigationOptions = ({navigation}) => ({
+    title: `${navigation.state.params.expense.name} Payment`,
+    headerTintColor: primaryColor,
+    headerTitleStyle: { color: 'black' }
+  });
 
   payObligation() {
     this.props.onObligationPaid(this.props.obligation);

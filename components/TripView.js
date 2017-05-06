@@ -106,18 +106,12 @@ let styles = StyleSheet.create({
 });
 
 class TripView extends Component {
-  static navigationOptions = {
-    title: (navigation) => {
-      return navigation.state.params.trip.name ;
-    },
-    header: ({ state, setParams }) => ({
-      right: (
-        <EditTripButton />
-      ),
-      tintColor: primaryColor,
-      titleStyle: { color: 'black' }
-    })
-  };
+  static navigationOptions = ({navigation}) => ({
+    title: navigation.state.params.trip.name,
+    headerTintColor: primaryColor,
+    headerTitleStyle: { color: 'black' },
+    headerRight: <EditTripButton />
+  });
 
   componentDidMount() {
     if (this.props.needsTripReload) {

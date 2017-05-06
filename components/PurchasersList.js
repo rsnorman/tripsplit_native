@@ -43,11 +43,9 @@ let styles = StyleSheet.create({
 class PurchasersList extends Component {
   static navigationOptions = {
     title: 'Choose Purchaser',
-    header: () => ({
-      left: <CancelPurchaserSelectButton />,
-      tintColor: primaryColor,
-      titleStyle: { color: 'black' }
-    })
+    headerLeft: <CancelPurchaserSelectButton />,
+    headerTintColor: primaryColor,
+    headerTitleStyle: { color: 'black' }
   };
 
   rowPressed(purchaserId) {

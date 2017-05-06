@@ -7,7 +7,7 @@ const EditExpenseFormStackNavigator = StackNavigator({
   EditExpense: {
     screen: EditExpense,
     navigationOptions: {
-      header: { visible: false }
+      header: null
     }
   },
   ExpensePurchasers: { screen: ExpensePurchasers }

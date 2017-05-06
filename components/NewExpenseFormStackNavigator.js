@@ -7,7 +7,7 @@ const NewExpenseFormStackNavigator = StackNavigator({
   NewExpense: {
     screen: NewExpense,
     navigationOptions: {
-      header: { visible: false }
+      header: null
     }
   },
   ExpensePurchasers: { screen: ExpensePurchasers }

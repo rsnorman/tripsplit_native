@@ -10,7 +10,6 @@ import {
   AppRegistry
 } from 'react-native';
 
-
 import EditExpenseStackNavigator from './../containers/EditExpenseStackNavigator'
 import EditExpenseButton from './../containers/EditExpenseButton'
 import ExpenseObligations from './../containers/ExpenseObligations'
@@ -82,18 +81,12 @@ let styles = StyleSheet.create({
 });
 
 class ExpenseView extends Component {
-  static navigationOptions = {
-    title: (navigation) => {
-      return navigation.state.params.expense.name ;
-    },
-    header: ({ state, setParams }) => ({
-      right: (
-        <EditExpenseButton />
-      ),
-      tintColor: primaryColor,
-      titleStyle: { color: 'black' }
-    })
-  };
+  static navigationOptions = ({navigation}) => ({
+    title: navigation.state.params.expense.name,
+    headerTintColor: primaryColor,
+    headerTitleStyle: { color: 'black' },
+    headerRight: <EditExpenseButton />
+  });
 
   updateExpenseImage(image) {
     this.props.onExpenseImageChanged(this.props.expense, image);

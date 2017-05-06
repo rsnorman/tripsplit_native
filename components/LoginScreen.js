@@ -68,18 +68,19 @@ var styles = StyleSheet.create({
 class LoginScreen extends Component {
   static navigationOptions = {
     title: 'TripSplit',
-    header: {
-      style: {
-        backgroundColor: primaryColor,
-        height: 100
-      },
-      titleStyle: {
-        marginTop: 20,
-        fontSize: 28,
-        fontFamily: 'Black Ops One'
-      },
-      tintColor: 'white'
-    }
+    headerBackTitle: null,
+    headerStyle: {
+      backgroundColor: primaryColor,
+      height: 100,
+    },
+    headerTitleStyle: {
+      marginTop: 20,
+      marginBottom: 20,
+      fontSize: 28,
+      fontFamily: 'Black Ops One',
+      color: 'white'
+    },
+    headerTintColor: 'white'
   };
 
   componentDidMount() {
