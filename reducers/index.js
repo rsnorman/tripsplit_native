@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 
 import rootNavigation from './navigation/root_navigation_reducer';
 import nav from './navigation/nav_reducer';
-import profileNav from './navigation/profile_nav_reducer';
 import sessionNav from './navigation/session_nav_reducer';
 import newExpenseFormNav from './navigation/new_expense_form_nav_reducer';
 import editExpenseFormNav from './navigation/edit_expense_form_nav_reducer';
@@ -22,7 +21,6 @@ import confirmPopup from './components/confirm_popup_reducer';
 const tripSplitApp = combineReducers({
   rootNavigation,
   nav,
-  profileNav,
   sessionNav,
   newExpenseFormNav,
   editExpenseFormNav,

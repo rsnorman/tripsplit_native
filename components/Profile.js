@@ -15,21 +15,19 @@ import OpenDrawerButton from './../containers/OpenDrawerButton';
 import EditUserButton from './../containers/EditUserButton';
 import EditUser from './../containers/EditUser';
 import ChangeUserPassword from './../containers/ChangeUserPassword';
-import { primaryColor, backgroundColor } from './../constants';
+import { primaryColor, borderColor } from './../constants';
 
 import { Header } from 'react-navigation';
+let renderCount = 0;
 
 let styles = StyleSheet.create({
   containerHeader: {
     alignSelf: 'stretch',
     borderWidth: 0,
-    borderBottomWidth: 1,
-    borderBottomColor: '#cdcdcd',
     paddingTop: 30,
     paddingLeft: 10,
     paddingRight: 10,
-    paddingBottom: 15,
-    backgroundColor
+    paddingBottom: 15
   },
   userHeader: {
     flexDirection: 'row'
@@ -70,26 +68,11 @@ let styles = StyleSheet.create({
   changePasswordButtonText: {
     color: primaryColor,
     fontWeight: 'normal',
-    fontSize: 14,
-    backgroundColor
+    fontSize: 14
   }
 });
 
 class Profile extends Component {
-  static navigationOptions = {
-    title: 'Profile',
-    header: () => ({
-      left: (
-        <OpenDrawerButton />
-      ),
-      right: (
-        <EditUserButton />
-      ),
-      tintColor: primaryColor,
-      titleStyle: { color: 'black' }
-    })
-  };
-
   componentDidMount() {
     this.props.onUserProfileLoad(this.props.user);
   }
@@ -115,6 +98,23 @@ class Profile extends Component {
 
     return (
       <View>
+        <Header
+          scene={{index: 0}}
+          navigation={{state: {index: 0}}}
+          getScreenDetails={() => {
+            return {
+              options: {
+                title: 'Profile',
+                headerLeft: <OpenDrawerButton />,
+                headerRight: <EditUserButton />,
+                headerTintColor: primaryColor,
+                headerTitleStyle: { color: 'black' },
+                headerStyle: {
+                  backgroundColor: 'white'
+                }
+              }
+            };
+          }} />
         <View style={styles.containerHeader}>
           <View style={styles.userHeader}>
             <HeaderImage

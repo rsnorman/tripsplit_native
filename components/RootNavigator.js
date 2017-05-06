@@ -1,7 +1,7 @@
 import React from 'react';
 import { DrawerNavigator, DrawerView } from 'react-navigation';
 import ActiveTripStackNavigator from './../containers/ActiveTripStackNavigator';
-import UserProfileStackNavigator from './../containers/UserProfileStackNavigator';
+import UserProfile from './../containers/UserProfile';
 import Logout from './../containers/Logout';
 
 import { primaryColor, secondaryColor } from './../constants';
@@ -11,7 +11,7 @@ const RootNavigator = DrawerNavigator({
     screen: ActiveTripStackNavigator
   },
   Profile: {
-    screen: UserProfileStackNavigator
+    screen: UserProfile
   },
   Logout: {
     screen: Logout
