@@ -236,7 +236,7 @@ class TripView extends Component {
         <ListView
           dataSource={dataSource.cloneWithRows(tripRows)}
           enableEmptySections={true}
-          stickyHeaderIndices={[1]}
+          stickyHeaderIndices={Platform.OS === 'ios' ? [1] : []}
           renderRow={this.renderRow.bind(this)}/>
         {addExpenseButton}
         {addMemberButton}
