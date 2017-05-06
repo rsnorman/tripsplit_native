@@ -8,7 +8,7 @@ import {
   AppRegistry
 } from 'react-native';
 
-import { primaryColor, dangerColor } from './../constants';
+import { primaryColor, secondaryColor, dangerColor } from './../constants';
 
 let styles = StyleSheet.create({
   container: {
@@ -27,9 +27,8 @@ class AsyncIndicator extends Component {
     if (errorMessage) {
       errorMessage = typeof errorMessage === 'string' ? errorMessage : 'There was an error. Please try again';
     }
-
-    let spinner = active ? <ActivityIndicator style={styles.container} size={size || 'large'}/> : <View/>;
-    let retryButton = !!onRetryPress ? <Button color={primaryColor} onPress={onRetryPress} title="Retry" accessibilityLabel="Retry fetching your trips" /> : <View/>;
+    const spinner = active ? <ActivityIndicator style={styles.container} size={size || 'large'} color={secondaryColor}/> : <View/>;
+    const retryButton = !!onRetryPress ? <Button color={primaryColor} onPress={onRetryPress} title="Retry" accessibilityLabel="Retry fetching your trips" /> : <View/>;
     if (!!errorMessage) {
       return (
         <View style={styles.container}>
