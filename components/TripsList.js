@@ -64,8 +64,6 @@ let styles = StyleSheet.create({
   }
 });
 
-let renderCount = 0;
-
 class TripsList extends Component {
   static navigationOptions = {
     title: 'Trips',
@@ -129,8 +127,6 @@ class TripsList extends Component {
       onModalRequestClose
     } = this.props;
 
-    renderCount++;
-    console.log('Render Trips List', renderCount);
     return (
       <View style={styles.container}>
         <AsyncIndicator
