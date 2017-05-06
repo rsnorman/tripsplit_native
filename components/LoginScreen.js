@@ -28,16 +28,6 @@ var styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center'
   },
-  loginInput: {
-    height: 36,
-    padding: 4,
-    flex: 4,
-    fontSize: 18,
-    borderWidth: 1,
-    borderColor: primaryColor,
-    borderRadius: 8,
-    color: primaryColor
-  },
   loginHeader: {
     backgroundColor: primaryColor,
     padding: 30,
@@ -140,25 +130,27 @@ class LoginScreen extends Component {
               <View style={styles.formRow}>
                 <TextInput
                   value={email}
-                  style={styles.loginInput}
+                  style={styles.input}
                   keyboardType="email-address"
                   autoCapitalize="none"
                   autoCorrect={false}
                   returnKeyType="next"
                   onSubmitEditing={this.onNextPress.bind(this)}
                   onChange={this.onEmailChanged.bind(this)}
+                  underlineColorAndroid={secondaryColor}
                   placeholder='Email'/>
               </View>
               <View style={styles.formRow}>
                 <TextInput
                   ref="passwordInput"
                   value={password}
-                  style={styles.loginInput}
+                  style={styles.input}
                   type="password"
                   secureTextEntry={true}
                   onChange={this.onPasswordChanged.bind(this)}
                   returnKeyType="go"
                   onSubmitEditing={this.onSubmitPress.bind(this)}
+                  underlineColorAndroid={secondaryColor}
                   placeholder='Password'/>
               </View>
               <FormButton

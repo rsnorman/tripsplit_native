@@ -16,7 +16,7 @@ import ModalFormHeader from './ModalFormHeader';
 import DeleteButton from './DeleteButton';
 
 import formStyles from '../styles/form';
-import { primaryColor, dangerColor } from './../constants';
+import { primaryColor, secondaryColor, dangerColor } from './../constants';
 
 var styles = StyleSheet.create({
   ...formStyles,
@@ -84,6 +84,7 @@ class UserForm extends Component {
               value={user.name}
               style={styles.input}
               onChange={this.onNameChanged.bind(this)}
+              underlineColorAndroid={secondaryColor}
               placeholder='Name'/>
           </View>
           <View style={styles.formRow}>
@@ -91,6 +92,7 @@ class UserForm extends Component {
               value={user.email}
               style={styles.input}
               onChange={this.onEmailChanged.bind(this)}
+              underlineColorAndroid={secondaryColor}
               placeholder='Email'/>
           </View>
           <DeleteButton

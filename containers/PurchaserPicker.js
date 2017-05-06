@@ -1,29 +1,37 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { AppRegistry, TouchableHighlight, Text, View, StyleSheet } from 'react-native';
+import { AppRegistry, TouchableHighlight, Text, View, StyleSheet, Platform } from 'react-native';
 import { viewPurchasers } from '../actions/purchasers_picker_actions';
-import { primaryColor } from './../constants';
+import { primaryColor, secondaryColor } from './../constants';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import formStyles from '../styles/form';
+const pickerInput = Platform.OS === 'ios' ? {
+  height: 36,
+  padding: 4,
+  flex: 4,
+  borderWidth: 1,
+  borderColor: primaryColor,
+  borderRadius: 8
+} : {
+  height: 36,
+  padding: 4,
+  flex: 4,
+  borderBottomWidth: 1,
+  borderColor: secondaryColor
+};
+
 const styles = StyleSheet.create({
   ...formStyles,
-  picker: {
-    height: 36,
-    padding: 4,
-    flex: 4,
-    borderWidth: 1,
-    borderColor: primaryColor,
-    borderRadius: 8
-  },
+  pickerInput,
   pickerText: {
     fontSize: 18,
     color: primaryColor
   },
   pickerPlaceholderText: {
     fontSize: 18,
-    color: '#B6B6BB'
+    color: Platform.OS === 'ios' ? '#B6B6BB' : '#6B6B6E'
   },
   arrowIcon: {
     fontSize: 18,
@@ -78,7 +86,7 @@ const PurchaserPicker = connect(
   return (
     <View style={styles.formRow}>
       <TouchableHighlight
-        style={styles.picker}
+        style={styles.pickerInput}
         color={primaryColor}
         underlayColor="transparent"
         onPress={() => onBeginPickingPurchasers(selectedPurchaserId, onSelect)}>

@@ -16,7 +16,7 @@ import ModalFormHeader from './ModalFormHeader';
 import DeleteButton from './DeleteButton';
 import KeyboardDismisser from './KeyboardDismisser';
 import formStyles from '../styles/form';
-import { primaryColor, dangerColor } from './../constants';
+import { primaryColor, secondaryColor, dangerColor } from './../constants';
 
 var styles = StyleSheet.create({
   ...formStyles,
@@ -91,6 +91,7 @@ class TripForm extends Component {
                 style={styles.input}
                 autoCapitalize="words"
                 onChange={this.onNameChanged.bind(this)}
+                underlineColorAndroid={secondaryColor}
                 placeholder="Name (e.g., Joan's Bachelorette Party)"/>
             </View>
             <View style={styles.formRow}>
@@ -99,6 +100,7 @@ class TripForm extends Component {
                 style={styles.input}
                 autoCapitalize="words"
                 onChange={this.onLocationChanged.bind(this)}
+                underlineColorAndroid={secondaryColor}
                 placeholder='Location'/>
             </View>
             <View style={styles.formRow}>
@@ -109,6 +111,7 @@ class TripForm extends Component {
                 multiline={true}
                 numberOfLines={3}
                 autoCapitalize="sentences"
+                underlineColorAndroid={secondaryColor}
                 placeholder='Description (optional)'/>
             </View>
             <DeleteButton

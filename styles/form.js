@@ -1,6 +1,7 @@
 import { primaryColor, secondaryColor } from './../constants';
+import { Platform } from 'react-native';
 
-export default formStyles = {
+let formStyles = {
   formHeader: {
     alignSelf: 'stretch',
     alignItems: 'center',
@@ -38,8 +39,11 @@ export default formStyles = {
     alignItems: 'center',
     alignSelf: 'stretch',
     marginTop: 15
-  },
-  input: {
+  }
+};
+
+if (Platform.OS === 'ios') {
+  formStyles.input = {
     height: 36,
     padding: 4,
     flex: 4,
@@ -48,8 +52,8 @@ export default formStyles = {
     borderColor: primaryColor,
     borderRadius: 8,
     color: primaryColor
-  },
-  multiLineInput: {
+  };
+  formStyles.multiLineInput = {
     height: 108,
     padding: 4,
     flex: 4,
@@ -58,5 +62,22 @@ export default formStyles = {
     borderColor: primaryColor,
     borderRadius: 8,
     color: primaryColor
-  }
-};
+  };
+} else {
+  formStyles.input = {
+    height: 36,
+    padding: 4,
+    flex: 4,
+    fontSize: 18,
+    color: primaryColor,
+  };
+  formStyles.multiLineInput = {
+    height: 108,
+    padding: 4,
+    flex: 4,
+    fontSize: 18,
+    color: primaryColor
+  };
+}
+
+export default formStyles;
