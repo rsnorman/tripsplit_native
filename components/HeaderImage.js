@@ -14,7 +14,7 @@ import { baseUrl } from './../constants';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 var ImagePicker = require('react-native-image-picker');
-import { primaryColor } from './../constants';
+import { primaryColor, backgroundColor } from './../constants';
 
 class HeaderImage extends Component {
   constructor(props) {
@@ -86,6 +86,13 @@ class HeaderImage extends Component {
         borderRadius: 4,
         backgroundColor: primaryColor
       },
+      thumbImage: {
+        width: this.props.size,
+        height: this.props.size,
+        borderRadius: 4,
+        backgroundColor: primaryColor,
+        overlayColor: backgroundColor
+      },
       thumbIcon: {
         margin: this.props.size / 4,
         textAlign: 'center'
@@ -114,7 +121,7 @@ class HeaderImage extends Component {
     });
 
     let image = this.props.image.url ?
-      ( <Image source={{uri: this.props.image.thumb.url, cache: 'force-cache'}} style={imageStyles.thumb} /> ) :
+      ( <Image source={{uri: this.props.image.thumb.url, cache: 'force-cache'}} style={imageStyles.thumbImage} /> ) :
       ( <Icon name={this.props.icon} style={imageStyles.thumbIcon} size={this.props.size / 2.3} color="#fff" /> );
 
     if (!this.props.canEdit) {

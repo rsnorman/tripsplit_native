@@ -8,7 +8,7 @@ import {
 import { baseUrl } from './../constants';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { primaryColor } from './../constants';
+import { primaryColor, backgroundColor } from './../constants';
 
 class ListImage extends Component {
   render() {
@@ -20,13 +20,23 @@ class ListImage extends Component {
         borderRadius: this.props.size / 2,
         backgroundColor: primaryColor
       },
+      thumbImage: {
+        width: this.props.size,
+        height: this.props.size,
+        marginRight: 10,
+        borderRadius: this.props.size / 2,
+        backgroundColor: primaryColor,
+        overlayColor: backgroundColor
+      },
       thumbIcon: {
         margin: this.props.size / 4,
         textAlign: 'center'
       }
     });
     return this.props.image && this.props.image.url ?
-      ( <Image source={{uri: this.props.image.thumb.url, cache: 'force-cache'}} style={iconStyles.thumb} /> ) :
+      ( <Image
+          source={{uri: this.props.image.thumb.url, cache: 'force-cache'}}
+          style={iconStyles.thumbImage} /> ) :
       (
         <View style={iconStyles.thumb}>
           <Icon name={this.props.icon} style={iconStyles.thumbIcon} size={this.props.size / 2.3} color="#fff" />
