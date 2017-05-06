@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
 import Profile from '../components/Profile';
-import { refreshUser, updateUserImage, editUserPassword } from '../actions/user_actions';
+import { refreshUser, updateUserImage, editUserPassword, cancelEditingUser, cancelEditingUserPassword } from '../actions/user_actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -24,6 +24,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     onUserEditPassword: (user) => {
       dispatch(editUserPassword(user));
+    },
+    onEditUserModalRequestClose: () => {
+      dispatch(cancelEditingUser());
+    },
+    onEditUserPasswordModalRequestClose: () => {
+      dispatch(cancelEditingUserPassword());
     }
   };
 };

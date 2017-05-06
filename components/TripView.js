@@ -216,6 +216,12 @@ class TripView extends Component {
   }
 
   render() {
+    const {
+      onEditTripModalRequestClose,
+      onNewExpenseModalRequestClose,
+      onNewMemberModalRequestClose
+    } = this.props;
+
     const dataSource = new ListView.DataSource({
         rowHasChanged: (r1, r2) => r1 !== r2,
     });
@@ -240,13 +246,25 @@ class TripView extends Component {
           renderRow={this.renderRow.bind(this)}/>
         {addExpenseButton}
         {addMemberButton}
-        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditTripForm}>
+        <Modal
+          animationType={'slide'}
+          transparent={false}
+          onRequestClose={onEditTripModalRequestClose}
+          visible={this.props.isViewingEditTripForm}>
           <EditTrip />
         </Modal>
-        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingNewExpenseForm}>
+        <Modal
+          animationType={'slide'}
+          transparent={false}
+          onRequestClose={onNewExpenseModalRequestClose}
+          visible={this.props.isViewingNewExpenseForm}>
           <NewExpenseStackNavigator />
         </Modal>
-        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingNewMemberForm}>
+        <Modal
+          animationType={'slide'}
+          transparent={false}
+          onRequestClose={onNewMemberModalRequestClose}
+          visible={this.props.isViewingNewMemberForm}>
           <NewMember />
         </Modal>
       </View>

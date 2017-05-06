@@ -161,7 +161,11 @@ class ExpenseView extends Component {
           dataSource={dataSource.cloneWithRows(expenseRows)}
           enableEmptySections={true}
           renderRow={this.renderRow.bind(this)}/>
-        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditExpenseForm}>
+        <Modal
+          animationType={'slide'}
+          transparent={false}
+          onRequestClose={this.props.onModalRequestClose}
+          visible={this.props.isViewingEditExpenseForm}>
           <EditExpenseStackNavigator />
         </Modal>
       </View>

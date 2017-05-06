@@ -103,7 +103,15 @@ class Profile extends Component {
   }
 
   render() {
-    let { user, uploadPhotoErrorMessage } = this.props;
+    const {
+      user,
+      isUploadingUserImage,
+      uploadPhotoErrorMessage,
+      isViewingEditUserForm,
+      isViewingChangeUserPasswordForm,
+      onEditUserModalRequestClose,
+      onEditUserPasswordModalRequestClose
+    } = this.props;
 
     return (
       <View>
@@ -115,7 +123,7 @@ class Profile extends Component {
               size={100}
               onImageSelected={this.updateUserImage.bind(this)}
               icon="user"
-              isUploadingImage={this.props.isUploadingUserImage}
+              isUploadingImage={isUploadingUserImage}
               errorMessage={uploadPhotoErrorMessage}
               canEdit={true} />
             <View style={styles.userHeaderRightColumn}>
@@ -136,8 +144,8 @@ class Profile extends Component {
             </View>
           </View>
           <View style={styles.userDetails}>
-            <Text style={styles.userName}>{this.props.user.name}</Text>
-            <Text style={styles.userEmail}>{this.props.user.email}</Text>
+            <Text style={styles.userName}>{user.name}</Text>
+            <Text style={styles.userEmail}>{user.email}</Text>
             <TouchableHighlight
               style={styles.changePasswordButton}
               underlayColor='transparent'
@@ -146,10 +154,18 @@ class Profile extends Component {
             </TouchableHighlight>
           </View>
         </View>
-        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditUserForm}>
+        <Modal
+          animationType={'slide'}
+          transparent={false}
+          onRequestClose={onEditUserModalRequestClose}
+          visible={isViewingEditUserForm}>
           <EditUser />
         </Modal>
-        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingChangeUserPasswordForm}>
+        <Modal
+          animationType={'slide'}
+          transparent={false}
+          onRequestClose={onEditUserPasswordModalRequestClose}
+          visible={isViewingChangeUserPasswordForm}>
           <ChangeUserPassword />
         </Modal>
       </View>
