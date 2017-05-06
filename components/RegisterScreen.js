@@ -28,16 +28,6 @@ var styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center'
   },
-  registerInput: {
-    height: 36,
-    padding: 4,
-    flex: 4,
-    fontSize: 18,
-    borderWidth: 1,
-    borderColor: primaryColor,
-    borderRadius: 8,
-    color: primaryColor
-  },
   registerHeader: {
     backgroundColor: primaryColor,
     padding: 30,
@@ -78,18 +68,19 @@ var styles = StyleSheet.create({
 class RegisterScreen extends Component {
   static navigationOptions = {
     title: 'TripSplit',
-    header: {
-      style: {
-        backgroundColor: secondaryColor,
-        height: 100
-      },
-      titleStyle: {
-        marginTop: 20,
-        fontSize: 28,
-        fontFamily: 'Black Ops One'
-      },
-      tintColor: 'white'
-    }
+    headerBackTitle: null,
+    headerStyle: {
+      backgroundColor: secondaryColor,
+      height: 100,
+    },
+    headerTitleStyle: {
+      marginTop: 20,
+      marginBottom: 20,
+      fontSize: 28,
+      fontFamily: 'Black Ops One',
+      color: 'white'
+    },
+    headerTintColor: 'white'
   };
 
   onNameChanged(event) {
@@ -143,37 +134,40 @@ class RegisterScreen extends Component {
             <View style={styles.formRow}>
               <TextInput
                 value={name}
-                style={styles.registerInput}
+                style={styles.input}
                 autoCapitalize="words"
                 autoCorrect={false}
                 returnKeyType="next"
                 onSubmitEditing={this.onNameNextPress.bind(this)}
                 onChange={this.onNameChanged.bind(this)}
+                underlineColorAndroid={secondaryColor}
                 placeholder='Name'/>
             </View>
             <View style={styles.formRow}>
               <TextInput
                 ref="emailInput"
                 value={email}
-                style={styles.registerInput}
+                style={styles.input}
                 keyboardType="email-address"
                 autoCapitalize="none"
                 autoCorrect={false}
                 returnKeyType="next"
                 onSubmitEditing={this.onEmailNextPress.bind(this)}
                 onChange={this.onEmailChanged.bind(this)}
+                underlineColorAndroid={secondaryColor}
                 placeholder='Email'/>
             </View>
             <View style={styles.formRow}>
               <TextInput
                 ref="passwordInput"
                 value={password}
-                style={styles.registerInput}
+                style={styles.input}
                 type="password"
                 secureTextEntry={true}
                 onChange={this.onPasswordChanged.bind(this)}
                 returnKeyType="go"
                 onSubmitEditing={this.onSubmitPress.bind(this)}
+                underlineColorAndroid={secondaryColor}
                 placeholder='Password'/>
             </View>
             <FormButton

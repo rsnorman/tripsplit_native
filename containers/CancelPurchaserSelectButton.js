@@ -22,7 +22,7 @@ const CancelPurchaserSelectButton = connect(
 )(({ onCancelPurchaserSelect }) => {
   return (
     <HeaderButton
-      title='Cancel'
+      text='Cancel'
       onPress={() => onCancelPurchaserSelect()}
     />
   );

@@ -9,6 +9,8 @@ const editExpenseFormNav = (state, action) => {
     case 'CANCEL_VIEW_PURCHASERS':
     case 'SELECT_PURCHASER':
       return EditExpenseFormStackNavigator.router.getStateForAction(NavigationActions.back(), state);
+    case 'POP_EDIT_EXPENSE_STACK_SCREEN':
+      return EditExpenseFormStackNavigator.router.getStateForAction(NavigationActions.back(), state);
     default:
       return EditExpenseFormStackNavigator.router.getStateForAction(action, state);
   }

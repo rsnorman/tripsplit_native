@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { updateExpenseImage } from '../actions/expense_actions';
+import { updateExpenseImage, cancelEditingExpense } from '../actions/expense_actions';
 import ExpenseView from './../components/ExpenseView'
 
 const mapStateToProps = (state) => {
@@ -20,6 +20,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onExpenseImageChanged: (expense, image) => {
       dispatch(updateExpenseImage(expense, image))
+    },
+    onModalRequestClose: () => {
+      dispatch(cancelEditingExpense());
     }
   };
 };

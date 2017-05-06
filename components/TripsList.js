@@ -67,11 +67,7 @@ let styles = StyleSheet.create({
 class TripsList extends Component {
   static navigationOptions = {
     title: 'Trips',
-    header: () => ({
-      left: (
-        <OpenDrawerButton />
-      )
-    }),
+    headerLeft: <OpenDrawerButton />,
     tintColor: primaryColor,
     titleStyle: { color: 'black' }
   };
@@ -127,7 +123,8 @@ class TripsList extends Component {
       fetchTripsErrorMessage,
       dataSource,
       isViewingNewTripForm,
-      emptyMessageVisible
+      emptyMessageVisible,
+      onModalRequestClose
     } = this.props;
 
     return (
@@ -143,7 +140,11 @@ class TripsList extends Component {
           enableEmptySections={true}
           renderRow={this.renderRow.bind(this)}/>
         <FloatingButton icon="plus-circle" size={50} onButtonPressed={this.onAddTripPressed.bind(this)} />
-        <Modal animationType={'slide'} transparent={false} visible={isViewingNewTripForm}>
+        <Modal
+          animationType={'slide'}
+          transparent={false}
+          visible={isViewingNewTripForm}
+          onRequestClose={onModalRequestClose}>
           <NewTrip />
         </Modal>
       </View>

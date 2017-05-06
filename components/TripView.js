@@ -106,18 +106,12 @@ let styles = StyleSheet.create({
 });
 
 class TripView extends Component {
-  static navigationOptions = {
-    title: (navigation) => {
-      return navigation.state.params.trip.name ;
-    },
-    header: ({ state, setParams }) => ({
-      right: (
-        <EditTripButton />
-      ),
-      tintColor: primaryColor,
-      titleStyle: { color: 'black' }
-    })
-  };
+  static navigationOptions = ({navigation}) => ({
+    title: navigation.state.params.trip.name,
+    headerTintColor: primaryColor,
+    headerTitleStyle: { color: 'black' },
+    headerRight: <EditTripButton />
+  });
 
   componentDidMount() {
     if (this.props.needsTripReload) {
@@ -216,6 +210,12 @@ class TripView extends Component {
   }
 
   render() {
+    const {
+      onEditTripModalRequestClose,
+      onNewExpenseModalRequestClose,
+      onNewMemberModalRequestClose
+    } = this.props;
+
     const dataSource = new ListView.DataSource({
         rowHasChanged: (r1, r2) => r1 !== r2,
     });
@@ -236,17 +236,29 @@ class TripView extends Component {
         <ListView
           dataSource={dataSource.cloneWithRows(tripRows)}
           enableEmptySections={true}
-          stickyHeaderIndices={[1]}
+          stickyHeaderIndices={Platform.OS === 'ios' ? [1] : []}
           renderRow={this.renderRow.bind(this)}/>
         {addExpenseButton}
         {addMemberButton}
-        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditTripForm}>
+        <Modal
+          animationType={'slide'}
+          transparent={false}
+          onRequestClose={onEditTripModalRequestClose}
+          visible={this.props.isViewingEditTripForm}>
           <EditTrip />
         </Modal>
-        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingNewExpenseForm}>
+        <Modal
+          animationType={'slide'}
+          transparent={false}
+          onRequestClose={onNewExpenseModalRequestClose}
+          visible={this.props.isViewingNewExpenseForm}>
           <NewExpenseStackNavigator />
         </Modal>
-        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingNewMemberForm}>
+        <Modal
+          animationType={'slide'}
+          transparent={false}
+          onRequestClose={onNewMemberModalRequestClose}
+          visible={this.props.isViewingNewMemberForm}>
           <NewMember />
         </Modal>
       </View>

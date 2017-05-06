@@ -13,7 +13,7 @@ import AsyncIndicator from './AsyncIndicator';
 import ModalFormHeader from './ModalFormHeader';
 
 import formStyles from '../styles/form';
-import { primaryColor } from './../constants';
+import { primaryColor, secondaryColor } from './../constants';
 
 var styles = StyleSheet.create({
   ...formStyles,
@@ -59,6 +59,7 @@ class UserPasswordForm extends Component {
               type="password"
               secureTextEntry={true}
               onChange={this.onCurrentPasswordChanged.bind(this)}
+              underlineColorAndroid={secondaryColor}
               placeholder='Current Password'/>
           </View>
           <View style={styles.formRow}>
@@ -67,6 +68,7 @@ class UserPasswordForm extends Component {
               type="password"
               secureTextEntry={true}
               onChange={this.onPasswordChanged.bind(this)}
+              underlineColorAndroid={secondaryColor}
               placeholder='New Password'/>
           </View>
           <View style={styles.formRow}>
@@ -75,6 +77,7 @@ class UserPasswordForm extends Component {
               type="password"
               secureTextEntry={true}
               onChange={this.onPasswordConfirmationChanged.bind(this)}
+              underlineColorAndroid={secondaryColor}
               placeholder='New Password Confirmation'/>
           </View>
           <AsyncIndicator

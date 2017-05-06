@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { reloadTrip, updateTripImage } from '../actions/trip_actions';
-import { addExpense } from '../actions/expense_actions';
-import { addMember } from '../actions/member_actions';
+import { reloadTrip, updateTripImage, cancelEditingTrip } from '../actions/trip_actions';
+import { addExpense, cancelCreatingExpense } from '../actions/expense_actions';
+import { addMember, cancelAddingMember } from '../actions/member_actions';
 import TripView from './../components/TripView'
 
 const EXPENSES_TAB_INDEX = 0;
@@ -47,6 +47,15 @@ const mapDispatchToProps = (dispatch) => {
     },
     onAddMemberPressed: (trip) => {
       dispatch(addMember(trip));
+    },
+    onEditTripModalRequestClose: () => {
+      dispatch(cancelEditingTrip());
+    },
+    onNewExpenseModalRequestClose: () => {
+      dispatch(cancelCreatingExpense());
+    },
+    onNewMemberModalRequestClose: () => {
+      dispatch(cancelAddingMember());
     }
   };
 };

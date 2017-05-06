@@ -15,21 +15,19 @@ import OpenDrawerButton from './../containers/OpenDrawerButton';
 import EditUserButton from './../containers/EditUserButton';
 import EditUser from './../containers/EditUser';
 import ChangeUserPassword from './../containers/ChangeUserPassword';
-import { primaryColor, backgroundColor } from './../constants';
+import { primaryColor, borderColor } from './../constants';
 
 import { Header } from 'react-navigation';
+let renderCount = 0;
 
 let styles = StyleSheet.create({
   containerHeader: {
     alignSelf: 'stretch',
     borderWidth: 0,
-    borderBottomWidth: 1,
-    borderBottomColor: '#cdcdcd',
     paddingTop: 30,
     paddingLeft: 10,
     paddingRight: 10,
-    paddingBottom: 15,
-    backgroundColor
+    paddingBottom: 15
   },
   userHeader: {
     flexDirection: 'row'
@@ -70,26 +68,11 @@ let styles = StyleSheet.create({
   changePasswordButtonText: {
     color: primaryColor,
     fontWeight: 'normal',
-    fontSize: 14,
-    backgroundColor
+    fontSize: 14
   }
 });
 
 class Profile extends Component {
-  static navigationOptions = {
-    title: 'Profile',
-    header: () => ({
-      left: (
-        <OpenDrawerButton />
-      ),
-      right: (
-        <EditUserButton />
-      ),
-      tintColor: primaryColor,
-      titleStyle: { color: 'black' }
-    })
-  };
-
   componentDidMount() {
     this.props.onUserProfileLoad(this.props.user);
   }
@@ -103,10 +86,35 @@ class Profile extends Component {
   }
 
   render() {
-    let { user, uploadPhotoErrorMessage } = this.props;
+    const {
+      user,
+      isUploadingUserImage,
+      uploadPhotoErrorMessage,
+      isViewingEditUserForm,
+      isViewingChangeUserPasswordForm,
+      onEditUserModalRequestClose,
+      onEditUserPasswordModalRequestClose
+    } = this.props;
 
     return (
       <View>
+        <Header
+          scene={{index: 0}}
+          navigation={{state: {index: 0}}}
+          getScreenDetails={() => {
+            return {
+              options: {
+                title: 'Profile',
+                headerLeft: <OpenDrawerButton />,
+                headerRight: <EditUserButton />,
+                headerTintColor: primaryColor,
+                headerTitleStyle: { color: 'black' },
+                headerStyle: {
+                  backgroundColor: 'white'
+                }
+              }
+            };
+          }} />
         <View style={styles.containerHeader}>
           <View style={styles.userHeader}>
             <HeaderImage
@@ -115,7 +123,7 @@ class Profile extends Component {
               size={100}
               onImageSelected={this.updateUserImage.bind(this)}
               icon="user"
-              isUploadingImage={this.props.isUploadingUserImage}
+              isUploadingImage={isUploadingUserImage}
               errorMessage={uploadPhotoErrorMessage}
               canEdit={true} />
             <View style={styles.userHeaderRightColumn}>
@@ -136,8 +144,8 @@ class Profile extends Component {
             </View>
           </View>
           <View style={styles.userDetails}>
-            <Text style={styles.userName}>{this.props.user.name}</Text>
-            <Text style={styles.userEmail}>{this.props.user.email}</Text>
+            <Text style={styles.userName}>{user.name}</Text>
+            <Text style={styles.userEmail}>{user.email}</Text>
             <TouchableHighlight
               style={styles.changePasswordButton}
               underlayColor='transparent'
@@ -146,10 +154,18 @@ class Profile extends Component {
             </TouchableHighlight>
           </View>
         </View>
-        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingEditUserForm}>
+        <Modal
+          animationType={'slide'}
+          transparent={false}
+          onRequestClose={onEditUserModalRequestClose}
+          visible={isViewingEditUserForm}>
           <EditUser />
         </Modal>
-        <Modal animationType={'slide'} transparent={false} visible={this.props.isViewingChangeUserPasswordForm}>
+        <Modal
+          animationType={'slide'}
+          transparent={false}
+          onRequestClose={onEditUserPasswordModalRequestClose}
+          visible={isViewingChangeUserPasswordForm}>
           <ChangeUserPassword />
         </Modal>
       </View>

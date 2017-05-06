@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import { fetchTrips, addTrip, viewTrip } from '../actions/trip_actions';
+import { fetchTrips, addTrip, viewTrip, cancelCreatingTrip } from '../actions/trip_actions';
 import TripsList from '../components/TripsList';
 import { ListView } from 'react-native';
 
@@ -41,6 +41,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onTripSelected: (trip) => {
       dispatch(viewTrip(trip));
+    },
+    onModalRequestClose: () => {
+      dispatch(cancelCreatingTrip());
     }
   };
 };

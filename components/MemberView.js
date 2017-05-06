@@ -104,6 +104,18 @@ class MemberView extends Component {
     }
   };
 
+  static navigationOptions = ({navigation}) => {
+    const { name } = navigation.state.params.member;
+    const title = name[name.length - 1] === 's' ? `${name}' Activity` : `${name}'s Activity`;
+
+    return {
+      title,
+      headerTintColor: primaryColor,
+      headerTitleStyle: { color: 'black' },
+      headerRight: <RemoveMemberButton />
+    }
+  };
+
   updateMemberImage(image) {
     this.props.onMemberImageChanged(this.props.member, image);
   }

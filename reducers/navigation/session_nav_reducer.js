@@ -15,6 +15,8 @@ const sessionNav = (state, action) => {
       return stateForRoute(SessionStackNavigator.router, state, 'NewAccount');
     case 'VIEW_LOGIN':
       return SessionStackNavigator.router.getStateForAction(NavigationActions.back(), state);
+    case 'POP_SESSION_STACK_SCREEN':
+      return SessionStackNavigator.router.getStateForAction(NavigationActions.back(), state);
     default:
       return SessionStackNavigator.router.getStateForAction(action, state);
   }

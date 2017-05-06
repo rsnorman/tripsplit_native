@@ -20,6 +20,8 @@ const nav = (state, action) => {
       return TripStackNavigator.router.getStateForAction(NavigationActions.back(), state);
     case 'VIEW_OBLIGATION':
       return stateForRoute(TripStackNavigator.router, state, 'VisibleObligation', { expense: action.obligation.expense } );
+    case 'POP_TRIP_STACK_SCREEN':
+      return TripStackNavigator.router.getStateForAction(NavigationActions.back(), state);
     default:
       return TripStackNavigator.router.getStateForAction(action, state);
   }

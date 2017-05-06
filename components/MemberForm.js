@@ -10,7 +10,7 @@ import {
   AppRegistry
 } from 'react-native';
 
-import { primaryColor } from './../constants';
+import { primaryColor, secondaryColor } from './../constants';
 
 import AsyncIndicator from './AsyncIndicator';
 import ModalFormHeader from './ModalFormHeader';
@@ -64,6 +64,7 @@ class MemberForm extends Component {
               autoCapitalize="words"
               style={styles.input}
               onChange={this.onNameChanged.bind(this)}
+              underlineColorAndroid={secondaryColor}
               placeholder='Name'/>
           </View>
           <View style={styles.formRow}>
@@ -74,6 +75,7 @@ class MemberForm extends Component {
               autoCapitalize="none"
               autoCorrect={false}
               onChange={this.onEmailChanged.bind(this)}
+              underlineColorAndroid={secondaryColor}
               placeholder='Email'/>
           </View>
           <AsyncIndicator

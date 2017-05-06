@@ -20,6 +20,8 @@ const rootNavigation = (state, action) => {
       return RootNavigator.router.getStateForAction(NavigationActions.navigate({ routeName: 'Home' }), state);
     case 'OPEN_DRAWER':
       return RootNavigator.router.getStateForAction(NavigationActions.navigate({ routeName: 'DrawerOpen' }), state);
+    case 'CLOSE_DRAWER':
+      return RootNavigator.router.getStateForAction(NavigationActions.navigate({ routeName: 'DrawerClose' }), state);
     default:
       let newState = RootNavigator.router.getStateForAction(action, state);
       if (!newState) {
