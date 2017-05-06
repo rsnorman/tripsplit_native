@@ -1,4 +1,4 @@
-package com.tripsplitnative;
+package io.katetdev.tripsplit;
 
 import android.app.Application;
 import android.util.Log;

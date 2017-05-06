@@ -21,4 +21,4 @@ export default class TripSplitApp extends Component {
   }
 }
 
-AppRegistry.registerComponent('TripSplitNative', () => TripSplitApp);
+AppRegistry.registerComponent('TripSplit', () => TripSplitApp);

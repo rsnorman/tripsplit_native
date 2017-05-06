@@ -216,7 +216,7 @@ export const updateTripImage = (trip, image) => {
     return fetch(url, applyAuthenticationHeaders({
       method: method,
       body: body
-    }, session))
+    }, session, 'multipart/form-data'))
       .then(parseResponse(200, 'There was an error uploading trip image. Please try again.'))
       .then(json => dispatch(tripImageUpdateSuccess(json)))
       .catch(error => dispatch(tripPhotoUpdateFailure(error)))

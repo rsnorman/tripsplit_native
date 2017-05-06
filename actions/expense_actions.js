@@ -192,7 +192,7 @@ export const updateExpenseImage = (expense, image) => {
     return fetch(url, applyAuthenticationHeaders({
       method: method,
       body: body
-    }, session))
+    }, session, 'multipart/form-data'))
       .then(parseResponse(200, 'There was an error uploading expense image. Please try again.'))
       .then(json => dispatch(expenseImageUpdateSuccess(json)))
       .catch(error => dispatch(expensePhotoUpdateFailure(error)))

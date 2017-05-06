@@ -45,7 +45,7 @@ export const updateUserImage = (user, image) => {
     return fetch(url, applyAuthenticationHeaders({
       method: 'PUT',
       body: body
-    }, session))
+    }, session, 'multipart/form-data'))
       .then(parseResponse(200, 'There was an error updating profile photo. Please try again.'))
       .then(json => dispatch(userImageUpdateSuccess(json)))
       .catch(error => dispatch(userPhotoUpdateFailure(error)))

@@ -1,17 +1,17 @@
 // @flow
 
-export const applyAuthenticationHeaders = (fetchOptions, session) => {
+export const applyAuthenticationHeaders = (fetchOptions, session, contentType = 'application/json') => {
   return {
-    ...fetchOptions,
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type': contentType,
       "Token-Type": "Bearer",
       'Access-Token': session.accessToken,
       'Client': session.client,
       "Expiry": session.expiry,
       "uid": session.uid
-    }
+    },
+    ...fetchOptions
   }
 }
 
