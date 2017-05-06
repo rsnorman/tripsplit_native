@@ -9,6 +9,8 @@ const newExpenseFormNav = (state, action) => {
     case 'CANCEL_VIEW_PURCHASERS':
     case 'SELECT_PURCHASER':
       return NewExpenseFormStackNavigator.router.getStateForAction(NavigationActions.back(), state);
+    case 'POP_NEW_EXPENSE_STACK_SCREEN':
+      return NewExpenseFormStackNavigator.router.getStateForAction(NavigationActions.back(), state);
     default:
       return NewExpenseFormStackNavigator.router.getStateForAction(action, state);
   }
