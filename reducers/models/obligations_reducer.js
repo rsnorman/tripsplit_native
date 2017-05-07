@@ -4,7 +4,9 @@ let initialObligationsState = {
   isPayingExpense: false,
   fetchObligationsErrorMessage: null,
   errorMessage: null,
-  isRemovingObligationPayment: false
+  isRemovingObligationPayment: false,
+  isAnnullingObligation: false,
+  isActivatingObligation: false
 };
 
 const obligations = (state = initialObligationsState, action) => {
@@ -81,6 +83,44 @@ const obligations = (state = initialObligationsState, action) => {
       return {
         ...state,
         isRemovingObligationPayment: false,
+        errorMessage: action.error
+      };
+    case 'START_ANNULLING_EXPENSE_OBLIGATION':
+      return {
+        ...state,
+        isAnnullingObligation: true,
+        errorMessage: null
+      };
+    case 'EXPENSE_OBLIGATION_ANNULMENT_SUCCESS':
+      return {
+        ...state,
+        expenseObligations: action.obligation.expense.obligations,
+        viewedObligation: action.obligation,
+        isAnnullingObligation: false,
+      }
+    case 'EXPENSE_OBLIGATION_ANNULMENT_ERROR':
+      return {
+        ...state,
+        isAnnullingObligation: false,
+        errorMessage: action.error
+      };
+    case 'START_ACTIVATING_EXPENSE_OBLIGATION':
+      return {
+        ...state,
+        isActivatingObligation: true,
+        errorMessage: null
+      };
+    case 'EXPENSE_OBLIGATION_ACTIVATE_SUCCESS':
+      return {
+        ...state,
+        expenseObligations: action.obligation.expense.obligations,
+        viewedObligation: action.obligation,
+        isActivatingObligation: false,
+      }
+    case 'EXPENSE_OBLIGATION_ACTIVATE_ERROR':
+      return {
+        ...state,
+        isActivatingObligation: false,
         errorMessage: action.error
       };
     case 'EXPENSE_UPDATE_SUCCESS':

@@ -53,6 +53,9 @@ let styles = StyleSheet.create({
     position: 'absolute',
     right: 10,
     top: 40
+  },
+  annulledObligation: {
+    opacity: 0.4
   }
 });
 
@@ -71,7 +74,7 @@ class ObligationsList extends Component {
   }
 
   renderRow(rowData, sectionID, rowID) {
-    let paidIndicator = rowData.is_paid ?
+    const paidIndicator = rowData.is_paid ?
       (
         <View style={styles.paidIndicator}>
           <Text style={[styles.paidIndicatorLabel, styles.rowText]}>{rowData.label}</Text>
@@ -83,12 +86,14 @@ class ObligationsList extends Component {
         </View>
       );
 
+    const rowStyle = rowData.is_annulled ? [styles.annulledObligation, styles.rowContainer] : [styles.rowContainer];
+
     return (
       <TouchableHighlight
         onPress={() => this.rowPressed(rowData.id)}
         underlayColor='#dddddd'>
         <View>
-          <View style={styles.rowContainer}>
+          <View style={rowStyle}>
             <ListImage size={50} image={rowData.user.picture} icon="user-circle" />
             <View style={styles.textContainer}>
               <Text style={[styles.obligator, styles.rowText]} numberOfLines={1}>

@@ -5,6 +5,7 @@ import {
   Text,
   ActivityIndicator,
   TouchableHighlight,
+  Dimensions,
   AppRegistry
 } from 'react-native';
 
@@ -14,6 +15,7 @@ import AsyncIndicator from './AsyncIndicator';
 import FormButton from './FormButton';
 import DeleteButton from './DeleteButton';
 
+const ScreenWidth = Dimensions.get("window").width;
 import formStyles from '../styles/form';
 import { primaryColor, backgroundColor } from './../constants';
 
@@ -96,6 +98,13 @@ let styles = StyleSheet.create({
     borderRadius: 8,
     alignSelf: 'stretch',
     justifyContent: 'center'
+  },
+  buttonGroup: {
+    position: 'absolute',
+    bottom: 20,
+    width: ScreenWidth,
+    paddingLeft: 20,
+    paddingRight: 20
   }
 });
 
@@ -114,15 +123,29 @@ class ObligationView extends Component {
     this.props.onRemoveObligationPayment(this.props.obligation);
   }
 
+  annulObligation() {
+    this.props.onAnnulObligation(this.props.obligation);
+  }
+
+  activateObligation() {
+    this.props.onActivateObligation(this.props.obligation);
+  }
+
   render() {
     const {
       expense,
       obligation,
       showPayButton,
       showUnpayButton,
+      showAnnulButton,
+      showActivateButton,
       payButtonDisabled,
+      annulButtonDisabled,
+      activateButtonDisabled,
       isPayingExpense,
       isRemovingObligationPayment,
+      isAnnullingObligation,
+      isActivatingObligation,
       errorMessage
     } = this.props;
 
@@ -141,6 +164,24 @@ class ObligationView extends Component {
           onPress={this.removeObligationPayment.bind(this)}
           disabled={payButtonDisabled}
           text="Mark As Unpaid" />
+      ) :
+      ( <View /> );
+
+    let annulPaymentButton = showAnnulButton ?
+      (
+        <DeleteButton
+          onPress={this.annulObligation.bind(this)}
+          disabled={annulButtonDisabled}
+          text="Remove" />
+      ) :
+      ( <View /> );
+
+    let activatePaymentButton = showActivateButton ?
+      (
+        <FormButton
+          onPress={this.activateObligation.bind(this)}
+          disabled={activateButtonDisabled}
+          text="Re-add" />
       ) :
       ( <View /> );
 
@@ -178,12 +219,14 @@ class ObligationView extends Component {
             <Text style={styles.expenseDescription}>{expense.description}</Text>
           </View>
         </View>
-        <View style={styles.form}>
+        <View style={styles.buttonGroup}>
+          <AsyncIndicator
+            active={isPayingExpense || isRemovingObligationPayment || isAnnullingObligation || isActivatingObligation}
+            errorMessage={errorMessage} />
           {markAsPaidView}
+          {annulPaymentButton}
+          {activatePaymentButton}
         </View>
-        <AsyncIndicator
-          active={isPayingExpense || isRemovingObligationPayment}
-          errorMessage={errorMessage} />
       </View>
     );
   }
