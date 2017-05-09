@@ -80,7 +80,6 @@ let styles = StyleSheet.create({
     color: 'darkgray'
   },
   rowText: {
-    backgroundColor: backgroundColor
   }
 });
 

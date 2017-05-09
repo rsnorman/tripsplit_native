@@ -49,7 +49,6 @@ let styles = StyleSheet.create({
     padding: 10
   },
   rowText: {
-    backgroundColor: backgroundColor
   },
   nextScreenIndicator: {
     color: lightGrayColor,

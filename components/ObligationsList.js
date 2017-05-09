@@ -46,7 +46,6 @@ let styles = StyleSheet.create({
     color: grayColor
   },
   rowText: {
-    backgroundColor: backgroundColor
   },
   nextScreenIndicator: {
     color: lightGrayColor,
