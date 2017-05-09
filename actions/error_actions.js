@@ -53,6 +53,14 @@ export const expenseObligationPaymentRemoveFailure = (error: string) => {
   return createError(error, 'EXPENSE_OBLIGATION_PAYMENT_REMOVAL_ERROR');
 }
 
+export const expenseObligationAnnulFailure = (error: string) => {
+  return createError(error, 'EXPENSE_OBLIGATION_ANNULMENT_ERROR');
+}
+
+export const expenseObligationActivateFailure = (error: string) => {
+  return createError(error, 'EXPENSE_OBLIGATION_ACTIVATE_ERROR');
+}
+
 export const tripDeleteFailure = (error: string) => {
   return createError(error, 'DELETE_TRIP_ERROR');
 }

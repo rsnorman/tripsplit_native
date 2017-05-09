@@ -18,7 +18,7 @@ import AsyncIndicator from './AsyncIndicator';
 import FormButton from './FormButton';
 import KeyboardDismisser from './KeyboardDismisser';
 
-let ScreenWidth = Dimensions.get("window").width;
+const ScreenWidth = Dimensions.get("window").width;
 import formStyles from '../styles/form';
 import { primaryColor, secondaryColor } from './../constants';
 

@@ -183,6 +183,12 @@ const expenses = (state = initialExpensesState, action) => {
         isDeletingExpense: false,
         errorMessage: action.error
       };
+    case 'EXPENSE_OBLIGATION_ACTIVATE_SUCCESS':
+    case 'EXPENSE_OBLIGATION_ANNULMENT_SUCCESS':
+      return {
+        ...state,
+        viewedExpense: action.obligation.expense,
+      };
     default:
       return state;
   }
