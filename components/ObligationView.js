@@ -5,17 +5,16 @@ import {
   Text,
   ActivityIndicator,
   TouchableHighlight,
-  Dimensions,
   AppRegistry
 } from 'react-native';
 
 import HeaderImage from './../components/HeaderImage';
 import Money from './../components/MoneyView';
 import AsyncIndicator from './AsyncIndicator';
+import ButtonGroup from './ButtonGroup';
 import FormButton from './FormButton';
 import DeleteButton from './DeleteButton';
 
-const ScreenWidth = Dimensions.get("window").width;
 import formStyles from '../styles/form';
 import { primaryColor, backgroundColor } from './../constants';
 
@@ -98,13 +97,6 @@ let styles = StyleSheet.create({
     borderRadius: 8,
     alignSelf: 'stretch',
     justifyContent: 'center'
-  },
-  buttonGroup: {
-    position: 'absolute',
-    bottom: 20,
-    width: ScreenWidth,
-    paddingLeft: 20,
-    paddingRight: 20
   }
 });
 
@@ -219,14 +211,14 @@ class ObligationView extends Component {
             <Text style={styles.expenseDescription}>{expense.description}</Text>
           </View>
         </View>
-        <View style={styles.buttonGroup}>
+        <ButtonGroup>
           <AsyncIndicator
             active={isPayingExpense || isRemovingObligationPayment || isAnnullingObligation || isActivatingObligation}
             errorMessage={errorMessage} />
           {markAsPaidView}
           {annulPaymentButton}
           {activatePaymentButton}
-        </View>
+        </ButtonGroup>
       </View>
     );
   }

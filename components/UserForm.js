@@ -14,14 +14,15 @@ import Popup from 'react-native-popup';
 import AsyncIndicator from './AsyncIndicator';
 import ModalFormHeader from './ModalFormHeader';
 import DeleteButton from './DeleteButton';
+import ButtonGroup from './ButtonGroup';
 
 import formStyles from '../styles/form';
-import { primaryColor, secondaryColor, dangerColor } from './../constants';
+import { primaryColor, secondaryColor, dangerColor, placeholderTextColor } from './../constants';
 
 var styles = StyleSheet.create({
   ...formStyles,
   container: {
-    alignItems: 'center'
+    flex: 1
   }
 });
 
@@ -85,6 +86,7 @@ class UserForm extends Component {
               style={styles.input}
               onChange={this.onNameChanged.bind(this)}
               underlineColorAndroid={secondaryColor}
+              placeholderTextColor={placeholderTextColor}
               placeholder='Name'/>
           </View>
           <View style={styles.formRow}>
@@ -93,15 +95,18 @@ class UserForm extends Component {
               style={styles.input}
               onChange={this.onEmailChanged.bind(this)}
               underlineColorAndroid={secondaryColor}
+              placeholderTextColor={placeholderTextColor}
               placeholder='Email'/>
           </View>
-          <DeleteButton
-            disabled={deleteButtonDisabled}
-            onPress={this.onDeletePressed.bind(this)} />
+        </View>
+        <ButtonGroup>
           <AsyncIndicator
             active={isSavingUser}
             errorMessage={errorMessage} />
-        </View>
+          <DeleteButton
+            disabled={deleteButtonDisabled}
+            onPress={this.onDeletePressed.bind(this)} />
+        </ButtonGroup>
         <Popup ref={popup => this.popup = popup }/>
       </View>
     );

@@ -9,12 +9,13 @@ import {
   AppRegistry
 } from 'react-native';
 
-import { primaryColor, secondaryColor, dangerColor } from './../constants';
+import { primaryColor, secondaryColor, dangerColor, placeholderTextColor } from './../constants';
 
 import Popup from 'react-native-popup';
 import AsyncIndicator from './AsyncIndicator';
 import FormButton from './FormButton';
 import DeleteButton from './DeleteButton';
+import ButtonGroup from './ButtonGroup';
 import CurrencyTextInput from './CurrencyTextInput';
 import KeyboardDismisser from './KeyboardDismisser';
 import PurchaserPicker from './../containers/PurchaserPicker';
@@ -25,7 +26,7 @@ import formStyles from '../styles/form';
 var styles = StyleSheet.create({
   ...formStyles,
   container: {
-    alignItems: 'center'
+    flex: 1
   }
 });
 
@@ -100,6 +101,7 @@ class ExpenseForm extends Component {
                 autoCapitalize="words"
                 onChange={this.onNameChanged.bind(this)}
                 underlineColorAndroid={secondaryColor}
+                placeholderTextColor={placeholderTextColor}
                 placeholder='Name (e.g., Gas, Horse Masks)'/>
             </View>
             <View style={styles.formRow}>
@@ -119,16 +121,19 @@ class ExpenseForm extends Component {
                 numberOfLines={3}
                 autoCapitalize="sentences"
                 underlineColorAndroid={secondaryColor}
+                placeholderTextColor={placeholderTextColor}
                 placeholder='Description (optional)'/>
             </View>
+          </View>
+          <ButtonGroup>
+            <AsyncIndicator
+              active={isSavingExpense || isDeletingExpense}
+              errorMessage={errorMessage} />
             <DeleteButton
               hidden={!showDeleteButton}
               disabled={deleteButtonDisabled}
               onPress={this.onDeletePressed.bind(this)} />
-            <AsyncIndicator
-              active={isSavingExpense || isDeletingExpense}
-              errorMessage={errorMessage} />
-          </View>
+          </ButtonGroup>
           <Popup ref={popup => this.popup = popup }/>
         </View>
       </KeyboardDismisser>

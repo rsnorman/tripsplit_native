@@ -5,7 +5,7 @@ import {
   AppRegistry
 } from 'react-native';
 
-import { primaryColor, secondaryColor } from './../constants';
+import { primaryColor, secondaryColor, placeholderTextColor } from './../constants';
 
 class CurrencyTextInput extends Component {
   render() {
@@ -20,6 +20,7 @@ class CurrencyTextInput extends Component {
         value={amount}
         selectTextOnFocus={true}
         keyboardType="numeric"
+        placeholderTextColor={placeholderTextColor}
         underlineColorAndroid={secondaryColor}
         onChange={onChange} />
     );
