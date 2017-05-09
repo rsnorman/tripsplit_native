@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry, TouchableHighlight, Text, View, StyleSheet, Platform } from 'react-native';
 import { viewPurchasers } from '../actions/purchasers_picker_actions';
-import { primaryColor, secondaryColor } from './../constants';
+import { primaryColor, secondaryColor, placeholderTextColor } from './../constants';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   pickerPlaceholderText: {
     fontSize: 18,
-    color: Platform.OS === 'ios' ? '#B6B6BB' : '#6B6B6E'
+    color: placeholderTextColor
   },
   arrowIcon: {
     fontSize: 18,

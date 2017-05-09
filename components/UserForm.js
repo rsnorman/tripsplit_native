@@ -17,7 +17,7 @@ import DeleteButton from './DeleteButton';
 import ButtonGroup from './ButtonGroup';
 
 import formStyles from '../styles/form';
-import { primaryColor, secondaryColor, dangerColor } from './../constants';
+import { primaryColor, secondaryColor, dangerColor, placeholderTextColor } from './../constants';
 
 var styles = StyleSheet.create({
   ...formStyles,
@@ -86,6 +86,7 @@ class UserForm extends Component {
               style={styles.input}
               onChange={this.onNameChanged.bind(this)}
               underlineColorAndroid={secondaryColor}
+              placeholderTextColor={placeholderTextColor}
               placeholder='Name'/>
           </View>
           <View style={styles.formRow}>
@@ -94,6 +95,7 @@ class UserForm extends Component {
               style={styles.input}
               onChange={this.onEmailChanged.bind(this)}
               underlineColorAndroid={secondaryColor}
+              placeholderTextColor={placeholderTextColor}
               placeholder='Email'/>
           </View>
         </View>

@@ -9,7 +9,7 @@ import {
   AppRegistry
 } from 'react-native';
 
-import { primaryColor, secondaryColor, dangerColor } from './../constants';
+import { primaryColor, secondaryColor, dangerColor, placeholderTextColor } from './../constants';
 
 import Popup from 'react-native-popup';
 import AsyncIndicator from './AsyncIndicator';
@@ -101,6 +101,7 @@ class ExpenseForm extends Component {
                 autoCapitalize="words"
                 onChange={this.onNameChanged.bind(this)}
                 underlineColorAndroid={secondaryColor}
+                placeholderTextColor={placeholderTextColor}
                 placeholder='Name (e.g., Gas, Horse Masks)'/>
             </View>
             <View style={styles.formRow}>
@@ -120,6 +121,7 @@ class ExpenseForm extends Component {
                 numberOfLines={3}
                 autoCapitalize="sentences"
                 underlineColorAndroid={secondaryColor}
+                placeholderTextColor={placeholderTextColor}
                 placeholder='Description (optional)'/>
             </View>
           </View>

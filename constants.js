@@ -10,3 +10,4 @@ export const grayColor = '#8d8d8d';
 export const lightGrayColor = '#cdcdcd';
 export const borderColor = '#cdcdcd';
 export const backgroundColor = '#E9E9EF';
+export const placeholderTextColor = '#adadad';

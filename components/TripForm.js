@@ -17,7 +17,7 @@ import DeleteButton from './DeleteButton';
 import ButtonGroup from './ButtonGroup';
 import KeyboardDismisser from './KeyboardDismisser';
 import formStyles from '../styles/form';
-import { primaryColor, secondaryColor, dangerColor } from './../constants';
+import { primaryColor, secondaryColor, dangerColor, placeholderTextColor } from './../constants';
 
 var styles = StyleSheet.create({
   ...formStyles,
@@ -92,6 +92,7 @@ class TripForm extends Component {
                 style={styles.input}
                 autoCapitalize="words"
                 onChange={this.onNameChanged.bind(this)}
+                placeholderTextColor={placeholderTextColor}
                 underlineColorAndroid={secondaryColor}
                 placeholder="Name (e.g., Joan's Bachelorette Party)"/>
             </View>
@@ -101,6 +102,7 @@ class TripForm extends Component {
                 style={styles.input}
                 autoCapitalize="words"
                 onChange={this.onLocationChanged.bind(this)}
+                placeholderTextColor={placeholderTextColor}
                 underlineColorAndroid={secondaryColor}
                 placeholder='Location'/>
             </View>
@@ -112,6 +114,7 @@ class TripForm extends Component {
                 multiline={true}
                 numberOfLines={3}
                 autoCapitalize="sentences"
+                placeholderTextColor={placeholderTextColor}
                 underlineColorAndroid={secondaryColor}
                 placeholder='Description (optional)'/>
             </View>
