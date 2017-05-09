@@ -18,7 +18,7 @@ import { primaryColor, secondaryColor } from './../constants';
 var styles = StyleSheet.create({
   ...formStyles,
   container: {
-    alignItems: 'center'
+    flex: 1
   }
 });
 
