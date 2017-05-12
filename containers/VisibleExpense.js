@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
   let expense = state.expenses.viewedExpense;
   return {
     expense,
-    isViewingEditExpenseForm: state.expenses.isViewingEditExpenseForm,
+    isViewingEditExpenseForm: state.editExpenseFormNav.isViewingEditExpenseForm,
     isUploadingExpenseImage: state.expenses.isUploadingExpenseImage,
     isFetchingObligations: true,
     canEditPhoto: !!expense.actions.update,
