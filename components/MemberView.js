@@ -147,8 +147,12 @@ class MemberView extends Component {
                     <Text style={styles.memberStatLabel}>Purchased</Text>
                   </View>
                   <View style={styles.memberStat}>
+                    <Money style={styles.memberStatValue} amount={member.total_paid_back_amount} />
+                    <Text style={styles.memberStatLabel}>Paid Back</Text>
+                  </View>
+                  <View style={styles.memberStat}>
                     <Money style={styles.memberStatValue} amount={member.total_contributed_amount} />
-                    <Text style={styles.memberStatLabel}>Paid</Text>
+                    <Text style={styles.memberStatLabel}>Contributed</Text>
                   </View>
                 </View>
                 {oweAmount}

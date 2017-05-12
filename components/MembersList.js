@@ -84,11 +84,11 @@ class MembersList extends Component {
               <Text style={[styles.name, styles.rowText]} numberOfLines={1}>
                 {rowData.name}
               </Text>
+              <Text style={[styles.cost, styles.rowText]} numberOfLines={1}>
+                Contributed: <Money amount={rowData.total_contributed_amount} />
+              </Text>
               <Text style={[styles.cost, styles.rowText]}>
                 Purchased: <Money amount={rowData.total_purchased_amount} />
-              </Text>
-              <Text style={[styles.cost, styles.rowText]} numberOfLines={1}>
-                Paid: <Money amount={rowData.total_contributed_amount} />
               </Text>
             </View>
           </View>
