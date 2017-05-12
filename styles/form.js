@@ -32,7 +32,6 @@ let formStyles = {
     alignSelf: 'stretch',
     alignItems: 'center',
     padding: 30,
-    marginTop: 60
   },
   formRow: {
     flexDirection: 'row',

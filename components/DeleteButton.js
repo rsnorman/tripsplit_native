@@ -4,6 +4,7 @@ import {
   TouchableHighlight,
   Text,
   View,
+  Keyboard,
   AppRegistry
 } from 'react-native';
 
@@ -44,10 +45,40 @@ let styles = StyleSheet.create({
 });
 
 class DeleteButton extends Component {
+
+  _keyboardDidShow() {
+    this.setState({
+      hideButton: true
+    });
+  }
+
+  _keyboardDidHide() {
+    this.setState({
+      hideButton: false
+    });
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      hideButton: false
+    };
+  }
+
+  componentWillMount () {
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow.bind(this));
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide.bind(this));
+  }
+
+  componentWillUnmount () {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
   render() {
     const { text, onPress, disabled, hidden } = this.props;
 
-    if (hidden) {
+    if (hidden || this.state.hideButton) {
       return <View />;
     }
 
