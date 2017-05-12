@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AppRegistry } from 'react-native';
-import HeaderButton from './../components/HeaderButton';
+import { HeaderBackButton } from 'react-navigation';
 import { cancelPurchasersSelect } from '../actions/purchasers_picker_actions';
+import { primaryColor } from './../constants';
 
 const mapStateToProps = (state) => {
   return {};
@@ -21,8 +22,8 @@ const CancelPurchaserSelectButton = connect(
   mapDispatchToProps
 )(({ onCancelPurchaserSelect }) => {
   return (
-    <HeaderButton
-      text='Cancel'
+    <HeaderBackButton
+      tintColor={primaryColor}
       onPress={() => onCancelPurchaserSelect()}
     />
   );

@@ -13,8 +13,6 @@ let initialExpensesState = {
   isSavingExpense: false,
   isDeletingExpense: false,
   viewedExpense: null,
-  isViewingNewExpenseForm: false,
-  isViewingEditExpenseForm: false,
   editingExpense: null,
   fetchExpensesErrorMessage: null,
   errorMessage: null,
@@ -55,7 +53,6 @@ const expenses = (state = initialExpensesState, action) => {
         ...state,
         errorMessage: null,
         isValidExpense: false,
-        isViewingNewExpenseForm: true,
         newExpense: newTripExpense
       };
     case 'SET_NEW_EXPENSE_ATTRIBUTE':
@@ -87,7 +84,6 @@ const expenses = (state = initialExpensesState, action) => {
         ...state,
         tripExpenses: [action.expense, ...state.tripExpenses],
         isSavingExpense: false,
-        isViewingNewExpenseForm: false,
         viewedExpense: action.expense
       };
     case 'SAVE_EXPENSE_ERROR':
@@ -95,11 +91,6 @@ const expenses = (state = initialExpensesState, action) => {
         ...state,
         isSavingExpense: false,
         errorMessage: action.error
-      };
-    case 'CANCEL_NEW_EXPENSE':
-      return {
-        ...state,
-        isViewingNewExpenseForm: false
       };
     case 'VIEW_EXPENSE':
       return {
@@ -110,7 +101,6 @@ const expenses = (state = initialExpensesState, action) => {
       return {
         ...state,
         editingExpense: action.expense,
-        isViewingEditExpenseForm: true,
         errorMessage: null,
         isValidExpense: false
       };
@@ -130,12 +120,6 @@ const expenses = (state = initialExpensesState, action) => {
         tripExpenses: expensesWithUpdated,
         viewedExpense: action.expense,
         isSavingExpense: false,
-        isViewingEditExpenseForm: false
-      };
-    case 'CANCEL_EDIT_EXPENSE':
-      return {
-        ...state,
-        isViewingEditExpenseForm: false
       };
     case 'START_UPDATING_EXPENSE_IMAGE':
       return {

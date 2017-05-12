@@ -20,7 +20,7 @@ function showAddMembersButton(state) {
 const mapStateToProps = (state) => {
   return {
     trip: state.trips.viewedTrip,
-    isViewingNewExpenseForm: state.expenses.isViewingNewExpenseForm,
+    isViewingNewExpenseForm: state.newExpenseFormNav.isViewingNewExpenseForm,
     isViewingNewMemberForm: state.members.isViewingNewMemberForm,
     isViewingEditTripForm: state.trips.isViewingEditTripForm,
     isFetchingExpenses: true,
