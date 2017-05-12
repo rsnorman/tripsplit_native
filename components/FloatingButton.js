@@ -27,6 +27,7 @@ class FloatingButton extends Component {
         position: 'absolute',
         bottom: 10,
         right: 10,
+        elevation: 4,
         shadowColor: '#000000',
         shadowOffset: {
           width: 0,

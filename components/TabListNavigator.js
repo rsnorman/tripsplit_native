@@ -15,7 +15,8 @@ let styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#cdcdcd',
     backgroundColor: '#E9E9EF',
-    opacity: 0.9
+    opacity: 0.9,
+    elevation: 1
   },
   tabActive: {
     paddingTop: 5,
